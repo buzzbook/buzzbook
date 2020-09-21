@@ -1,0 +1,10 @@
+:root {
+	--dark: #141414;
+	--gt-gold: #8e835a;
+	--light: #dadada;
+}
+
+body {
+	background-color: var(--dark);
+	color: var(--light);
+}
