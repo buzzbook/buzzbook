@@ -20,7 +20,7 @@ function Navbar() {
 	// Currently only applying the navbar-dark class so that the hamburger icon appears when on mobile
 	// Doesn't work on light mode (will require figuring out if mode is light or dark with js)
 	return (
-		<nav className="navbar navbar-dark navbar-expand-lg mb-3" id="navbar">
+		<nav className="navbar navbar-dark navbar-expand-lg" id="navbar">
 			<button
 				className="navbar-toggler"
 				type="button"

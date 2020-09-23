@@ -3,6 +3,9 @@
 	--gt-gold: #a99d6c;
 	--main-text: #dadada;
 	--nav-link: #dadada;
+	--border: #555;
+	--input-border: #555;
+	--input: #1d1d1d;
 }
 
 @media (prefers-color-scheme: light) {
@@ -10,6 +13,9 @@
 		--main-bg: white;
 		--main-text: #353535;
 		--nav-link: #444444;
+		--border: #333;
+		--input-border: #aaa;
+		--input: #eee;
 	}
 }
 

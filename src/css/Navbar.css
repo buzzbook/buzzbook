@@ -1,7 +1,7 @@
 #navbar {
 	color: var(--main-text);
 	background-color: var(--main-bg);
-	border-bottom: 1px solid var(--main-text);
+	border-bottom: 2px solid var(--border);
 }
 
 #navbar .navbar-brand {
