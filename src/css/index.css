@@ -6,6 +6,7 @@
 	--border: #555;
 	--input-border: #555;
 	--input: #1d1d1d;
+	--course-selected: rgba(255, 255, 255, 0.05);
 	--course-hover: rgba(255, 255, 255, 0.1);
 }
 
@@ -17,6 +18,7 @@
 		--border: #333;
 		--input-border: #aaa;
 		--input: #eee;
+		--course-selected: rgba(0, 0, 0, 0.1);
 		--course-hover: rgba(0, 0, 0, 0.2);
 	}
 }
@@ -24,4 +26,8 @@
 body {
 	background-color: var(--main-bg);
 	color: var(--main-text);
+}
+
+.gt-gold {
+	color: var(--gt-gold);
 }

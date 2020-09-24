@@ -9,16 +9,16 @@ function CourseListItem(props) {
 	const setSelectedCourse = val => updateSelectedCourse(dispatch, val);
 
 	let bgColor =
-		selectedCourse === props.index ? "rgba(255,255,255,0.05)" : "initial";
+		selectedCourse === props.index ? "var(--course-selected)" : "initial";
 
-	let enrollmentColor = "green";
-	if (props.enrollment > 67) enrollmentColor = "red";
-	else if (props.enrollment > 33) enrollmentColor = "orange";
+	let enrollmentColor = "var(--green)";
+	if (props.enrollmentPercent > 67) enrollmentColor = "var(--red)";
+	else if (props.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
 	let gradeColor = "green";
-	if (props.grade.charAt(0) === "B") gradeColor = "yellow";
-	else if (props.grade.charAt(0) === "C") gradeColor = "orange";
-	else if (props.grade.charAt(0) === "D") gradeColor = "red";
+	if (props.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
+	else if (props.grade.charAt(0) === "C") gradeColor = "var(--orange)";
+	else if (props.grade.charAt(0) === "D") gradeColor = "var(--red)";
 
 	return (
 		<div
@@ -33,12 +33,12 @@ function CourseListItem(props) {
 			<span>{props.name}</span>
 			<br />
 			<span style={{color: enrollmentColor}}>
-				{props.enrollment}% enrollment
+				{Math.round(props.enrollmentPercent)}% enrollment
 			</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 			<span>{props.credits} units</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span>{props.sections} sections</span>
+			<span>{props.numSections} sections</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 			<span style={{color: gradeColor}}>{props.grade}</span>
 		</div>
@@ -48,9 +48,9 @@ function CourseListItem(props) {
 CourseListItem.propTypes = {
 	courseID: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	enrollment: PropTypes.number.isRequired,
+	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
-	sections: PropTypes.number.isRequired,
+	numSections: PropTypes.number.isRequired,
 	grade: PropTypes.string.isRequired,
 	index: PropTypes.number.isRequired
 };

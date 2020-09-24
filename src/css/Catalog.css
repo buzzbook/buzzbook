@@ -64,3 +64,19 @@
 #courseList > div:hover {
 	background-color: var(--course-hover) !important;
 }
+
+/* Course Info */
+#courseInfo table {
+	color: var(--main-text);
+	text-align: center;
+}
+#courseInfo table * {
+	border: none;
+}
+#courseInfo table thead th {
+	color: #6c757d;
+	background-color: var(--course-hover);
+	border: 1px solid var(--main-bg);
+	padding: 0.5rem 1rem;
+	font-weight: normal;
+}

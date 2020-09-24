@@ -35,7 +35,7 @@ function Navbar() {
 			<Link className="navbar-brand" to="/">
 				<img src={buzz} alt="Buzz" className="mr-2" />
 				<b>
-					G<span style={{color: "var(--gt-gold)"}}>T</span>
+					G<span className="gt-gold">T</span>
 				</b>{" "}
 				<i>BuzzBook</i>
 			</Link>

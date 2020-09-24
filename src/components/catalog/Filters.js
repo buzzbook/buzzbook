@@ -9,9 +9,13 @@ function Filters() {
 	return (
 		<div>
 			<div className="mb-1 font-weight-bold">
-				<span style={{color: "var(--gt-gold)", cursor: "pointer"}}>Browse</span>
+				<span className="gt-gold" style={{cursor: "pointer"}}>
+					Browse
+				</span>
 				&nbsp;&nbsp;
-				<span style={{cursor: "pointer"}}>Compare</span>
+				<span className="text-muted" style={{cursor: "pointer"}}>
+					Compare
+				</span>
 			</div>
 			<input type="text" className="form-control mb-2" placeholder="Search" />
 			<div className="input-group mb-3">
@@ -27,14 +31,18 @@ function Filters() {
 					defaultValue="Select"
 				>
 					<option disabled>Select</option>
+					<option>Course ID</option>
 					<option>Name</option>
-					<option>Number</option>
+					<option>Grade</option>
+					<option>Difficulty (Ascending)</option>
 				</select>
 			</div>
 
 			<div className="mb-1 font-weight-bold">
-				<span style={{color: "var(--gt-gold)"}}>Filters</span>&nbsp;&nbsp;
-				<span style={{cursor: "pointer"}}>Clear</span>
+				<span className="gt-gold">Filters</span>&nbsp;&nbsp;
+				<span className="text-muted" style={{cursor: "pointer"}}>
+					Clear
+				</span>
 			</div>
 			<div className="input-group mb-3">
 				<div className="input-group-prepend">

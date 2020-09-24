@@ -6,7 +6,7 @@ function Home() {
 		<div className="text-center">
 			<h1>
 				<b>
-					Georgia <span style={{color: "var(--gt-gold)"}}>Tech</span>
+					Georgia <span color="gt-gold">Tech</span>
 				</b>{" "}
 				<i>BuzzBook</i>
 			</h1>
