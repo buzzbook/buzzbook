@@ -1,5 +1,6 @@
 import React from "react";
 import Filters from "../components/catalog/Filters";
+import CourseList from "../components/catalog/CourseList";
 
 import "../css/Catalog.css";
 
@@ -10,7 +11,7 @@ function Catalog() {
 				<Filters />
 			</div>
 			<div className="col-3 p-3">
-				<h2>Class List</h2>
+				<CourseList />
 			</div>
 			<div className="col-6 p-3">
 				<h2>Class Info</h2>

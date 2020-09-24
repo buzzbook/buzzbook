@@ -1,3 +1,4 @@
+/* Filters */
 #catalog > div:not(:last-child) {
 	border-right: 2px solid var(--border);
 }
@@ -53,4 +54,13 @@
 .button-group > button:last-child {
 	border-top-right-radius: 0.25rem;
 	border-bottom-right-radius: 0.25rem;
+}
+
+/* Course List */
+#courseList > div {
+	cursor: pointer;
+	transition: all 0.2s;
+}
+#courseList > div:hover {
+	background-color: var(--course-hover) !important;
 }

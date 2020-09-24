@@ -30,8 +30,13 @@ function App({location}) {
 				<Switch location={location}>
 					<Route exact path="/" component={Home} />
 
-					{navPages.map(page => (
-						<Route exact path={page.path} component={page.component} />
+					{navPages.map((page, index) => (
+						<Route
+							exact
+							path={page.path}
+							component={page.component}
+							key={index}
+						/>
 					))}
 				</Switch>
 			</div>
