@@ -1,5 +1,8 @@
 /* Filters */
-#catalog > div:not(:last-child) {
+.col-page > div {
+	overflow-y: scroll;
+}
+.col-page > div:not(:last-child) {
 	border-right: 2px solid var(--border);
 }
 

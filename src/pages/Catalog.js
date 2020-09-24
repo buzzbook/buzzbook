@@ -15,13 +15,13 @@ function Catalog() {
 	});
 	return (
 		<div className="row mx-0" id="catalog">
-			<div className="col-3 h-100 p-3" style={{overflowY: "scroll"}}>
+			<div className="col-3 h-100 p-3">
 				<Filters />
 			</div>
-			<div className="col-3 h-100 p-3" style={{overflowY: "scroll"}}>
+			<div className="col-3 h-100 p-3">
 				<CourseList />
 			</div>
-			<div className="col-6 h-100 p-3" style={{overflowY: "scroll"}}>
+			<div className="col-6 h-100 p-3">
 				<CourseInfo />
 			</div>
 		</div>
