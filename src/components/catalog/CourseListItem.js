@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSelectedCourse} from "../../redux/actions";
+import {
+	updateSelectedCourse,
+	getSelectedCourse
+} from "../../redux/catalogSlice";
 
 function CourseListItem(props) {
 	const dispatch = useDispatch();
-	const selectedCourse = useSelector(state => state.selectedCourse);
-	const setSelectedCourse = val => updateSelectedCourse(dispatch, val);
+	const selectedCourse = useSelector(getSelectedCourse);
 
 	let bgColor =
 		selectedCourse === props.index ? "var(--course-selected)" : "initial";
@@ -24,7 +26,7 @@ function CourseListItem(props) {
 		<div
 			className="p-3 mb-2 rounded"
 			style={{backgroundColor: bgColor}}
-			onClick={() => setSelectedCourse(props.index)}
+			onClick={() => dispatch(updateSelectedCourse(props.index))}
 		>
 			<h5 className="d-inline">
 				<b>{props.courseID}</b>

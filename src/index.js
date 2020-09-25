@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router} from "react-router-dom";
-import {createStore} from "redux";
 import {Provider} from "react-redux";
-import rootReducer from "./redux/reducers.js";
+import store from "./redux/store.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "jquery";
@@ -13,8 +12,6 @@ import "bootstrap";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./css/index.css";
-
-const store = createStore(rootReducer);
 
 ReactDOM.render(
 	<Provider store={store}>

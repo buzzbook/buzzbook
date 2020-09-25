@@ -1,10 +1,11 @@
 import React from "react";
 import {useSelector} from "react-redux";
+import {getSelectedCourse} from "../../redux/catalogSlice";
 import RatingBar from "./RatingBar";
 import courses from "./courses";
 
 function CourseInfo() {
-	const selectedCourse = useSelector(state => state.selectedCourse);
+	const selectedCourse = useSelector(getSelectedCourse);
 	const course = courses[selectedCourse];
 
 	let enrollmentColor = "var(--green)";
@@ -83,7 +84,7 @@ function CourseInfo() {
 					</tr>
 				</thead>
 				<tbody>
-					{course.sections.map(section => {
+					{course.sections.map((section, index) => {
 						let sectionEnrollmentColor = "var(--green)";
 						if (
 							(section.enrollment.max / section.enrollment.current) * 100 >
@@ -96,7 +97,7 @@ function CourseInfo() {
 						)
 							sectionEnrollmentColor = "var(--orange)";
 						return (
-							<tr>
+							<tr key={index}>
 								<td>{section.type}</td>
 								<td>{section.courseNumber}</td>
 								<td>{section.id}</td>

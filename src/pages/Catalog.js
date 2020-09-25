@@ -14,7 +14,7 @@ function Catalog() {
 		).style.height = `calc(100vh - ${navHeight}px)`;
 	});
 	return (
-		<div className="row mx-0" id="catalog">
+		<div className="col-page row mx-0" id="catalog">
 			<div className="col-3 h-100 p-3">
 				<Filters />
 			</div>
