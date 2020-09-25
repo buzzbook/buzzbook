@@ -1,5 +1,6 @@
 import React, {useLayoutEffect} from "react";
 import Filters from "../components/grades/Filters";
+import "../css/Grades.css";
 
 function Grades() {
 	useLayoutEffect(() => {

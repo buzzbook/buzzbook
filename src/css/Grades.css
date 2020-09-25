@@ -1,0 +1,12 @@
+/* Course List */
+#grades-courseList > div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.grades-courseList-plus {
+	font-size: 2rem;
+	color: #00ff00;
+	cursor: pointer;
+}

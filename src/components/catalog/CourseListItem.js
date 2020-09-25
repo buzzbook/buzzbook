@@ -6,43 +6,43 @@ import {
 	getSelectedCourse
 } from "../../redux/catalogSlice";
 
-function CourseListItem(props) {
+function CourseListItem(course) {
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 
 	let bgColor =
-		selectedCourse === props.index ? "var(--course-selected)" : "initial";
+		selectedCourse === course.index ? "var(--course-selected)" : "initial";
 
 	let enrollmentColor = "var(--green)";
-	if (props.enrollmentPercent > 67) enrollmentColor = "var(--red)";
-	else if (props.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
+	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
+	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
 	let gradeColor = "green";
-	if (props.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
-	else if (props.grade.charAt(0) === "C") gradeColor = "var(--orange)";
-	else if (props.grade.charAt(0) === "D") gradeColor = "var(--red)";
+	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
+	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
+	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
 
 	return (
 		<div
 			className="p-3 mb-2 rounded"
 			style={{backgroundColor: bgColor}}
-			onClick={() => dispatch(updateSelectedCourse(props.index))}
+			onClick={() => dispatch(updateSelectedCourse(course.index))}
 		>
 			<h5 className="d-inline">
-				<b>{props.courseID}</b>
+				<b>{course.courseID}</b>
 			</h5>
 			&nbsp;&nbsp;&nbsp;
-			<span>{props.name}</span>
+			<span>{course.name}</span>
 			<br />
 			<span style={{color: enrollmentColor}}>
-				{Math.round(props.enrollmentPercent)}% enrollment
+				{Math.round(course.enrollmentPercent)}% enrollment
 			</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span>{props.credits} units</span>
+			<span>{course.credits} units</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span>{props.numSections} sections</span>
+			<span>{course.numSections} sections</span>
 			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span style={{color: gradeColor}}>{props.grade}</span>
+			<span style={{color: gradeColor}}>{course.grade}</span>
 		</div>
 	);
 }
