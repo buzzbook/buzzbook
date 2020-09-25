@@ -28,6 +28,8 @@ export const catalogSlice = createSlice({
 		updateCourses: (state, action) => {
 			if (state.selectedCourse >= action.payload.length)
 				state.selectedCourse = action.payload.length - 1;
+			else if (state.selectedCourse === -1 && action.payload.length > 0)
+				state.selectedCourse = 0;
 			state.courses = action.payload;
 		}
 	}

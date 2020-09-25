@@ -95,6 +95,14 @@ function CourseList() {
 		};
 	});
 
+	if (filteredCourses.length === 0) {
+		return (
+			<div className="text-center">
+				<h2>No classes match your filters :(</h2>
+			</div>
+		);
+	}
+
 	return (
 		<div id="catalog-courseList">
 			{filteredCourses.map((course, index) => {

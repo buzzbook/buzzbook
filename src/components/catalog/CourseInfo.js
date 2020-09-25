@@ -7,6 +7,11 @@ import courses from "./courses";
 function CourseInfo() {
 	const filteredCourses = useSelector(getCourses);
 	const selectedCourse = useSelector(getSelectedCourse);
+
+	if (selectedCourse === -1) {
+		return <div></div>;
+	}
+
 	const course = filteredCourses[selectedCourse];
 
 	let enrollmentColor = "var(--green)";
