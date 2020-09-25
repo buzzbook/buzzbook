@@ -5,11 +5,7 @@ export const catalogSlice = createSlice({
 	name: "catalog",
 	initialState: {
 		selectedCourse: 0,
-		filters: {
-			credits: "Any",
-			subject: "Any",
-			level: "Any"
-		},
+		filters: {},
 		sort: "Course ID",
 		courses: courses
 	},

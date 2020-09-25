@@ -11,9 +11,11 @@ import {
 import courses from "./courses";
 
 /** Keys are the courseID values. Values are the long names */
-const subjectNames = {
-	MATH: "Mathematics",
+export const subjectNames = {
+	CHEM: "Chemistry",
 	CS: "Computer Science",
+	ECON: "Economics",
+	MATH: "Mathematics",
 	PHYS: "Physics"
 };
 
@@ -24,15 +26,15 @@ function CourseList() {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const filteredCourses = courses
 		.filter(course => {
-			if (filters.credits !== "Any") {
+			if (filters.credits && filters.credits !== "Any") {
 				// eslint-disable-next-line
 				if (course.credits != filters.credits) return false;
 			}
-			if (filters.subject !== "Any") {
+			if (filters.subject && filters.subject !== "Any") {
 				let subject = subjectNames[course.courseID.split(" ")[0]];
 				if (subject !== filters.subject) return false;
 			}
-			if (filters.level !== "Any") {
+			if (filters.level && filters.level !== "Any") {
 				let level = parseInt(course.courseID.split(" ")[1].charAt(0)) * 1000;
 				// eslint-disable-next-line
 				if (level != filters.level) return false;
@@ -96,6 +98,7 @@ function CourseList() {
 	return (
 		<div id="catalog-courseList">
 			{filteredCourses.map((course, index) => {
+				let sections = course.sections ? course.sections : courses[0].sections;
 				return (
 					<CourseListItem
 						courseID={course.courseID}
@@ -104,7 +107,7 @@ function CourseList() {
 							(course.enrollment.current / course.enrollment.max) * 100
 						}
 						credits={course.credits}
-						numSections={course.sections.length}
+						numSections={sections.length}
 						grade={course.grade}
 						index={index}
 						key={index}

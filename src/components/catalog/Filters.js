@@ -1,6 +1,7 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {updateFilter, resetFilters, updateSort} from "../../redux/catalogSlice";
+import {subjectNames} from "./CourseList";
 
 function Filters() {
 	const handleDayButtonClick = e => {
@@ -113,9 +114,9 @@ function Filters() {
 						onChange={e => updateFil(e, "subject")}
 					>
 						<option>Any</option>
-						<option>Computer Science</option>
-						<option>Mathematics</option>
-						<option>Physics</option>
+						{Object.keys(subjectNames).map((key, index) => {
+							return <option key={index}>{subjectNames[key]}</option>;
+						})}
 					</select>
 				</div>
 				<div className="input-group mb-3">
