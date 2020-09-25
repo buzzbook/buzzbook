@@ -9,8 +9,8 @@ function RatingBar({value, max = 5, highIsBetter}) {
 		if (rating < 33) color = "var(--red)";
 		else if (rating < 67) color = "var(--orange)";
 	} else {
-		if (rating > 67) color = "var(--red)";
-		else if (rating > 33) color = "var(--orange)";
+		if (rating >= 80) color = "var(--red)";
+		else if (rating >= 60) color = "var(--orange)";
 	}
 
 	return (

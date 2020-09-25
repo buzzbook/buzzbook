@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {updateFilter, resetFilters} from "../../redux/catalogSlice";
+import {updateFilter, resetFilters, updateSort} from "../../redux/catalogSlice";
 
 function Filters() {
 	const handleDayButtonClick = e => {
@@ -40,13 +40,14 @@ function Filters() {
 					className="custom-select"
 					aria-label="Sort By"
 					aria-describedby="sort-by-label"
-					defaultValue="Select"
+					defaultValue="Course ID"
+					onChange={e => dispatch(updateSort(e.target.value))}
 				>
-					<option disabled>Select</option>
 					<option>Course ID</option>
 					<option>Name</option>
 					<option>Grade</option>
-					<option>Difficulty (Ascending)</option>
+					<option>Difficulty</option>
+					<option>Enrollment</option>
 				</select>
 			</div>
 
@@ -112,8 +113,9 @@ function Filters() {
 						onChange={e => updateFil(e, "subject")}
 					>
 						<option>Any</option>
-						<option>Mathematics</option>
 						<option>Computer Science</option>
+						<option>Mathematics</option>
+						<option>Physics</option>
 					</select>
 				</div>
 				<div className="input-group mb-3">

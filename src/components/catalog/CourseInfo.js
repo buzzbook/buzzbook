@@ -1,10 +1,10 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getSelectedCourse} from "../../redux/catalogSlice";
+import {getCourses, getSelectedCourse} from "../../redux/catalogSlice";
 import RatingBar from "./RatingBar";
-import courses from "./courses";
 
 function CourseInfo() {
+	const courses = useSelector(getCourses);
 	const selectedCourse = useSelector(getSelectedCourse);
 	const course = courses[selectedCourse];
 

@@ -365,7 +365,7 @@ const courses = [
 	},
 	{
 		courseID: "CS 1332",
-		name: "Date Structures and Algorithms",
+		name: "Data Structures and Algorithms",
 		enrollment: {
 			current: 250,
 			max: 250
@@ -452,6 +452,296 @@ const courses = [
 			"Proof methods, strategy, correctness of algorithms over discrete structures. Induction and recursion. Complexity and order of growth. Number theoretic principles and algorithms. Counting and computability.",
 		prerequisites: "CS 1332 grade of C or higher",
 		enrollRestrictions: "Credit not allowed for both CS 2050 and CS 2051.",
+		sections: [
+			{
+				type: "Lecture",
+				courseNumber: "91514",
+				id: "G",
+				time: "12:30-1:45",
+				days: "TR",
+				location: "Weber SST 3",
+				instructor: "TBA",
+				enrollment: {
+					current: 51,
+					max: 51
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81120",
+				id: "G01",
+				time: "8:25-9:15",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81134",
+				id: "G02",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 268",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81230",
+				id: "G03",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			}
+		]
+	},
+	{
+		courseID: "MATH 2550",
+		name: "Introduction to Multivariable Calculus",
+		enrollment: {
+			current: 100,
+			max: 180
+		},
+		credits: 2,
+		grade: "B+",
+		ratings: {
+			interest: 3.5,
+			difficulty: 3.5
+		},
+		description:
+			"Vectors in three dimensions, curves in space, functions of several variables, partial derivatives, optimization, integration of functions of several variables. Vector Calculus not covered.",
+		prerequisites: "MATH 1554 grade of C or higher",
+		enrollRestrictions:
+			"Credit will not be awarded for both MATH 2550 and MATH 2605 or MATH 2401 or MATH 2551 or MATH 1555.",
+		sections: [
+			{
+				type: "Lecture",
+				courseNumber: "91514",
+				id: "G",
+				time: "12:30-1:45",
+				days: "TR",
+				location: "Weber SST 3",
+				instructor: "TBA",
+				enrollment: {
+					current: 51,
+					max: 51
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81120",
+				id: "G01",
+				time: "8:25-9:15",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81134",
+				id: "G02",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 268",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81230",
+				id: "G03",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			}
+		]
+	},
+	{
+		courseID: "MATH 2551",
+		name: "Multivariable Calculus",
+		enrollment: {
+			current: 100,
+			max: 180
+		},
+		credits: 4,
+		grade: "B-",
+		ratings: {
+			interest: 4,
+			difficulty: 4
+		},
+		description:
+			"Multivariable calculus: Linear approximation and Taylor's theorems, Lagrange multiples and constrained optimization, multiple integration and vector analysis including the theorems of Green, Gauss, and Stokes.",
+		prerequisites: "MATH 1554 grade of C or higher",
+		enrollRestrictions:
+			"Credit will not be awarded for both MATH 2551 and MATH 2401 or MATH 2411 or MATH 2561.",
+		sections: [
+			{
+				type: "Lecture",
+				courseNumber: "91514",
+				id: "G",
+				time: "12:30-1:45",
+				days: "TR",
+				location: "Weber SST 3",
+				instructor: "TBA",
+				enrollment: {
+					current: 51,
+					max: 51
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81120",
+				id: "G01",
+				time: "8:25-9:15",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81134",
+				id: "G02",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 268",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81230",
+				id: "G03",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			}
+		]
+	},
+	{
+		courseID: "PHYS 2211",
+		name: "Introductory Physics I",
+		enrollment: {
+			current: 500,
+			max: 700
+		},
+		credits: 4,
+		grade: "C+",
+		ratings: {
+			interest: 3.5,
+			difficulty: 4
+		},
+		description:
+			"A calculus-based course with a laboratory covering classical mechanics, applications of classical mechanics, oscillations, and waves",
+		prerequisites: "None",
+		enrollRestrictions: "None",
+		sections: [
+			{
+				type: "Lecture",
+				courseNumber: "91514",
+				id: "G",
+				time: "12:30-1:45",
+				days: "TR",
+				location: "Weber SST 3",
+				instructor: "TBA",
+				enrollment: {
+					current: 51,
+					max: 51
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81120",
+				id: "G01",
+				time: "8:25-9:15",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81134",
+				id: "G02",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 268",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			},
+			{
+				type: "Studio",
+				courseNumber: "81230",
+				id: "G03",
+				time: "9:30-10:20",
+				days: "MW",
+				location: "Skiles 170",
+				instructor: "TBA",
+				enrollment: {
+					current: 17,
+					max: 17
+				}
+			}
+		]
+	},
+	{
+		courseID: "PHYS 2212",
+		name: "Introductory Physics II",
+		enrollment: {
+			current: 100,
+			max: 500
+		},
+		credits: 4,
+		grade: "D+",
+		ratings: {
+			interest: 3,
+			difficulty: 5
+		},
+		description:
+			"A calculus-based course with laboratory covering electromagnetism, applications of electromagnetism, light, and modern physics.",
+		prerequisites: "AP Mechanics Score of 5 or a C or better in PHYS 2211",
+		enrollRestrictions: "None",
 		sections: [
 			{
 				type: "Lecture",
