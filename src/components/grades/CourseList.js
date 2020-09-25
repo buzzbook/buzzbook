@@ -2,14 +2,19 @@ import React from "react";
 import CourseListItem from "./CourseListItem";
 import {useSelector} from "react-redux";
 import {getFilters, getSort} from "../../redux/gradesSlice";
-import courses from "../catalog/courses";
 import {subjectNames} from "../catalog/CourseList";
+
+const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function CourseList() {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort);
 
 	const filteredCourses = courses
+		.map((course, index) => {
+			course["index"] = index;
+			return course;
+		})
 		.filter(course => {
 			if (filters.credits && filters.credits !== "Any") {
 				// eslint-disable-next-line
@@ -73,7 +78,7 @@ function CourseList() {
 					<CourseListItem
 						courseID={course.courseID}
 						name={course.name}
-						index={index}
+						index={course.index}
 						key={index}
 					/>
 				);

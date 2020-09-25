@@ -2,13 +2,14 @@ import React, {useEffect, useLayoutEffect} from "react";
 import CourseListItem from "./CourseListItem";
 import {useDispatch, useSelector} from "react-redux";
 import {
-	updateCourses,
+	updateFilteredCourses,
 	updateSelectedCourse,
 	getSelectedCourse,
 	getFilters,
 	getSort
 } from "../../redux/catalogSlice";
-import courses from "./courses";
+
+const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -73,7 +74,7 @@ function CourseList() {
 			}
 		});
 	useLayoutEffect(() => {
-		dispatch(updateCourses(filteredCourses));
+		dispatch(updateFilteredCourses(filteredCourses));
 	});
 
 	const changeSelected = event => {

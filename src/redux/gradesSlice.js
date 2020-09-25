@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import courses from "../components/catalog/courses";
 
 export const gradesSlice = createSlice({
 	name: "grades",
@@ -11,11 +10,11 @@ export const gradesSlice = createSlice({
 	reducers: {
 		/** Adds a course by its index in the courses list */
 		addCourse: (state, action) => {
-			state.selectedCourses.push(courses[action.payload]);
+			state.selectedCourses.push(action.payload);
 		},
 		/** Removes a course by its index in the courses list */
 		removeCourse: (state, action) => {
-			state.selectedCourses.remove(action.payload);
+			state.selectedCourses.splice(action.payload, 1);
 		},
 		updateFilter: (state, action) => {
 			state.filters[action.payload.name] = action.payload.value;

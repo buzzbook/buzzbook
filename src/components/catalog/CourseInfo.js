@@ -1,11 +1,12 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getCourses, getSelectedCourse} from "../../redux/catalogSlice";
+import {getFilteredCourses, getSelectedCourse} from "../../redux/catalogSlice";
 import RatingBar from "./RatingBar";
-import courses from "./courses";
+
+const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function CourseInfo() {
-	const filteredCourses = useSelector(getCourses);
+	const filteredCourses = useSelector(getFilteredCourses);
 	const selectedCourse = useSelector(getSelectedCourse);
 
 	if (selectedCourse === -1) {

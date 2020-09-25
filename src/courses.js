@@ -369,4 +369,5 @@ const courses = [
 	}
 ];
 
-export default courses;
+var localStorage = window.localStorage;
+localStorage.setItem("courses", JSON.stringify(courses));

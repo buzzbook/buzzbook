@@ -22,9 +22,7 @@ function Filters() {
 				style={{borderBottom: "2px solid var(--border)"}}
 			>
 				<div className="mb-1 font-weight-bold">
-					<span className="gt-gold" style={{cursor: "pointer"}}>
-						Grading Distributions
-					</span>
+					<span className="gt-gold">Grading Distributions</span>
 				</div>
 				<input type="text" className="form-control mb-2" placeholder="Search" />
 				<div className="input-group mb-3">

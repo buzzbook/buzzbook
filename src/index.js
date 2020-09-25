@@ -9,6 +9,7 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 
+import "./courses";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./css/index.css";

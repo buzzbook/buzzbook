@@ -1,5 +1,6 @@
 import React, {useLayoutEffect} from "react";
 import Filters from "../components/grades/Filters";
+import SelectedCourses from "../components/grades/SelectedCourses";
 import "../css/Grades.css";
 
 function Grades() {
@@ -16,7 +17,7 @@ function Grades() {
 				<Filters />
 			</div>
 			<div className="col-3 h-100 p-3">
-				<h1>Selected Courses</h1>
+				<SelectedCourses />
 			</div>
 			<div className="col-6 h-100 p-3">
 				<h1>Graph</h1>

@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import courses from "../components/catalog/courses";
+
+const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 export const catalogSlice = createSlice({
 	name: "catalog",
@@ -7,7 +8,7 @@ export const catalogSlice = createSlice({
 		selectedCourse: 0,
 		filters: {},
 		sort: "Course ID",
-		courses: courses
+		filteredCourses: courses
 	},
 	reducers: {
 		updateSelectedCourse: (state, action) => {
@@ -25,12 +26,12 @@ export const catalogSlice = createSlice({
 		updateSort: (state, action) => {
 			state.sort = action.payload;
 		},
-		updateCourses: (state, action) => {
+		updateFilteredCourses: (state, action) => {
 			if (state.selectedCourse >= action.payload.length)
 				state.selectedCourse = action.payload.length - 1;
 			else if (state.selectedCourse === -1 && action.payload.length > 0)
 				state.selectedCourse = 0;
-			state.courses = action.payload;
+			state.filteredCourses = action.payload;
 		}
 	}
 });
@@ -40,12 +41,12 @@ export const {
 	updateFilter,
 	resetFilters,
 	updateSort,
-	updateCourses
+	updateFilteredCourses
 } = catalogSlice.actions;
 
 export const getSelectedCourse = state => state.catalog.selectedCourse;
 export const getFilters = state => state.catalog.filters;
 export const getSort = state => state.catalog.sort;
-export const getCourses = state => state.catalog.courses;
+export const getFilteredCourses = state => state.catalog.filteredCourses;
 
 export default catalogSlice.reducer;
