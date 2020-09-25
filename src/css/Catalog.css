@@ -17,6 +17,10 @@
 	background-color: var(--input);
 }
 
+.custom-select {
+	color: var(--main-text);
+}
+
 .input-group > .input-group-prepend {
 	flex: 0 0 40%;
 }
@@ -60,11 +64,11 @@
 }
 
 /* Course List */
-#courseList > div {
+#catalog-courseList > div {
 	cursor: pointer;
 	transition: all 0.2s;
 }
-#courseList > div:hover {
+#catalog-courseList > div:hover {
 	background-color: var(--course-hover) !important;
 }
 
