@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {resetFilters, updateFilter, updateSort} from "../../redux/gradesSlice";
 import {subjectNames} from "../catalog/CourseList";
 import CourseList from "./CourseList";
+import FilterItem from "../FilterItem";
 
 function Filters() {
 	const clearFilters = () => {
@@ -12,9 +13,11 @@ function Filters() {
 		dispatch(resetFilters());
 	};
 
-	const dispatch = useDispatch();
-	const updateFil = (e, name) =>
-		dispatch(updateFilter({name: name, value: e.target.value}));
+  const dispatch = useDispatch();
+  
+  //Term and Core not implemented yet
+	const updateFil = (value, name) =>
+		dispatch(updateFilter({name: name, value: value}));
 	return (
 		<div>
 			<div
@@ -31,19 +34,14 @@ function Filters() {
 							Sort By
 						</span>
 					</div>
-					<select
-						className="custom-select"
-						aria-label="Sort By"
-						aria-describedby="sort-by-label"
-						defaultValue="Course ID"
-						onChange={e => dispatch(updateSort(e.target.value))}
-					>
-						<option>Course ID</option>
-						<option>Name</option>
-						<option>Grade</option>
-						<option>Difficulty</option>
-						<option>Enrollment</option>
-					</select>
+          <FilterItem
+            className="custom-select"
+            ariaLabel="Sort By"
+            ariaDescribedBy="sort-by-label"
+            defaultValue="Course ID"
+            onChange={value => dispatch(updateSort(value))}
+            optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
+          />
 				</div>
 
 				<div id="grades-filters">
@@ -63,16 +61,14 @@ function Filters() {
 								Term
 							</span>
 						</div>
-						<select
-							className="custom-select"
-							aria-label="Term"
-							aria-describedby="term-label"
-							defaultValue="Any"
-						>
-							<option>Any</option>
-							<option>Fall 2020</option>
-							<option>Spring 2021</option>
-						</select>
+						<FilterItem
+              className="custom-select"
+              ariaLabel="Term"
+              ariaDescribedBy="term-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "term")}
+              optionList={["Any", "Fall 2020", "Spring 2021"]}
+            />
 					</div>
 					<div className="input-group mb-3">
 						<div className="input-group-prepend">
@@ -80,19 +76,14 @@ function Filters() {
 								Credits
 							</span>
 						</div>
-						<select
-							className="custom-select"
-							aria-label="Credits"
-							aria-describedby="credits-label"
-							defaultValue="Any"
-							onChange={e => updateFil(e, "credits")}
-						>
-							<option>Any</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-						</select>
+						<FilterItem
+              className="custom-select"
+              ariaLabel="Credits"
+              ariaDescribedBy="credits-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "credits")}
+              optionList={["Any", "1", "2", "3", "4"]}
+            />
 					</div>
 					<div className="input-group mb-3">
 						<div className="input-group-prepend">
@@ -100,18 +91,17 @@ function Filters() {
 								Subject
 							</span>
 						</div>
-						<select
-							className="custom-select"
-							aria-label="Subject"
-							aria-describedby="subject-label"
-							defaultValue="Any"
-							onChange={e => updateFil(e, "subject")}
-						>
-							<option>Any</option>
-							{Object.keys(subjectNames).map((key, index) => {
-								return <option key={index}>{subjectNames[key]}</option>;
-							})}
-						</select>
+						<FilterItem
+              className="custom-select"
+              ariaLabel="Subject"
+              ariaDescribedBy="subject-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "subject")}
+              optionList={["Any"].concat(
+                Object.keys(subjectNames).map(key => {
+                  return subjectNames[key];
+              }))}
+            />
 					</div>
 					<div className="input-group mb-3">
 						<div className="input-group-prepend">
@@ -119,19 +109,14 @@ function Filters() {
 								Level
 							</span>
 						</div>
-						<select
-							className="custom-select"
-							aria-label="Level"
-							aria-describedby="level-label"
-							defaultValue="Any"
-							onChange={e => updateFil(e, "level")}
-						>
-							<option>Any</option>
-							<option>1000</option>
-							<option>2000</option>
-							<option>3000</option>
-							<option>4000</option>
-						</select>
+						<FilterItem
+              className="custom-select"
+              ariaLabel="Level"
+              ariaDescribedBy="level-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "level")}
+              optionList={["Any", "1000", "2000", "3000", "4000"]}
+            />
 					</div>
 					<div className="input-group mb-3">
 						<div className="input-group-prepend">
@@ -139,16 +124,14 @@ function Filters() {
 								Core
 							</span>
 						</div>
-						<select
-							className="custom-select"
-							aria-label="Core"
-							aria-describedby="core-label"
-							defaultValue="Any"
-						>
-							<option>Any</option>
-							<option>Test 1</option>
-							<option>Test 2</option>
-						</select>
+						<FilterItem
+              className="custom-select"
+              ariaLabel="Core"
+              ariaDescribedBy="core-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "core")}
+              optionList={["Any", "Test 1", "Test 2"]}
+            />
 					</div>
 				</div>
 			</div>

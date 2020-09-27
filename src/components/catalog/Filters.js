@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {updateFilter, resetFilters, updateSort} from "../../redux/catalogSlice";
 import {subjectNames} from "./CourseList";
-import FilterItem from "./FilterItem";
+import FilterItem from "../FilterItem";
 
 function Filters() {
 	const handleDayButtonClick = e => {
