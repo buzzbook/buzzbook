@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function FilterItem({ className, ariaLabel, ariaDescribedBy, defaultValue, onChange, optionList }) {
   return (
@@ -9,9 +10,18 @@ export default function FilterItem({ className, ariaLabel, ariaDescribedBy, defa
       defaultValue={defaultValue}
       onChange={e => onChange(e.target.value)}
     >
-      {optionList.map(option => {
-        return <option>{option}</option>
+      {optionList.map((option, index) => {
+        return <option key={index}>{option}</option>
       })}
     </select>
   );
 }
+
+FilterItem.propTypes = {
+	className: PropTypes.string.isRequired,
+	ariaLabel: PropTypes.string.isRequired,
+	ariaDescribedBy: PropTypes.string.isRequired,
+	defaultValue: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+	optionList: PropTypes.arrayOf(PropTypes.string).isRequired
+};
