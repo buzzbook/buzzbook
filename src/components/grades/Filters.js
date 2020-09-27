@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {resetFilters, updateFilter, updateSort} from "../../redux/gradesSlice";
 import {subjectNames} from "../catalog/CourseList";
 import CourseList from "./CourseList";
-import FilterItem from "../FilterItem";
+import FilterSelector from "../FilterSelector";
 
 function Filters() {
 	const clearFilters = () => {
@@ -34,7 +34,7 @@ function Filters() {
 							Sort By
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Sort By"
             ariaDescribedBy="sort-by-label"
@@ -61,7 +61,7 @@ function Filters() {
 								Term
 							</span>
 						</div>
-						<FilterItem
+						<FilterSelector
               className="custom-select"
               ariaLabel="Term"
               ariaDescribedBy="term-label"
@@ -76,7 +76,7 @@ function Filters() {
 								Credits
 							</span>
 						</div>
-						<FilterItem
+						<FilterSelector
               className="custom-select"
               ariaLabel="Credits"
               ariaDescribedBy="credits-label"
@@ -91,7 +91,7 @@ function Filters() {
 								Subject
 							</span>
 						</div>
-						<FilterItem
+						<FilterSelector
               className="custom-select"
               ariaLabel="Subject"
               ariaDescribedBy="subject-label"
@@ -109,7 +109,7 @@ function Filters() {
 								Level
 							</span>
 						</div>
-						<FilterItem
+						<FilterSelector
               className="custom-select"
               ariaLabel="Level"
               ariaDescribedBy="level-label"
@@ -124,7 +124,7 @@ function Filters() {
 								Core
 							</span>
 						</div>
-						<FilterItem
+						<FilterSelector
               className="custom-select"
               ariaLabel="Core"
               ariaDescribedBy="core-label"

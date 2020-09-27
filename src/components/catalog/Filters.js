@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {updateFilter, resetFilters, updateSort} from "../../redux/catalogSlice";
 import {subjectNames} from "./CourseList";
-import FilterItem from "../FilterItem";
+import FilterSelector from "../FilterSelector";
 
 function Filters() {
 	const handleDayButtonClick = e => {
@@ -40,7 +40,7 @@ function Filters() {
 						Sort By
 					</span>
 				</div>
-        <FilterItem
+        <FilterSelector
           className="custom-select"
 					ariaLabel="Sort By"
 					ariaDescribedBy="sort-by-label"
@@ -67,7 +67,7 @@ function Filters() {
 							Term
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Term"
             ariaDescribedBy="term-label"
@@ -82,7 +82,7 @@ function Filters() {
 							Credits
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Credits"
             ariaDescribedBy="credits-label"
@@ -97,7 +97,7 @@ function Filters() {
 							Subject
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Subject"
             ariaDescribedBy="subject-label"
@@ -115,7 +115,7 @@ function Filters() {
 							Level
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Level"
             ariaDescribedBy="level-label"
@@ -130,7 +130,7 @@ function Filters() {
 							Core
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Core"
             ariaDescribedBy="core-label"
@@ -157,7 +157,7 @@ function Filters() {
 							Time
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Time-from"
             ariaDescribedBy="time-label"
@@ -165,7 +165,7 @@ function Filters() {
             onChange={value =>  updateFil(value, "time-from")}
             optionList={["Any", "9:00", "10:00"]}
           />
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Time-to"
             ariaDescribedBy="time-label"
@@ -180,7 +180,7 @@ function Filters() {
 							Prof
 						</span>
 					</div>
-          <FilterItem
+          <FilterSelector
             className="custom-select"
             ariaLabel="Prof"
             ariaDescribedBy="prof-label"
