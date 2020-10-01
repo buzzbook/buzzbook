@@ -2,6 +2,7 @@ import React, {useLayoutEffect} from "react";
 import Filters from "../components/grades/Filters";
 import SelectedCourses from "../components/grades/SelectedCourses";
 import "../css/Grades.css";
+import CourseList from "../components/grades/CourseList";
 
 function Grades() {
 	useLayoutEffect(() => {
@@ -15,6 +16,7 @@ function Grades() {
 		<div className="col-page row mx-0" id="grades">
 			<div className="col-3 h-100 p-3">
 				<Filters />
+				<CourseList />
 			</div>
 			<div className="col-3 h-100 p-3">
 				<SelectedCourses />

@@ -6,18 +6,19 @@ function SelectedCourse(course) {
 	const dispatch = useDispatch();
 	return (
 		<div>
-			<span style={{fontSize: "1.25rem"}}>
-				<b>{course.courseID}</b>
-			</span>
-			&nbsp;&nbsp;&nbsp;
-			<span>{course.name}</span>
-			&nbsp;&nbsp;
-			<span
-				style={{cursor: "pointer", color: "red"}}
+			<div>
+				<span style={{fontSize: "1.25rem"}}>
+					<b>{course.courseID}</b>
+				</span>
+				&nbsp;&nbsp;&nbsp;
+				<span>{course.name}</span>
+			</div>
+			<div
+				className="grades-selectedCourses-x"
 				onClick={() => dispatch(removeCourse(course.index))}
 			>
 				X
-			</span>
+			</div>
 		</div>
 	);
 }

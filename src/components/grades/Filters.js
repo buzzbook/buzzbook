@@ -2,7 +2,6 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {resetFilters, updateFilter, updateSort} from "../../redux/gradesSlice";
 import {subjectNames} from "../catalog/CourseList";
-import CourseList from "./CourseList";
 
 function Filters() {
 	const clearFilters = () => {
@@ -152,8 +151,6 @@ function Filters() {
 					</div>
 				</div>
 			</div>
-
-			<CourseList />
 		</div>
 	);
 }
