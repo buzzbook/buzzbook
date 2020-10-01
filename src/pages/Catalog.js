@@ -7,8 +7,8 @@ import "../css/Catalog.css";
 
 function Catalog() {
 	useLayoutEffect(() => {
-		let navHeight = document.getElementById("navbar").getBoundingClientRect()
-			.height;
+		let navHeight =
+			document.getElementById("navbar").getBoundingClientRect().height + 2;
 		document.getElementById(
 			"catalog"
 		).style.height = `calc(100vh - ${navHeight}px)`;

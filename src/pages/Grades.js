@@ -5,8 +5,8 @@ import "../css/Grades.css";
 
 function Grades() {
 	useLayoutEffect(() => {
-		let navHeight = document.getElementById("navbar").getBoundingClientRect()
-			.height;
+		let navHeight =
+			document.getElementById("navbar").getBoundingClientRect().height + 2;
 		document.getElementById(
 			"grades"
 		).style.height = `calc(100vh - ${navHeight}px)`;
