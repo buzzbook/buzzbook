@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Provider} from "react-redux";
+import "./courses";
 import store from "./redux/store.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -9,7 +10,6 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 
-import "./courses";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./css/index.css";
