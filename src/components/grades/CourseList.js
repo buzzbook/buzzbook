@@ -1,7 +1,7 @@
 import React from "react";
 import CourseListItem from "./CourseListItem";
 import {useSelector} from "react-redux";
-import {getFilters, getSort} from "../../redux/gradesSlice";
+import {getFilters, getSelectedCourses, getSort} from "../../redux/gradesSlice";
 import {subjectNames} from "../catalog/CourseList";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
@@ -9,6 +9,7 @@ const courses = JSON.parse(window.localStorage.getItem("courses"));
 function CourseList() {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort);
+	var selectedCoursesIndeces = useSelector(getSelectedCourses);
 
 	const filteredCourses = courses
 		.map((course, index) => {
@@ -16,6 +17,9 @@ function CourseList() {
 			return course;
 		})
 		.filter(course => {
+			if (selectedCoursesIndeces.includes(course.index)) {
+				return false;
+			}
 			if (filters.credits && filters.credits !== "Any") {
 				// eslint-disable-next-line
 				if (course.credits != filters.credits) return false;

@@ -15,17 +15,18 @@ function SelectedCourses() {
 			<div className="gt-gold font-weight-bold" style={{fontSize: "1.25rem"}}>
 				Selected Courses
 			</div>
-			{selectedCourses.map((course, index) => {
-				console.log(course);
-				return (
-					<SelectedCourse
-						courseID={course.courseID}
-						name={course.name}
-						index={index}
-						key={index}
-					/>
-				);
-			})}
+			<div id="grades-selectedCourses">
+				{selectedCourses.map((course, index) => {
+					return (
+						<SelectedCourse
+							courseID={course.courseID}
+							name={course.name}
+							index={index}
+							key={index}
+						/>
+					);
+				})}
+			</div>
 		</div>
 	);
 }
