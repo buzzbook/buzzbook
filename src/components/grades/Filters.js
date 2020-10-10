@@ -28,16 +28,16 @@ function Filters() {
 					<span className="gt-gold">Grading Distributions</span>
 				</div>
 				<input type="text" className="form-control mb-2" placeholder="Search" />
-        <FilterItem
-          label="Sort By"
-          className="custom-select"
-          ariaLabel="Sort By"
-          ariaDescribedBy="sort-by-label"
-          defaultValue="Course ID"
-          onChange={value => dispatch(updateSort(value))}
-          optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
-        />
-
+        <FilterItem label="Sort By">
+          <FilterSelector
+            className="custom-select"
+            ariaLabel="Sort By"
+            ariaDescribedBy="sort-by-label"
+            defaultValue="Course ID"
+            onChange={value => dispatch(updateSort(value))}
+            optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
+          />
+        </FilterItem>
 				<div id="grades-filters">
 					<div className="mb-1 font-weight-bold">
 						<span className="gt-gold">Filters</span>&nbsp;&nbsp;
@@ -49,54 +49,59 @@ function Filters() {
 							Clear
 						</span>
 					</div>
-          <FilterItem
-            label="Term"
-            className="custom-select"
-            ariaLabel="Term"
-            ariaDescribedBy="term-label"
-            defaultValue="Any"
-            onChange={value =>  updateFil(value, "term")}
-            optionList={["Any", "Fall 2020", "Spring 2021"]}
-          />
-          <FilterItem
-            label="Credits"
-            className="custom-select"
-            ariaLabel="Credits"
-            ariaDescribedBy="credits-label"
-            defaultValue="Any"
-            onChange={value =>  updateFil(value, "credits")}
-            optionList={["Any", "1", "2", "3", "4"]}
-          />
-          <FilterItem
-            label="Subject"
-            className="custom-select"
-            ariaLabel="Subject"
-            ariaDescribedBy="subject-label"
-            defaultValue="Any"
-            onChange={value =>  updateFil(value, "subject")}
-            optionList={["Any"].concat(
-              Object.keys(subjectNames).map(key => {
-                return subjectNames[key];
-            }))}
-          />
-          <FilterItem
-            label="Level"
-            className="custom-select"
-            ariaLabel="Level"
-            ariaDescribedBy="level-label"
-            defaultValue="Any"
-            onChange={value =>  updateFil(value, "level")}
-            optionList={["Any", "1000", "2000", "3000", "4000"]}
-          />
-          <FilterItem
-            label="Core"
-            className="custom-select"
-            ariaLabel="Core"
-            ariaDescribedBy="core-label"
-            defaultValue="Any"
-            onChange={value =>  updateFil(value, "core")}
-            optionList={["Any", "Test 1", "Test 2"]}
-          />
+          <FilterItem label="Term">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Term"
+              ariaDescribedBy="term-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "term")}
+              optionList={["Any", "Fall 2020", "Spring 2021"]}
+            />
+          </FilterItem>
+          <FilterItem label="Credits">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Credits"
+              ariaDescribedBy="credits-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "credits")}
+              optionList={["Any", "1", "2", "3", "4"]}
+            />
+          </FilterItem>
+          <FilterItem label="Subject">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Subject"
+              ariaDescribedBy="subject-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "subject")}
+              optionList={["Any"].concat(
+                Object.keys(subjectNames).map(key => {
+                  return subjectNames[key];
+              }))}
+            />
+          </FilterItem>
+          <FilterItem label="Level">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Level"
+              ariaDescribedBy="level-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "level")}
+              optionList={["Any", "1000", "2000", "3000", "4000"]}
+            />
+          </FilterItem>
+          <FilterItem label="Core">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Core"
+              ariaDescribedBy="core-label"
+              defaultValue="Any"
+              onChange={value =>  updateFil(value, "core")}
+              optionList={["Any", "Test 1", "Test 2"]}
+            />
+          </FilterItem>
 				</div>
 			</div>
 		</div>
