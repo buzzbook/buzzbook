@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {resetFilters, updateFilter, updateSort} from "../../redux/gradesSlice";
 import {subjectNames} from "../catalog/CourseList";
+import FilterSelector from "../FilterSelector";
 
 function Filters() {
 	const clearFilters = () => {
