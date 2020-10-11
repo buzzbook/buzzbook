@@ -1,4 +1,4 @@
-:root {
+body {
 	--main-bg: #141414;
 	--gt-gold: #b3a369;
 	--main-text: #dadada;
@@ -11,18 +11,16 @@
 	--high-alpha: rgba(255, 255, 255, 0.2);
 }
 
-@media (prefers-color-scheme: light) {
-	:root {
-		--main-bg: white;
-		--main-text: #353535;
-		--nav-link: #444444;
-		--border: #333;
-		--input-border: #aaa;
-		--input: #eee;
-		--low-alpha: rgba(0, 0, 0, 0.1);
-		--med-alpha: rgba(0, 0, 0, 0.2);
-		--high-alpha: rgba(0, 0, 0, 0.3);
-	}
+body.light-theme {
+	--main-bg: white;
+	--main-text: #353535;
+	--nav-link: #444444;
+	--border: #333;
+	--input-border: #aaa;
+	--input: #eee;
+	--low-alpha: rgba(0, 0, 0, 0.1);
+	--med-alpha: rgba(0, 0, 0, 0.2);
+	--high-alpha: rgba(0, 0, 0, 0.3);
 }
 
 body {

@@ -19,6 +19,7 @@
 
 .custom-select {
 	color: var(--main-text);
+	transition: 0s;
 }
 
 .input-group > .input-group-prepend {
