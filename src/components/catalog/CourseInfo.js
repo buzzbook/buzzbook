@@ -3,6 +3,10 @@ import {useSelector} from "react-redux";
 import {getFilteredCourses, getSelectedCourse} from "../../redux/catalogSlice";
 import RatingBar from "./RatingBar";
 
+import enrollmentIcon from "../../img/enrollmentIcon.svg";
+import gradeIcon from "../../img/gradeIcon.svg";
+import creditsIcon from "../../img/creditsIcon.svg";
+
 const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function CourseInfo() {
@@ -16,9 +20,9 @@ function CourseInfo() {
 	const course = filteredCourses[selectedCourse];
 
 	let enrollmentColor = "var(--green)";
-	if ((course.enrollment.max / course.enrollment.current) * 100 > 67)
+	if ((course.enrollment.current / course.enrollment.max) * 100 > 67)
 		enrollmentColor = "var(--red)";
-	else if ((course.enrollment.max / course.enrollment.current) * 100 > 33)
+	else if ((course.enrollment.current / course.enrollment.max) * 100 > 33)
 		enrollmentColor = "var(--orange)";
 
 	let gradeColor = "var(--green)";
@@ -38,11 +42,20 @@ function CourseInfo() {
 				<div className="col-2">
 					<div className="text-muted">Statistics</div>
 					<div style={{fontSize: "0.8rem"}}>
-						<div style={{color: enrollmentColor}}>
-							{course.enrollment.current}/{course.enrollment.max}
+						<div style={{whiteSpace: "nowrap"}}>
+							<img src={enrollmentIcon} alt="enrollment icon" width="15px" className="d-inline-block mr-1" />
+							<div style={{color: enrollmentColor}} className="d-inline-block">
+								{course.enrollment.current}/{course.enrollment.max}
+							</div>
 						</div>
-						<div style={{color: gradeColor}}>{course.grade}</div>
-						<div>{course.credits} units</div>
+						<div style={{whiteSpace: "nowrap"}}>
+							<img src={gradeIcon} alt="grade icon" width="15px" className="d-inline-block mr-1" />
+							<div style={{color: gradeColor}} className="d-inline-block">{course.grade}</div>
+						</div>
+						<div style={{whiteSpace: "nowrap"}}>
+							<img src={creditsIcon} alt="credits icon" width="15px" className="d-inline-block mr-1" />
+							<div className="d-inline-block">{course.credits} units</div>
+						</div>
 					</div>
 				</div>
 				<div className="col-5">
@@ -67,7 +80,7 @@ function CourseInfo() {
 				</div>
 			</div>
 
-			<hr style={{backgroundColor: "var(--course-hover)", height: 2}} />
+			<hr style={{backgroundColor: "var(--med-alpha)", height: 2}} />
 
 			<div className="text-muted">Description</div>
 			<div className="mb-3">{course.description}</div>

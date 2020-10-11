@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.519" height="20.318" viewBox="0 0 19.519 20.318">
+  <g id="Group_262" data-name="Group 262" transform="translate(-1269.415 -513.924)">
+    <g id="Rectangle_26" data-name="Rectangle 26" transform="translate(1275.977 531.912) rotate(-137)" fill="none" stroke="#d8d8d8" stroke-width="1">
+      <rect width="6" height="19" stroke="none"/>
+      <rect x="0.5" y="0.5" width="5" height="18" fill="none"/>
+    </g>
+    <rect id="Rectangle_27" data-name="Rectangle 27" width="6.718" height="3.98" transform="translate(1275.467 533.059) rotate(-137)" fill="#141414"/>
+    <g id="Polygon_3" data-name="Polygon 3" transform="translate(1273.803 534.242) rotate(-137)" fill="none">
+      <path d="M3,0,6,6H0Z" stroke="none"/>
+      <path d="M 3 2.236069917678833 L 1.618034839630127 5 L 4.381965160369873 5 L 3 2.236069917678833 M 3 0 L 6 6 L 0 6 L 3 0 Z" stroke="none" fill="#d8d8d8"/>
+    </g>
+    <g id="Rectangle_28" data-name="Rectangle 28" transform="translate(1284.97 522.268) rotate(-137)" fill="none" stroke="#d8d8d8" stroke-width="1">
+      <rect width="6" height="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="5" height="2" fill="none"/>
+    </g>
+  </g>
+</svg>

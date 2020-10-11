@@ -17,7 +17,7 @@ function RatingBar({value, max = 5, highIsBetter}) {
 		<div
 			className="w-100 p-1"
 			style={{
-				backgroundColor: "var(--course-hover)",
+				backgroundColor: "var(--med-alpha)",
 				height: 20,
 				borderRadius: 20
 			}}

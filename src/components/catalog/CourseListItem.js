@@ -11,7 +11,7 @@ function CourseListItem(course) {
 	const selectedCourse = useSelector(getSelectedCourse);
 
 	let bgColor =
-		selectedCourse === course.index ? "var(--course-selected)" : "initial";
+		selectedCourse === course.index ? "var(--low-alpha)" : "initial";
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";

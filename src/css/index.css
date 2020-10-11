@@ -1,15 +1,14 @@
 :root {
 	--main-bg: #141414;
-	--gt-gold: #a99d6c;
+	--gt-gold: #b3a369;
 	--main-text: #dadada;
 	--nav-link: #dadada;
 	--border: #555;
 	--input-border: #555;
 	--input: #1d1d1d;
-	--course-selected: rgba(255, 255, 255, 0.05);
-	--course-hover: rgba(255, 255, 255, 0.1);
-	--scrollbar-thumb: rgba(255, 255, 255, 0.1);
-	--scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
+	--low-alpha: rgba(255, 255, 255, 0.05);
+	--med-alpha: rgba(255, 255, 255, 0.1);
+	--high-alpha: rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-color-scheme: light) {
@@ -20,10 +19,9 @@
 		--border: #333;
 		--input-border: #aaa;
 		--input: #eee;
-		--course-selected: rgba(0, 0, 0, 0.1);
-		--course-hover: rgba(0, 0, 0, 0.2);
-		--scrollbar-thumb: rgba(0, 0, 0, 0.1);
-		--scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
+		--low-alpha: rgba(0, 0, 0, 0.1);
+		--med-alpha: rgba(0, 0, 0, 0.2);
+		--high-alpha: rgba(0, 0, 0, 0.3);
 	}
 }
 
