@@ -8,6 +8,8 @@
 	--input: #1d1d1d;
 	--course-selected: rgba(255, 255, 255, 0.05);
 	--course-hover: rgba(255, 255, 255, 0.1);
+	--scrollbar-thumb: rgba(255, 255, 255, 0.1);
+	--scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-color-scheme: light) {
@@ -20,6 +22,8 @@
 		--input: #eee;
 		--course-selected: rgba(0, 0, 0, 0.1);
 		--course-hover: rgba(0, 0, 0, 0.2);
+		--scrollbar-thumb: rgba(0, 0, 0, 0.1);
+		--scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
 	}
 }
 
