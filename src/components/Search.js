@@ -27,7 +27,7 @@ export default function Search({ label1, label2, sortOptionList }) {
           className="custom-select"
           ariaLabel="Sort By"
           ariaDescribedBy="sort-by-label"
-          defaultValue="Course ID"
+          defaultValue={sortOptionList[0]}
           onChange={value => dispatch(updateSort(value))}
           optionList={sortOptionList}
         />
@@ -37,5 +37,7 @@ export default function Search({ label1, label2, sortOptionList }) {
 }
 
 Search.propTypes = {
-  label: PropTypes.string.isRequired,
+  label1: PropTypes.string.isRequired,
+  label2: PropTypes.string,
+  sortOptionList: PropTypes.arrayOf(PropTypes.string),
 };
