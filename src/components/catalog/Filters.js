@@ -1,9 +1,10 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {updateFilter, resetFilters, updateSort} from "../../redux/catalogSlice";
+import {updateFilter, resetFilters} from "../../redux/catalogSlice";
 import {subjectNames} from "./CourseList";
-import FilterItem from "..//FilterItem";
+import FilterItem from "../FilterItem";
 import FilterSelector from "../FilterSelector";
+import Search from "../Search";
 
 function Filters() {
 	const handleDayButtonClick = e => {
@@ -25,26 +26,11 @@ function Filters() {
 
 	return (
 		<div>
-			<div className="mb-1 font-weight-bold">
-				<span className="gt-gold" style={{cursor: "pointer"}}>
-					Browse
-				</span>
-				<span className="text-muted" style={{cursor: "pointer"}}>
-					Compare
-				</span>
-			</div>
-			<input type="text" className="form-control mb-2" placeholder="Search" />
-      <FilterItem label="Sort By">
-        <FilterSelector
-          className="custom-select"
-          ariaLabel="Sort By"
-          ariaDescribedBy="sort-by-label"
-          defaultValue="Course ID"
-          onChange={value => dispatch(updateSort(value))}
-          optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
-        />
-      </FilterItem>
-
+      <Search
+        label1="Browse"
+        label2="Compare"
+        sortOptionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
+      />
 			<div id="catalog-filters">
 				<div className="mb-1 font-weight-bold">
 					<span className="gt-gold">Filters</span>&nbsp;&nbsp;
