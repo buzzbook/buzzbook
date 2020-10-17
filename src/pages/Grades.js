@@ -20,7 +20,10 @@ function Grades() {
             label2="Compare"
             sortOptionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
           />
-          <Filters filterList={filterList} />
+          <Filters 
+            id="grades"
+            filterList={filterList} 
+          />
           <CourseList />
         </div>
       )}

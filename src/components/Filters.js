@@ -1,29 +1,40 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { updateFilter, resetFilters } from "../redux/catalogSlice";
 import { subjectNames } from "./catalog/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
 
-function Filters({ filterList }) {
+function Filters({ id, filterList }) {
   const { term, credits, subject, level, core, days, time, prof } = filterList;
+
+  const dictionary = {
+    catalog: "catalogSlice",
+    grades: "gradesSlice",
+  }
+  const importPromise = import(`../redux/${dictionary[id]}`);
 
   const handleDayButtonClick = e => {
     e.preventDefault();
     e.target.classList.toggle("active");
   };
+  
   const clearFilters = () => {
     document
       .querySelectorAll("#catalog-filters .custom-select")
       .forEach(select => (select.value = "Any"));
-    dispatch(resetFilters());
+    importPromise.then(response => {
+      dispatch(response.resetFilters());
+    });
   };
 
   const dispatch = useDispatch();
 
   //Term, Core, Time-from, Time-to, and Prof filter not implemented yet
-  const updateFil = (value, name) =>
-    dispatch(updateFilter({ name: name, value: value }));
+  const updateFil = (value, name) => {
+    importPromise.then(response => {
+      dispatch(response.updateFilter({ name: name, value: value }));
+    });
+  }
 
   return (
     <div>
@@ -133,16 +144,16 @@ function Filters({ filterList }) {
           </FilterItem>
         }
         {prof &&
-        <FilterItem label="Prof">
-          <FilterSelector
-            className="custom-select"
-            ariaLabel="Prof"
-            ariaDescribedBy="prof-label"
-            defaultValue="Any"
-            onChange={value => updateFil(value, "prof")}
-            optionList={["Any", "Mr. Smith", "Mr.Brown"]}
-          />
-        </FilterItem>
+          <FilterItem label="Prof">
+            <FilterSelector
+              className="custom-select"
+              ariaLabel="Prof"
+              ariaDescribedBy="prof-label"
+              defaultValue="Any"
+              onChange={value => updateFil(value, "prof")}
+              optionList={["Any", "Mr. Smith", "Mr.Brown"]}
+            />
+          </FilterItem>
         }
       </div>
     </div>

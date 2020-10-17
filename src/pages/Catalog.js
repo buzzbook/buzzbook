@@ -20,7 +20,10 @@ function Catalog() {
             label2="Compare"
             sortOptionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
           />
-          <Filters filterList={filterList}/>
+          <Filters 
+            id="catalog"
+            filterList={filterList}
+          />
         </div>)}
       col2Content={<CourseList />}
       col3Content={<CourseInfo />}
