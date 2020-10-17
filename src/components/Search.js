@@ -1,13 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { updateSort } from "../redux/catalogSlice";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
 
-export default function Search({ label1, label2, sortOptionList }) {
+function Search({ id, label1, label2, sortOptionList }) {
 
   const dispatch = useDispatch();
+
+  const dictionary = {
+    catalog: "catalogSlice",
+    grades: "gradesSlice",
+  }
+  const importPromise = import(`../redux/${dictionary[id]}`);
 
   return (
     <div>
@@ -28,13 +33,19 @@ export default function Search({ label1, label2, sortOptionList }) {
           ariaLabel="Sort By"
           ariaDescribedBy="sort-by-label"
           defaultValue={sortOptionList[0]}
-          onChange={value => dispatch(updateSort(value))}
+          onChange={value => {
+            importPromise.then(response => {
+              dispatch(response.updateSort(value));
+            });
+          }}
           optionList={sortOptionList}
         />
       </FilterItem>
     </div>
-  );
+  )
 }
+
+export default Search;
 
 Search.propTypes = {
   label1: PropTypes.string.isRequired,

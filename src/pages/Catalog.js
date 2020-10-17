@@ -15,6 +15,7 @@ function Catalog() {
       col1Content={(
         <div>
           <Search
+            id="catalog"
             label1="Browse"
             label2="Compare"
             sortOptionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}

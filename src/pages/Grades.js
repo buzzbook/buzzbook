@@ -15,6 +15,7 @@ function Grades() {
       col1Content={(
         <div>
           <Search
+            id="grades"
             label1="Browse"
             label2="Compare"
             sortOptionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
