@@ -2,7 +2,7 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 
 import "./css/App.css";
-import Navbar from "./components/Navbar";
+import Nav from "./components/Nav";
 
 // Nav Pages
 import Home from "./pages/Home";
@@ -24,9 +24,11 @@ const navPages = [
 
 function App({location}) {
 	return (
-		<div>
-			<Navbar />
-			<div>
+		<div className="row">
+			<div className="col" style={{maxWidth: 200}}>
+				<Nav />
+			</div>
+			<div className="col">
 				<Switch location={location}>
 					<Route exact path="/" component={Home} />
 

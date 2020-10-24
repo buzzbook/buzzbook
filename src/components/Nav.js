@@ -3,7 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import $ from "jquery";
 
 import "../css/Navbar.css";
-import buzz from "../img/buzzIcon.png";
+import itLogo from "../img/itLogo.png";
 import sun from "../img/sun.svg";
 import moon from "../img/moon.svg";
 
@@ -24,7 +24,7 @@ if(!initialTheme) {
 	document.body.classList.add("light-theme");
 }
 
-function Navbar() {
+function Nav() {
 	const loc = useLocation();
 	const activePath = loc.pathname + (loc.pathname.endsWith("/") ? "" : "/");
 
@@ -47,49 +47,37 @@ function Navbar() {
 		});
 	});
 
-	// Currently only applying the navbar-dark class so that the hamburger icon appears when on mobile
-	// Doesn't work on light mode (will require figuring out if mode is light or dark with js)
 	return (
-		<nav className="navbar navbar-dark navbar-expand-lg" id="navbar">
-			<button
-				className="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarText"
-				aria-controls="navbarText"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span className="navbar-toggler-icon"></span>
-			</button>
-			<Link className="navbar-brand" to="/">
-				<img src={buzz} alt="Buzz" className="mr-2" />
-				<b>
-					G<span className="gt-gold">T</span>
-				</b>{" "}
-				<i>BuzzBook</i>
-			</Link>
-			<div className="collapse navbar-collapse" id="navbarText">
-				<ul className="navbar-nav ml-auto">
-					{navPages.map(page => (
-						<li
-							key={page.path}
-							className={
-								"nav-item" + (page.path === activePath ? " active" : "")
-							}
-						>
-							<Link className="nav-link" to={page.path}>
-								{page.title}
-							</Link>
-						</li>
-					))}
-				</ul>
-			</div>
+		<nav className="nav flex-column pl-4">
+			<ul className="pl-0">
+				<li>
+				<Link className="navbar-brand" to="/">
+					<img src={itLogo} alt="Buzz" className="mr-2" />
+					{/* <br />
+					<b>
+						G<span className="gt-gold">T</span>
+					</b>{" "}
+					<i>BuzzBook</i> */}
+				</Link>
+				</li>
+				{navPages.map(page => (
+					<li
+						key={page.path}
+						className={
+							"nav-item" + (page.path === activePath ? " active" : "")
+						}
+					>
+						<Link className="nav-link px-0 pt-1 pb-2" to={page.path}>
+							<b style={{fontSize: "1.2rem"}}>{page.title}</b>
+						</Link>
+					</li>
+				))}
+			</ul>
 			<div>
-				<img id="theme-toggle-icon" src={theme === "dark" ? sun : moon} alt={theme === "dark" ? "sun" : "moon"} height="35px" onClick={toggleTheme} style={{cursor: "pointer"}} className="ml-1" />
+				<img id="theme-toggle-icon" src={theme === "dark" ? sun : moon} alt={theme === "dark" ? "sun" : "moon"} height="35px" onClick={toggleTheme} style={{cursor: "pointer"}} />
 			</div>
 		</nav>
 	);
 }
 
-export default Navbar;
+export default Nav;
