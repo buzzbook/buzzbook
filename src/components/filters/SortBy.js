@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
-import { updateSort } from "../redux/courseListSlice";
+import {updateSort} from "../../redux/courseListSlice";
 
-function SortBy ({ sortOptionList }) {
+function SortBy({sortOptionList}) {
 	const dispatch = useDispatch();
 
 	return (
@@ -21,11 +21,15 @@ function SortBy ({ sortOptionList }) {
 				/>
 			</FilterItem>
 		</div>
-	)
+	);
 }
 
-export default SortBy;
-
-Search.propTypes = {
-	sortOptionList: PropTypes.arrayOf(PropTypes.string),
+SortBy.defaultProps = {
+	sortOptionList: ["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]
 };
+
+SortBy.propTypes = {
+	sortOptionList: PropTypes.arrayOf(PropTypes.string)
+};
+
+export default SortBy;

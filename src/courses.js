@@ -1,4 +1,4 @@
-const courses = [
+var courses = [
 	{
 		courseID: "MATH 1553",
 		name: "Intro to Linear Algebra",
@@ -367,7 +367,10 @@ const courses = [
 		enrollRestrictions:
 			"Students can receive credit for either ECON 2100 or ECON 2101,or for ECON 2105/2106. Students cannot receive credit for ECON 2100 and ECON 2101 or for ECON 2100 and ECON 2105/2106 or for ECON 2101 and ECON 2105/2106."
 	}
-];
+].map((course, index) => {
+	course["index"] = index;
+	return course;
+});
 
 var localStorage = window.localStorage;
 localStorage.setItem("courses", JSON.stringify(courses));

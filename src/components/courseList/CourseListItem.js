@@ -3,17 +3,23 @@ import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	updateSelectedCourse,
-	getSelectedCourse
-} from "../../redux/catalogSlice";
-import { addCourse } from "../../redux/courseListSlice";
+	getSelectedCourse,
+	getSavedCourses,
+	removeCourseByIndex
+} from "../../redux/courseListSlice";
+import {saveCourse} from "../../redux/courseListSlice";
 import saveIcon from "../../img/saveIcon.png";
+import unsaveIcon from "../../img/unsaveIcon.png";
 
 function CourseListItem(course) {
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
+	const savedCourses = useSelector(getSavedCourses);
 
-	let bgColor =
-		selectedCourse === course.index ? "var(--low-alpha)" : "initial";
+	let isSelected = selectedCourse === course.index;
+	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
+
+	let isSaved = savedCourses.includes(course.index);
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
@@ -31,29 +37,43 @@ function CourseListItem(course) {
 			onClick={() => dispatch(updateSelectedCourse(course.index))}
 		>
 			<div className="position-relative">
-					<div style={{maxWidth: "calc(100% - 25px)"}}>
-						<div className="text-cutoff">
-							<h5 className="d-inline">
-								<b>{course.courseID}</b>
-							</h5>
-							&nbsp;&nbsp;&nbsp;
-							<span>{course.name}</span>
-						</div>
-
-						<div style={{fontSize: "0.9rem"}}>
-							<span style={{color: enrollmentColor}}>
-								{Math.round(course.enrollmentPercent)}% enrollment
-							</span>
-							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-							<span>{course.credits} units</span>
-							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-							<span>{course.numSections} sections</span>
-							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-							<span style={{color: gradeColor}}>{course.grade}</span>
-						</div>
+				<div style={{maxWidth: "calc(100% - 25px)"}}>
+					<div className="text-cutoff">
+						<h5 className="d-inline">
+							<b>{course.courseID}</b>
+						</h5>
+						&nbsp;&nbsp;&nbsp;
+						<span>{course.name}</span>
 					</div>
 
-					<img src={saveIcon} alt="save course" className="saveIcon" onClick={() => dispatch(addCourse(course.index))} />
+					<div style={{fontSize: "0.9rem"}}>
+						<span style={{color: enrollmentColor}}>
+							{Math.round(course.enrollmentPercent)}% enrollment
+						</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span>{course.credits} units</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span>{course.numSections} sections</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span style={{color: gradeColor}}>{course.grade}</span>
+					</div>
+				</div>
+
+				{isSaved ? (
+					<img
+						src={unsaveIcon}
+						alt="unsave course"
+						className="saveIcon icon-dark"
+						onClick={() => dispatch(removeCourseByIndex(course.index))}
+					/>
+				) : (
+					<img
+						src={saveIcon}
+						alt="save course"
+						className="saveIcon icon-dark"
+						onClick={() => dispatch(saveCourse(course.index))}
+					/>
+				)}
 			</div>
 		</div>
 	);

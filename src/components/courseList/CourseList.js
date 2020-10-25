@@ -1,8 +1,12 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getFilters, getSelectedCourses, getSort} from "../../redux/courseListSlice";
+import {
+	getFilters,
+	getSavedCourses,
+	getSort
+} from "../../redux/courseListSlice";
 import CourseListItem from "./CourseListItem";
-import SelectedCourses from "./SelectedCourses";
+import SavedCourses from "./SavedCourses";
 import "../../css/CourseList.css";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
@@ -16,18 +20,14 @@ export const subjectNames = {
 	PHYS: "Physics"
 };
 
-function CourseList() {
+function CourseList({id}) {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort);
-	var selectedCoursesIndeces = useSelector(getSelectedCourses);
+	var savedCoursesIndeces = useSelector(getSavedCourses);
 
 	const filteredCourses = courses
-		.map((course, index) => {
-			course["index"] = index;
-			return course;
-		})
 		.filter(course => {
-			if (selectedCoursesIndeces.includes(course.index)) {
+			if (id !== "Catalog" && savedCoursesIndeces.includes(course.index)) {
 				return false;
 			}
 			if (filters.credits && filters.credits !== "Any") {
@@ -77,45 +77,45 @@ function CourseList() {
 			}
 		});
 
-	if (filteredCourses.length === 0) {
-		return (
-			<div className="text-center mt-2">
-				<h2>No classes match your filters :(</h2>
-			</div>
-		);
-	}
-
 	return (
 		<div>
-			<div style={{height: "50px"}}>
-				<input type="text" className="form-control mb-2" placeholder="Search Courses" />
-			</div>
-			<div style={{height: "calc(100vh - 50px)"}}>
+			<div style={{height: "100%"}}>
 				<div id="courseList">
-					{filteredCourses.map((course, index) => {
-						let sections = course.sections ? course.sections : courses[0].sections;
-						return (
-							<CourseListItem
-								courseID={course.courseID}
-								name={course.name}
-								enrollmentPercent={
-									(course.enrollment.current / course.enrollment.max) * 100
-								}
-								credits={course.credits}
-								numSections={sections.length}
-								grade={course.grade}
-								index={course.index}
-								key={index}
-							/>
-						);
-					})}
+					{filteredCourses.length === 0 ? (
+						<div className="text-center mt-2">
+							<h2>No classes match your filters :(</h2>
+						</div>
+					) : (
+						filteredCourses.map((course, index) => {
+							let sections = course.sections
+								? course.sections
+								: courses[0].sections;
+							return (
+								<CourseListItem
+									courseID={course.courseID}
+									name={course.name}
+									enrollmentPercent={
+										(course.enrollment.current / course.enrollment.max) * 100
+									}
+									credits={course.credits}
+									numSections={sections.length}
+									grade={course.grade}
+									index={course.index}
+									key={index}
+								/>
+							);
+						})
+					)}
 				</div>
 
-				<div className="gt-gold font-weight-bold pl-2" style={{fontSize: "1.25rem"}}>
-					Selected Courses
+				<div
+					className="gt-gold font-weight-bold pl-2 mt-2"
+					style={{fontSize: "1.25rem"}}
+				>
+					Saved Courses
 				</div>
-				<div id="selectedCourses">
-					<SelectedCourses />
+				<div id="savedCourses">
+					<SavedCourses />
 				</div>
 			</div>
 		</div>

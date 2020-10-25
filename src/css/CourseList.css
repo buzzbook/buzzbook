@@ -2,7 +2,7 @@
 	height: 60%;
 	overflow-y: scroll;
 }
-#selectedCourses {
+#savedCourses {
 	height: 40%;
 	overflow: scroll;
 }

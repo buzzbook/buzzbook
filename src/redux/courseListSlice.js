@@ -1,20 +1,32 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+const courses = JSON.parse(window.localStorage.getItem("courses"));
+
 export const courseListSlice = createSlice({
 	name: "courseList",
 	initialState: {
-		selectedCourses: [],
+		selectedCourse: 0,
+		savedCourses: [],
 		filters: {},
-		sort: "Course ID"
+		sort: "Course ID",
+		filteredCourses: courses
 	},
 	reducers: {
+		updateSelectedCourse: (state, action) => {
+			state.selectedCourse = action.payload;
+		},
 		/** Adds a course by its index in the courses list */
-		addCourse: (state, action) => {
-			state.selectedCourses.push(action.payload);
+		saveCourse: (state, action) => {
+			state.savedCourses.push(action.payload);
+		},
+		/** Removes a course by its index in the saved courses list */
+		removeCourse: (state, action) => {
+			state.savedCourses.splice(action.payload, 1);
 		},
 		/** Removes a course by its index in the courses list */
-		removeCourse: (state, action) => {
-			state.selectedCourses.splice(action.payload, 1);
+		removeCourseByIndex: (state, action) => {
+			let index = state.savedCourses.indexOf(action.payload);
+			state.savedCourses.splice(index, 1);
 		},
 		updateFilter: (state, action) => {
 			state.filters[action.payload.name] = action.payload.value;
@@ -25,6 +37,13 @@ export const courseListSlice = createSlice({
 				state.filters[key] = "Any";
 			});
 		},
+		updateFilteredCourses: (state, action) => {
+			if (state.selectedCourse >= action.payload.length)
+				state.selectedCourse = action.payload.length - 1;
+			else if (state.selectedCourse === -1 && action.payload.length > 0)
+				state.selectedCourse = 0;
+			state.filteredCourses = action.payload;
+		},
 		updateSort: (state, action) => {
 			state.sort = action.payload;
 		}
@@ -32,15 +51,20 @@ export const courseListSlice = createSlice({
 });
 
 export const {
-	addCourse,
+	updateSelectedCourse,
+	saveCourse,
 	removeCourse,
+	removeCourseByIndex,
 	updateFilter,
 	resetFilters,
+	updateFilteredCourses,
 	updateSort
 } = courseListSlice.actions;
 
-export const getSelectedCourses = state => state.grades.selectedCourses;
-export const getFilters = state => state.grades.filters;
-export const getSort = state => state.grades.sort;
+export const getSelectedCourse = state => state.courseList.selectedCourse;
+export const getSavedCourses = state => state.courseList.savedCourses;
+export const getFilters = state => state.courseList.filters;
+export const getSort = state => state.courseList.sort;
+export const getFilteredCourses = state => state.courseList.filteredCourses;
 
 export default courseListSlice.reducer;

@@ -9,6 +9,8 @@ body {
 	--low-alpha: rgba(255, 255, 255, 0.05);
 	--med-alpha: rgba(255, 255, 255, 0.1);
 	--high-alpha: rgba(255, 255, 255, 0.2);
+	--icon-light: invert(0);
+	--icon-dark: invert(100%);
 }
 
 body.light-theme {
@@ -21,6 +23,8 @@ body.light-theme {
 	--low-alpha: rgba(0, 0, 0, 0.1);
 	--med-alpha: rgba(0, 0, 0, 0.2);
 	--high-alpha: rgba(0, 0, 0, 0.3);
+	--icon-light: invert(100%);
+	--icon-dark: invert(0);
 }
 
 body {
@@ -30,4 +34,11 @@ body {
 
 .gt-gold {
 	color: var(--gt-gold);
+}
+
+.icon-light {
+	filter: var(--icon-light);
+}
+.icon-dark {
+	filter: var(--icon-dark);
 }
