@@ -64,15 +64,6 @@
 	border-bottom-right-radius: 0.25rem;
 }
 
-/* Course List */
-#catalog-courseList > div {
-	cursor: pointer;
-	transition: all 0.2s;
-}
-#catalog-courseList > div:hover {
-	background-color: var(--med-alpha) !important;
-}
-
 /* Course Info */
 #courseInfo table {
 	color: var(--main-text);

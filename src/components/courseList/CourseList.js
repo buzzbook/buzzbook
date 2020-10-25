@@ -1,13 +1,9 @@
-import React, {useEffect, useLayoutEffect} from "react";
+import React from "react";
+import {useSelector} from "react-redux";
+import {getFilters, getSelectedCourses, getSort} from "../../redux/courseListSlice";
 import CourseListItem from "./CourseListItem";
-import {useDispatch, useSelector} from "react-redux";
-import {
-	updateFilteredCourses,
-	updateSelectedCourse,
-	getSelectedCourse,
-	getFilters,
-	getSort
-} from "../../redux/catalogSlice";
+import SelectedCourses from "./SelectedCourses";
+import "../../css/CourseList.css";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
 
@@ -21,12 +17,19 @@ export const subjectNames = {
 };
 
 function CourseList() {
-	const dispatch = useDispatch();
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort);
-	const selectedCourse = useSelector(getSelectedCourse);
+	var selectedCoursesIndeces = useSelector(getSelectedCourses);
+
 	const filteredCourses = courses
+		.map((course, index) => {
+			course["index"] = index;
+			return course;
+		})
 		.filter(course => {
+			if (selectedCoursesIndeces.includes(course.index)) {
+				return false;
+			}
 			if (filters.credits && filters.credits !== "Any") {
 				// eslint-disable-next-line
 				if (course.credits != filters.credits) return false;
@@ -73,56 +76,48 @@ function CourseList() {
 					return 0;
 			}
 		});
-	useLayoutEffect(() => {
-		dispatch(updateFilteredCourses(filteredCourses));
-	});
-
-	const changeSelected = event => {
-		if (event.keyCode === 40) {
-			if (selectedCourse < filteredCourses.length - 1)
-				dispatch(updateSelectedCourse(selectedCourse + 1));
-		}
-		if (event.keyCode === 38) {
-			if (selectedCourse > 0)
-				dispatch(updateSelectedCourse(selectedCourse - 1));
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener("keydown", changeSelected, false);
-
-		return () => {
-			document.removeEventListener("keydown", changeSelected, false);
-		};
-	});
 
 	if (filteredCourses.length === 0) {
 		return (
-			<div className="text-center">
+			<div className="text-center mt-2">
 				<h2>No classes match your filters :(</h2>
 			</div>
 		);
 	}
 
 	return (
-		<div id="catalog-courseList">
-			{filteredCourses.map((course, index) => {
-				let sections = course.sections ? course.sections : courses[0].sections;
-				return (
-					<CourseListItem
-						courseID={course.courseID}
-						name={course.name}
-						enrollmentPercent={
-							(course.enrollment.current / course.enrollment.max) * 100
-						}
-						credits={course.credits}
-						numSections={sections.length}
-						grade={course.grade}
-						index={index}
-						key={index}
-					/>
-				);
-			})}
+		<div>
+			<div style={{height: "50px"}}>
+				<input type="text" className="form-control mb-2" placeholder="Search Courses" />
+			</div>
+			<div style={{height: "calc(100vh - 50px)"}}>
+				<div id="courseList">
+					{filteredCourses.map((course, index) => {
+						let sections = course.sections ? course.sections : courses[0].sections;
+						return (
+							<CourseListItem
+								courseID={course.courseID}
+								name={course.name}
+								enrollmentPercent={
+									(course.enrollment.current / course.enrollment.max) * 100
+								}
+								credits={course.credits}
+								numSections={sections.length}
+								grade={course.grade}
+								index={course.index}
+								key={index}
+							/>
+						);
+					})}
+				</div>
+
+				<div className="gt-gold font-weight-bold pl-2" style={{fontSize: "1.25rem"}}>
+					Selected Courses
+				</div>
+				<div id="selectedCourses">
+					<SelectedCourses />
+				</div>
+			</div>
 		</div>
 	);
 }

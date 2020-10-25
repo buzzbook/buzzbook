@@ -25,7 +25,7 @@ const navPages = [
 function App({location}) {
 	return (
 		<div className="row">
-			<div className="col" style={{maxWidth: 200}}>
+			<div className="col pr-0" style={{maxWidth: 200}}>
 				<Nav />
 			</div>
 			<div className="col">

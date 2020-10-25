@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { subjectNames } from "./catalog/CourseList";
+import { subjectNames } from "./courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
 
@@ -9,7 +9,7 @@ function Filters({ id, filterList }) {
 
   const dictionary = {
     catalog: "catalogSlice",
-    grades: "gradesSlice",
+    grades: "courseListSlice",
   }
   const importPromise = import(`../redux/${dictionary[id]}`);
 

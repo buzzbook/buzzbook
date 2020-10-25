@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-export const gradesSlice = createSlice({
-	name: "grades",
+export const courseListSlice = createSlice({
+	name: "courseList",
 	initialState: {
 		selectedCourses: [],
 		filters: {},
@@ -37,10 +37,10 @@ export const {
 	updateFilter,
 	resetFilters,
 	updateSort
-} = gradesSlice.actions;
+} = courseListSlice.actions;
 
 export const getSelectedCourses = state => state.grades.selectedCourses;
 export const getFilters = state => state.grades.filters;
 export const getSort = state => state.grades.sort;
 
-export default gradesSlice.reducer;
+export default courseListSlice.reducer;

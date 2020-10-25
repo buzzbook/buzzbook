@@ -1,6 +1,6 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getSelectedCourses} from "../../redux/gradesSlice";
+import {getSelectedCourses} from "../../redux/courseListSlice";
 import SelectedCourse from "./SelectedCourse";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
@@ -11,11 +11,8 @@ function SelectedCourses() {
 	selectedCoursesIndeces.forEach(index => selectedCourses.push(courses[index]));
 
 	return (
-		<div>
-			<div className="gt-gold font-weight-bold" style={{fontSize: "1.25rem"}}>
-				Selected Courses
-			</div>
-			<div id="grades-selectedCourses">
+		<div className="px-2 mt-2">
+			<div>
 				{selectedCourses.map((course, index) => {
 					return (
 						<SelectedCourse

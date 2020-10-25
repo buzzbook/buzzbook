@@ -5,6 +5,8 @@ import {
 	updateSelectedCourse,
 	getSelectedCourse
 } from "../../redux/catalogSlice";
+import { addCourse } from "../../redux/courseListSlice";
+import saveIcon from "../../img/saveIcon.png";
 
 function CourseListItem(course) {
 	const dispatch = useDispatch();
@@ -24,25 +26,35 @@ function CourseListItem(course) {
 
 	return (
 		<div
-			className="p-3 mb-2 rounded"
+			className="p-2 mb-2 rounded"
 			style={{backgroundColor: bgColor}}
 			onClick={() => dispatch(updateSelectedCourse(course.index))}
 		>
-			<h5 className="d-inline">
-				<b>{course.courseID}</b>
-			</h5>
-			&nbsp;&nbsp;&nbsp;
-			<span>{course.name}</span>
-			<br />
-			<span style={{color: enrollmentColor}}>
-				{Math.round(course.enrollmentPercent)}% enrollment
-			</span>
-			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span>{course.credits} units</span>
-			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span>{course.numSections} sections</span>
-			<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-			<span style={{color: gradeColor}}>{course.grade}</span>
+			<div className="position-relative">
+					<div style={{maxWidth: "calc(100% - 25px)"}}>
+						<div className="text-cutoff">
+							<h5 className="d-inline">
+								<b>{course.courseID}</b>
+							</h5>
+							&nbsp;&nbsp;&nbsp;
+							<span>{course.name}</span>
+						</div>
+
+						<div style={{fontSize: "0.9rem"}}>
+							<span style={{color: enrollmentColor}}>
+								{Math.round(course.enrollmentPercent)}% enrollment
+							</span>
+							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+							<span>{course.credits} units</span>
+							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+							<span>{course.numSections} sections</span>
+							<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+							<span style={{color: gradeColor}}>{course.grade}</span>
+						</div>
+					</div>
+
+					<img src={saveIcon} alt="save course" className="saveIcon" onClick={() => dispatch(addCourse(course.index))} />
+			</div>
 		</div>
 	);
 }

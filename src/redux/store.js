@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 import catalogReducer from "./catalogSlice";
-import gradesReducer from "./gradesSlice";
+import gradesReducer from "./courseListSlice";
 
 export default configureStore({
 	reducer: {
