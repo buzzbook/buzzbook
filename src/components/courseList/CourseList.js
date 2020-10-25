@@ -27,7 +27,7 @@ function CourseList({id}) {
 
 	const filteredCourses = courses
 		.filter(course => {
-			if (id !== "Catalog" && savedCoursesIndeces.includes(course.index)) {
+			if (id !== "catalog" && savedCoursesIndeces.includes(course.index)) {
 				return false;
 			}
 			if (filters.credits && filters.credits !== "Any") {

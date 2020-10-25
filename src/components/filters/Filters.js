@@ -1,17 +1,12 @@
 import React from "react";
 import {useDispatch} from "react-redux";
+import {resetFilters, updateFilter} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
 
-function Filters({id, filterList}) {
+function Filters({filterList}) {
 	const {term, credits, subject, level, core, days, time, prof} = filterList;
-
-	const dictionary = {
-		catalog: "catalogSlice",
-		grades: "courseListSlice"
-	};
-	const importPromise = import(`../redux/${dictionary[id]}`);
 
 	const handleDayButtonClick = e => {
 		e.preventDefault();
@@ -20,33 +15,28 @@ function Filters({id, filterList}) {
 
 	const clearFilters = () => {
 		document
-			.querySelectorAll("#catalog-filters .custom-select")
+			.querySelectorAll("#filters .custom-select")
 			.forEach(select => (select.value = "Any"));
-		importPromise.then(response => {
-			dispatch(response.resetFilters());
-		});
+		dispatch(resetFilters());
 	};
 
 	const dispatch = useDispatch();
 
 	//Term, Core, Time-from, Time-to, and Prof filter not implemented yet
 	const updateFil = (value, name) => {
-		importPromise.then(response => {
-			dispatch(response.updateFilter({name: name, value: value}));
-		});
+		dispatch(updateFilter({name: name, value: value}));
 	};
 
 	return (
 		<div>
-			<div id="catalog-filters">
-				<div className="mb-1 font-weight-bold">
-					<span className="gt-gold">Filters</span>&nbsp;&nbsp;
+			<div id="filters">
+				<div className="mb-1 font-weight-bold text-right">
 					<span
 						className="text-muted"
 						style={{cursor: "pointer"}}
 						onClick={clearFilters}
 					>
-						Clear
+						Clear Filters
 					</span>
 				</div>
 				{term && (
@@ -160,5 +150,18 @@ function Filters({id, filterList}) {
 		</div>
 	);
 }
+
+Filters.defaultProps = {
+	filterList: {
+		term: true,
+		credits: true,
+		subject: true,
+		level: true,
+		core: true,
+		days: true,
+		time: true,
+		prof: true
+	}
+};
 
 export default Filters;

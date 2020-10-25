@@ -1,6 +1,8 @@
 import React from "react";
 import SortBy from "./SortBy";
 import filterIcon from "../../img/filterIcon.png";
+import "../../css/Filters.css";
+import Filters from "./Filters";
 
 function FilterBar() {
 	return (
@@ -18,8 +20,41 @@ function FilterBar() {
 						src={filterIcon}
 						alt="filter"
 						className="mr-3 icon-dark"
-						style={{width: 40, height: 40}}
+						style={{width: 40, height: 40, cursor: "pointer"}}
+						data-toggle="modal"
+						data-target="#filterModal"
 					/>
+
+					<div
+						className="modal fade"
+						id="filterModal"
+						tabindex="-1"
+						role="dialog"
+						aria-labelledby="filterModalLabel"
+						aria-hidden="true"
+					>
+						<div className="modal-dialog" role="document">
+							<div className="modal-content">
+								<div className="modal-header">
+									<h5 className="modal-title" id="filterModalLabel">
+										Filters
+									</h5>
+									<button
+										type="button"
+										className="close"
+										data-dismiss="modal"
+										aria-label="Close"
+									>
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div className="modal-body">
+									<Filters />
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<SortBy />
 				</div>
 			</div>
