@@ -4,7 +4,6 @@ import {resetFilters, updateFilter} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
-import FilterMultiSelector from "./FilterMultiSelector";
 
 function Filters({filterList}) {
 	const {term, credits, subject, level, core, days, time, prof} = filterList;
@@ -15,6 +14,7 @@ function Filters({filterList}) {
 	};
 
 	const clearFilters = () => {
+    console.log(document.querySelectorAll("#filters .custom-select"));
 		document
 			.querySelectorAll("#filters .custom-select")
 			.forEach(select => (select.value = "Any"));
@@ -54,19 +54,20 @@ function Filters({filterList}) {
 				)}
 				{credits && (
 					<FilterItem label="Credits">
-						<FilterMultiSelector
+						<FilterSelector
 							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "credits")}
-							optionList={["Any", 1, 2, 3, 4]}
+              optionList={["Any", 1, 2, 3, 4]}
+              isMulti={true}
 						/>
 					</FilterItem>
 				)}
 				{subject && (
 					<FilterItem label="Subject">
-						<FilterMultiSelector
+						<FilterSelector
 							className="custom-select"
 							ariaLabel="Subject"
 							ariaDescribedBy="subject-label"
@@ -76,31 +77,34 @@ function Filters({filterList}) {
 								Object.keys(subjectNames).map(key => {
 									return subjectNames[key];
 								})
-							)}
+              )}
+              isMulti={true}
 						/>
 					</FilterItem>
 				)}
 				{level && (
 					<FilterItem label="Level">
-						<FilterMultiSelector
+						<FilterSelector
 							className="custom-select"
 							ariaLabel="Level"
 							ariaDescribedBy="level-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "level")}
-							optionList={["Any", 1000, 2000, 3000, 4000]}
+              optionList={["Any", 1000, 2000, 3000, 4000]}
+              isMulti={true}
 						/>
 					</FilterItem>
 				)}
 				{core && (
 					<FilterItem label="Core">
-						<FilterMultiSelector
+						<FilterSelector
 							className="custom-select"
 							ariaLabel="Core"
 							ariaDescribedBy="core-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "core")}
-							optionList={["Any", "Test 1", "Test 2"]}
+              optionList={["Any", "Test 1", "Test 2"]}
+              isMulti={true}
 						/>
 					</FilterItem>
 				)}
@@ -137,13 +141,14 @@ function Filters({filterList}) {
 				)}
 				{prof && (
 					<FilterItem label="Prof">
-						<FilterMultiSelector
+						<FilterSelector
 							className="custom-select"
 							ariaLabel="Prof"
 							ariaDescribedBy="prof-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "prof")}
-							optionList={["Any", "Mr. Smith", "Mr.Brown"]}
+              optionList={["Any", "Mr. Smith", "Mr.Brown"]}
+              isMulti={true}
 						/>
 					</FilterItem>
 				)}
