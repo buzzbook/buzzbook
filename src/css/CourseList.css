@@ -27,6 +27,7 @@
 }
 
 .saveIcon,
+.unsaveIcon,
 .deleteIcon {
 	cursor: pointer;
 	position: absolute;
@@ -34,4 +35,12 @@
 	top: 50%;
 	right: 0;
 	width: 20px;
+	transition: 0.2s;
+}
+
+.saveIcon:hover {
+	filter: sepia(100%) hue-rotate(110deg) saturate(20);
+}
+.unsaveIcon:hover {
+	filter: invert(50%) sepia(100%) hue-rotate(-20deg) saturate(30);
 }

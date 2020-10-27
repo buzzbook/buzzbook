@@ -63,7 +63,7 @@ function CourseListItem(course) {
 					<img
 						src={unsaveIcon}
 						alt="unsave course"
-						className="saveIcon icon-dark"
+						className="unsaveIcon icon-dark"
 						onClick={() => dispatch(removeCourseByIndex(course.index))}
 					/>
 				) : (

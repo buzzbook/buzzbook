@@ -24,7 +24,7 @@
 }
 
 .nav .nav-item a.nav-link:hover {
-	color: var(--yellow);
+	color: #ffe084;
 }
 
 .nav .nav-item.active a.nav-link {
