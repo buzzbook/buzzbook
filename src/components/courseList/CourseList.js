@@ -30,21 +30,25 @@ function CourseList({id}) {
 			if (id !== "catalog" && savedCoursesIndeces.includes(course.index)) {
 				return false;
 			}
-			if (filters.credits && filters.credits !== "Any") {
-        // eslint-disable-next-line
+			if (filters.credits) {
         const creditFilterBy = filters.credits.map(option => option.value);
-        if (!creditFilterBy.includes(course.credits)) return false;
+        if (!creditFilterBy.includes("Any")) {
+          if (!creditFilterBy.includes(course.credits)) return false;
+        }
 			}
-			if (filters.subject && filters.subject !== "Any") {
-        let subject = subjectNames[course.courseID.split(" ")[0]];
+			if (filters.subject) {
         const subjectFilterBy = filters.subject.map(option => option.value);
-        if (!subjectFilterBy.includes(subject)) return false;
+        if (!subjectFilterBy.includes("Any")) {
+          let subject = subjectNames[course.courseID.split(" ")[0]];
+          if (!subjectFilterBy.includes(subject)) return false;
+        }
 			}
-			if (filters.level && filters.level !== "Any") {
-				let level = parseInt(course.courseID.split(" ")[1].charAt(0)) * 1000;
-        // eslint-disable-next-line
+			if (filters.level) {
         const levelFilterBy = filters.level.map(option => option.value);
-        if (!levelFilterBy.includes(level)) return false;
+        if (!levelFilterBy.includes("Any")) {
+          let level = parseInt(course.courseID.split(" ")[1].charAt(0)) * 1000;
+          if (!levelFilterBy.includes(level)) return false;
+        }
 			}
 			return true;
 		})

@@ -24,10 +24,11 @@ export default function FilterMultiSelector({
 
 	 return (
 		<Select
-			className="form-control border-0 p-0"
+      className="form-control border-0 p-0"
 			styles={customStyles}
 			options={options}
-			isMulti={true}
+      isMulti={true}
+      closeMenuOnSelect={false}
 			aria-label={ariaLabel}
       aria-describedby={ariaDescribedBy}
       onChange={selectedList => onChange(selectedList)}
