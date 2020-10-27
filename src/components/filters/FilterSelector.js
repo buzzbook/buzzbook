@@ -9,35 +9,13 @@ export default function FilterSelector({
 	onChange,
 	optionList
 }) {
-	const options = [];
-	optionList.forEach(option => {
-		options.push({value: option, label: option});
-	});
-
-	/* const customStyles = {
-		multiValue: provided => ({
-			...provided,
-			borderRadius: "15px"
-		})
-	};
-
-	 return (
-		<Select
-			className="form-control border-0 p-0"
-			styles={customStyles}
-			options={options}
-			isMulti={true}
-			aria-label={ariaLabel}
-			aria-describedby={ariaDescribedBy}
-		/>
-	); */
 	return (
 		<select
 			className={className}
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedBy}
 			defaultValue={defaultValue}
-			onChange={e => onChange(e.target.value)}
+			onChange={e => onChange([{value: e.target.value, label: e.target.value}])}
 		>
 			{optionList.map((option, index) => {
 				return <option key={index}>{option}</option>;

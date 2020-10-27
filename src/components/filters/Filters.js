@@ -4,6 +4,7 @@ import {resetFilters, updateFilter} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
+import FilterMultiSelector from "./FilterMultiSelector";
 
 function Filters({filterList}) {
 	const {term, credits, subject, level, core, days, time, prof} = filterList;
@@ -53,19 +54,19 @@ function Filters({filterList}) {
 				)}
 				{credits && (
 					<FilterItem label="Credits">
-						<FilterSelector
+						<FilterMultiSelector
 							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "credits")}
-							optionList={["Any", "1", "2", "3", "4"]}
+							optionList={["Any", 1, 2, 3, 4]}
 						/>
 					</FilterItem>
 				)}
 				{subject && (
 					<FilterItem label="Subject">
-						<FilterSelector
+						<FilterMultiSelector
 							className="custom-select"
 							ariaLabel="Subject"
 							ariaDescribedBy="subject-label"
@@ -81,19 +82,19 @@ function Filters({filterList}) {
 				)}
 				{level && (
 					<FilterItem label="Level">
-						<FilterSelector
+						<FilterMultiSelector
 							className="custom-select"
 							ariaLabel="Level"
 							ariaDescribedBy="level-label"
 							defaultValue="Any"
 							onChange={value => updateFil(value, "level")}
-							optionList={["Any", "1000", "2000", "3000", "4000"]}
+							optionList={["Any", 1000, 2000, 3000, 4000]}
 						/>
 					</FilterItem>
 				)}
 				{core && (
 					<FilterItem label="Core">
-						<FilterSelector
+						<FilterMultiSelector
 							className="custom-select"
 							ariaLabel="Core"
 							ariaDescribedBy="core-label"
@@ -136,7 +137,7 @@ function Filters({filterList}) {
 				)}
 				{prof && (
 					<FilterItem label="Prof">
-						<FilterSelector
+						<FilterMultiSelector
 							className="custom-select"
 							ariaLabel="Prof"
 							ariaDescribedBy="prof-label"
