@@ -28,7 +28,7 @@ function App({location}) {
 			<div className="col pr-0" style={{maxWidth: 200}}>
 				<Nav />
 			</div>
-			<div className="col">
+			<div className="col px-0">
 				<Switch location={location}>
 					<Route exact path="/" component={Home} />
 

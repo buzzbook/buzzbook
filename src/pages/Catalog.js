@@ -1,6 +1,6 @@
 import React from "react";
 import CourseInfo from "../components/catalog/CourseInfo";
-import Layout from "./Layout";
+import Layout from "./CourseListLayout";
 
 import "../css/Catalog.css";
 
