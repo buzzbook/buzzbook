@@ -31,17 +31,20 @@ function CourseList({id}) {
 				return false;
 			}
 			if (filters.credits && filters.credits !== "Any") {
-				// eslint-disable-next-line
-				if (course.credits != filters.credits) return false;
+        // eslint-disable-next-line
+        const creditFilterBy = filters.credits.map(option => option.value);
+        if (!creditFilterBy.includes(course.credits)) return false;
 			}
 			if (filters.subject && filters.subject !== "Any") {
-				let subject = subjectNames[course.courseID.split(" ")[0]];
-				if (subject !== filters.subject) return false;
+        let subject = subjectNames[course.courseID.split(" ")[0]];
+        const subjectFilterBy = filters.subject.map(option => option.value);
+        if (!subjectFilterBy.includes(subject)) return false;
 			}
 			if (filters.level && filters.level !== "Any") {
 				let level = parseInt(course.courseID.split(" ")[1].charAt(0)) * 1000;
-				// eslint-disable-next-line
-				if (level != filters.level) return false;
+        // eslint-disable-next-line
+        const levelFilterBy = filters.level.map(option => option.value);
+        if (!levelFilterBy.includes(level)) return false;
 			}
 			return true;
 		})
