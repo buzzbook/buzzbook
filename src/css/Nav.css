@@ -1,0 +1,36 @@
+.nav {
+	height: 100vh;
+	color: var(--main-text);
+	background-color: var(--low-alpha);
+}
+
+.nav .navbar-brand {
+	color: var(--main-text);
+	font-size: xx-large;
+}
+
+.nav .navbar-brand img {
+	max-width: 40px;
+}
+
+.nav .nav-item:active {
+	outline: none;
+	box-shadow: none;
+}
+
+.nav .nav-item a.nav-link {
+	color: var(--nav-link);
+	transition: color 0.25s;
+}
+
+.nav .nav-item a.nav-link:hover {
+	color: #ffe084;
+}
+
+.nav .nav-item.active a.nav-link {
+	color: var(--gt-gold);
+}
+
+.nav ul {
+	list-style: none;
+}

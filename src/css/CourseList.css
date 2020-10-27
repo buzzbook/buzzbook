@@ -1,0 +1,46 @@
+#courseList {
+	height: 60%;
+	overflow-y: scroll;
+}
+#savedCourses {
+	height: 40%;
+	overflow: scroll;
+}
+
+#courseList > div {
+	cursor: pointer;
+	transition: all 0.2s;
+}
+#courseList > div:hover {
+	background-color: var(--med-alpha) !important;
+}
+
+.text-cutoff {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.selectedCourse:first-child {
+	width: 90%;
+	display: inline-block;
+}
+
+.saveIcon,
+.unsaveIcon,
+.deleteIcon {
+	cursor: pointer;
+	position: absolute;
+	transform: translate(0, -50%);
+	top: 50%;
+	right: 0;
+	width: 20px;
+	transition: 0.2s;
+}
+
+.saveIcon:hover {
+	filter: sepia(100%) hue-rotate(110deg) saturate(20);
+}
+.unsaveIcon:hover {
+	filter: invert(50%) sepia(100%) hue-rotate(-20deg) saturate(30);
+}

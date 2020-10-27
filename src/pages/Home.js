@@ -1,19 +1,19 @@
 import React from "react";
-import buzz from "../img/buzzIcon.png";
+import graphic from "../img/homePageGraphic.png";
 
 function Home() {
 	return (
 		<div className="text-center">
 			<h1>
 				<b>
-					Georgia <span color="gt-gold">Tech</span>
+					<span className="gt-gold">Georgia Tech</span>
 				</b>{" "}
 				<i>BuzzBook</i>
 			</h1>
-			<h5>A reenvisioned course catalog, made by students, for students.</h5>
+			<h5>A reenvisioned course catalog. Made by students, for students.</h5>
 			<img
-				src={buzz}
-				alt="buzz"
+				src={graphic}
+				alt="student"
 				className="mx-auto"
 				style={{maxWidth: "40%"}}
 			/>

@@ -1,11 +1,14 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getFilteredCourses, getSelectedCourse} from "../../redux/catalogSlice";
+import {
+	getFilteredCourses,
+	getSelectedCourse
+} from "../../redux/courseListSlice";
 import RatingBar from "./RatingBar";
 
-import enrollmentIcon from "../../img/enrollmentIcon.svg";
-import gradeIcon from "../../img/gradeIcon.svg";
-import creditsIcon from "../../img/creditsIcon.svg";
+import enrollmentIcon from "../../img/enrollmentIcon.png";
+import gradeIcon from "../../img/gradeIcon.png";
+import creditsIcon from "../../img/creditsIcon.png";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
 
@@ -33,7 +36,7 @@ function CourseInfo() {
 	let sections = course.sections ? course.sections : courses[0].sections;
 
 	return (
-		<div className="pt-3 px-4" id="courseInfo">
+		<div className="" id="courseInfo">
 			<div className="row w-100 mx-0">
 				<div className="col-4 pl-0">
 					<h1>{course.courseID}</h1>
@@ -43,17 +46,34 @@ function CourseInfo() {
 					<div className="text-muted">Statistics</div>
 					<div style={{fontSize: "0.8rem"}}>
 						<div style={{whiteSpace: "nowrap"}}>
-							<img src={enrollmentIcon} alt="enrollment icon" width="15px" className="d-inline-block mr-1" />
+							<img
+								src={enrollmentIcon}
+								alt="enrollment icon"
+								width="15px"
+								className="d-inline-block mr-1 icon-light"
+							/>
 							<div style={{color: enrollmentColor}} className="d-inline-block">
 								{course.enrollment.current}/{course.enrollment.max}
 							</div>
 						</div>
 						<div style={{whiteSpace: "nowrap"}}>
-							<img src={gradeIcon} alt="grade icon" width="15px" className="d-inline-block mr-1" />
-							<div style={{color: gradeColor}} className="d-inline-block">{course.grade}</div>
+							<img
+								src={gradeIcon}
+								alt="grade icon"
+								width="15px"
+								className="d-inline-block mr-1 icon-light"
+							/>
+							<div style={{color: gradeColor}} className="d-inline-block">
+								{course.grade}
+							</div>
 						</div>
 						<div style={{whiteSpace: "nowrap"}}>
-							<img src={creditsIcon} alt="credits icon" width="15px" className="d-inline-block mr-1" />
+							<img
+								src={creditsIcon}
+								alt="credits icon"
+								width="15px"
+								className="d-inline-block mr-1 icon-light"
+							/>
 							<div className="d-inline-block">{course.credits} units</div>
 						</div>
 					</div>
