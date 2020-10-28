@@ -32,10 +32,7 @@ export const courseListSlice = createSlice({
 			state.filters[action.payload.name] = action.payload.value;
 		},
 		resetFilters: state => {
-			var keys = Object.keys(state.filters);
-			keys.forEach(function (key) {
-				state.filters[key] = "Any";
-			});
+      state.filters = {};
 		},
 		updateFilteredCourses: (state, action) => {
 			if (state.selectedCourse >= action.payload.length)
