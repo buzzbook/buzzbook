@@ -23,6 +23,10 @@ export default function FilterSelector({
       borderColor: "var(--input-border)",
       color: "var(--main-text)"
     }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "var(--main-text)"
+    }),
     menu: (provided) => ({
       ...provided,
       background: "var(--input)",
@@ -34,7 +38,13 @@ export default function FilterSelector({
     }),
 		multiValue: provided => ({
 			...provided,
-			borderRadius: "15px"
+      borderRadius: "15px",
+      background: "var(--main-text)",
+      color: "var(--input)"
+    }),
+    multiValueLabel: provided => ({
+			...provided,
+      color: "var(--input)"
     }),
   };
 

@@ -13,8 +13,8 @@ function Filters({filterList}) {
 		e.target.classList.toggle("active");
 	};
 
+  // TODO: clear/reset selectors on clear
 	const clearFilters = () => {
-    console.log(document.querySelectorAll("#filters .custom-select"));
 		document
 			.querySelectorAll("#filters .custom-select")
 			.forEach(select => (select.value = "Any"));
