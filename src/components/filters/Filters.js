@@ -1,6 +1,6 @@
 import React from "react";
-import {useDispatch} from "react-redux";
-import {resetFilters, updateFilter} from "../../redux/courseListSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {resetFilters, updateFilter, getFilters,} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
@@ -11,13 +11,9 @@ function Filters({filterList}) {
 	const handleDayButtonClick = e => {
 		e.preventDefault();
 		e.target.classList.toggle("active");
-	};
+  };
 
-  // TODO: clear/reset selectors on clear
 	const clearFilters = () => {
-		document
-			.querySelectorAll("#filters .custom-select")
-			.forEach(select => (select.value = "Any"));
 		dispatch(resetFilters());
 	};
 
@@ -26,7 +22,9 @@ function Filters({filterList}) {
 	//Term, Core, Time-from, Time-to, and Prof filter not implemented yet
 	const updateFil = (value, name) => {
 		dispatch(updateFilter({name: name, value: value}));
-	};
+  };
+  
+  const filters = useSelector(getFilters);
 
 	return (
 		<div>
@@ -46,7 +44,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Term"
 							ariaDescribedBy="term-label"
-							defaultValue="Any"
+              value={filters.term}
 							onChange={value => updateFil(value, "term")}
 							optionList={["Any", "Fall 2020", "Spring 2021"]}
 						/>
@@ -58,7 +56,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
-							defaultValue="Any"
+              value={filters.credits}
 							onChange={value => updateFil(value, "credits")}
               optionList={["Any", 1, 2, 3, 4]}
               isMulti={true}
@@ -71,7 +69,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Subject"
 							ariaDescribedBy="subject-label"
-							defaultValue="Any"
+							value={filters.subject}
 							onChange={value => updateFil(value, "subject")}
 							optionList={["Any"].concat(
 								Object.keys(subjectNames).map(key => {
@@ -88,7 +86,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Level"
 							ariaDescribedBy="level-label"
-							defaultValue="Any"
+							value={filters.level}
 							onChange={value => updateFil(value, "level")}
               optionList={["Any", 1000, 2000, 3000, 4000]}
               isMulti={true}
@@ -101,7 +99,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Core"
 							ariaDescribedBy="core-label"
-							defaultValue="Any"
+							value={filters.core}
 							onChange={value => updateFil(value, "core")}
               optionList={["Any", "Test 1", "Test 2"]}
               isMulti={true}
@@ -145,7 +143,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Prof"
 							ariaDescribedBy="prof-label"
-							defaultValue="Any"
+							value={filters.prof}
 							onChange={value => updateFil(value, "prof")}
               optionList={["Any", "Mr. Smith", "Mr.Brown"]}
               isMulti={true}
