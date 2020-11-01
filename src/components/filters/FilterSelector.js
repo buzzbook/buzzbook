@@ -6,10 +6,10 @@ export default function FilterSelector({
 	className,
 	ariaLabel,
 	ariaDescribedBy,
-	defaultValue,
+	value,
 	onChange,
   optionList,
-  isMulti
+  isMulti,
 }) {
 	const options = [];
 	optionList.forEach(option => {
@@ -48,14 +48,17 @@ export default function FilterSelector({
     }),
   };
 
+  const placeholder = 'Select ' + ariaLabel + '...';
+
 	 return (
 		<Select
       className={className + " form-control border-0 p-0"}
 			styles={customStyles}
-			options={options}
+      options={options}
+      value={value}
+      placeholder={placeholder}
       isMulti={isMulti}
-      menuColor="red"
-      closeMenuOnSelect={false}
+      closeMenuOnSelect={!isMulti}
 			aria-label={ariaLabel}
       aria-describedby={ariaDescribedBy}
       onChange={selectedList => onChange(selectedList)}
@@ -67,11 +70,11 @@ FilterSelector.propTypes = {
 	className: PropTypes.string.isRequired,
 	ariaLabel: PropTypes.string.isRequired,
 	ariaDescribedBy: PropTypes.string.isRequired,
-	defaultValue: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
-	optionList: PropTypes.arrayOf(PropTypes.string).isRequired
+  optionList: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 FilterSelector.defaultProps = {
-	isMulti: false
+  isMulti: false,
+  value: null,
 };
