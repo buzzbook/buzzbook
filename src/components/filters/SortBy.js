@@ -1,21 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
-import {updateSort} from "../../redux/courseListSlice";
+import {updateSort, getSort} from "../../redux/courseListSlice";
 
 function SortBy({sortOptionList}) {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  
+	const sort = useSelector(getSort);
 
 	return (
 		<div>
 			<FilterItem label="Sort By">
 				<FilterSelector
+          id="sort-by-filter"
 					className="custom-select"
 					ariaLabel="Sort By"
 					ariaDescribedBy="sort-by-label"
-					defaultValue={sortOptionList[0]}
+					value={sort}
 					onChange={value => dispatch(updateSort(value))}
 					optionList={sortOptionList}
 				/>

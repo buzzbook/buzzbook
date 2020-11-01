@@ -10,6 +10,7 @@ export default function FilterSelector({
 	onChange,
   optionList,
   isMulti,
+  placeholder
 }) {
 	const options = [];
 	optionList.forEach(option => {
@@ -21,39 +22,38 @@ export default function FilterSelector({
       ...base,
       background: "var(--input)",
       borderColor: "var(--input-border)",
-      color: "var(--main-text)"
+      color: "var(--main-text)",
+      minWidth: "150px",
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "var(--main-text)"
+      color: "var(--main-text)",
     }),
     menu: (provided) => ({
       ...provided,
       background: "var(--input)",
-      color: "var(--main-text)"
+      color: "var(--main-text)",
     }),
     option: (provided, state) => ({
       ...provided,
-      color: state.isFocused ? "blue" : "var(--main-text)"
+      color: state.isFocused ? "blue" : "var(--main-text)",
     }),
 		multiValue: provided => ({
 			...provided,
       borderRadius: "15px",
       background: "var(--main-text)",
-      color: "var(--input)"
+      color: "var(--input)",
     }),
     multiValueLabel: provided => ({
 			...provided,
-      color: "var(--input)"
+      color: "var(--input)",
     }),
   };
-
-  const placeholder = 'Select ' + ariaLabel + '...';
 
 	 return (
 		<Select
       className={className + " form-control border-0 p-0"}
-			styles={customStyles}
+      styles={customStyles}
       options={options}
       value={value}
       placeholder={placeholder}
@@ -77,4 +77,5 @@ FilterSelector.propTypes = {
 FilterSelector.defaultProps = {
   isMulti: false,
   value: null,
+  placeholder: "Select..."
 };

@@ -22,7 +22,7 @@ export const subjectNames = {
 
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
-	const sort = useSelector(getSort);
+	const sort = useSelector(getSort).value;
 	var savedCoursesIndeces = useSelector(getSavedCourses);
 	const filteredCourses = courses
 		.filter(course => {

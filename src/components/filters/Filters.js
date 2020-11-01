@@ -44,6 +44,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Term"
 							ariaDescribedBy="term-label"
+              placeholder="Select term..."
               value={filters.term}
 							onChange={value => updateFil(value, "term")}
 							optionList={["Any", "Fall 2020", "Spring 2021"]}
@@ -56,6 +57,7 @@ function Filters({filterList}) {
 							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
+              placeholder="Select credits..."
               value={filters.credits}
 							onChange={value => updateFil(value, "credits")}
               optionList={["Any", 1, 2, 3, 4]}
@@ -68,8 +70,9 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Subject"
-							ariaDescribedBy="subject-label"
-							value={filters.subject}
+              ariaDescribedBy="subject-label"
+              placeholder="Select subjects..."
+              value={filters.subject}
 							onChange={value => updateFil(value, "subject")}
 							optionList={["Any"].concat(
 								Object.keys(subjectNames).map(key => {
@@ -85,7 +88,8 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Level"
-							ariaDescribedBy="level-label"
+              ariaDescribedBy="level-label"
+              placeholder="Select levels..."
 							value={filters.level}
 							onChange={value => updateFil(value, "level")}
               optionList={["Any", 1000, 2000, 3000, 4000]}
@@ -98,7 +102,8 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Core"
-							ariaDescribedBy="core-label"
+              ariaDescribedBy="core-label"
+              placeholder="Select cores..."
 							value={filters.core}
 							onChange={value => updateFil(value, "core")}
               optionList={["Any", "Test 1", "Test 2"]}
@@ -142,7 +147,8 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Prof"
-							ariaDescribedBy="prof-label"
+              ariaDescribedBy="prof-label"
+              placeholder="Select professors..."
 							value={filters.prof}
 							onChange={value => updateFil(value, "prof")}
               optionList={["Any", "Mr. Smith", "Mr.Brown"]}
