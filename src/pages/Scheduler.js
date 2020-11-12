@@ -1,11 +1,10 @@
 import React from "react";
+import Layout from "./CourseListLayout";
+import ScheduleGraph from "../components/scheduler/ScheduleGraph";
+
 
 function Scheduler() {
-	return (
-		<div className="text-center">
-			<h2>The scheduler page is not yet Available :(</h2>
-		</div>
-	);
+	return <Layout id="scheduler" content={<ScheduleGraph />} />;
 }
 
 export default Scheduler;

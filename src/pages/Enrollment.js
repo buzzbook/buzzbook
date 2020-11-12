@@ -1,11 +1,9 @@
 import React from "react";
+import Layout from "./CourseListLayout";
+import EnrollmentGraph from "../components/enrollment/EnrollmentGraph";
 
 function Enrollment() {
-	return (
-		<div className="text-center">
-			<h2>The enrollment page is not yet Available :(</h2>
-		</div>
-	);
+	return <Layout id="enrollment" content={<EnrollmentGraph />} />;
 }
 
 export default Enrollment;

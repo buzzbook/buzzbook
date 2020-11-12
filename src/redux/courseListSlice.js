@@ -8,7 +8,7 @@ export const courseListSlice = createSlice({
 		selectedCourse: 0,
 		savedCourses: [],
 		filters: {term: null, credits: null, subject: null, level: null, core: null, prof: null},
-		sort: "Course ID",
+		sort: {value: "Course ID", label: "Course ID"},
 		filteredCourses: courses
 	},
 	reducers: {

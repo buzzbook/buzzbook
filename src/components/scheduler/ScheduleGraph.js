@@ -4,7 +4,7 @@ import {getSavedCourses} from "../../redux/courseListSlice";
 // Webpack import not working for some reason
 // import {graphic} from "../../img/gradesPageGraphic.png";
 
-function GradesGraph() {
+function ScheduleGraph() {
 	const savedCourses = useSelector(getSavedCourses);
 
 	if (savedCourses.length === 0) {
@@ -21,8 +21,8 @@ function GradesGraph() {
 			</div>
 		);
 	} else {
-		return <h1>Grades Graph</h1>;
+		return <h1>Schedule</h1>;
 	}
 }
 
-export default GradesGraph;
+export default ScheduleGraph;
