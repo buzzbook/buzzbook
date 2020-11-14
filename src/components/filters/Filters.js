@@ -41,7 +41,6 @@ function Filters({filterList}) {
 				{term && (
 					<FilterItem label="Term">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Term"
 							ariaDescribedBy="term-label"
               placeholder="Select term..."
@@ -54,7 +53,6 @@ function Filters({filterList}) {
 				{credits && (
 					<FilterItem label="Credits">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
               placeholder="Select credits..."
@@ -68,7 +66,6 @@ function Filters({filterList}) {
 				{subject && (
 					<FilterItem label="Subject">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Subject"
               ariaDescribedBy="subject-label"
               placeholder="Select subjects..."
@@ -86,7 +83,6 @@ function Filters({filterList}) {
 				{level && (
 					<FilterItem label="Level">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Level"
               ariaDescribedBy="level-label"
               placeholder="Select levels..."
@@ -100,7 +96,6 @@ function Filters({filterList}) {
 				{core && (
 					<FilterItem label="Core">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Core"
               ariaDescribedBy="core-label"
               placeholder="Select cores..."
@@ -125,7 +120,6 @@ function Filters({filterList}) {
 				{time && (
 					<FilterItem label="Time">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Time-from"
 							ariaDescribedBy="time-label"
 							defaultValue="Any"
@@ -133,7 +127,6 @@ function Filters({filterList}) {
 							optionList={["Any", "9:00", "10:00"]}
 						/>
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Time-to"
 							ariaDescribedBy="time-label"
 							defaultValue="Any"
@@ -145,7 +138,6 @@ function Filters({filterList}) {
 				{prof && (
 					<FilterItem label="Prof">
 						<FilterSelector
-							className="custom-select"
 							ariaLabel="Prof"
               ariaDescribedBy="prof-label"
               placeholder="Select professors..."

@@ -67,7 +67,6 @@ export default function FilterSelector({
 }
 
 FilterSelector.propTypes = {
-	className: PropTypes.string.isRequired,
 	ariaLabel: PropTypes.string.isRequired,
 	ariaDescribedBy: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
@@ -75,6 +74,7 @@ FilterSelector.propTypes = {
 };
 
 FilterSelector.defaultProps = {
+  className: '',
   isMulti: false,
   value: null,
   placeholder: "Select..."
