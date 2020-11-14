@@ -5,6 +5,7 @@ import {
 	updateSelectedCourse,
 	getSelectedCourse,
 } from "../../redux/courseListSlice";
+import FilterSelector from '../filters/FilterSelector';
 
 function SavedCourseItem(course) {
 	const dispatch = useDispatch();
@@ -39,6 +40,16 @@ function SavedCourseItem(course) {
 						&nbsp;&nbsp;&nbsp;
 						<span>{course.name}</span>
 					</div>
+          <FilterSelector
+            className="custom-select"
+            placeholder="All Professors"
+            optionList={["All Professors", "Prof 1", "Prof 2", "Prof 3"]}
+          />
+          <FilterSelector
+            className="custom-select"
+            placeholder="All Semesters"
+            optionList={["All Semesters", "Spring 21", "Fall 20", "Spring 20"]}
+          />
 
 					<div style={{fontSize: "0.9rem"}}>
             <span>
@@ -48,6 +59,8 @@ function SavedCourseItem(course) {
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrollment
 						</span>
+            <span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+            <span>Graph</span>
 					</div>
 				</div>
 			</div>

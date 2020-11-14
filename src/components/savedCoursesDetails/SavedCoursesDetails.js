@@ -27,6 +27,7 @@ function SavedCoursesDetails({ id }) {
               credits={course.credits}
               grade={course.grade}
               index={course.index}
+              sections={course.sections}
               key={index}
             />
           );
