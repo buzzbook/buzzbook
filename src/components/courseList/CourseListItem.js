@@ -51,9 +51,13 @@ function CourseListItem(course) {
 							{Math.round(course.enrollmentPercent)}% enrollment
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span>{course.credits} units</span>
+						<span>
+							{course.credits} credit{course.credits > 1 && "s"}
+						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span>{course.numSections} sections</span>
+						<span>
+							{course.numSections} section{course.numSections > 1 && "s"}
+						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span style={{color: gradeColor}}>{course.grade}</span>
 					</div>

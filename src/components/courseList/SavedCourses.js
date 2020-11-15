@@ -16,8 +16,8 @@ function SavedCourses() {
 				{savedCourses.map((course, index) => {
 					return (
 						<SavedCourse
-							courseID={course.courseID}
-							name={course.name}
+							courseID={course[4]}
+							name={course[0]}
 							index={index}
 							key={index}
 						/>

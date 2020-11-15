@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	updateSelectedCourse,
-	getSelectedCourse,
+	getSelectedCourse
 } from "../../redux/courseListSlice";
 
 function SavedCourseItem(course) {
@@ -16,13 +16,6 @@ function SavedCourseItem(course) {
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
-
-	let gradeColor = "green";
-	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
-	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
-  else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
-  
-  console.log(course)
 
 	return (
 		<div
@@ -41,10 +34,10 @@ function SavedCourseItem(course) {
 					</div>
 
 					<div style={{fontSize: "0.9rem"}}>
-            <span>
-              {course.enrollment.current} / {course.enrollment.max}
-            </span>
-            <span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span>
+							{course.enrollment.current} / {course.enrollment.max}
+						</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrollment
 						</span>

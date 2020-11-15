@@ -8,9 +8,9 @@ export default function FilterSelector({
 	ariaDescribedBy,
 	value,
 	onChange,
-  optionList,
-  isMulti,
-  placeholder
+	optionList,
+	isMulti,
+	placeholder
 }) {
 	const options = [];
 	optionList.forEach(option => {
@@ -18,50 +18,50 @@ export default function FilterSelector({
 	});
 
 	const customStyles = {
-    control: (base) => ({
-      ...base,
-      background: "var(--input)",
-      borderColor: "var(--input-border)",
-      color: "var(--main-text)",
-      minWidth: "150px",
-    }),
-    singleValue: (provided) => ({
-      ...provided,
-      color: "var(--main-text)",
-    }),
-    menu: (provided) => ({
-      ...provided,
-      background: "var(--input)",
-      color: "var(--main-text)",
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isFocused ? "blue" : "var(--main-text)",
-    }),
+		control: base => ({
+			...base,
+			background: "var(--input)",
+			borderColor: "var(--input-border)",
+			color: "var(--main-text)",
+			minWidth: "150px"
+		}),
+		singleValue: provided => ({
+			...provided,
+			color: "var(--main-text)"
+		}),
+		menu: provided => ({
+			...provided,
+			background: "var(--input)",
+			color: "var(--main-text)"
+		}),
+		option: (provided, state) => ({
+			...provided,
+			color: state.isFocused ? "blue" : "var(--main-text)"
+		}),
 		multiValue: provided => ({
 			...provided,
-      borderRadius: "15px",
-      background: "var(--main-text)",
-      color: "var(--input)",
-    }),
-    multiValueLabel: provided => ({
+			borderRadius: "15px",
+			background: "var(--main-text)",
+			color: "var(--input)"
+		}),
+		multiValueLabel: provided => ({
 			...provided,
-      color: "var(--input)",
-    }),
-  };
+			color: "var(--input)"
+		})
+	};
 
-	 return (
+	return (
 		<Select
-      className={className + " form-control border-0 p-0"}
-      styles={customStyles}
-      options={options}
-      value={value}
-      placeholder={placeholder}
-      isMulti={isMulti}
-      closeMenuOnSelect={!isMulti}
+			className={className + " form-control border-0 p-0"}
+			styles={customStyles}
+			options={options}
+			value={value}
+			placeholder={placeholder}
+			isMulti={isMulti}
+			closeMenuOnSelect={!isMulti}
 			aria-label={ariaLabel}
-      aria-describedby={ariaDescribedBy}
-      onChange={selectedList => onChange(selectedList)}
+			aria-describedby={ariaDescribedBy}
+			onChange={selectedList => onChange(selectedList)}
 		/>
 	);
 }
@@ -71,11 +71,11 @@ FilterSelector.propTypes = {
 	ariaLabel: PropTypes.string.isRequired,
 	ariaDescribedBy: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
-  optionList: PropTypes.arrayOf(PropTypes.string).isRequired
+	optionList: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 FilterSelector.defaultProps = {
-  isMulti: false,
-  value: null,
-  placeholder: "Select..."
+	isMulti: false,
+	value: null,
+	placeholder: "Select..."
 };

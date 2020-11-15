@@ -28,7 +28,7 @@ function FilterBar() {
 					<div
 						className="modal fade"
 						id="filterModal"
-						tabindex="-1"
+						tabIndex="-1"
 						role="dialog"
 						aria-labelledby="filterModalLabel"
 						aria-hidden="true"
@@ -55,7 +55,7 @@ function FilterBar() {
 						</div>
 					</div>
 
-					<SortBy />
+					<SortBy sortOptionList={["Course ID", "Name"]} />
 				</div>
 			</div>
 		</div>

@@ -1,17 +1,21 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {resetFilters, updateFilter, getFilters,} from "../../redux/courseListSlice";
+import {
+	resetFilters,
+	updateFilter,
+	getFilters
+} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import FilterItem from "./FilterItem";
 import FilterSelector from "./FilterSelector";
 
 function Filters({filterList}) {
-	const {term, credits, subject, level, core, days, time, prof} = filterList;
+	const {credits, subject, level, days, time, prof} = filterList;
 
 	const handleDayButtonClick = e => {
 		e.preventDefault();
 		e.target.classList.toggle("active");
-  };
+	};
 
 	const clearFilters = () => {
 		dispatch(resetFilters());
@@ -19,12 +23,12 @@ function Filters({filterList}) {
 
 	const dispatch = useDispatch();
 
-	//Term, Core, Time-from, Time-to, and Prof filter not implemented yet
+	//Time-from, Time-to, and Prof filter not implemented yet
 	const updateFil = (value, name) => {
 		dispatch(updateFilter({name: name, value: value}));
-  };
-  
-  const filters = useSelector(getFilters);
+	};
+
+	const filters = useSelector(getFilters);
 
 	return (
 		<div>
@@ -38,30 +42,17 @@ function Filters({filterList}) {
 						Clear Filters
 					</span>
 				</div>
-				{term && (
-					<FilterItem label="Term">
-						<FilterSelector
-							className="custom-select"
-							ariaLabel="Term"
-							ariaDescribedBy="term-label"
-              placeholder="Select term..."
-              value={filters.term}
-							onChange={value => updateFil(value, "term")}
-							optionList={["Any", "Fall 2020", "Spring 2021"]}
-						/>
-					</FilterItem>
-				)}
 				{credits && (
 					<FilterItem label="Credits">
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
-              placeholder="Select credits..."
-              value={filters.credits}
+							placeholder="Select credits..."
+							value={filters.credits}
 							onChange={value => updateFil(value, "credits")}
-              optionList={["Any", 1, 2, 3, 4]}
-              isMulti={true}
+							optionList={["Any", 1, 2, 3, 4]}
+							isMulti={true}
 						/>
 					</FilterItem>
 				)}
@@ -70,16 +61,16 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Subject"
-              ariaDescribedBy="subject-label"
-              placeholder="Select subjects..."
-              value={filters.subject}
+							ariaDescribedBy="subject-label"
+							placeholder="Select subjects..."
+							value={filters.subject}
 							onChange={value => updateFil(value, "subject")}
 							optionList={["Any"].concat(
 								Object.keys(subjectNames).map(key => {
 									return subjectNames[key];
 								})
-              )}
-              isMulti={true}
+							)}
+							isMulti={true}
 						/>
 					</FilterItem>
 				)}
@@ -88,26 +79,22 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Level"
-              ariaDescribedBy="level-label"
-              placeholder="Select levels..."
+							ariaDescribedBy="level-label"
+							placeholder="Select levels..."
 							value={filters.level}
 							onChange={value => updateFil(value, "level")}
-              optionList={["Any", 1000, 2000, 3000, 4000]}
-              isMulti={true}
-						/>
-					</FilterItem>
-				)}
-				{core && (
-					<FilterItem label="Core">
-						<FilterSelector
-							className="custom-select"
-							ariaLabel="Core"
-              ariaDescribedBy="core-label"
-              placeholder="Select cores..."
-							value={filters.core}
-							onChange={value => updateFil(value, "core")}
-              optionList={["Any", "Test 1", "Test 2"]}
-              isMulti={true}
+							optionList={[
+								"Any",
+								1000,
+								2000,
+								3000,
+								4000,
+								6000,
+								7000,
+								8000,
+								9000
+							]}
+							isMulti={true}
 						/>
 					</FilterItem>
 				)}
@@ -147,12 +134,12 @@ function Filters({filterList}) {
 						<FilterSelector
 							className="custom-select"
 							ariaLabel="Prof"
-              ariaDescribedBy="prof-label"
-              placeholder="Select professors..."
+							ariaDescribedBy="prof-label"
+							placeholder="Select professors..."
 							value={filters.prof}
 							onChange={value => updateFil(value, "prof")}
-              optionList={["Any", "Mr. Smith", "Mr.Brown"]}
-              isMulti={true}
+							optionList={["Any", "Mr. Smith", "Mr.Brown"]}
+							isMulti={true}
 						/>
 					</FilterItem>
 				)}
@@ -163,11 +150,9 @@ function Filters({filterList}) {
 
 Filters.defaultProps = {
 	filterList: {
-		term: true,
 		credits: true,
 		subject: true,
 		level: true,
-		core: true,
 		days: true,
 		time: true,
 		prof: true
