@@ -34,6 +34,37 @@ function CourseInfo() {
 	else if (courseGrade.charAt(0) === "C") gradeColor = "var(--orange)";
 	else if (courseGrade.charAt(0) === "D") gradeColor = "var(--red)";
 
+	const prereqsRaw = courseRaw[2];
+	var prereqs;
+	if (prereqsRaw.length <= 1) prereqs = <div>None</div>;
+	else {
+		prereqs = (
+			<div
+				dangerouslySetInnerHTML={{__html: prereqsHelper(prereqsRaw, true)}}
+			></div>
+		);
+	}
+
+	function prereqsHelper(val, firstRun) {
+		if (!Array.isArray(val)) {
+			return `<div class="prereq">${val.id}</div>`;
+		}
+
+		const separator = val[0];
+		var output = "";
+		for (let i = 1; i < val.length; i++) {
+			if (!firstRun && Array.isArray(val[i])) {
+				output += '<div class="prereq-container">';
+				output += prereqsHelper(val[i], false);
+				output += "</div>";
+			} else output += prereqsHelper(val[i], false);
+			if (i !== val.length - 1) {
+				output += separator;
+			}
+		}
+		return output;
+	}
+
 	const course = {
 		courseID: courseRaw[4],
 		name: courseRaw[0],
@@ -41,7 +72,8 @@ function CourseInfo() {
 		grade: courseGrade,
 		credits: Object.values(courseRaw[1])[0][2],
 		sections: courseRaw[1],
-		description: courseRaw[3]
+		description: courseRaw[3],
+		prerequisites: prereqs
 	};
 
 	return (
