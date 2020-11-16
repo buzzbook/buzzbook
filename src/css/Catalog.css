@@ -1,4 +1,8 @@
 /* Course Info */
+#courseInfo {
+	height: calc(96vh - 88px);
+	overflow-y: scroll;
+}
 #courseInfo table {
 	color: var(--main-text);
 	text-align: center;
@@ -12,6 +16,9 @@
 	border: 1px solid var(--main-bg);
 	padding: 0.5rem 1rem;
 	font-weight: normal;
+}
+#courseInfo table td {
+	padding: 2.5px 7.5px;
 }
 
 .prereq,

@@ -7,7 +7,7 @@ export const courseListSlice = createSlice({
 	initialState: {
 		selectedCourse: 0,
 		savedCourses: [],
-		filters: {term: null, credits: null, subject: null, level: null, core: null, prof: null},
+		filters: {credits: null, subject: null, level: null, prof: null},
 		sort: {value: "Course ID", label: "Course ID"},
 		filteredCourses: courses
 	},
@@ -32,7 +32,12 @@ export const courseListSlice = createSlice({
 			state.filters[action.payload.name] = action.payload.value;
 		},
 		resetFilters: state => {
-      state.filters = {term: null, credits: null, subject: null, level: null, core: null, prof: null};
+			state.filters = {
+				credits: null,
+				subject: null,
+				level: null,
+				prof: null
+			};
 		},
 		updateFilteredCourses: (state, action) => {
 			if (state.selectedCourse >= action.payload.length)

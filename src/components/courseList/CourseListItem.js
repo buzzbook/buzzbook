@@ -52,7 +52,7 @@ function CourseListItem(course) {
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span>
-							{course.credits} credit{course.credits > 1 && "s"}
+							{course.credits} credit{course.credits !== 1 && "s"}
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span>

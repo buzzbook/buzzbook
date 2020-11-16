@@ -12,7 +12,7 @@ function SavedCoursesDetails({id}) {
 	savedCoursesIndeces.forEach(index => savedCourses.push(courses[index]));
 
 	return (
-		<div>
+		<div style={{height: "calc(95vh - 88px)", overflowY: "scroll"}}>
 			<div style={{height: "100%"}}>
 				{savedCourses.map((courseRaw, index) => {
 					const courseEnrollment = {current: 200, max: 250};

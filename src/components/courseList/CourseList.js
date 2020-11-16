@@ -154,25 +154,6 @@ function CourseList({id}) {
 				case "Name":
 					// a/b[0] is the course name
 					return a[0].localeCompare(b[0]);
-				case "Grade":
-				/* if (a.grade.charAt(0) === b.grade.charAt(0)) {
-						let modifiers = {
-							"+": 0,
-							"": 1,
-							"-": 2
-						};
-						return modifiers[a.grade.charAt(1)] - modifiers[b.grade.charAt(1)];
-					}
-					return a.grade.charAt(0).localeCompare(b.grade.charAt(0)); */
-				// No grade data currently
-				case "Difficulty":
-				// return a.ratings.difficulty - b.ratings.difficulty;
-				// No difficulty data currently
-				case "Enrollment":
-				/* let aPercent = a.enrollment.current / a.enrollment.max;
-					let bPercent = b.enrollment.current / b.enrollment.max;
-					return aPercent - bPercent; */
-				// No enrollment data currently
 				default:
 					return 0;
 			}

@@ -53,7 +53,7 @@ function CourseInfo() {
 		const separator = val[0];
 		var output = "";
 		for (let i = 1; i < val.length; i++) {
-			if (!firstRun && Array.isArray(val[i])) {
+			if ((!firstRun || val.length > 2) && Array.isArray(val[i])) {
 				output += '<div class="prereq-container">';
 				output += prereqsHelper(val[i], false);
 				output += "</div>";
@@ -116,7 +116,7 @@ function CourseInfo() {
 								className="d-inline-block mr-1 icon-light"
 							/>
 							<div className="d-inline-block">
-								{course.credits} credit{course.credits > 1 && "s"}
+								{course.credits} credit{course.credits !== 1 && "s"}
 							</div>
 						</div>
 					</div>
@@ -180,14 +180,25 @@ function CourseInfo() {
 							sectionEnrollmentColor = "var(--orange)";
 
 						const meetings = sectionRaw[1];
+						var instructors = meetings.length > 0 ? "" : "N/A";
+						if (instructors !== "N/A") {
+							meetings[0][4].forEach((instructor, i) => {
+								instructors += instructor;
+								if (i !== meetings[0][4].length - 1) instructors += ", ";
+							});
+						}
 						const section = {
 							type: caches.scheduleTypes[sectionRaw[3]],
 							courseNumber: sectionRaw[0],
 							id: id,
-							time: caches.periods[meetings[0][0]],
-							days: meetings[0][1],
-							location: meetings[0][2],
-							instructor: meetings[0][4][0]
+							time:
+								meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
+							days:
+								meetings.length > 0 && meetings[0][1] !== "&nbsp;"
+									? meetings[0][1]
+									: "N/A",
+							location: meetings.length > 0 ? meetings[0][2] : "N/A",
+							instructors: instructors
 						};
 
 						return (
@@ -198,7 +209,7 @@ function CourseInfo() {
 								<td>{section.time}</td>
 								<td>{section.days}</td>
 								<td>{section.location}</td>
-								<td>{section.instructor}</td>
+								<td>{section.instructors}</td>
 								<td style={{color: sectionEnrollmentColor}}>
 									{sectionEnrollment.current}/{sectionEnrollment.max}
 								</td>
