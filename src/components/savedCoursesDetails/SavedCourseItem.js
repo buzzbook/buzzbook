@@ -10,7 +10,7 @@ function SavedCourseItem(course) {
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 
-	let isSelected = selectedCourse === course.index;
+	let isSelected = selectedCourse === course.courseID;
 	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
 
 	let enrollmentColor = "var(--green)";
@@ -21,7 +21,7 @@ function SavedCourseItem(course) {
 		<div
 			className="p-2 mb-2 rounded"
 			style={{backgroundColor: bgColor}}
-			onClick={() => dispatch(updateSelectedCourse(course.index))}
+			onClick={() => dispatch(updateSelectedCourse(course.courseID))}
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
@@ -53,8 +53,7 @@ SavedCourseItem.propTypes = {
 	name: PropTypes.string.isRequired,
 	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
-	grade: PropTypes.string.isRequired,
-	index: PropTypes.number.isRequired
+	grade: PropTypes.string.isRequired
 };
 
 export default SavedCourseItem;

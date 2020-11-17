@@ -5,28 +5,24 @@ const courses = JSON.parse(window.localStorage.getItem("courses"));
 export const courseListSlice = createSlice({
 	name: "courseList",
 	initialState: {
-		selectedCourse: 0,
-		savedCourses: [],
+		selectedCourse: Object.keys(courses)[0],
+		// Saved courses is an object full of courseID: true entries
+		// This is because searching an object is O(1) vs O(n) for an array
+		savedCourses: {},
 		filters: {credits: null, subject: null, level: null, prof: null},
-		sort: {value: "Course ID", label: "Course ID"},
-		filteredCourses: courses
+		sort: {value: "Course ID", label: "Course ID"}
 	},
 	reducers: {
 		updateSelectedCourse: (state, action) => {
 			state.selectedCourse = action.payload;
 		},
-		/** Adds a course by its index in the courses list */
+		/** Adds a course by its course ID */
 		saveCourse: (state, action) => {
-			state.savedCourses.push(action.payload);
+			state.savedCourses[action.payload] = true;
 		},
-		/** Removes a course by its index in the saved courses list */
+		/** Removes a course by its course ID */
 		removeCourse: (state, action) => {
-			state.savedCourses.splice(action.payload, 1);
-		},
-		/** Removes a course by its index in the courses list */
-		removeCourseByIndex: (state, action) => {
-			let index = state.savedCourses.indexOf(action.payload);
-			state.savedCourses.splice(index, 1);
+			delete state.savedCourses[action.payload];
 		},
 		updateFilter: (state, action) => {
 			state.filters[action.payload.name] = action.payload.value;
@@ -39,13 +35,6 @@ export const courseListSlice = createSlice({
 				prof: null
 			};
 		},
-		updateFilteredCourses: (state, action) => {
-			if (state.selectedCourse >= action.payload.length)
-				state.selectedCourse = action.payload.length - 1;
-			else if (state.selectedCourse === -1 && action.payload.length > 0)
-				state.selectedCourse = 0;
-			state.filteredCourses = action.payload;
-		},
 		updateSort: (state, action) => {
 			state.sort = action.payload;
 		}
@@ -56,10 +45,8 @@ export const {
 	updateSelectedCourse,
 	saveCourse,
 	removeCourse,
-	removeCourseByIndex,
 	updateFilter,
 	resetFilters,
-	updateFilteredCourses,
 	updateSort
 } = courseListSlice.actions;
 
@@ -67,6 +54,5 @@ export const getSelectedCourse = state => state.courseList.selectedCourse;
 export const getSavedCourses = state => state.courseList.savedCourses;
 export const getFilters = state => state.courseList.filters;
 export const getSort = state => state.courseList.sort;
-export const getFilteredCourses = state => state.courseList.filteredCourses;
 
 export default courseListSlice.reducer;

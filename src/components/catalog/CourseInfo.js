@@ -1,9 +1,6 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {
-	getFilteredCourses,
-	getSelectedCourse
-} from "../../redux/courseListSlice";
+import {getSelectedCourse} from "../../redux/courseListSlice";
 import RatingBar from "./RatingBar";
 import caches from "../../courses";
 
@@ -11,15 +8,16 @@ import enrollmentIcon from "../../img/enrollmentIcon.png";
 import gradeIcon from "../../img/gradeIcon.png";
 import creditsIcon from "../../img/creditsIcon.png";
 
+const courses = JSON.parse(window.localStorage.getItem("courses"));
+
 function CourseInfo() {
-	const filteredCourses = useSelector(getFilteredCourses);
 	const selectedCourse = useSelector(getSelectedCourse);
 
-	if (selectedCourse === -1) {
+	if (selectedCourse === "None") {
 		return <div></div>;
 	}
 
-	const courseRaw = filteredCourses[selectedCourse];
+	const courseRaw = courses[selectedCourse];
 
 	const courseEnrollment = {current: 200, max: 250};
 	let enrollmentColor = "var(--green)";
@@ -66,7 +64,7 @@ function CourseInfo() {
 	}
 
 	const course = {
-		courseID: courseRaw[4],
+		courseID: selectedCourse,
 		name: courseRaw[0],
 		enrollment: courseEnrollment,
 		grade: courseGrade,

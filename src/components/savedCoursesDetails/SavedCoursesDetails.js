@@ -7,28 +7,26 @@ import "../../css/SavedCoursesDetails.css";
 const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function SavedCoursesDetails({id}) {
-	const savedCoursesIndeces = useSelector(getSavedCourses);
-	let savedCourses = [];
-	savedCoursesIndeces.forEach(index => savedCourses.push(courses[index]));
+	const savedCoursesIDs = useSelector(getSavedCourses);
 
 	return (
 		<div style={{height: "calc(95vh - 88px)", overflowY: "scroll"}}>
 			<div style={{height: "100%"}}>
-				{savedCourses.map((courseRaw, index) => {
+				{Object.keys(savedCoursesIDs).map((id, index) => {
+					const courseData = courses[id];
 					const courseEnrollment = {current: 200, max: 250};
 					const courseGrade = "A";
 					const course = {
-						courseID: courseRaw[4],
-						name: courseRaw[0],
+						name: courseData[0],
 						enrollment: courseEnrollment,
 						grade: courseGrade,
-						credits: Object.values(courseRaw[1])[0][2],
-						sections: courseRaw[1],
-						description: courseRaw[3]
+						credits: Object.values(courseData[1])[0][2],
+						sections: courseData[1],
+						description: courseData[3]
 					};
 					return (
 						<SavedCourseItem
-							courseID={course.courseID}
+							courseID={id}
 							name={course.name}
 							enrollment={course.enrollment}
 							enrollmentPercent={
@@ -36,7 +34,6 @@ function SavedCoursesDetails({id}) {
 							}
 							credits={course.credits}
 							grade={course.grade}
-							index={course.index}
 							key={index}
 						/>
 					);

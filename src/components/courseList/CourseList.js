@@ -109,33 +109,32 @@ export const subjectNames = {
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort).value;
-	var savedCoursesIndeces = useSelector(getSavedCourses);
-	const filteredCourses = courses
+	var savedCourses = useSelector(getSavedCourses);
+	const filteredCourses = Object.entries(courses)
 		.filter(courseRaw => {
-			// courseRaw[5] is the course index
-			if (id !== "catalog" && savedCoursesIndeces.includes(courseRaw[5])) {
+			const [courseID, courseData] = courseRaw;
+			if (id !== "catalog" && savedCourses[courseID]) {
 				return false;
 			}
-			// Object.values(courseRaw[1])[0][2] is the number of course credits
+			// Object.values(courseData[1])[0][2] is the number of course credits
 			if (filters.credits && filters.credits.length > 0) {
 				const creditFilterBy = filters.credits.map(option => option.value);
 				if (!creditFilterBy.includes("Any")) {
-					if (!creditFilterBy.includes(Object.values(courseRaw[1])[0][2]))
+					if (!creditFilterBy.includes(Object.values(courseData[1])[0][2]))
 						return false;
 				}
 			}
-			// courseRaw[4] is the courseID
 			if (filters.subject && filters.subject.length > 0) {
 				const subjectFilterBy = filters.subject.map(option => option.value);
 				if (!subjectFilterBy.includes("Any")) {
-					let subject = subjectNames[courseRaw[4].split(" ")[0]];
+					let subject = subjectNames[courseID.split(" ")[0]];
 					if (!subjectFilterBy.includes(subject)) return false;
 				}
 			}
 			if (filters.level && filters.level.length > 0) {
 				const levelFilterBy = filters.level.map(option => option.value);
 				if (!levelFilterBy.includes("Any")) {
-					let level = parseInt(courseRaw[4].split(" ")[1].charAt(0)) * 1000;
+					let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
 					if (!levelFilterBy.includes(level)) return false;
 				}
 			}
@@ -144,16 +143,16 @@ function CourseList({id}) {
 		.sort((a, b) => {
 			switch (sort) {
 				case "Course ID":
-					// a/b[4] is the courseID
-					let aSplit = a[4].split(" ");
-					let bSplit = b[4].split(" ");
+					// a/b[0] is the courseID
+					let aSplit = a[0].split(" ");
+					let bSplit = b[0].split(" ");
 					if (aSplit[0] === bSplit[0]) {
 						return parseInt(aSplit[1]) - parseInt(bSplit[1]);
 					}
 					return aSplit[0].localeCompare(bSplit[0]);
 				case "Name":
-					// a/b[0] is the course name
-					return a[0].localeCompare(b[0]);
+					// a/b[1][0] is the course name
+					return a[1][0].localeCompare(b[1][0]);
 				default:
 					return 0;
 			}
@@ -169,21 +168,20 @@ function CourseList({id}) {
 						</div>
 					) : (
 						filteredCourses.map((courseRaw, index) => {
+							const [courseID, courseData] = courseRaw;
 							const courseEnrollment = {current: 200, max: 250};
 							const courseGrade = "A";
 							const course = {
-								courseID: courseRaw[4],
-								name: courseRaw[0],
+								name: courseData[0],
 								enrollment: courseEnrollment,
 								grade: courseGrade,
-								credits: Object.values(courseRaw[1])[0][2],
-								sections: courseRaw[1],
-								index: courseRaw[5]
+								credits: Object.values(courseData[1])[0][2],
+								sections: courseData[1]
 							};
 
 							return (
 								<CourseListItem
-									courseID={course.courseID}
+									courseID={courseID}
 									name={course.name}
 									enrollmentPercent={
 										(courseEnrollment.current / courseEnrollment.max) * 100
@@ -191,7 +189,6 @@ function CourseList({id}) {
 									credits={course.credits}
 									numSections={Object.keys(course.sections).length}
 									grade={course.grade}
-									index={course.index}
 									key={index}
 								/>
 							);

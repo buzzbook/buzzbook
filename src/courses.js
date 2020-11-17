@@ -8,17 +8,7 @@ meetings = [periods index, days, room, locations index, instructors, dateRange i
 indeces refer to the caches
 */
 
-var courses = [];
-var index = 0;
-for (const [course, info] of Object.entries(data.courses)) {
-	info.push(course);
-	info.push(index++);
-	courses.push(info);
-}
-
-console.log(courses);
-
 var localStorage = window.localStorage;
-localStorage.setItem("courses", JSON.stringify(courses));
+localStorage.setItem("courses", JSON.stringify(data.courses));
 
 export default data.caches;

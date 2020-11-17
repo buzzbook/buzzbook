@@ -5,7 +5,7 @@ import {
 	updateSelectedCourse,
 	getSelectedCourse,
 	getSavedCourses,
-	removeCourseByIndex
+	removeCourse
 } from "../../redux/courseListSlice";
 import {saveCourse} from "../../redux/courseListSlice";
 import saveIcon from "../../img/saveIcon.png";
@@ -16,10 +16,10 @@ function CourseListItem(course) {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 
-	let isSelected = selectedCourse === course.index;
+	let isSelected = selectedCourse === course.courseID;
 	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
 
-	let isSaved = savedCourses.includes(course.index);
+	let isSaved = savedCourses[course.courseID];
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
@@ -34,7 +34,7 @@ function CourseListItem(course) {
 		<div
 			className="p-2 mb-2 rounded"
 			style={{backgroundColor: bgColor}}
-			onClick={() => dispatch(updateSelectedCourse(course.index))}
+			onClick={() => dispatch(updateSelectedCourse(course.courseID))}
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
@@ -68,14 +68,14 @@ function CourseListItem(course) {
 						src={unsaveIcon}
 						alt="unsave course"
 						className="unsaveIcon icon-dark"
-						onClick={() => dispatch(removeCourseByIndex(course.index))}
+						onClick={() => dispatch(removeCourse(course.courseID))}
 					/>
 				) : (
 					<img
 						src={saveIcon}
 						alt="save course"
 						className="saveIcon icon-dark"
-						onClick={() => dispatch(saveCourse(course.index))}
+						onClick={() => dispatch(saveCourse(course.courseID))}
 					/>
 				)}
 			</div>
@@ -89,8 +89,7 @@ CourseListItem.propTypes = {
 	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
 	numSections: PropTypes.number.isRequired,
-	grade: PropTypes.string.isRequired,
-	index: PropTypes.number.isRequired
+	grade: PropTypes.string.isRequired
 };
 
 export default CourseListItem;
