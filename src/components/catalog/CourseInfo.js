@@ -153,14 +153,15 @@ function CourseInfo() {
 			<table className="table-responsive">
 				<thead>
 					<tr>
+						<th scope="col">Section ID</th>
+						<th scope="col">CRN</th>
 						<th scope="col">Type</th>
-						<th scope="col">Course #</th>
-						<th scope="col">ID</th>
+						<th scope="col">Enrollment</th>
 						<th scope="col">Time</th>
 						<th scope="col">Days</th>
 						<th scope="col">Location</th>
-						<th scope="col">Instructor</th>
-						<th scope="col">Enrollment</th>
+						<th scope="col">Instructors</th>
+						<th scope="col">Attributes</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -185,6 +186,13 @@ function CourseInfo() {
 								if (i !== meetings[0][4].length - 1) instructors += ", ";
 							});
 						}
+						var attributes = "";
+						sectionRaw[5].forEach((attribute, index) => {
+							attributes += caches.attributes[attribute];
+							if (index < sectionRaw[5].length - 1) {
+								attributes += ", ";
+							}
+						});
 						const section = {
 							type: caches.scheduleTypes[sectionRaw[3]],
 							courseNumber: sectionRaw[0],
@@ -195,22 +203,22 @@ function CourseInfo() {
 								meetings.length > 0 && meetings[0][1] !== "&nbsp;"
 									? meetings[0][1]
 									: "N/A",
-							location: meetings.length > 0 ? meetings[0][2] : "N/A",
-							instructors: instructors
+							location: meetings.length > 0 ? meetings[0][2] : "N/A"
 						};
 
 						return (
 							<tr key={index}>
-								<td>{section.type}</td>
-								<td>{section.courseNumber}</td>
 								<td>{section.id}</td>
-								<td>{section.time}</td>
-								<td>{section.days}</td>
-								<td>{section.location}</td>
-								<td>{section.instructors}</td>
+								<td>{section.courseNumber}</td>
+								<td>{section.type}</td>
 								<td style={{color: sectionEnrollmentColor}}>
 									{sectionEnrollment.current}/{sectionEnrollment.max}
 								</td>
+								<td>{section.time}</td>
+								<td>{section.days}</td>
+								<td>{section.location}</td>
+								<td>{instructors}</td>
+								<td>{attributes}</td>
 							</tr>
 						);
 					})}

@@ -163,9 +163,9 @@ function CourseList({id}) {
 			<div style={{height: "100%"}}>
 				<div id="courseList">
 					{filteredCourses.length === 0 ? (
-						<div className="text-center mt-2">
+						<span className="display-block text-center mt-2">
 							<h2>No classes match your filters :(</h2>
-						</div>
+						</span>
 					) : (
 						filteredCourses.map((courseRaw, index) => {
 							const [courseID, courseData] = courseRaw;
