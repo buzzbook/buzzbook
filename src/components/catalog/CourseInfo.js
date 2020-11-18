@@ -4,7 +4,7 @@ import {
 	getSelectedCourse,
 	updateSelectedCourse
 } from "../../redux/courseListSlice";
-import {useLocation, useHistory} from "react-router-dom";
+import {useLocation, useHistory, Link} from "react-router-dom";
 import RatingBar from "./RatingBar";
 import caches from "../../courses";
 
@@ -17,9 +17,9 @@ const courses = JSON.parse(window.localStorage.getItem("courses"));
 function CourseInfo() {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const location = useLocation();
 	const selectedCourse = useSelector(getSelectedCourse);
 
-	let location = useLocation();
 	let path = location.pathname.split("/");
 	if (path.length === 3) {
 		let iDParts = path[2].split("+");
@@ -46,8 +46,6 @@ function CourseInfo() {
 
 	const courseRaw = courses[selectedCourse];
 
-	console.log(selectedCourse);
-
 	const courseEnrollment = {current: 200, max: 250};
 	let enrollmentColor = "var(--green)";
 	if ((courseEnrollment.current / courseEnrollment.max) * 100 > 67)
@@ -65,28 +63,34 @@ function CourseInfo() {
 	var prereqs;
 	if (prereqsRaw.length <= 1) prereqs = <div>None</div>;
 	else {
-		prereqs = (
-			<div
-				dangerouslySetInnerHTML={{__html: prereqsHelper(prereqsRaw, true)}}
-			></div>
-		);
+		prereqs = <div>{prereqsHelper(prereqsRaw, true)}</div>;
 	}
 
 	function prereqsHelper(val, firstRun) {
 		if (!Array.isArray(val)) {
-			return `<div class="prereq">${val.id}</div>`;
+			return (
+				<div className="prereq" key={0}>
+					{courses[val.id] ? (
+						<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`}>{val.id}</Link>
+					) : (
+						val.id
+					)}
+				</div>
+			);
 		}
 
 		const separator = val[0];
-		var output = "";
+		var output = [];
 		for (let i = 1; i < val.length; i++) {
 			if ((!firstRun || val.length > 2) && Array.isArray(val[i])) {
-				output += '<div class="prereq-container">';
-				output += prereqsHelper(val[i], false);
-				output += "</div>";
-			} else output += prereqsHelper(val[i], false);
+				output.push(
+					<div className="prereq-container" key={i}>
+						{prereqsHelper(val[i], false)}
+					</div>
+				);
+			} else output.push(prereqsHelper(val[i], false));
 			if (i !== val.length - 1) {
-				output += separator;
+				output.push(<>{separator}</>);
 			}
 		}
 		return output;
