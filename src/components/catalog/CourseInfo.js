@@ -1,6 +1,10 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {getSelectedCourse} from "../../redux/courseListSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+	getSelectedCourse,
+	updateSelectedCourse
+} from "../../redux/courseListSlice";
+import {useLocation, useHistory} from "react-router-dom";
 import RatingBar from "./RatingBar";
 import caches from "../../courses";
 
@@ -11,13 +15,38 @@ import creditsIcon from "../../img/creditsIcon.png";
 const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function CourseInfo() {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const selectedCourse = useSelector(getSelectedCourse);
+
+	let location = useLocation();
+	let path = location.pathname.split("/");
+	if (path.length === 3) {
+		let iDParts = path[2].split("+");
+		if (iDParts.length === 1) {
+			// Current page is just /catalog -> go to selectedCourse (default is the first course in the catalog)
+			history.push(`/catalog/${selectedCourse.replaceAll(" ", "+")}`);
+		} else {
+			let currID = iDParts[0] + " " + iDParts[1];
+			if (currID !== selectedCourse) {
+				if (courses[currID]) {
+					// Will only update selected course to match URL if it's a valid course
+					dispatch(updateSelectedCourse(currID));
+				} else {
+					// Otherwise, update URL to match selected course
+					history.push(`/catalog/${selectedCourse.replaceAll(" ", "+")}`);
+				}
+			}
+		}
+	}
 
 	if (selectedCourse === "None") {
 		return <div></div>;
 	}
 
 	const courseRaw = courses[selectedCourse];
+
+	console.log(selectedCourse);
 
 	const courseEnrollment = {current: 200, max: 250};
 	let enrollmentColor = "var(--green)";

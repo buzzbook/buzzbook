@@ -34,7 +34,7 @@ function App({location}) {
 
 					{navPages.map((page, index) => (
 						<Route
-							exact
+							// exact
 							path={page.path}
 							component={page.component}
 							key={index}

@@ -7,12 +7,17 @@
 	overflow: scroll;
 }
 
-#courseList > div {
+#courseList > a > div {
 	cursor: pointer;
 	transition: all 0.2s;
 }
-#courseList > div:hover {
+#courseList > a > div:hover {
 	background-color: var(--med-alpha) !important;
+}
+
+#courseList a {
+	color: var(--main-text);
+	text-decoration: none;
 }
 
 .text-cutoff {
