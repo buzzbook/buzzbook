@@ -64,3 +64,8 @@
 .close:hover {
 	color: var(--main-text);
 }
+
+#filterBar input {
+	background-color: var(--low-alpha);
+	color: var(--main-text);
+}

@@ -10,7 +10,8 @@ export const courseListSlice = createSlice({
 		// This is because searching an object is O(1) vs O(n) for an array
 		savedCourses: {},
 		filters: {credits: null, subject: null, level: null, prof: null},
-		sort: {value: "Course ID", label: "Course ID"}
+		sort: {value: "Course ID", label: "Course ID"},
+		searchQuery: ""
 	},
 	reducers: {
 		updateSelectedCourse: (state, action) => {
@@ -37,6 +38,9 @@ export const courseListSlice = createSlice({
 		},
 		updateSort: (state, action) => {
 			state.sort = action.payload;
+		},
+		updateSearchQuery: (state, action) => {
+			state.searchQuery = action.payload;
 		}
 	}
 });
@@ -47,12 +51,14 @@ export const {
 	removeCourse,
 	updateFilter,
 	resetFilters,
-	updateSort
+	updateSort,
+	updateSearchQuery
 } = courseListSlice.actions;
 
 export const getSelectedCourse = state => state.courseList.selectedCourse;
 export const getSavedCourses = state => state.courseList.savedCourses;
 export const getFilters = state => state.courseList.filters;
 export const getSort = state => state.courseList.sort;
+export const getSearchQuery = state => state.courseList.searchQuery;
 
 export default courseListSlice.reducer;

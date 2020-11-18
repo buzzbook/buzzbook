@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {
 	getFilters,
 	getSavedCourses,
+	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
 import CourseListItem from "./CourseListItem";
@@ -109,7 +110,8 @@ export const subjectNames = {
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort).value;
-	var savedCourses = useSelector(getSavedCourses);
+	const savedCourses = useSelector(getSavedCourses);
+	const searchQuery = useSelector(getSearchQuery);
 	const filteredCourses = Object.entries(courses)
 		.filter(courseRaw => {
 			const [courseID, courseData] = courseRaw;
@@ -140,6 +142,11 @@ function CourseList({id}) {
 					);
 					let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
 					if (!levelFilterBy.includes(level)) return false;
+				}
+			}
+			if (searchQuery !== "") {
+				if (!courseID.includes(searchQuery.toUpperCase())) {
+					return false;
 				}
 			}
 			return true;

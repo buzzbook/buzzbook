@@ -1,10 +1,13 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+import {updateSearchQuery} from "../../redux/courseListSlice";
 import SortBy from "./SortBy";
 import filterIcon from "../../img/filterIcon.png";
 import "../../css/Filters.css";
 import Filters from "./Filters";
 
 function FilterBar() {
+	const dispatch = useDispatch();
 	return (
 		<div className="row mx-0" id="filterBar">
 			<div className="col-3 h-100 p-3">
@@ -12,6 +15,7 @@ function FilterBar() {
 					type="text"
 					className="form-control mb-2"
 					placeholder="Search Courses"
+					onChange={e => dispatch(updateSearchQuery(e.target.value))}
 				/>
 			</div>
 			<div className="col-9 h-100 p-3">
