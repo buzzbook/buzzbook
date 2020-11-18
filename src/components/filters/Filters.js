@@ -51,7 +51,7 @@ function Filters({filterList}) {
 							placeholder="Select credits..."
 							value={filters.credits}
 							onChange={value => updateFil(value, "credits")}
-							optionList={["Any", 1, 2, 3, 4]}
+							optionList={["Any", "1", "2", "3", "4"]}
 							isMulti={true}
 						/>
 					</FilterItem>
@@ -85,14 +85,14 @@ function Filters({filterList}) {
 							onChange={value => updateFil(value, "level")}
 							optionList={[
 								"Any",
-								1000,
-								2000,
-								3000,
-								4000,
-								6000,
-								7000,
-								8000,
-								9000
+								"1000",
+								"2000",
+								"3000",
+								"4000",
+								"6000",
+								"7000",
+								"8000",
+								"9000"
 							]}
 							isMulti={true}
 						/>

@@ -118,10 +118,12 @@ function CourseList({id}) {
 			}
 			// Object.values(courseData[1])[0][2] is the number of course credits
 			if (filters.credits && filters.credits.length > 0) {
-				const creditFilterBy = filters.credits.map(option => option.value);
-				if (!creditFilterBy.includes("Any")) {
-					if (!creditFilterBy.includes(Object.values(courseData[1])[0][2]))
-						return false;
+				if (filters.credits[0] !== "Any") {
+					const creditFilterBy = filters.credits.map(option =>
+						parseInt(option.value)
+					);
+					let credits = Object.values(courseData[1])[0][2];
+					if (!creditFilterBy.includes(credits)) return false;
 				}
 			}
 			if (filters.subject && filters.subject.length > 0) {
@@ -132,8 +134,10 @@ function CourseList({id}) {
 				}
 			}
 			if (filters.level && filters.level.length > 0) {
-				const levelFilterBy = filters.level.map(option => option.value);
-				if (!levelFilterBy.includes("Any")) {
+				if (filters.level[0] !== "Any") {
+					const levelFilterBy = filters.level.map(option =>
+						parseInt(option.value)
+					);
 					let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
 					if (!levelFilterBy.includes(level)) return false;
 				}
