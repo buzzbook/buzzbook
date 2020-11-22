@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-
-const courses = JSON.parse(window.localStorage.getItem("courses"));
+import courses from "../courses";
 
 export const courseListSlice = createSlice({
 	name: "courseList",

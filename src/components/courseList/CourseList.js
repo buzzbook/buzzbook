@@ -6,11 +6,10 @@ import {
 	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
+import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
 import "../../css/CourseList.css";
-
-const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -178,7 +177,7 @@ function CourseList({id}) {
 							<h2>No classes match your filters :(</h2>
 						</span>
 					) : (
-						filteredCourses.map((courseRaw, index) => {
+						filteredCourses.map(courseRaw => {
 							const [courseID, courseData] = courseRaw;
 							const courseEnrollment = {current: 200, max: 250};
 							const courseGrade = "A";
@@ -200,7 +199,7 @@ function CourseList({id}) {
 									credits={course.credits}
 									numSections={Object.keys(course.sections).length}
 									grade={course.grade}
-									key={index}
+									key={courseID}
 								/>
 							);
 						})

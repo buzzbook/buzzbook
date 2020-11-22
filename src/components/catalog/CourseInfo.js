@@ -6,13 +6,11 @@ import {
 } from "../../redux/courseListSlice";
 import {useLocation, useHistory, Link} from "react-router-dom";
 import RatingBar from "./RatingBar";
-import caches from "../../courses";
+import courses, {caches} from "../../courses";
 
 import enrollmentIcon from "../../img/enrollmentIcon.png";
 import gradeIcon from "../../img/gradeIcon.png";
 import creditsIcon from "../../img/creditsIcon.png";
-
-const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function CourseInfo() {
 	const dispatch = useDispatch();
@@ -69,9 +67,14 @@ function CourseInfo() {
 	function prereqsHelper(val, firstRun) {
 		if (!Array.isArray(val)) {
 			return (
-				<div className="prereq" key={0}>
+				<div className="prereq" key={val.id}>
 					{courses[val.id] ? (
-						<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`}>{val.id}</Link>
+						<Link
+							to={`/catalog/${val.id.replaceAll(" ", "+")}`}
+							key={val.id + "L"}
+						>
+							{val.id}
+						</Link>
 					) : (
 						val.id
 					)}
@@ -84,9 +87,7 @@ function CourseInfo() {
 		for (let i = 1; i < val.length; i++) {
 			if ((!firstRun || val.length > 2) && Array.isArray(val[i])) {
 				output.push(
-					<div className="prereq-container" key={i}>
-						{prereqsHelper(val[i], false)}
-					</div>
+					<div className="prereq-container">{prereqsHelper(val[i], false)}</div>
 				);
 			} else output.push(prereqsHelper(val[i], false));
 			if (i !== val.length - 1) {
@@ -198,7 +199,7 @@ function CourseInfo() {
 					</tr>
 				</thead>
 				<tbody>
-					{Object.entries(course.sections).map((entry, index) => {
+					{Object.entries(course.sections).map(entry => {
 						const [id, sectionRaw] = entry;
 
 						const sectionEnrollment = {current: 20, max: 25};
@@ -240,7 +241,7 @@ function CourseInfo() {
 						};
 
 						return (
-							<tr key={index}>
+							<tr key={section.id}>
 								<td>{section.id}</td>
 								<td>{section.courseNumber}</td>
 								<td>{section.type}</td>

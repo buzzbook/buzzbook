@@ -1,9 +1,8 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../../redux/courseListSlice";
+import courses from "../../courses";
 import SavedCourse from "./SavedCourse";
-
-const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function SavedCourses() {
 	const savedCoursesIDs = useSelector(getSavedCourses);

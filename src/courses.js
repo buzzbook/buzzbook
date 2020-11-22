@@ -11,4 +11,5 @@ indeces refer to the caches
 var localStorage = window.localStorage;
 localStorage.setItem("courses", JSON.stringify(data.courses));
 
-export default data.caches;
+export const caches = data.caches;
+export default data.courses;

@@ -1,10 +1,9 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../../redux/courseListSlice";
+import courses from "../../courses";
 import SavedCourseItem from "./SavedCourseItem";
 import "../../css/SavedCoursesDetails.css";
-
-const courses = JSON.parse(window.localStorage.getItem("courses"));
 
 function SavedCoursesDetails({id}) {
 	const savedCoursesIDs = useSelector(getSavedCourses);
@@ -12,7 +11,7 @@ function SavedCoursesDetails({id}) {
 	return (
 		<div style={{height: "calc(95vh - 88px)", overflowY: "scroll"}}>
 			<div style={{height: "100%"}}>
-				{Object.keys(savedCoursesIDs).map((id, index) => {
+				{Object.keys(savedCoursesIDs).map(ßid => {
 					const courseData = courses[id];
 					const courseEnrollment = {current: 200, max: 250};
 					const courseGrade = "A";
@@ -34,7 +33,7 @@ function SavedCoursesDetails({id}) {
 							}
 							credits={course.credits}
 							grade={course.grade}
-							key={index}
+							key={id}
 						/>
 					);
 				})}
