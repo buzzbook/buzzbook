@@ -106,13 +106,21 @@ export const subjectNames = {
 	SWAH: "Swahili"
 };
 
+var currFilters = null;
+var currSort = null;
+var filteredCourses = null;
+
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
 	const sort = useSelector(getSort).value;
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
-	const filteredCourses = Object.entries(courses)
-		.filter(courseRaw => {
+
+	let refilter = false;
+	if (currFilters !== filters || filteredCourses === null) {
+		refilter = true;
+		currFilters = filters;
+		filteredCourses = Object.entries(courses).filter(courseRaw => {
 			const [courseID, courseData] = courseRaw;
 			if (id !== "catalog" && savedCourses[courseID]) {
 				return false;
@@ -149,8 +157,11 @@ function CourseList({id}) {
 				}
 			}
 			return true;
-		})
-		.sort((a, b) => {
+		});
+	}
+	if (currSort !== sort || refilter) {
+		currSort = sort;
+		filteredCourses = filteredCourses.sort((a, b) => {
 			switch (sort) {
 				case "Course ID":
 					// a/b[0] is the courseID
@@ -167,6 +178,7 @@ function CourseList({id}) {
 					return 0;
 			}
 		});
+	}
 
 	return (
 		<div>
