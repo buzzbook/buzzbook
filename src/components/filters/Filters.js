@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {resetFilters, updateFilter, getFilters,} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
-import FilterItem from "./FilterItem";
+import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
 
 function Filters({filterList}) {
@@ -39,19 +39,19 @@ function Filters({filterList}) {
 					</span>
 				</div>
 				{term && (
-					<FilterItem label="Term">
-						<FilterSelector
-							ariaLabel="Term"
-							ariaDescribedBy="term-label"
-              placeholder="Select term..."
-              value={filters.term}
-							onChange={value => updateFil(value, "term")}
-							optionList={["Any", "Fall 2020", "Spring 2021"]}
-						/>
-					</FilterItem>
+          <DropdownButton label="Term">
+              <FilterSelector
+                ariaLabel="Term"
+                ariaDescribedBy="term-label"
+                placeholder="Select term..."
+                value={filters.term}
+                onChange={value => updateFil(value, "term")}
+                optionList={["Any", "Fall 2020", "Spring 2021"]}
+              />
+          </DropdownButton>
 				)}
 				{credits && (
-					<FilterItem label="Credits">
+					<DropdownButton label="Credits">
 						<FilterSelector
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
@@ -61,10 +61,10 @@ function Filters({filterList}) {
               optionList={["Any", 1, 2, 3, 4]}
               isMulti={true}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{subject && (
-					<FilterItem label="Subject">
+					<DropdownButton label="Subject">
 						<FilterSelector
 							ariaLabel="Subject"
               ariaDescribedBy="subject-label"
@@ -78,10 +78,10 @@ function Filters({filterList}) {
               )}
               isMulti={true}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{level && (
-					<FilterItem label="Level">
+					<DropdownButton label="Level">
 						<FilterSelector
 							ariaLabel="Level"
               ariaDescribedBy="level-label"
@@ -91,10 +91,10 @@ function Filters({filterList}) {
               optionList={["Any", 1000, 2000, 3000, 4000]}
               isMulti={true}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{core && (
-					<FilterItem label="Core">
+					<DropdownButton label="Core">
 						<FilterSelector
 							ariaLabel="Core"
               ariaDescribedBy="core-label"
@@ -104,10 +104,10 @@ function Filters({filterList}) {
               optionList={["Any", "Test 1", "Test 2"]}
               isMulti={true}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{days && (
-					<FilterItem label="Days">
+					<DropdownButton label="Days">
 						<div className="button-group">
 							<button onClick={handleDayButtonClick}>M</button>
 							<button onClick={handleDayButtonClick}>T</button>
@@ -115,10 +115,10 @@ function Filters({filterList}) {
 							<button onClick={handleDayButtonClick}>R</button>
 							<button onClick={handleDayButtonClick}>F</button>
 						</div>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{time && (
-					<FilterItem label="Time">
+					<DropdownButton label="Time">
 						<FilterSelector
 							ariaLabel="Time-from"
 							ariaDescribedBy="time-label"
@@ -133,10 +133,10 @@ function Filters({filterList}) {
 							onChange={value => updateFil(value, "time-to")}
 							optionList={["Any", "11:00", "12:00"]}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 				{prof && (
-					<FilterItem label="Prof">
+					<DropdownButton label="Prof">
 						<FilterSelector
 							ariaLabel="Prof"
               ariaDescribedBy="prof-label"
@@ -146,7 +146,7 @@ function Filters({filterList}) {
               optionList={["Any", "Mr. Smith", "Mr.Brown"]}
               isMulti={true}
 						/>
-					</FilterItem>
+					</DropdownButton>
 				)}
 			</div>
 		</div>
