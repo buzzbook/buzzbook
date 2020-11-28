@@ -52,7 +52,7 @@ export default function FilterSelector({
 
 	 return (
 		<Select
-      className={className + " form-control border-0 p-0"}
+      className={className}
       styles={customStyles}
       options={options}
       value={value}
