@@ -54,8 +54,8 @@ function FilterBar() {
 							</div>
 						</div>
 					</div>
-
 					<SortBy />
+          <Filters />
 				</div>
 			</div>
 		</div>

@@ -39,11 +39,11 @@ function Filters({filterList}) {
 					</span>
 				</div>
 				{term && (
-          <DropdownButton label="Term">
+          <DropdownButton label="Term" className="dropdownFilter">
               <FilterSelector
                 ariaLabel="Term"
                 ariaDescribedBy="term-label"
-                placeholder="Select term..."
+                placeholder="Select..."
                 value={filters.term}
                 onChange={value => updateFil(value, "term")}
                 optionList={["Any", "Fall 2020", "Spring 2021"]}
@@ -51,11 +51,11 @@ function Filters({filterList}) {
           </DropdownButton>
 				)}
 				{credits && (
-					<DropdownButton label="Credits">
+					<DropdownButton label="Credits" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
-              placeholder="Select credits..."
+              placeholder="Select..."
               value={filters.credits}
 							onChange={value => updateFil(value, "credits")}
               optionList={["Any", 1, 2, 3, 4]}
@@ -64,11 +64,11 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{subject && (
-					<DropdownButton label="Subject">
+					<DropdownButton label="Subject" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Subject"
               ariaDescribedBy="subject-label"
-              placeholder="Select subjects..."
+              placeholder="Select..."
               value={filters.subject}
 							onChange={value => updateFil(value, "subject")}
 							optionList={["Any"].concat(
@@ -81,11 +81,11 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{level && (
-					<DropdownButton label="Level">
+					<DropdownButton label="Level" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Level"
               ariaDescribedBy="level-label"
-              placeholder="Select levels..."
+              placeholder="Select..."
 							value={filters.level}
 							onChange={value => updateFil(value, "level")}
               optionList={["Any", 1000, 2000, 3000, 4000]}
@@ -94,11 +94,11 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{core && (
-					<DropdownButton label="Core">
+					<DropdownButton label="Core" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Core"
               ariaDescribedBy="core-label"
-              placeholder="Select cores..."
+              placeholder="Select..."
 							value={filters.core}
 							onChange={value => updateFil(value, "core")}
               optionList={["Any", "Test 1", "Test 2"]}
@@ -107,7 +107,7 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{days && (
-					<DropdownButton label="Days">
+					<DropdownButton label="Days" className="dropdownFilter">
 						<div className="button-group">
 							<button onClick={handleDayButtonClick}>M</button>
 							<button onClick={handleDayButtonClick}>T</button>
@@ -118,7 +118,7 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{time && (
-					<DropdownButton label="Time">
+					<DropdownButton label="Time" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Time-from"
 							ariaDescribedBy="time-label"
@@ -136,11 +136,11 @@ function Filters({filterList}) {
 					</DropdownButton>
 				)}
 				{prof && (
-					<DropdownButton label="Prof">
+					<DropdownButton label="Prof" className="dropdownFilter">
 						<FilterSelector
 							ariaLabel="Prof"
               ariaDescribedBy="prof-label"
-              placeholder="Select professors..."
+              placeholder="Select..."
 							value={filters.prof}
 							onChange={value => updateFil(value, "prof")}
               optionList={["Any", "Mr. Smith", "Mr.Brown"]}

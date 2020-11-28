@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Tippy from '@tippyjs/react';
+import '../../css/DropdownButton.css';
 
-export default function DropdownButton({ children, label }) {
+export default function DropdownButton({ children, label, className }) {
   return (
-    <Tippy content={children}  trigger='click' interactive>
-      <button>{label}</button>
+    <Tippy content={<div className="dropdownContainer">{children}</div>}  trigger='click' interactive placement='bottom-start' delay={[0,0]}>
+      <button className={className}>{label}</button>
     </Tippy>
   );
 }

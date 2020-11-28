@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
-import FilterItem from "./FilterItem";
+import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
 import {updateSort, getSort} from "../../redux/courseListSlice";
 
@@ -12,7 +12,7 @@ function SortBy({sortOptionList}) {
 
 	return (
 		<div>
-			<FilterItem label="Sort By">
+			<DropdownButton label="Sort By" className="dropdownFilter">
 				<FilterSelector
           id="sort-by-filter"
 					className="custom-select"
@@ -22,7 +22,7 @@ function SortBy({sortOptionList}) {
 					onChange={value => dispatch(updateSort(value))}
 					optionList={sortOptionList}
 				/>
-			</FilterItem>
+			</DropdownButton>
 		</div>
 	);
 }
