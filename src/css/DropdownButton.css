@@ -16,8 +16,7 @@
   box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
 }
 
-.shownFilter {
-  font-weight: 600;
+.shownFilter, .dropdownButton:hover {
   color: var(--main-text);
   background-color: var(--low-alpha);
 }
