@@ -5,7 +5,6 @@ import SavedCourseItem from "./SavedCourseItem";
 import "../../css/SavedCoursesDetails.css";
 
 const courses = JSON.parse(window.localStorage.getItem("courses"));
-console.log(courses);
 
 function SavedCoursesDetails({ id }) {
   const savedCoursesIndeces = useSelector(getSavedCourses);

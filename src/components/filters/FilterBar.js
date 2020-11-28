@@ -1,8 +1,8 @@
 import React from "react";
-import SortBy from "./SortBy";
+import Filters from "./Filters";
+import ExpandedFilters from "./ExpandedFilters";
 import filterIcon from "../../img/filterIcon.png";
 import "../../css/Filters.css";
-import Filters from "./Filters";
 
 function FilterBar() {
 	return (
@@ -33,7 +33,7 @@ function FilterBar() {
 						aria-labelledby="filterModalLabel"
 						aria-hidden="true"
 					>
-						<div className="modal-dialog" role="document">
+						<div className="modal-dialog modal-lg" role="document">
 							<div className="modal-content">
 								<div className="modal-header">
 									<h5 className="modal-title" id="filterModalLabel">
@@ -49,13 +49,12 @@ function FilterBar() {
 									</button>
 								</div>
 								<div className="modal-body">
-									<Filters />
+									<ExpandedFilters />
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<SortBy />
+          <Filters />
 				</div>
 			</div>
 		</div>
