@@ -1,16 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetFilters, updateFilter, getFilters, } from "../../redux/courseListSlice";
+import { resetFilters, updateFilter, getFilters, updateSort, getSort } from "../../redux/courseListSlice";
 import { subjectNames } from "../courseList/CourseList";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
 
-function Filters({ filterList }) {
-
-  const handleDayButtonClick = e => {
-    e.preventDefault();
-    e.target.classList.toggle("active");
-  };
+function Filters() {
 
   const clearFilters = () => {
     dispatch(resetFilters());
@@ -23,11 +18,23 @@ function Filters({ filterList }) {
     dispatch(updateFilter({ name: name, value: value }));
   };
 
+  const sort = useSelector(getSort);
   const filters = useSelector(getFilters);
 
   return (
     <div>
       <div id="filters">
+      <DropdownButton label="Sort By" className="dropdownFilter">
+				<FilterSelector
+          id="sort-by-filter"
+					className="custom-select"
+					ariaLabel="Sort By"
+					ariaDescribedBy="sort-by-label"
+					value={sort}
+					onChange={value => dispatch(updateSort(value))}
+					optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
+				/>
+			</DropdownButton>
         <DropdownButton label="Departments" className="dropdownFilter">
           <FilterSelector
             ariaLabel="Subject"

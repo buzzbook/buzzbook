@@ -1,8 +1,7 @@
 import React from "react";
-import SortBy from "./SortBy";
+import Filters from "./Filters";
 import filterIcon from "../../img/filterIcon.png";
 import "../../css/Filters.css";
-import Filters from "./Filters";
 
 function FilterBar() {
 	return (
@@ -54,7 +53,6 @@ function FilterBar() {
 							</div>
 						</div>
 					</div>
-					<SortBy />
           <Filters />
 				</div>
 			</div>
