@@ -15,3 +15,9 @@
   -moz-box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
   box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
 }
+
+.shownFilter {
+  font-weight: 600;
+  color: var(--main-text);
+  background-color: var(--low-alpha);
+}
