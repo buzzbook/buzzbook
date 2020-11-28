@@ -27,7 +27,6 @@ function Filters() {
       <DropdownButton label="Sort By" className="dropdownFilter">
 				<FilterSelector
           id="sort-by-filter"
-					className="custom-select"
 					ariaLabel="Sort By"
 					ariaDescribedBy="sort-by-label"
 					value={sort}
