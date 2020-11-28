@@ -1,5 +1,6 @@
 import React from "react";
 import Filters from "./Filters";
+import ExpandedFilters from "./ExpandedFilters";
 import filterIcon from "../../img/filterIcon.png";
 import "../../css/Filters.css";
 
@@ -48,7 +49,7 @@ function FilterBar() {
 									</button>
 								</div>
 								<div className="modal-body">
-									<Filters />
+									<ExpandedFilters />
 								</div>
 							</div>
 						</div>
