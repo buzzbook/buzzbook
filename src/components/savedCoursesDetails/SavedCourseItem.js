@@ -22,8 +22,6 @@ function SavedCourseItem(course) {
 	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
 	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
   else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
-  
-  console.log(course)
 
 	return (
 		<div
@@ -41,12 +39,10 @@ function SavedCourseItem(course) {
 						<span>{course.name}</span>
 					</div>
           <FilterSelector
-            className="custom-select"
             placeholder="All Professors"
             optionList={["All Professors", "Prof 1", "Prof 2", "Prof 3"]}
           />
           <FilterSelector
-            className="custom-select"
             placeholder="All Semesters"
             optionList={["All Semesters", "Spring 21", "Fall 20", "Spring 20"]}
           />

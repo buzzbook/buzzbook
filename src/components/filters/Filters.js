@@ -4,6 +4,7 @@ import { resetFilters, updateFilter, getFilters, updateSort, getSort } from "../
 import { subjectNames } from "../courseList/CourseList";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
+import "../../css/Filters.css";
 
 function Filters() {
 
@@ -22,18 +23,18 @@ function Filters() {
   const filters = useSelector(getFilters);
 
   return (
-    <div>
+    <div id="filter-container">
       <div id="filters">
-      <DropdownButton label="Sort By" className="dropdownFilter">
-				<FilterSelector
-          id="sort-by-filter"
-					ariaLabel="Sort By"
-					ariaDescribedBy="sort-by-label"
-					value={sort}
-					onChange={value => dispatch(updateSort(value))}
-					optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
-				/>
-			</DropdownButton>
+        <DropdownButton label="Sort By" className="dropdownFilter">
+          <FilterSelector
+            id="sort-by-filter"
+            ariaLabel="Sort By"
+            ariaDescribedBy="sort-by-label"
+            value={sort}
+            onChange={value => dispatch(updateSort(value))}
+            optionList={["Course ID", "Name", "Grade", "Difficulty", "Enrollment"]}
+          />
+        </DropdownButton>
         <DropdownButton label="Departments" className="dropdownFilter">
           <FilterSelector
             ariaLabel="Subject"
