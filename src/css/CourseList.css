@@ -1,6 +1,5 @@
 #courseList {
 	height: 60%;
-	overflow-y: scroll;
 }
 #savedCourses {
 	height: 40%;

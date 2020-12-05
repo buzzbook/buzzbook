@@ -32,10 +32,12 @@ function CourseListItem(course) {
 	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
 
 	return (
-		<Link to={`/catalog/${course.courseID.replaceAll(" ", "+")}`} replace>
+		<Link to={`/catalog/${course.courseID.replaceAll(" ", "+")}`} replace
+      style={course.style}
+    >
 			<div
 				className="p-2 mb-2 rounded"
-				style={course.style}
+				style={{backgroundColor: bgColor}}
         onClick={() => dispatch(updateSelectedCourse(course.courseID))}
 			>
 				<div className="position-relative">

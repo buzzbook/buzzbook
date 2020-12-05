@@ -6,7 +6,8 @@ import {
 	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
@@ -210,34 +211,36 @@ function CourseList({id}) {
 
 	return (
 		<div>
-			<div style={{height: "100%"}}>
-				<div id="courseList">
-					{filteredCourses.length === 0 ? (
-						<span className="display-block text-center mt-2">
-							<h2>No classes match your filters :(</h2>
-						</span>
-					) : (
-            <List
-              height={300}
-              itemCount={filteredCourses.length}
-              itemSize={50}
-              width={100}
-            >
-              {Row}
-            </List>
-					)}
-				</div>
+      <div id="courseList">
+        {filteredCourses.length === 0 ? (
+          <span className="display-block text-center mt-2">
+            <h2>No classes match your filters :(</h2>
+          </span>
+        ) : (
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                height={height}
+                itemCount={filteredCourses.length}
+                itemSize={80}
+                width={width}
+              >
+                {Row}
+              </List>
+            )}
+          </AutoSizer>
+        )}
+      </div>
 
-				<div
-					className="gt-gold font-weight-bold pl-2 mt-2"
-					style={{fontSize: "1.25rem"}}
-				>
-					Saved Courses
-				</div>
-				<div id="savedCourses">
-					<SavedCourses />
-				</div>
-			</div>
+      <div
+        className="gt-gold font-weight-bold pl-2 mt-2"
+        style={{fontSize: "1.25rem"}}
+      >
+        Saved Courses
+      </div>
+      <div id="savedCourses">
+        <SavedCourses />
+      </div>
 		</div>
 	);
 }
