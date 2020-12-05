@@ -6,7 +6,7 @@ import {
 	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
-import { FixedSizeList as List } from "react-window";
+import {FixedSizeList as List} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
@@ -110,6 +110,7 @@ export const subjectNames = {
 
 var currFilters = null;
 var currSort = null;
+var currSearch = null;
 var filteredCourses = null;
 
 function CourseList({id}) {
@@ -119,9 +120,14 @@ function CourseList({id}) {
 	const searchQuery = useSelector(getSearchQuery);
 
 	let refilter = false;
-	if (currFilters !== filters || filteredCourses === null) {
+	if (
+		currFilters !== filters ||
+		currSearch !== searchQuery ||
+		filteredCourses === null
+	) {
 		refilter = true;
 		currFilters = filters;
+		currSearch = searchQuery;
 		filteredCourses = Object.entries(courses).filter(courseRaw => {
 			const [courseID, courseData] = courseRaw;
 			if (id !== "catalog" && savedCourses[courseID]) {
@@ -154,7 +160,10 @@ function CourseList({id}) {
 				}
 			}
 			if (searchQuery !== "") {
-				if (!courseID.includes(searchQuery.toUpperCase())) {
+				if (
+					!courseID.includes(searchQuery.toUpperCase()) &&
+					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase())
+				) {
 					return false;
 				}
 			}
@@ -180,67 +189,67 @@ function CourseList({id}) {
 					return 0;
 			}
 		});
-  }
-  
-  const Row = ({ index, style }) => {
-    const [courseID, courseData] = filteredCourses[index];
-    const courseEnrollment = {current: 200, max: 250};
-    const courseGrade = "A";
-    const course = {
-      name: courseData[0],
-      enrollment: courseEnrollment,
-      grade: courseGrade,
-      credits: Object.values(courseData[1])[0][2],
-      sections: courseData[1]
-    };
-    return (
-      <CourseListItem
-        courseID={courseID}
-        name={course.name}
-        enrollmentPercent={
-          (courseEnrollment.current / courseEnrollment.max) * 100
-        }
-        credits={course.credits}
-        numSections={Object.keys(course.sections).length}
-        grade={course.grade}
-        key={courseID}
-        style={style}
-      />
-    );
-  }
+	}
+
+	const Row = ({index, style}) => {
+		const [courseID, courseData] = filteredCourses[index];
+		const courseEnrollment = {current: 200, max: 250};
+		const courseGrade = "A";
+		const course = {
+			name: courseData[0],
+			enrollment: courseEnrollment,
+			grade: courseGrade,
+			credits: Object.values(courseData[1])[0][2],
+			sections: courseData[1]
+		};
+		return (
+			<CourseListItem
+				courseID={courseID}
+				name={course.name}
+				enrollmentPercent={
+					(courseEnrollment.current / courseEnrollment.max) * 100
+				}
+				credits={course.credits}
+				numSections={Object.keys(course.sections).length}
+				grade={course.grade}
+				key={courseID}
+				style={style}
+			/>
+		);
+	};
 
 	return (
 		<div>
-      <div id="courseList">
-        {filteredCourses.length === 0 ? (
-          <span className="display-block text-center mt-2">
-            <h2>No classes match your filters :(</h2>
-          </span>
-        ) : (
-          <AutoSizer>
-            {({ height, width }) => (
-              <List
-                height={height}
-                itemCount={filteredCourses.length}
-                itemSize={80}
-                width={width}
-              >
-                {Row}
-              </List>
-            )}
-          </AutoSizer>
-        )}
-      </div>
+			<div id="courseList">
+				{filteredCourses.length === 0 ? (
+					<span className="display-block text-center mt-2">
+						<h2>No classes match your filters :(</h2>
+					</span>
+				) : (
+					<AutoSizer>
+						{({height, width}) => (
+							<List
+								height={height}
+								itemCount={filteredCourses.length}
+								itemSize={80}
+								width={width}
+							>
+								{Row}
+							</List>
+						)}
+					</AutoSizer>
+				)}
+			</div>
 
-      <div
-        className="gt-gold font-weight-bold pl-2 mt-2"
-        style={{fontSize: "1.25rem"}}
-      >
-        Saved Courses
-      </div>
-      <div id="savedCourses">
-        <SavedCourses />
-      </div>
+			<div
+				className="gt-gold font-weight-bold pl-2 mt-2"
+				style={{fontSize: "1.25rem"}}
+			>
+				Saved Courses
+			</div>
+			<div id="savedCourses">
+				<SavedCourses />
+			</div>
 		</div>
 	);
 }
