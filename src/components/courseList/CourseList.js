@@ -6,6 +6,8 @@ import {
 	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
+import { FixedSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
@@ -178,56 +180,67 @@ function CourseList({id}) {
 					return 0;
 			}
 		});
-	}
+  }
+  
+  const Row = ({ index, style }) => {
+    const [courseID, courseData] = filteredCourses[index];
+    const courseEnrollment = {current: 200, max: 250};
+    const courseGrade = "A";
+    const course = {
+      name: courseData[0],
+      enrollment: courseEnrollment,
+      grade: courseGrade,
+      credits: Object.values(courseData[1])[0][2],
+      sections: courseData[1]
+    };
+    return (
+      <CourseListItem
+        courseID={courseID}
+        name={course.name}
+        enrollmentPercent={
+          (courseEnrollment.current / courseEnrollment.max) * 100
+        }
+        credits={course.credits}
+        numSections={Object.keys(course.sections).length}
+        grade={course.grade}
+        key={courseID}
+        style={style}
+      />
+    );
+  }
 
 	return (
 		<div>
-			<div style={{height: "100%"}}>
-				<div id="courseList">
-					{filteredCourses.length === 0 ? (
-						<span className="display-block text-center mt-2">
-							<h2>No classes match your filters :(</h2>
-						</span>
-					) : (
-						filteredCourses.map(courseRaw => {
-							const [courseID, courseData] = courseRaw;
-							const courseEnrollment = {current: 200, max: 250};
-							const courseGrade = "A";
-							const course = {
-								name: courseData[0],
-								enrollment: courseEnrollment,
-								grade: courseGrade,
-								credits: Object.values(courseData[1])[0][2],
-								sections: courseData[1]
-							};
+      <div id="courseList">
+        {filteredCourses.length === 0 ? (
+          <span className="display-block text-center mt-2">
+            <h2>No classes match your filters :(</h2>
+          </span>
+        ) : (
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                height={height}
+                itemCount={filteredCourses.length}
+                itemSize={80}
+                width={width}
+              >
+                {Row}
+              </List>
+            )}
+          </AutoSizer>
+        )}
+      </div>
 
-							return (
-								<CourseListItem
-									courseID={courseID}
-									name={course.name}
-									enrollmentPercent={
-										(courseEnrollment.current / courseEnrollment.max) * 100
-									}
-									credits={course.credits}
-									numSections={Object.keys(course.sections).length}
-									grade={course.grade}
-									key={courseID}
-								/>
-							);
-						})
-					)}
-				</div>
-
-				<div
-					className="gt-gold font-weight-bold pl-2 mt-2"
-					style={{fontSize: "1.25rem"}}
-				>
-					Saved Courses
-				</div>
-				<div id="savedCourses">
-					<SavedCourses />
-				</div>
-			</div>
+      <div
+        className="gt-gold font-weight-bold pl-2 mt-2"
+        style={{fontSize: "1.25rem"}}
+      >
+        Saved Courses
+      </div>
+      <div id="savedCourses">
+        <SavedCourses />
+      </div>
 		</div>
 	);
 }
