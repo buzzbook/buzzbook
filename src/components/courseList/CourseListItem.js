@@ -35,8 +35,8 @@ function CourseListItem(course) {
 		<Link to={`/catalog/${course.courseID.replaceAll(" ", "+")}`} replace>
 			<div
 				className="p-2 mb-2 rounded"
-				style={{backgroundColor: bgColor}}
-				onClick={() => dispatch(updateSelectedCourse(course.courseID))}
+				style={course.style}
+        onClick={() => dispatch(updateSelectedCourse(course.courseID))}
 			>
 				<div className="position-relative">
 					<div style={{maxWidth: "calc(100% - 25px)"}}>

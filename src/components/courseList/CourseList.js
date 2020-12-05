@@ -6,6 +6,7 @@ import {
 	getSearchQuery,
 	getSort
 } from "../../redux/courseListSlice";
+import { FixedSizeList as List } from 'react-window';
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
@@ -178,7 +179,34 @@ function CourseList({id}) {
 					return 0;
 			}
 		});
-	}
+  }
+  
+  const Row = ({ index, style }) => {
+    const [courseID, courseData] = filteredCourses[index];
+    const courseEnrollment = {current: 200, max: 250};
+    const courseGrade = "A";
+    const course = {
+      name: courseData[0],
+      enrollment: courseEnrollment,
+      grade: courseGrade,
+      credits: Object.values(courseData[1])[0][2],
+      sections: courseData[1]
+    };
+    return (
+      <CourseListItem
+        courseID={courseID}
+        name={course.name}
+        enrollmentPercent={
+          (courseEnrollment.current / courseEnrollment.max) * 100
+        }
+        credits={course.credits}
+        numSections={Object.keys(course.sections).length}
+        grade={course.grade}
+        key={courseID}
+        style={style}
+      />
+    );
+  }
 
 	return (
 		<div>
@@ -189,32 +217,14 @@ function CourseList({id}) {
 							<h2>No classes match your filters :(</h2>
 						</span>
 					) : (
-						filteredCourses.map(courseRaw => {
-							const [courseID, courseData] = courseRaw;
-							const courseEnrollment = {current: 200, max: 250};
-							const courseGrade = "A";
-							const course = {
-								name: courseData[0],
-								enrollment: courseEnrollment,
-								grade: courseGrade,
-								credits: Object.values(courseData[1])[0][2],
-								sections: courseData[1]
-							};
-
-							return (
-								<CourseListItem
-									courseID={courseID}
-									name={course.name}
-									enrollmentPercent={
-										(courseEnrollment.current / courseEnrollment.max) * 100
-									}
-									credits={course.credits}
-									numSections={Object.keys(course.sections).length}
-									grade={course.grade}
-									key={courseID}
-								/>
-							);
-						})
+            <List
+              height={300}
+              itemCount={filteredCourses.length}
+              itemSize={50}
+              width={100}
+            >
+              {Row}
+            </List>
 					)}
 				</div>
 
