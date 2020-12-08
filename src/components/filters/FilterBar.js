@@ -1,10 +1,13 @@
 import React from "react";
 import Filters from "./Filters";
 import ExpandedFilters from "./ExpandedFilters";
+import {useDispatch} from "react-redux";
+import {updateSearchQuery} from "../../redux/courseListSlice";
 import filterIcon from "../../img/filterIcon.png";
 import "../../css/Filters.css";
 
 function FilterBar() {
+	const dispatch = useDispatch();
 	return (
 		<div className="row mx-0" id="filterBar">
 			<div className="col-3 h-100 p-3">
@@ -12,6 +15,7 @@ function FilterBar() {
 					type="text"
 					className="form-control mb-2"
 					placeholder="Search Courses"
+					onChange={e => dispatch(updateSearchQuery(e.target.value))}
 				/>
 			</div>
 			<div className="col-9 h-100 p-3">
@@ -28,7 +32,7 @@ function FilterBar() {
 					<div
 						className="modal fade"
 						id="filterModal"
-						tabindex="-1"
+						tabIndex="-1"
 						role="dialog"
 						aria-labelledby="filterModalLabel"
 						aria-hidden="true"
@@ -36,7 +40,10 @@ function FilterBar() {
 						<div className="modal-dialog modal-lg" role="document">
 							<div className="modal-content">
 								<div className="modal-header">
-									<h5 className="modal-title" id="filterModalLabel">
+									<h5
+										className="modal-title"
+										id="filterModalLabel"
+									>
 										Filters
 									</h5>
 									<button
@@ -54,7 +61,7 @@ function FilterBar() {
 							</div>
 						</div>
 					</div>
-          <Filters />
+					<Filters />
 				</div>
 			</div>
 		</div>

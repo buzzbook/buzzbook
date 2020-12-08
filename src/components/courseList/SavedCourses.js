@@ -1,26 +1,18 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../../redux/courseListSlice";
+import courses from "../../courses";
 import SavedCourse from "./SavedCourse";
 
-const courses = JSON.parse(window.localStorage.getItem("courses"));
-
 function SavedCourses() {
-	const savedCoursesIndeces = useSelector(getSavedCourses);
-	let savedCourses = [];
-	savedCoursesIndeces.forEach(index => savedCourses.push(courses[index]));
+	const savedCoursesIDs = useSelector(getSavedCourses);
 
 	return (
 		<div className="px-2">
 			<div>
-				{savedCourses.map((course, index) => {
+				{Object.keys(savedCoursesIDs).map((id, index) => {
 					return (
-						<SavedCourse
-							courseID={course.courseID}
-							name={course.name}
-							index={index}
-							key={index}
-						/>
+						<SavedCourse courseID={id} name={courses[id][0]} key={index} />
 					);
 				})}
 			</div>

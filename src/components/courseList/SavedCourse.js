@@ -22,7 +22,7 @@ function SavedCourse(course) {
 				src={deleteIcon}
 				alt="delete course"
 				className="deleteIcon"
-				onClick={() => dispatch(removeCourse(course.index))}
+				onClick={() => dispatch(removeCourse(course.courseID))}
 			/>
 		</div>
 	);

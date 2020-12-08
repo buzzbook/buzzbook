@@ -5,9 +5,10 @@ import {
 	updateSelectedCourse,
 	getSelectedCourse,
 	getSavedCourses,
-	removeCourseByIndex
+	removeCourse,
+	saveCourse
 } from "../../redux/courseListSlice";
-import {saveCourse} from "../../redux/courseListSlice";
+import {Link} from "react-router-dom";
 import saveIcon from "../../img/saveIcon.png";
 import unsaveIcon from "../../img/unsaveIcon.png";
 
@@ -16,10 +17,10 @@ function CourseListItem(course) {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 
-	let isSelected = selectedCourse === course.index;
+	let isSelected = selectedCourse === course.courseID;
 	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
 
-	let isSaved = savedCourses.includes(course.index);
+	let isSaved = savedCourses[course.courseID];
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
@@ -30,11 +31,18 @@ function CourseListItem(course) {
 	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
 	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
 
-	return (
+	const listItem = (
 		<div
 			className="p-2 mb-2 rounded"
-			style={{backgroundColor: bgColor}}
-			onClick={() => dispatch(updateSelectedCourse(course.index))}
+			style={
+				course.page === "catalog"
+					? {backgroundColor: bgColor}
+					: {backgroundColor: "initial"}
+			}
+			onClick={() =>
+				course.page === "catalog" &&
+				dispatch(updateSelectedCourse(course.courseID))
+			}
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
@@ -51,9 +59,13 @@ function CourseListItem(course) {
 							{Math.round(course.enrollmentPercent)}% enrollment
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span>{course.credits} units</span>
+						<span>
+							{course.credits} credit{course.credits !== 1 && "s"}
+						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span>{course.numSections} sections</span>
+						<span>
+							{course.numSections} section{course.numSections > 1 && "s"}
+						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span style={{color: gradeColor}}>{course.grade}</span>
 					</div>
@@ -64,19 +76,32 @@ function CourseListItem(course) {
 						src={unsaveIcon}
 						alt="unsave course"
 						className="unsaveIcon icon-dark"
-						onClick={() => dispatch(removeCourseByIndex(course.index))}
+						onClick={() => dispatch(removeCourse(course.courseID))}
 					/>
 				) : (
 					<img
 						src={saveIcon}
 						alt="save course"
 						className="saveIcon icon-dark"
-						onClick={() => dispatch(saveCourse(course.index))}
+						onClick={() => dispatch(saveCourse(course.courseID))}
 					/>
 				)}
 			</div>
 		</div>
 	);
+
+	if (course.page === "catalog") {
+		return (
+			<Link
+				to={`/catalog/${course.courseID.replaceAll(" ", "+")}`}
+				replace
+				style={course.style}
+			>
+				{listItem}
+			</Link>
+		);
+	}
+	return <div style={course.style}>{listItem}</div>;
 }
 
 CourseListItem.propTypes = {
@@ -85,8 +110,7 @@ CourseListItem.propTypes = {
 	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
 	numSections: PropTypes.number.isRequired,
-	grade: PropTypes.string.isRequired,
-	index: PropTypes.number.isRequired
+	grade: PropTypes.string.isRequired
 };
 
 export default CourseListItem;
