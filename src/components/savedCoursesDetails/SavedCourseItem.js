@@ -1,28 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {useDispatch, useSelector} from "react-redux";
-import {
-	updateSelectedCourse,
-	getSelectedCourse
-} from "../../redux/courseListSlice";
 
 function SavedCourseItem(course) {
-	const dispatch = useDispatch();
-	const selectedCourse = useSelector(getSelectedCourse);
-
-	let isSelected = selectedCourse === course.courseID;
-	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
-
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
 	return (
-		<div
-			className="p-2 mb-2 rounded"
-			style={{backgroundColor: bgColor}}
-			onClick={() => dispatch(updateSelectedCourse(course.courseID))}
-		>
+		<div className="p-2 mb-2 rounded">
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
 					<div className="text-cutoff">

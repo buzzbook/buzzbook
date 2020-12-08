@@ -11,8 +11,8 @@ function SavedCoursesDetails({id}) {
 	return (
 		<div style={{height: "calc(95vh - 88px)", overflowY: "scroll"}}>
 			<div style={{height: "100%"}}>
-				{Object.keys(savedCoursesIDs).map(ßid => {
-					const courseData = courses[id];
+				{Object.keys(savedCoursesIDs).map(courseID => {
+					const courseData = courses[courseID];
 					const courseEnrollment = {current: 200, max: 250};
 					const courseGrade = "A";
 					const course = {
@@ -25,7 +25,7 @@ function SavedCoursesDetails({id}) {
 					};
 					return (
 						<SavedCourseItem
-							courseID={id}
+							courseID={courseID}
 							name={course.name}
 							enrollment={course.enrollment}
 							enrollmentPercent={
@@ -33,7 +33,7 @@ function SavedCoursesDetails({id}) {
 							}
 							credits={course.credits}
 							grade={course.grade}
-							key={id}
+							key={courseID}
 						/>
 					);
 				})}

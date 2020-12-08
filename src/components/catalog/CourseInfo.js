@@ -2,7 +2,10 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	getSelectedCourse,
-	updateSelectedCourse
+	updateSelectedCourse,
+	getSavedCourses,
+	removeCourse,
+	saveCourse
 } from "../../redux/courseListSlice";
 import {useLocation, useHistory, Link} from "react-router-dom";
 import RatingBar from "./RatingBar";
@@ -11,12 +14,15 @@ import courses, {caches} from "../../courses";
 import enrollmentIcon from "../../img/enrollmentIcon.png";
 import gradeIcon from "../../img/gradeIcon.png";
 import creditsIcon from "../../img/creditsIcon.png";
+import saveIcon from "../../img/saveIcon.png";
+import unsaveIcon from "../../img/unsaveIcon.png";
 
 function CourseInfo() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const location = useLocation();
 	const selectedCourse = useSelector(getSelectedCourse);
+	const savedCourses = useSelector(getSavedCourses);
 
 	let path = location.pathname.split("/");
 	if (path.length === 3) {
@@ -108,11 +114,28 @@ function CourseInfo() {
 		prerequisites: prereqs
 	};
 
+	let isSaved = savedCourses[course.courseID];
+
 	return (
 		<div className="" id="courseInfo">
 			<div className="row w-100 mx-0">
 				<div className="col-4 pl-0">
 					<h1>{course.courseID}</h1>
+					{isSaved ? (
+						<img
+							src={unsaveIcon}
+							alt="unsave course"
+							className="unsaveIcon icon-dark"
+							onClick={() => dispatch(removeCourse(course.courseID))}
+						/>
+					) : (
+						<img
+							src={saveIcon}
+							alt="save course"
+							className="saveIcon icon-dark"
+							onClick={() => dispatch(saveCourse(course.courseID))}
+						/>
+					)}
 					<h4 className="gt-gold">{course.name}</h4>
 				</div>
 				<div className="col-2">

@@ -212,8 +212,9 @@ function CourseList({id}) {
 				credits={course.credits}
 				numSections={Object.keys(course.sections).length}
 				grade={course.grade}
-				key={courseID}
 				style={style}
+				page={id}
+				key={courseID}
 			/>
 		);
 	};
