@@ -4,8 +4,7 @@ import $ from "jquery";
 
 import "../css/Nav.css";
 import itLogo from "../img/itLogo.png";
-import sun from "../img/sun.svg";
-import moon from "../img/moon.svg";
+import iconset from "../img/iconset.svg";
 
 const navPages = [
 	{title: "Catalog", path: "/catalog/"},
@@ -72,14 +71,14 @@ function Nav() {
 				))}
 			</ul>
 			<div>
-				<img
+				<svg
 					id="theme-toggle-icon"
-					src={theme === "dark" ? sun : moon}
 					alt={theme === "dark" ? "sun" : "moon"}
-					height="35px"
 					onClick={toggleTheme}
-					style={{cursor: "pointer"}}
-				/>
+					style={{cursor: "pointer", height: "35px", width: "35px"}}
+				>
+					<use href={theme === "dark" ? iconset+"#icon-sun" : iconset+"#icon-moon"} />
+				</svg>
 			</div>
 		</nav>
 	);
