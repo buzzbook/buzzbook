@@ -2,17 +2,21 @@
 	overflow-y: scroll;
 }
 
-#courseList > a > div {
+#courseList a > div {
 	cursor: pointer;
 	transition: all 0.2s;
 }
-#courseList > a > div:hover {
-	background-color: var(--med-alpha) !important;
+#courseList a > div:hover {
+	background-color: var(--med-alpha);
 }
 
 #courseList a {
 	color: var(--main-text);
 	text-decoration: none;
+}
+
+#courseList .selected {
+	background-color: var(--low-alpha) !important;
 }
 
 .text-cutoff {

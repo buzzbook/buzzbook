@@ -7,7 +7,7 @@ import {getSavedCourses} from "../../redux/courseListSlice";
 function EnrollmentGraph() {
 	const savedCourses = useSelector(getSavedCourses);
 
-	if (savedCourses.length === 0) {
+	if (Object.keys(savedCourses).length === 0) {
 		return (
 			<div className="text-center">
 				<br />

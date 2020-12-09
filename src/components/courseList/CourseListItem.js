@@ -18,7 +18,7 @@ function CourseListItem(course) {
 	const savedCourses = useSelector(getSavedCourses);
 
 	let isSelected = selectedCourse === course.courseID;
-	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
+	let bgColor = course.page === "catalog" && isSelected ? "selected" : "";
 
 	let isSaved = savedCourses[course.courseID];
 
@@ -33,12 +33,7 @@ function CourseListItem(course) {
 
 	const listItem = (
 		<div
-			className="p-2 mb-2 rounded"
-			style={
-				course.page === "catalog"
-					? {backgroundColor: bgColor}
-					: {backgroundColor: "initial"}
-			}
+			className={`p-2 mb-2 rounded ${bgColor}`}
 			onClick={() =>
 				course.page === "catalog" &&
 				dispatch(updateSelectedCourse(course.courseID))
@@ -58,15 +53,22 @@ function CourseListItem(course) {
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrollment
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span style={{fontWeight: "900"}}>
+							&nbsp;&bull;&nbsp;
+						</span>
 						<span>
 							{course.credits} credit{course.credits !== 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span>
-							{course.numSections} section{course.numSections > 1 && "s"}
+						<span style={{fontWeight: "900"}}>
+							&nbsp;&bull;&nbsp;
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span>
+							{course.numSections} section
+							{course.numSections > 1 && "s"}
+						</span>
+						<span style={{fontWeight: "900"}}>
+							&nbsp;&bull;&nbsp;
+						</span>
 						<span style={{color: gradeColor}}>{course.grade}</span>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import {
 	getSort
 } from "../../redux/courseListSlice";
 import {FixedSizeList as List} from "react-window";
+import {useWindowWidth} from "@react-hook/window-size";
 import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
@@ -217,6 +218,9 @@ function CourseList({id}) {
 		);
 	};
 
+	const windowWidth = useWindowWidth();
+	const itemHeight = windowWidth > 1630 ? 70 : 90;
+
 	return (
 		<div
 			style={{
@@ -236,7 +240,7 @@ function CourseList({id}) {
 							<List
 								height={height}
 								itemCount={filteredCourses.length}
-								itemSize={80}
+								itemSize={itemHeight}
 								width={width}
 							>
 								{Row}

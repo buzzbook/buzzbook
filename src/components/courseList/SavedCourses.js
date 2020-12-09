@@ -5,14 +5,18 @@ import courses from "../../courses";
 import SavedCourse from "./SavedCourse";
 
 function SavedCourses() {
-	const savedCoursesIDs = useSelector(getSavedCourses);
+	const savedCourses = useSelector(getSavedCourses);
 
 	return (
 		<div className="px-2">
 			<div>
-				{Object.keys(savedCoursesIDs).map((id, index) => {
+				{Object.keys(savedCourses).map((id, index) => {
 					return (
-						<SavedCourse courseID={id} name={courses[id][0]} key={index} />
+						<SavedCourse
+							courseID={id}
+							name={courses[id][0]}
+							key={index}
+						/>
 					);
 				})}
 			</div>
