@@ -14,6 +14,8 @@ import FilterSelector from "./FilterSelector";
 import {caches} from "../../courses";
 import "../../css/Filters.css";
 import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/translucent.css";
+import x from "../../img/x.png";
 
 function Filters() {
 	const clearFilters = () => {
@@ -30,7 +32,9 @@ function Filters() {
 	const sort = useSelector(getSort);
 	const filters = useSelector(getFilters);
 
-	const [source, target] = useSingleton();
+	const [source, target] = useSingleton({
+		overrides: ["theme", "arrow"]
+	});
 
 	return (
 		<div id="filter-container">
@@ -136,13 +140,26 @@ function Filters() {
 						isMulti={true}
 					/>
 				</DropdownButton>
-				<span
-					className="text-muted"
-					style={{cursor: "pointer"}}
-					onClick={clearFilters}
+				<Tippy
+					content="Clear Filters"
+					theme="translucent"
+					arrow={true}
+					singleton={target}
 				>
-					Clear Filters
-				</span>
+					<div
+						className="d-inline-block ml-2 icon-dark"
+						style={{cursor: "pointer", height: "16px"}}
+						onClick={clearFilters}
+					>
+						<img
+							src={x}
+							alt="x"
+							height="20px"
+							width="20px"
+							className="d-block mb-1"
+						/>
+					</div>
+				</Tippy>
 			</div>
 		</div>
 	);

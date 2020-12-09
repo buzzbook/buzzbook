@@ -12,6 +12,8 @@ export default function DropdownButton({
 	return (
 		<Tippy
 			content={<div className="dropdownContainer">{children}</div>}
+			theme="transparent"
+			arrow={false}
 			singleton={singleton}
 		>
 			<button className={`dropdownButton ${className}`}>{label}</button>

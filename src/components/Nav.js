@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import $ from "jquery";
 
 import "../css/Nav.css";
 import itLogo from "../img/itLogo.png";
-import sun from "../img/sun.svg";
-import moon from "../img/moon.svg";
 
 const navPages = [
 	{title: "Catalog", path: "/catalog/"},
@@ -16,26 +14,9 @@ const navPages = [
 	{title: "About", path: "/about/"}
 ];
 
-const localStorage = window.localStorage;
-const initialTheme = localStorage.getItem("theme");
-if (!initialTheme) {
-	localStorage.setItem("theme", "dark");
-} else if (initialTheme === "light") {
-	document.body.classList.add("light-theme");
-}
-
 function Nav() {
 	const loc = useLocation();
 	const activePath = loc.pathname + (loc.pathname.endsWith("/") ? "" : "/");
-
-	const [theme, updateTheme] = useState(initialTheme || "dark");
-
-	const toggleTheme = () => {
-		document.body.classList.toggle("light-theme");
-		let newTheme = theme === "dark" ? "light" : "dark";
-		localStorage.setItem("theme", newTheme);
-		updateTheme(newTheme);
-	};
 
 	// This stops button group buttons from fading when changing themes
 	useEffect(() => {
@@ -80,16 +61,6 @@ function Nav() {
 					</li>
 				))}
 			</ul>
-			<div>
-				<img
-					id="theme-toggle-icon"
-					src={theme === "dark" ? sun : moon}
-					alt={theme === "dark" ? "sun" : "moon"}
-					height="35px"
-					onClick={toggleTheme}
-					style={{cursor: "pointer"}}
-				/>
-			</div>
 		</nav>
 	);
 }

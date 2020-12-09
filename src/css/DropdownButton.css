@@ -11,6 +11,10 @@
 	padding: 10px;
 	border-radius: 10px;
 	background-color: var(--main-bg);
+}
+
+.dropdownContainer,
+.shadow {
 	-webkit-box-shadow: 2px 2px 20px 0px var(--shadow);
 	-moz-box-shadow: 2px 2px 20px 0px var(--shadow);
 	box-shadow: 2px 2px 20px 0px var(--shadow);
