@@ -1,22 +1,35 @@
 .dropdownFilter {
-  margin: 0px 5px;
-  padding: 0px 10px;
-  border: 2px solid var(--input-border);
-  border-radius: 15px;
-  background-color: var(--main-bg);
-  color: var(--input-border);
+	margin: 0px 5px;
+	padding: 0px 10px;
+	border: 2px solid var(--input-border);
+	border-radius: 15px;
+	background-color: var(--main-bg);
+	color: var(--input-border);
 }
 
 .dropdownContainer {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: var(--main-bg);
-  -webkit-box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
-  -moz-box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
-  box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
+	padding: 10px;
+	border-radius: 10px;
+	background-color: var(--main-bg);
+	-webkit-box-shadow: 2px 2px 20px 0px var(--shadow);
+	-moz-box-shadow: 2px 2px 20px 0px var(--shadow);
+	box-shadow: 2px 2px 20px 0px var(--shadow);
 }
 
-.shownFilter, .dropdownButton:hover {
-  color: var(--main-text);
-  background-color: var(--low-alpha);
+.dropdownButton {
+	transition: 0.1s;
+}
+
+.dropdownButton:focus {
+	outline: none;
+}
+
+.dropdownButton:hover,
+.dropdownButton[aria-expanded="true"] {
+	color: var(--main-text);
+	background-color: var(--low-alpha);
+}
+
+.tippy-box[data-theme~="transparent"] {
+	background-color: transparent;
 }

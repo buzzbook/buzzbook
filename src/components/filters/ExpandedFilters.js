@@ -65,16 +65,7 @@ function ExpandedFilters() {
 					placeholder="Select..."
 					value={filters.level}
 					onChange={value => updateFil(value, "level")}
-					optionList={[
-						1000,
-						2000,
-						3000,
-						4000,
-						6000,
-						7000,
-						8000,
-						9000
-					]}
+					optionList={[1000, 2000, 3000, 4000, 6000, 7000, 8000, 9000]}
 					isMulti={true}
 				/>
 				<h4 className="mt-2">Credits</h4>
@@ -84,7 +75,7 @@ function ExpandedFilters() {
 					placeholder="Select..."
 					value={filters.credits}
 					onChange={value => updateFil(value, "credits")}
-					optionList={[1, 2, 3, 4]}
+					optionList={[0, 1, 2, 3, 4, 5, 6, 9]}
 					isMulti={true}
 				/>
 			</div>

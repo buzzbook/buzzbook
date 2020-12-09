@@ -11,6 +11,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
+import {caches} from "../../courses";
 import "../../css/CourseList.css";
 
 /** Keys are the courseID values. Values are the long names */
@@ -133,30 +134,38 @@ function CourseList({id}) {
 			if (id !== "catalog" && savedCourses[courseID]) {
 				return false;
 			}
-			// Object.values(courseData[1])[0][2] is the number of course credits
 			if (filters.credits && filters.credits.length > 0) {
-				if (filters.credits[0] !== "Any") {
-					const creditFilterBy = filters.credits.map(option =>
-						parseInt(option.value)
-					);
-					let credits = Object.values(courseData[1])[0][2];
-					if (!creditFilterBy.includes(credits)) return false;
-				}
+				const creditFilterBy = filters.credits.map(option =>
+					parseInt(option.value)
+				);
+				// Object.values(courseData[1])[0][2] is the number of course credits listed for the first section
+				let credits = Object.values(courseData[1])[0][2];
+				if (!creditFilterBy.includes(credits)) return false;
 			}
 			if (filters.subject && filters.subject.length > 0) {
 				const subjectFilterBy = filters.subject.map(option => option.value);
-				if (!subjectFilterBy.includes("Any")) {
-					let subject = subjectNames[courseID.split(" ")[0]];
-					if (!subjectFilterBy.includes(subject)) return false;
-				}
+				let subject = subjectNames[courseID.split(" ")[0]];
+				if (!subjectFilterBy.includes(subject)) return false;
 			}
 			if (filters.level && filters.level.length > 0) {
-				if (filters.level[0] !== "Any") {
-					const levelFilterBy = filters.level.map(option =>
-						parseInt(option.value)
-					);
-					let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
-					if (!levelFilterBy.includes(level)) return false;
+				const levelFilterBy = filters.level.map(option =>
+					parseInt(option.value)
+				);
+				let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
+				if (!levelFilterBy.includes(level)) return false;
+			}
+			if (filters.type && filters.type.length > 0) {
+				// Filter out by type here
+				const typeFilterBy = filters.type.map(option => option.value);
+				var courseTypes = new Set();
+				Object.values(courseData[1]).forEach(section => {
+					// section[3] is the index representing the schedule type of the section
+					courseTypes.add(caches["scheduleTypes"][section[3]]);
+				});
+				for (let i = 0; i < typeFilterBy.length; i++) {
+					if (!courseTypes.has(typeFilterBy[i])) {
+						return false;
+					}
 				}
 			}
 			if (searchQuery !== "") {
