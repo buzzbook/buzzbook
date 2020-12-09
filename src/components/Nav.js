@@ -5,6 +5,7 @@ import $ from "jquery";
 import "../css/Nav.css";
 import itLogo from "../img/itLogo.png";
 import iconset from "../img/iconset.svg";
+//import Icon from '../img/icon';
 
 const navPages = [
 	{title: "Catalog", path: "/catalog/"},

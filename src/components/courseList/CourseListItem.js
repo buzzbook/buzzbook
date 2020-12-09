@@ -9,8 +9,7 @@ import {
 	saveCourse
 } from "../../redux/courseListSlice";
 import {Link} from "react-router-dom";
-import saveIcon from "../../img/saveIcon.png";
-import unsaveIcon from "../../img/unsaveIcon.png";
+import Icon from "../../img/icon";
 
 function CourseListItem(course) {
 	const dispatch = useDispatch();
@@ -70,22 +69,18 @@ function CourseListItem(course) {
 						<span style={{color: gradeColor}}>{course.grade}</span>
 					</div>
 				</div>
+				
+				<Icon
+					name={isSaved? "unsave": "save"}
+					alt={isSaved? "unsave course": "save course"}
+					iconclass={isSaved? "unsaveIcon icon-dark": "saveIcon icon-dark"}
+					onClick={isSaved? (
+						() => dispatch(removeCourse(course.courseID))
+					) : (
+						() => dispatch(saveCourse(course.courseID))
+					)}
+				/>
 
-				{isSaved ? (
-					<img
-						src={unsaveIcon}
-						alt="unsave course"
-						className="unsaveIcon icon-dark"
-						onClick={() => dispatch(removeCourse(course.courseID))}
-					/>
-				) : (
-					<img
-						src={saveIcon}
-						alt="save course"
-						className="saveIcon icon-dark"
-						onClick={() => dispatch(saveCourse(course.courseID))}
-					/>
-				)}
 			</div>
 		</div>
 	);

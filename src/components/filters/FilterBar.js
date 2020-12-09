@@ -3,7 +3,8 @@ import Filters from "./Filters";
 import ExpandedFilters from "./ExpandedFilters";
 import {useDispatch} from "react-redux";
 import {updateSearchQuery} from "../../redux/courseListSlice";
-import filterIcon from "../../img/filterIcon.png";
+//import Icon from "../../img/icon";
+import iconset from "../../img/iconset.svg";
 import "../../css/Filters.css";
 
 function FilterBar() {
@@ -20,14 +21,15 @@ function FilterBar() {
 			</div>
 			<div className="col-9 h-100 p-3">
 				<div className="d-flex">
-					<img
-						src={filterIcon}
+					<svg
 						alt="filter"
 						className="mr-3 icon-dark"
-						style={{width: 40, height: 40, cursor: "pointer"}}
+						style={{width: 30, height: 30, cursor: "pointer"}}
 						data-toggle="modal"
 						data-target="#filterModal"
-					/>
+					>
+						<use href={iconset+"#icon-filter"}/>
+					</svg>
 
 					<div
 						className="modal fade"

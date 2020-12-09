@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {removeCourse} from "../../redux/courseListSlice";
-import deleteIcon from "../../img/deleteIcon.png";
+import Icon from "../../img/icon";
 
 function SavedCourse(course) {
 	const dispatch = useDispatch();
@@ -18,10 +18,10 @@ function SavedCourse(course) {
 				<span>{course.name}</span>
 			</div>
 
-			<img
-				src={deleteIcon}
+			<Icon
+				name="delete"
 				alt="delete course"
-				className="deleteIcon"
+				iconclass="deleteIcon"
 				onClick={() => dispatch(removeCourse(course.courseID))}
 			/>
 		</div>

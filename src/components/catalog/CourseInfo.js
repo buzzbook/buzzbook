@@ -11,11 +11,7 @@ import {useLocation, useHistory, Link} from "react-router-dom";
 import RatingBar from "./RatingBar";
 import courses, {caches} from "../../courses";
 
-import enrollmentIcon from "../../img/enrollmentIcon.png";
-import gradeIcon from "../../img/gradeIcon.png";
-import creditsIcon from "../../img/creditsIcon.png";
-import saveIcon from "../../img/saveIcon.png";
-import unsaveIcon from "../../img/unsaveIcon.png";
+import Icon from "../../img/icon";
 import {Helmet} from "react-helmet";
 
 function CourseInfo() {
@@ -127,17 +123,17 @@ function CourseInfo() {
 					<div className="col-4 pl-0">
 						<h1>{course.courseID}</h1>
 						{isSaved ? (
-							<img
-								src={unsaveIcon}
+							<Icon
+								name="unsave"
 								alt="unsave course"
-								className="unsaveIcon icon-dark"
+								iconclass="unsaveIcon icon-dark"
 								onClick={() => dispatch(removeCourse(course.courseID))}
 							/>
 						) : (
-							<img
-								src={saveIcon}
+							<Icon
+								name="save"
 								alt="save course"
-								className="saveIcon icon-dark"
+								iconclass="saveIcon icon-dark"
 								onClick={() => dispatch(saveCourse(course.courseID))}
 							/>
 						)}
@@ -147,11 +143,11 @@ function CourseInfo() {
 						<div className="text-muted">Statistics</div>
 						<div style={{fontSize: "0.8rem"}}>
 							<div style={{whiteSpace: "nowrap"}}>
-								<img
-									src={enrollmentIcon}
+								<Icon
+									name="enrollment"
 									alt="enrollment icon"
-									width="15px"
-									className="d-inline-block mr-1 icon-light"
+									width="11px"
+									iconclass="d-inline-block mr-1 icon-light"
 								/>
 								<div
 									style={{color: enrollmentColor}}
@@ -161,22 +157,22 @@ function CourseInfo() {
 								</div>
 							</div>
 							<div style={{whiteSpace: "nowrap"}}>
-								<img
-									src={gradeIcon}
+								<Icon
+									name="grades"
 									alt="grade icon"
-									width="15px"
-									className="d-inline-block mr-1 icon-light"
+									width="11px"
+									iconclass="d-inline-block mr-1 icon-light"
 								/>
 								<div style={{color: gradeColor}} className="d-inline-block">
 									{course.grade}
 								</div>
 							</div>
 							<div style={{whiteSpace: "nowrap"}}>
-								<img
-									src={creditsIcon}
+								<Icon
+									name="credits"
 									alt="credits icon"
-									width="15px"
-									className="d-inline-block mr-1 icon-light"
+									width="11px"
+									iconclass="d-inline-block mr-1 icon-light"
 								/>
 								<div className="d-inline-block">
 									{course.credits} credit{course.credits !== 1 && "s"}
