@@ -9,8 +9,8 @@ import "../../css/Filters.css";
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
-		<div className="row mx-0" id="filterBar">
-			<div className="col-3 h-100 p-3">
+		<div className="mx-0" id="filterBar">
+			<div className="h-100 p-3">
 				<input
 					type="text"
 					className="form-control mb-2"
@@ -18,7 +18,7 @@ function FilterBar() {
 					onChange={e => dispatch(updateSearchQuery(e.target.value))}
 				/>
 			</div>
-			<div className="col-9 h-100 p-3">
+			<div className="h-100 p-3">
 				<div className="d-flex">
 					<img
 						src={filterIcon}

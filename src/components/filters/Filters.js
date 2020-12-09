@@ -38,7 +38,7 @@ function Filters() {
 				<Tippy
 					interactive
 					singleton={source}
-					moveTransition="transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)"
+					moveTransition="transform 0.5s"
 					placement="bottom"
 					trigger="mouseenter"
 					theme="transparent"
@@ -88,7 +88,16 @@ function Filters() {
 						placeholder="Select..."
 						value={filters.level}
 						onChange={value => updateFil(value, "level")}
-						optionList={[1000, 2000, 3000, 4000, 6000, 7000, 8000, 9000]}
+						optionList={[
+							1000,
+							2000,
+							3000,
+							4000,
+							6000,
+							7000,
+							8000,
+							9000
+						]}
 						isMulti={true}
 					/>
 				</DropdownButton>

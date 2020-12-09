@@ -24,11 +24,11 @@ const navPages = [
 
 function App({location}) {
 	return (
-		<div className="row">
-			<div className="col pr-0" style={{maxWidth: 200}}>
+		<div style={{display: "grid", gridTemplateColumns: "200px 1fr"}}>
+			<div className="pr-0" style={{maxWidth: 200}}>
 				<Nav />
 			</div>
-			<div className="col px-0">
+			<div className="px-0">
 				<Switch location={location}>
 					<Route exact path="/" component={Home} />
 

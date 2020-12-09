@@ -1,9 +1,5 @@
-#courseList {
-	height: 60%;
-}
 #savedCourses {
-	height: 40%;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 #courseList > a > div {
@@ -34,12 +30,24 @@
 .unsaveIcon,
 .deleteIcon {
 	cursor: pointer;
+	transition: 0.2s;
+}
+
+#courseList .saveIcon,
+#courseList .unsaveIcon,
+#savedCourses .deleteIcon {
 	position: absolute;
 	transform: translate(0, -50%);
 	top: 50%;
 	right: 0;
 	width: 20px;
-	transition: 0.2s;
+}
+
+#courseInfo .saveIcon,
+#courseInfo .unsaveIcon {
+	height: 35px;
+	grid-area: icon;
+	align-self: center;
 }
 
 .saveIcon:hover {

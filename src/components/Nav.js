@@ -39,12 +39,15 @@ function Nav() {
 
 	// This stops button group buttons from fading when changing themes
 	useEffect(() => {
-		$("#theme-toggle-icon").on("mouseover", () => {
-			$(".button-group button").css("transition", "0s");
-		});
-		$("#theme-toggle-icon").on("mouseout", () => {
-			$(".button-group button").css("transition", "0.25s");
-		});
+		let dropdownTrans = "";
+		$("#theme-toggle-icon")
+			.on("mouseover", () => {
+				dropdownTrans = $(".dropdownButton").css("transition");
+				$(".dropdownButton").css("transition", "0s");
+			})
+			.on("mouseout", () => {
+				$(".dropdownButton").css("transition", dropdownTrans);
+			});
 	});
 
 	return (
@@ -63,9 +66,15 @@ function Nav() {
 				{navPages.map(page => (
 					<li
 						key={page.path}
-						className={"nav-item" + (page.path === activePath ? " active" : "")}
+						className={
+							"nav-item" +
+							(page.path === activePath ? " active" : "")
+						}
 					>
-						<Link className="nav-link px-0 pt-1 pb-2" to={page.path}>
+						<Link
+							className="nav-link px-0 pt-1 pb-2"
+							to={page.path}
+						>
 							<b style={{fontSize: "1.2rem"}}>{page.title}</b>
 						</Link>
 					</li>

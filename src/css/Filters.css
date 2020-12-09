@@ -1,6 +1,6 @@
 #filter-container {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .form-control,
@@ -68,6 +68,11 @@
 .close,
 .close:hover {
 	color: var(--main-text);
+}
+
+#filterBar {
+	display: grid;
+	grid-template-columns: 3fr 9fr;
 }
 
 #filterBar input {

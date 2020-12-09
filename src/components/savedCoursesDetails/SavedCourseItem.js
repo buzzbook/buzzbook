@@ -21,10 +21,14 @@ function SavedCourseItem(course) {
 					<FilterSelector
 						placeholder="All Professors"
 						optionList={["Prof 1", "Prof 2", "Prof 3"]}
+						ariaLabel="Proffesors"
+						ariaDescribedBy="profs-label"
 					/>
 					<FilterSelector
 						placeholder="All Semesters"
 						optionList={["Spring 21", "Fall 20", "Spring 20"]}
+						ariaLabel="Semesters"
+						ariaDescribedBy="semesters-label"
 					/>
 
 					<div style={{fontSize: "0.9rem"}}>

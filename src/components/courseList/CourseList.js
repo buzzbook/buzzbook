@@ -109,9 +109,6 @@ export const subjectNames = {
 	SWAH: "Swahili"
 };
 
-var currFilters = null;
-var currSort = null;
-var currSearch = null;
 var filteredCourses = null;
 
 function CourseList({id}) {
@@ -120,16 +117,8 @@ function CourseList({id}) {
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
 
-	let refilter = false;
-	if (
-		currFilters !== filters ||
-		currSearch !== searchQuery ||
-		filteredCourses === null
-	) {
-		refilter = true;
-		currFilters = filters;
-		currSearch = searchQuery;
-		filteredCourses = Object.entries(courses).filter(courseRaw => {
+	filteredCourses = Object.entries(courses)
+		.filter(courseRaw => {
 			const [courseID, courseData] = courseRaw;
 			if (id !== "catalog" && savedCourses[courseID]) {
 				return false;
@@ -143,7 +132,9 @@ function CourseList({id}) {
 				if (!creditFilterBy.includes(credits)) return false;
 			}
 			if (filters.subject && filters.subject.length > 0) {
-				const subjectFilterBy = filters.subject.map(option => option.value);
+				const subjectFilterBy = filters.subject.map(
+					option => option.value
+				);
 				let subject = subjectNames[courseID.split(" ")[0]];
 				if (!subjectFilterBy.includes(subject)) return false;
 			}
@@ -171,17 +162,16 @@ function CourseList({id}) {
 			if (searchQuery !== "") {
 				if (
 					!courseID.includes(searchQuery.toUpperCase()) &&
-					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase())
+					!courseData[0]
+						.toUpperCase()
+						.includes(searchQuery.toUpperCase())
 				) {
 					return false;
 				}
 			}
 			return true;
-		});
-	}
-	if (currSort !== sort || refilter) {
-		currSort = sort;
-		filteredCourses = filteredCourses.sort((a, b) => {
+		})
+		.sort((a, b) => {
 			switch (sort) {
 				case "Course ID":
 					// a/b[0] is the courseID
@@ -198,7 +188,6 @@ function CourseList({id}) {
 					return 0;
 			}
 		});
-	}
 
 	const Row = ({index, style}) => {
 		const [courseID, courseData] = filteredCourses[index];
@@ -229,7 +218,13 @@ function CourseList({id}) {
 	};
 
 	return (
-		<div>
+		<div
+			style={{
+				display: "grid",
+				gridTemplateRows: "1fr auto 1fr",
+				height: "100%"
+			}}
+		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
 					<span className="display-block text-center mt-2">

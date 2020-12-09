@@ -39,7 +39,9 @@ function CourseInfo() {
 					dispatch(updateSelectedCourse(currID));
 				} else {
 					// Otherwise, update URL to match selected course
-					history.push(`/catalog/${selectedCourse.replaceAll(" ", "+")}`);
+					history.push(
+						`/catalog/${selectedCourse.replaceAll(" ", "+")}`
+					);
 				}
 			}
 		}
@@ -94,7 +96,9 @@ function CourseInfo() {
 		for (let i = 1; i < val.length; i++) {
 			if ((!firstRun || val.length > 2) && Array.isArray(val[i])) {
 				output.push(
-					<div className="prereq-container">{prereqsHelper(val[i], false)}</div>
+					<div className="prereq-container">
+						{prereqsHelper(val[i], false)}
+					</div>
 				);
 			} else output.push(prereqsHelper(val[i], false));
 			if (i !== val.length - 1) {
@@ -123,27 +127,51 @@ function CourseInfo() {
 				<title>BuzzBook | {course.courseID}</title>
 			</Helmet>
 			<div className="" id="courseInfo">
-				<div className="row w-100 mx-0">
-					<div className="col-4 pl-0">
-						<h1>{course.courseID}</h1>
+				<div
+					className="w-100 mx-0"
+					style={{
+						display: "grid",
+						gridTemplateColumns: "3fr auto 5fr",
+						gap: "0 15px"
+					}}
+				>
+					<div
+						style={{
+							display: "grid",
+							gridTemplateColumns: "1fr auto",
+							gridTemplateAreas: "'ID icon' 'name icon'"
+						}}
+					>
+						<h1
+							className="d-inline-block mr-2"
+							style={{gridArea: "ID"}}
+						>
+							{course.courseID}
+						</h1>
+						<h4 className="gt-gold" style={{gridArea: "name"}}>
+							{course.name}
+						</h4>
 						{isSaved ? (
 							<img
 								src={unsaveIcon}
 								alt="unsave course"
 								className="unsaveIcon icon-dark"
-								onClick={() => dispatch(removeCourse(course.courseID))}
+								onClick={() =>
+									dispatch(removeCourse(course.courseID))
+								}
 							/>
 						) : (
 							<img
 								src={saveIcon}
 								alt="save course"
 								className="saveIcon icon-dark"
-								onClick={() => dispatch(saveCourse(course.courseID))}
+								onClick={() =>
+									dispatch(saveCourse(course.courseID))
+								}
 							/>
 						)}
-						<h4 className="gt-gold">{course.name}</h4>
 					</div>
-					<div className="col-2">
+					<div>
 						<div className="text-muted">Statistics</div>
 						<div style={{fontSize: "0.8rem"}}>
 							<div style={{whiteSpace: "nowrap"}}>
@@ -157,7 +185,8 @@ function CourseInfo() {
 									style={{color: enrollmentColor}}
 									className="d-inline-block"
 								>
-									{course.enrollment.current}/{course.enrollment.max}
+									{course.enrollment.current}/
+									{course.enrollment.max}
 								</div>
 							</div>
 							<div style={{whiteSpace: "nowrap"}}>
@@ -167,7 +196,10 @@ function CourseInfo() {
 									width="15px"
 									className="d-inline-block mr-1 icon-light"
 								/>
-								<div style={{color: gradeColor}} className="d-inline-block">
+								<div
+									style={{color: gradeColor}}
+									className="d-inline-block"
+								>
 									{course.grade}
 								</div>
 							</div>
@@ -179,27 +211,41 @@ function CourseInfo() {
 									className="d-inline-block mr-1 icon-light"
 								/>
 								<div className="d-inline-block">
-									{course.credits} credit{course.credits !== 1 && "s"}
+									{course.credits} credit
+									{course.credits !== 1 && "s"}
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className="col-5">
-						<div className="text-muted">Ratings</div>
-						<div className="row">
-							<div className="col-4">Quality</div>
-							<div className="col-6 px-0">
-								<RatingBar value={4} highIsBetter={true} />
-							</div>
-							<div className="col-2 pl-2">{4}/5</div>
+					<div
+						style={{
+							display: "grid",
+							gridTemplateColumns: "auto 3fr 50px",
+							gap: "0 10px"
+						}}
+					>
+						<div
+							className="text-muted"
+							style={{gridArea: "1 / 1 / 1 / 1"}}
+						>
+							Ratings
 						</div>
-						<div className="row">
-							<div className="col-4">Difficulty</div>
-							<div className="col-6 px-0">
-								<RatingBar value={3.5} highIsBetter={false} />
-							</div>
-							<div className="col-2 pl-2">{3.5}/5</div>
+
+						{/* Quality */}
+						<div style={{gridArea: "2 / 1 / 2 / 1"}}>Quality</div>
+						<div style={{gridArea: "2 / 2 / 2 / 2"}}>
+							<RatingBar value={4} highIsBetter={true} />
 						</div>
+						<div style={{gridArea: "2 / 3 / 2 / 3"}}>{4}/5</div>
+
+						{/* Difficulty */}
+						<div style={{gridArea: "3 / 1 / 3 / 1"}}>
+							Difficulty
+						</div>
+						<div style={{gridArea: "3 / 2 / 3 / 2"}}>
+							<RatingBar value={3.5} highIsBetter={false} />
+						</div>
+						<div style={{gridArea: "3 / 3 / 3 / 3"}}>{3.5}/5</div>
 					</div>
 				</div>
 
@@ -236,12 +282,16 @@ function CourseInfo() {
 							const sectionEnrollment = {current: 20, max: 25};
 							let sectionEnrollmentColor = "var(--green)";
 							if (
-								(sectionEnrollment.max / sectionEnrollment.current) * 100 >
+								(sectionEnrollment.max /
+									sectionEnrollment.current) *
+									100 >
 								67
 							)
 								sectionEnrollmentColor = "var(--red)";
 							else if (
-								(sectionEnrollment.max / sectionEnrollment.current) * 100 >
+								(sectionEnrollment.max /
+									sectionEnrollment.current) *
+									100 >
 								33
 							)
 								sectionEnrollmentColor = "var(--orange)";
@@ -251,7 +301,8 @@ function CourseInfo() {
 							if (instructors !== "N/A") {
 								meetings[0][4].forEach((instructor, i) => {
 									instructors += instructor;
-									if (i !== meetings[0][4].length - 1) instructors += ", ";
+									if (i !== meetings[0][4].length - 1)
+										instructors += ", ";
 								});
 							}
 							var attributes = "";
@@ -266,12 +317,16 @@ function CourseInfo() {
 								courseNumber: sectionRaw[0],
 								id: id,
 								time:
-									meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
+									meetings.length > 0
+										? caches.periods[meetings[0][0]]
+										: "N/A",
 								days:
-									meetings.length > 0 && meetings[0][1] !== "&nbsp;"
+									meetings.length > 0 &&
+									meetings[0][1] !== "&nbsp;"
 										? meetings[0][1]
 										: "N/A",
-								location: meetings.length > 0 ? meetings[0][2] : "N/A"
+								location:
+									meetings.length > 0 ? meetings[0][2] : "N/A"
 							};
 
 							return (
@@ -280,7 +335,8 @@ function CourseInfo() {
 									<td>{section.courseNumber}</td>
 									<td>{section.type}</td>
 									<td style={{color: sectionEnrollmentColor}}>
-										{sectionEnrollment.current}/{sectionEnrollment.max}
+										{sectionEnrollment.current}/
+										{sectionEnrollment.max}
 									</td>
 									<td>{section.time}</td>
 									<td>{section.days}</td>

@@ -70,7 +70,10 @@ FilterSelector.propTypes = {
 	ariaLabel: PropTypes.string.isRequired,
 	ariaDescribedBy: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
-	optionList: PropTypes.arrayOf(PropTypes.string).isRequired
+	optionList: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.string),
+		PropTypes.arrayOf(PropTypes.number)
+	]).isRequired
 };
 
 FilterSelector.defaultProps = {
