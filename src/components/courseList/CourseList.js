@@ -125,47 +125,68 @@ function CourseList({id}) {
 				return false;
 			}
 			if (filters.credits && filters.credits.length > 0) {
-				const creditFilterBy = filters.credits.map(option =>
-					parseInt(option.value)
+				const creditFiltersSet = new Set(
+					filters.credits.map(option => parseInt(option.value))
 				);
 				// Object.values(courseData[1])[0][2] is the number of course credits listed for the first section
 				let credits = Object.values(courseData[1])[0][2];
-				if (!creditFilterBy.includes(credits)) return false;
+				if (!creditFiltersSet.has(credits)) return false;
 			}
 			if (filters.subject && filters.subject.length > 0) {
-				const subjectFilterBy = filters.subject.map(
-					option => option.value
+				const subjectFiltersSet = new Set(
+					filters.subject.map(option => option.value)
 				);
 				let subject = subjectNames[courseID.split(" ")[0]];
-				if (!subjectFilterBy.includes(subject)) return false;
+				if (!subjectFiltersSet.has(subject)) return false;
 			}
 			if (filters.level && filters.level.length > 0) {
-				const levelFilterBy = filters.level.map(option =>
-					parseInt(option.value)
+				const levelFiltersSet = new Set(
+					filters.level.map(option => parseInt(option.value))
 				);
 				let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
-				if (!levelFilterBy.includes(level)) return false;
+				if (!levelFiltersSet.has(level)) return false;
 			}
 			if (filters.type && filters.type.length > 0) {
 				// Filter out by type here
-				const typeFilterBy = filters.type.map(option => option.value);
+				const typeFilters = filters.type.map(option => option.value);
 				var courseTypes = new Set();
 				Object.values(courseData[1]).forEach(section => {
 					// section[3] is the index representing the schedule type of the section
 					courseTypes.add(caches["scheduleTypes"][section[3]]);
 				});
-				for (let i = 0; i < typeFilterBy.length; i++) {
-					if (!courseTypes.has(typeFilterBy[i])) {
+				for (let i = 0; i < typeFilters.length; i++) {
+					if (!courseTypes.has(typeFilters[i])) {
 						return false;
 					}
+				}
+			}
+			if (filters.instructors && filters.instructors.length > 0) {
+				const instructorFiltersSet = new Set(
+					filters.instructors.map(option => option.value)
+				);
+				const sections = Object.values(courseData[1]);
+				var hasInstructor = false;
+				for (let i = 0; i < sections.length && !hasInstructor; i++) {
+					const section = sections[i];
+					const meetings = section[1];
+					if (meetings.length > 0) {
+						const professors = meetings[0][4];
+						for (let p = 0; p < professors.length; p++) {
+							if (instructorFiltersSet.has(professors[p])) {
+								hasInstructor = true;
+								break;
+							}
+						}
+					}
+				}
+				if (!hasInstructor) {
+					return false;
 				}
 			}
 			if (searchQuery !== "") {
 				if (
 					!courseID.includes(searchQuery.toUpperCase()) &&
-					!courseData[0]
-						.toUpperCase()
-						.includes(searchQuery.toUpperCase())
+					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase())
 				) {
 					return false;
 				}

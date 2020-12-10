@@ -11,7 +11,7 @@ import {
 import {subjectNames} from "../courseList/CourseList";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
-import {caches} from "../../courses";
+import {instructors, caches} from "../../courses";
 import "../../css/Filters.css";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/translucent.css";
@@ -24,9 +24,8 @@ function Filters() {
 
 	const dispatch = useDispatch();
 
-	//Term, Core, Time-from, Time-to, and Prof filter not implemented yet
 	const updateFil = (value, name) => {
-		dispatch(updateFilter({name: name, value: value}));
+		dispatch(updateFilter({value: value, name: name}));
 	};
 
 	const sort = useSelector(getSort);
@@ -72,13 +71,15 @@ function Filters() {
 					<FilterSelector
 						ariaLabel="Subject"
 						ariaDescribedBy="subject-label"
-						placeholder="Select..."
+						placeholder="Search..."
 						value={filters.subject}
 						onChange={value => updateFil(value, "subject")}
 						optionList={Object.keys(subjectNames).map(key => {
 							return subjectNames[key];
 						})}
-						isMulti={true}
+						isMulti
+						isSearchable
+						windowed
 					/>
 				</DropdownButton>
 				<DropdownButton
@@ -89,20 +90,10 @@ function Filters() {
 					<FilterSelector
 						ariaLabel="Level"
 						ariaDescribedBy="level-label"
-						placeholder="Select..."
 						value={filters.level}
 						onChange={value => updateFil(value, "level")}
-						optionList={[
-							1000,
-							2000,
-							3000,
-							4000,
-							6000,
-							7000,
-							8000,
-							9000
-						]}
-						isMulti={true}
+						optionList={[1000, 2000, 3000, 4000, 6000, 7000, 8000, 9000]}
+						isMulti
 					/>
 				</DropdownButton>
 				<DropdownButton
@@ -113,18 +104,12 @@ function Filters() {
 					<FilterSelector
 						ariaLabel="Credits"
 						ariaDescribedBy="credits-label"
-						placeholder="Select..."
 						value={filters.credits}
 						onChange={value => updateFil(value, "credits")}
 						optionList={[0, 1, 2, 3, 4, 5, 6, 9]}
-						isMulti={true}
+						isMulti
 					/>
 				</DropdownButton>
-				<DropdownButton
-					label="Time"
-					className="dropdownFilter"
-					singleton={target}
-				></DropdownButton>
 				<DropdownButton
 					label="Type"
 					className="dropdownFilter"
@@ -133,13 +118,36 @@ function Filters() {
 					<FilterSelector
 						ariaLabel="Type"
 						ariaDescribedBy="type-label"
-						placeholder="Select..."
+						placeholder="Search..."
 						value={filters.type}
 						onChange={value => updateFil(value, "type")}
 						optionList={caches["scheduleTypes"]}
-						isMulti={true}
+						isMulti
+						isSearchable
 					/>
 				</DropdownButton>
+				<DropdownButton
+					label="Instructors"
+					className="dropdownFilter"
+					singleton={target}
+				>
+					<FilterSelector
+						ariaLabel="Instructors"
+						ariaDescribedBy="instructors-label"
+						placeholder="Search..."
+						value={filters.instructors}
+						onChange={value => updateFil(value, "instructors")}
+						optionList={instructors}
+						isMulti
+						isSearchable
+						windowed
+					/>
+				</DropdownButton>
+				{/* <DropdownButton
+					label="Time"
+					className="dropdownFilter"
+					singleton={target}
+				></DropdownButton> */}
 				<Tippy
 					content="Clear Filters"
 					theme="translucent"

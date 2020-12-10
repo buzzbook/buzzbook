@@ -4,19 +4,8 @@
 }
 
 .form-control,
-.input-group-text,
-.custom-select {
+.input-group-text {
 	border-color: var(--input-border);
-}
-
-.form-control,
-.custom-select {
-	background-color: var(--input);
-}
-
-.custom-select {
-	color: var(--main-text);
-	transition: 0s;
 }
 
 .input-group > .input-group-prepend {

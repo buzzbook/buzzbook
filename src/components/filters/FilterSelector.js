@@ -1,19 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import WindowedSelect from "react-windowed-select";
 
-export default function FilterSelector({
-	className,
-	ariaLabel,
-	ariaDescribedBy,
-	value,
-	onChange,
-	optionList,
-	isMulti,
-	placeholder
-}) {
+function FilterSelector(props) {
 	const options = [];
-	optionList.forEach(option => {
+	props.optionList.forEach(option => {
 		options.push({value: option, label: option});
 	});
 
@@ -47,21 +39,43 @@ export default function FilterSelector({
 		multiValueLabel: provided => ({
 			...provided,
 			color: "var(--input)"
+		}),
+		input: provided => ({
+			...provided,
+			color: "var(--main-text)"
 		})
 	};
 
+	if (props.windowed) {
+		return (
+			<WindowedSelect
+				className={props.className + " form-control border-0 p-0"}
+				styles={customStyles}
+				options={options}
+				value={props.value}
+				placeholder={props.placeholder}
+				isMulti={props.isMulti}
+				isSearchable={props.isSearchable}
+				closeMenuOnSelect={!props.isMulti}
+				aria-label={props.ariaLabel}
+				aria-describedby={props.ariaDescribedBy}
+				onChange={selectedList => props.onChange(selectedList)}
+			/>
+		);
+	}
 	return (
 		<Select
-			className={className + " form-control border-0 p-0"}
+			className={props.className + " form-control border-0 p-0"}
 			styles={customStyles}
 			options={options}
-			value={value}
-			placeholder={placeholder}
-			isMulti={isMulti}
-			closeMenuOnSelect={!isMulti}
-			aria-label={ariaLabel}
-			aria-describedby={ariaDescribedBy}
-			onChange={selectedList => onChange(selectedList)}
+			value={props.value}
+			placeholder={props.placeholder}
+			isMulti={props.isMulti}
+			isSearchable={props.isSearchable}
+			closeMenuOnSelect={!props.isMulti}
+			aria-label={props.ariaLabel}
+			aria-describedby={props.ariaDescribedBy}
+			onChange={selectedList => props.onChange(selectedList)}
 		/>
 	);
 }
@@ -72,14 +86,24 @@ FilterSelector.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	optionList: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.string),
-		PropTypes.arrayOf(PropTypes.number)
-	]).isRequired
+		PropTypes.arrayOf(PropTypes.number),
+		PropTypes.instanceOf(Set)
+	]).isRequired,
+	className: PropTypes.string,
+	isMulti: PropTypes.bool,
+	isSearchable: PropTypes.bool,
+	placeholder: PropTypes.string,
+	windowed: PropTypes.bool
 };
 
 FilterSelector.defaultProps = {
 	className: "",
 	isMulti: false,
+	isSearchable: false,
 	value: null,
 	placeholder: "Select...",
-	onChange: () => {}
+	onChange: () => {},
+	windowed: false
 };
+
+export default FilterSelector;
