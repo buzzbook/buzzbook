@@ -28,7 +28,7 @@ function Filters() {
 		dispatch(updateFilter({value: value, name: name}));
 	};
 
-	const sort = useSelector(getSort);
+  const sort = useSelector(getSort);
 	const filters = useSelector(getFilters);
 
 	const [source, target] = useSingleton({
@@ -51,7 +51,8 @@ function Filters() {
 
 				<DropdownButton
 					label="Sort By"
-					className="dropdownFilter"
+          className="dropdownFilter"
+          highlight={sort.value !== "Course ID"}
 					singleton={target}
 				>
 					<FilterSelector
@@ -64,8 +65,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Departments"
+          label="Departments"
 					className="dropdownFilter"
+          highlight={filters.subject && filters.subject.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -83,8 +85,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Level"
-					className="dropdownFilter"
+          label="Level"
+          className="dropdownFilter"
+          highlight={filters.level && filters.level.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -97,8 +100,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Credits"
+          label="Credits"
 					className="dropdownFilter"
+          highlight={filters.credits && filters.credits.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -111,8 +115,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Type"
+          label="Type"
 					className="dropdownFilter"
+          highlight={filters.type && filters.type.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -127,8 +132,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Instructors"
+          label="Instructors"
 					className="dropdownFilter"
+          highlight={filters.instructors && filters.instructors.length > 0}
 					singleton={target}
 				>
 					<FilterSelector

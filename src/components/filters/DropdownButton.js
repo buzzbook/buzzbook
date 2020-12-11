@@ -5,7 +5,8 @@ import "../../css/DropdownButton.css";
 
 export default function DropdownButton({
 	children,
-	label,
+  label,
+  highlight,
 	className,
 	singleton
 }) {
@@ -16,13 +17,14 @@ export default function DropdownButton({
 			arrow={false}
 			singleton={singleton}
 		>
-			<button className={`dropdownButton ${className}`}>{label}</button>
+			<button id={(highlight) ? 'highlight' : ''} className={`dropdownButton ${className}`}>{label}</button>
 		</Tippy>
 	);
 }
 
 DropdownButton.propTypes = {
-	label: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired,
 	singleton: PropTypes.object.isRequired,
 	className: PropTypes.string
 };
