@@ -19,7 +19,8 @@ import x from "../../img/x.png";
 
 function Filters() {
 	const clearFilters = () => {
-		dispatch(resetFilters());
+    dispatch(resetFilters());
+    dispatch(updateSort({label: "Course ID", value: "Course ID"}))
 	};
 
 	const dispatch = useDispatch();
