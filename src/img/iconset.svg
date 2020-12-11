@@ -39,13 +39,13 @@
       <path id="buzz-b15aZpmJUr-2" data-name="b15aZpmJUr" d="M1985.29,921.54C1956.31,853,1724.22,613,1645.14,533.9s-522.13-356-603.9-350.75-29,108.13,229.27,184.6q258.21,76.5,643.61,569.41Q2014.28,990.13,1985.29,921.54Z" transform="translate(-252.92 -179.88)" fill="rgba(0,0,0,0)" stroke="#000" stroke-miterlimit="25.6" stroke-width="6.4" />
     </g>
   </symbol>
-  <symbol viewBox="0 0 17.052 19.865" id="icon-credits">
+  <symbol viewBox="0 0 11.63 13.462" id="icon-credits">
     <title>credits</title>
     <g id="credits-Group_450" data-name="Group 450" transform="translate(-3.5 -2)">
-      <path id="credits-Path_1323" data-name="Path 1323" d="M14.737,2.762H8.084A3.82,3.82,0,0,0,4.25,6.491V17.2a3.827,3.827,0,0,0,3.834,3.911h7.989A3.887,3.887,0,0,0,19.8,17.2V8.038Z" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
-      <path id="credits-Path_1324" data-name="Path 1324" d="M14.474,2.75V5.659a2.574,2.574,0,0,0,2.568,2.575c1.317,0,2.664,0,2.755,0" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
-      <path id="credits-Path_1325" data-name="Path 1325" d="M14.284,15.558h-5.4" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
-      <path id="credits-Path_1326" data-name="Path 1326" d="M12.243,10.606H8.887" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="credits-Path_1323" data-name="Path 1323" d="M11.081,2.762H6.747a2.488,2.488,0,0,0-2.5,2.429v6.978a2.493,2.493,0,0,0,2.5,2.548h5.2a2.532,2.532,0,0,0,2.429-2.548V6.2Z" transform="translate(0 -0.004)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="credits-Path_1324" data-name="Path 1324" d="M14.474,2.75V4.645a1.677,1.677,0,0,0,1.673,1.677c.858,0,1.735,0,1.795,0" transform="translate(-3.564)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="credits-Path_1325" data-name="Path 1325" d="M12.4,15.558H8.887" transform="translate(-1.617 -4.465)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="credits-Path_1326" data-name="Path 1326" d="M11.073,10.606H8.887" transform="translate(-1.617 -2.739)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
     </g>
   </symbol>
   <symbol viewBox="0 0 14.333 15.499" id="icon-delete">

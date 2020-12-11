@@ -12,6 +12,7 @@ import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
 
 function CourseListItem(course) {
+
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
@@ -69,7 +70,7 @@ function CourseListItem(course) {
 						<span style={{color: gradeColor}}>{course.grade}</span>
 					</div>
 				</div>
-				
+
 				<Icon
 					name={isSaved? "unsave": "save"}
 					alt={isSaved? "unsave course": "save course"}

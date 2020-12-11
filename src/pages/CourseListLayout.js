@@ -4,6 +4,7 @@ import SavedCoursesDetails from "../components/savedCoursesDetails/SavedCoursesD
 import FilterBar from "../components/filters/FilterBar";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
+import {usePreload} from "../img/icon";
 
 function Layout({id, content, savedCoursesDetails}) {
 	useLayoutEffect(() => {
@@ -13,6 +14,9 @@ function Layout({id, content, savedCoursesDetails}) {
 			"courseList"
 		).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
 	});
+
+	const initload = usePreload("./iconset.svg");
+	console.log("initially loaded");
 
 	const savedCourses = useSelector(getSavedCourses);
 	let numSaved = Object.keys(savedCourses).length;
