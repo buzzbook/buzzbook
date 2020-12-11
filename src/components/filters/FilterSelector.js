@@ -49,7 +49,7 @@ function FilterSelector(props) {
 	if (props.windowed) {
 		return (
 			<WindowedSelect
-				className={props.className + " form-control border-0 p-0"}
+				className={props.className + " border-0 p-0"}
 				styles={customStyles}
 				options={options}
 				value={props.value}
@@ -65,7 +65,7 @@ function FilterSelector(props) {
 	}
 	return (
 		<Select
-			className={props.className + " form-control border-0 p-0"}
+			className={props.className + " border-0 p-0"}
 			styles={customStyles}
 			options={options}
 			value={props.value}
