@@ -55,7 +55,7 @@ function Nav() {
 						<img src={itLogo} alt="Buzz" className="mr-2" />
 						{/* <br />
 					<b>
-						G<span className="gt-gold">T</span>
+						G<span className="theme">T</span>
 					</b>{" "}
 					<i>BuzzBook</i> */}
 					</Link>
@@ -65,7 +65,7 @@ function Nav() {
 						key={page.path}
 						className={"nav-item" + (page.path === activePath ? " active" : "")}
 					>
-						<Link className="nav-link px-0 pt-1 pb-2" to={page.path}>
+						<Link className="primarytextcolor px-0 pt-1 pb-2" to={page.path}>
 							<b style={{fontSize: "1.2rem"}}>{page.title}</b>
 						</Link>
 					</li>

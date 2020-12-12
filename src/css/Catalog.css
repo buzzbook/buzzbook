@@ -4,7 +4,7 @@
 	overflow-y: scroll;
 }
 #courseInfo table {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 	text-align: center;
 }
 #courseInfo table * {
@@ -12,8 +12,8 @@
 }
 #courseInfo table thead th {
 	color: #6c757d;
-	background-color: var(--med-alpha);
-	border: 1px solid var(--main-bg);
+	background-color: var(--labelcolor);
+	border: 1px solid var(--bgcolor);
 	padding: 0.5rem 1rem;
 	font-weight: normal;
 }
@@ -23,7 +23,7 @@
 
 .prereq,
 .prereq-container {
-	background-color: var(--low-alpha);
+	background-color: var(--labelcolor);
 	border-radius: 5px;
 	margin: 5px;
 	display: inline-block;
@@ -45,13 +45,13 @@
 
 .col-page > div::-webkit-scrollbar-thumb,
 #courseInfo table::-webkit-scrollbar-thumb {
-	background-color: var(--med-alpha);
+	background-color: var(--labelcolor);
 	border-radius: 15px;
 	transition: 0.2s;
 }
 
 .col-page > div::-webkit-scrollbar-thumb:hover,
 #courseInfo table::-webkit-scrollbar-thumb:hover {
-	background-color: var(--high-alpha);
+	background-color: var(--labelcolor);
 	border-radius: 15px;
 }

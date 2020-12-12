@@ -1,5 +1,8 @@
 #courseList {
 	height: 60%;
+	box-shadow:
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC;
 }
 #savedCourses {
 	height: 40%;
@@ -11,11 +14,11 @@
 	transition: all 0.2s;
 }
 #courseList > a > div:hover {
-	background-color: var(--med-alpha) !important;
+	background-color: var(--labelcolor) !important;
 }
 
 #courseList a {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 	text-decoration: none;
 }
 

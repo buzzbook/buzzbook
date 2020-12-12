@@ -1,11 +1,11 @@
 .nav {
 	height: 100vh;
-	color: var(--main-text);
-	background-color: var(--low-alpha);
+	color: var(--primarytextcolor);
+	background-color: var(--labelcolor);
 }
 
 .nav .navbar-brand {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 	font-size: xx-large;
 }
 
@@ -18,17 +18,17 @@
 	box-shadow: none;
 }
 
-.nav .nav-item a.nav-link {
-	color: var(--nav-link);
+.nav .nav-item a.primarytextcolor {
+	color: var(--primarytextcolor);
 	transition: color 0.25s;
 }
 
-.nav .nav-item a.nav-link:hover {
+.nav .nav-item a.primarytextcolor:hover {
 	color: #ffe084;
 }
 
-.nav .nav-item.active a.nav-link {
-	color: var(--gt-gold);
+.nav .nav-item.active a.primarytextcolor {
+	color: var(--theme);
 }
 
 .nav ul {

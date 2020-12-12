@@ -17,7 +17,7 @@ function RatingBar({value, max = 5, highIsBetter}) {
 		<div
 			className="w-100 p-1"
 			style={{
-				backgroundColor: "var(--med-alpha)",
+				backgroundColor: "var(--labelcolor)",
 				height: 20,
 				borderRadius: 20
 			}}

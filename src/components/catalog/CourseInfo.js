@@ -137,11 +137,11 @@ function CourseInfo() {
 								onClick={() => dispatch(saveCourse(course.courseID))}
 							/>
 						)}
-						<h4 className="gt-gold">{course.name}</h4>
+						<h4 className="theme">{course.name}</h4>
 					</div>
 					<div className="col-2">
 						<div className="text-muted">Statistics</div>
-						<div style={{fontSize: "0.8rem"}}>
+						<div style={{fontSize: "1rem"}}>
 							<div style={{whiteSpace: "nowrap"}}>
 								<Icon
 									name="enrollment"
@@ -199,7 +199,7 @@ function CourseInfo() {
 					</div>
 				</div>
 
-				<hr style={{backgroundColor: "var(--med-alpha)", height: 2}} />
+				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} />
 
 				<div className="text-muted">Description</div>
 				<div className="mb-3">{course.description}</div>

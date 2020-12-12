@@ -20,33 +20,33 @@ export default function FilterSelector({
 	const customStyles = {
 		control: base => ({
 			...base,
-			background: "var(--input)",
-			borderColor: "var(--input-border)",
-			color: "var(--main-text)",
+			background: "var(--labelcolor)",
+			borderColor: "var(--inputcolor)",
+			color: "var(--primarytextcolor)",
 			minWidth: "150px"
 		}),
 		singleValue: provided => ({
 			...provided,
-			color: "var(--main-text)"
+			color: "var(--primarytextcolor)"
 		}),
 		menu: provided => ({
 			...provided,
-			background: "var(--input)",
-			color: "var(--main-text)"
+			background: "var(--labelcolor)",
+			color: "var(--primarytextcolor)"
 		}),
 		option: (provided, state) => ({
 			...provided,
-			color: state.isFocused ? "blue" : "var(--main-text)"
+			color: state.isFocused ? "blue" : "var(--primarytextcolor)"
 		}),
 		multiValue: provided => ({
 			...provided,
 			borderRadius: "15px",
-			background: "var(--main-text)",
-			color: "var(--input)"
+			background: "var(--primarytextcolor)",
+			color: "var(--labelcolor)"
 		}),
 		multiValueLabel: provided => ({
 			...provided,
-			color: "var(--input)"
+			color: "var(--labelcolor)"
 		})
 	};
 

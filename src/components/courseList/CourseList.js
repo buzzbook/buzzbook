@@ -243,7 +243,7 @@ function CourseList({id}) {
 			</div>
 
 			<div
-				className="gt-gold font-weight-bold pl-2 mt-2"
+				className="theme font-weight-bold pl-2 mt-2"
 				style={{fontSize: "1.25rem"}}
 			>
 				Saved Courses

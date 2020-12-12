@@ -6,16 +6,16 @@
 .form-control,
 .input-group-text,
 .custom-select {
-	border-color: var(--input-border);
+	border-color: var(--inputcolor);
 }
 
 .form-control,
 .custom-select {
-	background-color: var(--input);
+	background-color: var(--labelcolor);
 }
 
 .custom-select {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 	transition: 0s;
 }
 
@@ -32,8 +32,8 @@
 }
 
 .input-group-prepend span {
-	color: var(--main-text);
-	background-color: var(--input);
+	color: var(--primarytextcolor);
+	background-color: var(--labelcolor);
 }
 
 .button-group {
@@ -45,16 +45,16 @@
 	display: inline-block;
 	flex: 1 1 auto;
 	width: 1%;
-	color: var(--input-border);
-	background-color: var(--input);
+	color: var(--inputcolor);
+	background-color: var(--labelcolor);
 	margin-left: -1px;
-	border: 1px solid var(--input-border);
+	border: 1px solid var(--inputcolor);
 	border-radius: 0;
 	transition: 0.25s;
 }
 .button-group button.active {
-	color: var(--input);
-	background-color: var(--input-border);
+	color: var(--labelcolor);
+	background-color: var(--inputcolor);
 }
 .button-group > button:last-child {
 	border-top-right-radius: 0.25rem;
@@ -62,15 +62,16 @@
 }
 
 .modal-content {
-	background-color: var(--main-bg);
-	color: var(--main-text);
+	background-color: var(--bgcolor);
+	color: var(--primarytextcolor);
 }
 .close,
 .close:hover {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 }
 
 #filterBar input {
-	background-color: var(--low-alpha);
-	color: var(--main-text);
+	background-color: var(--bgcolor);
+	color: var(--primarytextcolor);
+	border-radius: 5rem;
 }

@@ -18,7 +18,7 @@ function CourseListItem(course) {
 	const savedCourses = useSelector(getSavedCourses);
 
 	let isSelected = selectedCourse === course.courseID;
-	let bgColor = isSelected ? "var(--low-alpha)" : "initial";
+	let bgColor = isSelected ? "var(--labelcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
 
