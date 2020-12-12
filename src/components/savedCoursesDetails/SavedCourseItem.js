@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import FilterSelector from "../filters/FilterSelector";
 
 function SavedCourseItem(course) {
-	let enrollmentColor = "var(--green)";
-	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
-	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
+
+  const instructorList = Object.values(course.sections).map(section => {
+    return section[1][0][4][0];
+  });
+
+  // removes duplicate professors
+  const instructorSet = new Set(instructorList);
 
 	return (
 		<div className="p-2 mb-2 rounded">
@@ -20,7 +24,7 @@ function SavedCourseItem(course) {
 					</div>
 					<FilterSelector
 						placeholder="All Professors"
-						optionList={["Prof 1", "Prof 2", "Prof 3"]}
+						optionList={Array.from(instructorSet)}
 						ariaLabel="Proffesors"
 						ariaDescribedBy="profs-label"
 					/>
@@ -30,17 +34,15 @@ function SavedCourseItem(course) {
 						ariaLabel="Semesters"
 						ariaDescribedBy="semesters-label"
 					/>
-
 					<div style={{fontSize: "0.9rem"}}>
 						<span>
-							{course.enrollment.current} /{" "}
-							{course.enrollment.max}
+							Grade Average: 3.66
 						</span>
 						<span style={{fontWeight: "900"}}>
 							&nbsp;&bull;&nbsp;
 						</span>
-						<span style={{color: enrollmentColor}}>
-							{Math.round(course.enrollmentPercent)}% enrollment
+						<span>
+							{course.grade}
 						</span>
 						<span style={{fontWeight: "900"}}>
 							&nbsp;&bull;&nbsp;
@@ -56,7 +58,6 @@ function SavedCourseItem(course) {
 SavedCourseItem.propTypes = {
 	courseID: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
 	grade: PropTypes.string.isRequired
 };

@@ -24,7 +24,11 @@ export default function DropdownButton({
 
 DropdownButton.propTypes = {
   label: PropTypes.string.isRequired,
-  key: PropTypes.string.isRequired,
+  highlight: PropTypes.bool,
 	singleton: PropTypes.object.isRequired,
 	className: PropTypes.string
+};
+
+DropdownButton.defaultProps = {
+	highlight: false,
 };
