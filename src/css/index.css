@@ -40,11 +40,14 @@ body.light-theme {
 	--darkgrey: #E7E7E7; /*for ratings bar*/
 	--lightgrey: #C6C6C6;
 	--red: #FF5C5C;
+	--pink: #FFA7A7;
 	--orange: #F5A334;
 	--yellow: #FFCE00;
 	--green: #69C961;
-	--blue: #1063FFF2;
+	--blue: #1063FF;
 	--theme: #EAAA00;
+	--primaryfont: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande, sans-serif;
+	--secondaryfont: Karla, Lato, Lucinda Grande, Tahoma, sans-serif;
 
 	/*light theme settings*/
 	--bgcolor: var(--white);
@@ -67,6 +70,7 @@ body.light-theme {
 }
 
 html {
+	font-size: 16px;
 	background-color: var(--bgcolor);
 	color: var(--textcolor);
 	scroll-behavior: smooth;
@@ -75,14 +79,89 @@ html {
 }
 
 body {
-	font-family: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande,sans-serif;
+	font-family: var(--primaryfont);
 	font-size: 1rem;
-	line-height: 1.6rem;
+	/*line-height: 1.6rem;*/
 	box-sizing: border-box;
 	text-rendering: optimizeLegibility;
 	font-kerning: auto;
 	-webkit-font-kerning: auto;
 }
+
+/*font styling*/
+.titlefont { /*course number*/
+	font-family: var(--primaryfont);
+	font-weight: 600;
+	font-size: 2.5rem;
+	color: var(--primarytextcolor);
+}
+
+.subtitlefont { /*course name*/
+	font-family: var(--primaryfont);
+	font-weight: 400;
+	font-size: 1.6875rem;
+	color: var(--themecolor);
+}
+
+.headingfont { /*search bar course number*/
+	font-family: var(--primaryfont);
+	font-weight: 500;
+	font-size: 1.25rem;
+	color: var(--primarytextcolor);
+}
+
+.subheadingfont { /*search bar course name*/
+	font-family: var(--primaryfont);
+	font-weight: 600;
+	font-size: 1rem;
+	color: var(--primarytextcolor);
+}
+
+.sectionlabelfont {
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1.0625rem;
+	color: var(--textcolor);
+}
+
+.contentfont {
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1rem;
+	color: var(--secondarytextcolor);
+}
+
+.navfont {
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1.3125rem;
+	color: var(--textcolor);
+}
+
+.navselectedfont{
+	font-family: var(--secondaryfont);
+	font-weight: 600;
+	font-size: 1.3125rem;
+	color: var(--theme);
+}
+
+/*https://www.ninjaunits.com/converters/pixels/pixels-rem/*/
+.icon-small {
+	width: 1rem;
+	height: 1rem;
+}
+
+.icon-medium {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+.icon-large {
+	width: 2.2rem;
+	height: 2.2rem;
+}
+
+
 
 
 body {
