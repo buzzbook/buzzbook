@@ -1,5 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import {
 	resetFilters,
 	updateFilter,
@@ -122,6 +124,7 @@ function ExpandedFilters() {
           </div>
           <div>
             <h6 className="mt-2">Course Quality</h6>
+            <Range min={0} max={5} defaultValue={[0,5]}/>
           </div>
           <div>
             <h6 className="mt-2">Instructors</h6>
@@ -139,18 +142,40 @@ function ExpandedFilters() {
           </div>
           <div>
             <h6 className="mt-2">Professor Quality</h6>
-          </div>
-          <div>
-            <h6 className="mt-2">Weekly Workload</h6>
+            <Range min={0} max={5} defaultValue={[0,5]}/>
           </div>
           <div>
             <h6 className="mt-2">Terms</h6>
+            <FilterSelector
+              ariaLabel="Terms"
+              ariaDescribedBy="Terms-label"
+              optionList={["Spring 21", "Spring 20", "Fall 20", "Fall 19"]}
+              isSearchable
+            />
+          </div>
+          <div>
+            <h6 className="mt-2">Weekly Workload</h6>
+            <Range min={0} max={5} defaultValue={[0,5]}/>
           </div>
           <div>
             <h6 className="mt-2">Campus</h6>
+            <FilterSelector
+              ariaLabel="Campus"
+              ariaDescribedBy="Campus-label"
+              optionList={["Georgia Tech-Atlanta", "Georgia Tech-Korea", "Georgia Tech-Shanghai", "Georgia Tech-Shenzhen", "Georgia Tech-Singapore"]}
+              isSearchable
+            />
           </div>
           <div className="advanced-options">
             <h6 className="mt-2">Advanced Options</h6>
+            <label>
+              <input type="checkbox"/>
+              Only Show Eligible
+            </label>
+            <label>
+              <input type="checkbox"/>
+              Only Show Related
+            </label>
           </div>
         </div>
 			</div>
