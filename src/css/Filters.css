@@ -77,10 +77,18 @@
 .expanded-filters-grid {
   display: grid;
   grid-template-columns: repeat(6, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-rows: repeat(4, auto);
   gap: 10px;
+}
+
+.timing-filter, .degree-requirements, .advanced-options {
+  grid-row: 2/5;
 }
 
 .degree-requirements {
   grid-column: 2/4;
+}
+
+.advanced-options {
+  grid-column: 6/7;
 }

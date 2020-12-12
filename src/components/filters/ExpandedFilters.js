@@ -114,7 +114,7 @@ function ExpandedFilters() {
               Waitlist
             </label>
           </div>
-          <div>
+          <div className="timing-filter">
             <h6 className="mt-2">Timing Filter</h6>
           </div>
           <div className="degree-requirements">
@@ -122,8 +122,6 @@ function ExpandedFilters() {
           </div>
           <div>
             <h6 className="mt-2">Course Quality</h6>
-            <h6 className="mt-2">Professor Quality</h6>
-            <h6 className="mt-2">Weekly Workload</h6>
           </div>
           <div>
             <h6 className="mt-2">Instructors</h6>
@@ -138,10 +136,20 @@ function ExpandedFilters() {
               isSearchable
               windowed
             />
-            <h6 className="mt-2">Terms</h6>
-            <h6 className="mt-2">Campus</h6>
           </div>
           <div>
+            <h6 className="mt-2">Professor Quality</h6>
+          </div>
+          <div>
+            <h6 className="mt-2">Weekly Workload</h6>
+          </div>
+          <div>
+            <h6 className="mt-2">Terms</h6>
+          </div>
+          <div>
+            <h6 className="mt-2">Campus</h6>
+          </div>
+          <div className="advanced-options">
             <h6 className="mt-2">Advanced Options</h6>
           </div>
         </div>
