@@ -1,10 +1,24 @@
 import {createSlice} from "@reduxjs/toolkit";
 import courses from "../courses";
 
+var startID = Object.keys(courses)[0];
+let path = window.location.href.split("/");
+if (path.length === 5) {
+	let iDParts = path[4].split("+");
+	let currID = iDParts[0] + " " + iDParts[1];
+	currID = currID.toUpperCase();
+	if (currID !== startID) {
+		if (courses[currID]) {
+			// Will only update starting course to match URL if it's a valid course
+			startID = currID;
+		}
+	}
+}
+
 export const courseListSlice = createSlice({
 	name: "courseList",
 	initialState: {
-		selectedCourse: Object.keys(courses)[0],
+		selectedCourse: startID,
 		// Saved courses is an object full of courseID: true entries
 		// This is because searching an object is O(1) vs O(n) for an array
 		savedCourses: {},

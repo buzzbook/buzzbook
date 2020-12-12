@@ -26,10 +26,10 @@ function CourseListItem(course) {
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
-	let gradeColor = "green";
-	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
-	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
-	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
+	// let gradeColor = "green";
+	// if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
+	// else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
+	// else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
 
 	const listItem = (
 		<div
@@ -66,10 +66,10 @@ function CourseListItem(course) {
 							{course.numSections} section
 							{course.numSections > 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>
+						{/* <span style={{fontWeight: "900"}}>
 							&nbsp;&bull;&nbsp;
 						</span>
-						<span style={{color: gradeColor}}>{course.grade}</span>
+						<span style={{color: gradeColor}}>{course.grade}</span> */}
 					</div>
 				</div>
 
