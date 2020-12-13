@@ -26,18 +26,18 @@ function CourseListItem(course) {
 	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
-	// let gradeColor = "green";
-	// if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
-	// else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
-	// else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
+	let gradeColor = "var(--main-text)";
+	if (course.grade) {
+		if (course.grade < 3) gradeColor = "var(--red)";
+		else if (course.grade < 3.25) gradeColor = "var(--orange)";
+		else if (course.grade < 3.5) gradeColor = "var(--yellow)";
+		else gradeColor = "var(--green)";
+	}
 
 	const listItem = (
 		<div
 			className={`p-2 mb-2 rounded ${bgColor}`}
-			onClick={() =>
-				course.page === "catalog" &&
-				dispatch(updateSelectedCourse(course.courseID))
-			}
+			onClick={() => course.page === "catalog" && dispatch(updateSelectedCourse(course.courseID))}
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
@@ -50,26 +50,22 @@ function CourseListItem(course) {
 					</div>
 
 					<div style={{fontSize: "0.9rem"}}>
-						<span style={{color: enrollmentColor}}>
-							{Math.round(course.enrollmentPercent)}% enrollment
-						</span>
-						<span style={{fontWeight: "900"}}>
-							&nbsp;&bull;&nbsp;
-						</span>
+						<span style={{color: enrollmentColor}}>{Math.round(course.enrollmentPercent)}% enrollment</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span>
 							{course.credits} credit{course.credits !== 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>
-							&nbsp;&bull;&nbsp;
-						</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span>
 							{course.numSections} section
 							{course.numSections > 1 && "s"}
 						</span>
-						{/* <span style={{fontWeight: "900"}}>
-							&nbsp;&bull;&nbsp;
-						</span>
-						<span style={{color: gradeColor}}>{course.grade}</span> */}
+						{course.grade && (
+							<>
+								<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+								<span style={{color: gradeColor}}>{course.grade}</span>
+							</>
+						)}
 					</div>
 				</div>
 
@@ -94,11 +90,7 @@ function CourseListItem(course) {
 
 	if (course.page === "catalog") {
 		return (
-			<Link
-				to={`/catalog/${course.courseID.replaceAll(" ", "+")}`}
-				replace
-				style={course.style}
-			>
+			<Link to={`/catalog/${course.courseID.replaceAll(" ", "+")}`} replace style={course.style}>
 				{listItem}
 			</Link>
 		);

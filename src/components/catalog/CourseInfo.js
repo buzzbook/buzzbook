@@ -9,7 +9,6 @@ import {
 } from "../../redux/courseListSlice";
 import {useHistory, useLocation, Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
-import ClipLoader from "react-spinners/ClipLoader";
 import BeatLoader from "react-spinners/BeatLoader";
 import RatingBar from "./RatingBar";
 import courses, {caches} from "../../courses";
@@ -22,8 +21,6 @@ import unsaveIcon from "../../img/unsaveIcon.png";
 
 var prevSelectedCourse;
 var profGrades;
-// This is useful until grades are integrated into the course data
-var courseGrade = -1;
 
 function CourseInfo() {
 	const dispatch = useDispatch();
@@ -58,7 +55,6 @@ function CourseInfo() {
 		prevSelectedCourse = selectedCourse;
 		updateGradesLoaded(false);
 		profGrades = {};
-		courseGrade = -1;
 		let courseQuery = selectedCourse.replaceAll(" ", "%20");
 		// For CHEM 1211K/1212K
 		if (courseQuery.charAt(courseQuery.length - 1) === "K") {
@@ -68,7 +64,6 @@ function CourseInfo() {
 			.then(resp => resp.json()) // Transform the data into json
 			.then(data => {
 				if (data && data.raw.length > 0) {
-					courseGrade = data.header[0].avg_gpa;
 					data.raw.forEach(instructor => {
 						let split = instructor.instructor_name.split(", ");
 						let name = split[1] + " " + split[0];
@@ -86,10 +81,11 @@ function CourseInfo() {
 	if ((courseEnrollment.current / courseEnrollment.max) * 100 > 67) enrollmentColor = "var(--red)";
 	else if ((courseEnrollment.current / courseEnrollment.max) * 100 > 33) enrollmentColor = "var(--orange)";
 
+	const courseGrade = courseRaw[4] || -1;
 	let gradeColor = "var(--main-text)";
 	if (courseGrade !== -1) {
-		if (courseGrade < 2) gradeColor = "var(--red)";
-		else if (courseGrade < 2.75) gradeColor = "var(--orange)";
+		if (courseGrade < 3) gradeColor = "var(--red)";
+		else if (courseGrade < 3.25) gradeColor = "var(--orange)";
 		else if (courseGrade < 3.5) gradeColor = "var(--yellow)";
 		else gradeColor = "var(--green)";
 	}
@@ -207,13 +203,7 @@ function CourseInfo() {
 									className="d-inline-block mr-1 icon-light"
 								/>
 								<div style={{color: gradeColor}} className="d-inline-block">
-									{!gradesLoaded ? (
-										<ClipLoader size="0.8rem" color="var(--main-text)" />
-									) : course.grade === -1 ? (
-										<>Not found</>
-									) : (
-										course.grade
-									)}
+									{course.grade === -1 ? <>Not found</> : course.grade}
 								</div>
 							</div>
 							<div style={{whiteSpace: "nowrap"}}>
@@ -328,8 +318,8 @@ function CourseInfo() {
 							grades.forEach(grade => {
 								let sectionGradeColor = "var(--main-text)";
 								if (typeof grade === "number") {
-									if (grade < 2) sectionGradeColor = "var(--red)";
-									else if (grade < 2.75) sectionGradeColor = "var(--orange)";
+									if (grade < 3) sectionGradeColor = "var(--red)";
+									else if (grade < 3.25) sectionGradeColor = "var(--orange)";
 									else if (grade < 3.5) sectionGradeColor = "var(--yellow)";
 									else sectionGradeColor = "var(--green)";
 								}

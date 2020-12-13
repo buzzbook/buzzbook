@@ -1,13 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Tippy, {useSingleton} from "@tippyjs/react";
-import {
-	resetFilters,
-	updateFilter,
-	getFilters,
-	updateSort,
-	getSort
-} from "../../redux/courseListSlice";
+import {resetFilters, updateFilter, getFilters, updateSort, getSort} from "../../redux/courseListSlice";
 import {subjectNames} from "../courseList/CourseList";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
@@ -19,8 +13,8 @@ import x from "../../img/x.png";
 
 function Filters() {
 	const clearFilters = () => {
-    dispatch(resetFilters());
-    dispatch(updateSort({label: "Course ID", value: "Course ID"}))
+		dispatch(resetFilters());
+		dispatch(updateSort({label: "Course ID", value: "Course ID"}));
 	};
 
 	const dispatch = useDispatch();
@@ -29,7 +23,7 @@ function Filters() {
 		dispatch(updateFilter({value: value, name: name}));
 	};
 
-  const sort = useSelector(getSort);
+	const sort = useSelector(getSort);
 	const filters = useSelector(getFilters);
 
 	const [source, target] = useSingleton({
@@ -52,8 +46,8 @@ function Filters() {
 
 				<DropdownButton
 					label="Sort By"
-          className="dropdownFilter"
-          highlight={sort.value !== "Course ID"}
+					className="dropdownFilter"
+					highlight={sort.value !== "Course ID"}
 					singleton={target}
 				>
 					<FilterSelector
@@ -62,13 +56,13 @@ function Filters() {
 						ariaDescribedBy="sort-by-label"
 						value={sort}
 						onChange={value => dispatch(updateSort(value))}
-						optionList={["Course ID", "Name"]}
+						optionList={["Course ID", "Name", "Grade"]}
 					/>
 				</DropdownButton>
 				<DropdownButton
-          label="Departments"
+					label="Departments"
 					className="dropdownFilter"
-          highlight={filters.subject && filters.subject.length > 0}
+					highlight={filters.subject && filters.subject.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -86,9 +80,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-          label="Level"
-          className="dropdownFilter"
-          highlight={filters.level && filters.level.length > 0}
+					label="Level"
+					className="dropdownFilter"
+					highlight={filters.level && filters.level.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -101,9 +95,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-          label="Credits"
+					label="Credits"
 					className="dropdownFilter"
-          highlight={filters.credits && filters.credits.length > 0}
+					highlight={filters.credits && filters.credits.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -116,9 +110,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-          label="Type"
+					label="Type"
 					className="dropdownFilter"
-          highlight={filters.type && filters.type.length > 0}
+					highlight={filters.type && filters.type.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -133,9 +127,9 @@ function Filters() {
 					/>
 				</DropdownButton>
 				<DropdownButton
-          label="Instructors"
+					label="Instructors"
 					className="dropdownFilter"
-          highlight={filters.instructors && filters.instructors.length > 0}
+					highlight={filters.instructors && filters.instructors.length > 0}
 					singleton={target}
 				>
 					<FilterSelector
@@ -155,24 +149,13 @@ function Filters() {
 					className="dropdownFilter"
 					singleton={target}
 				></DropdownButton> */}
-				<Tippy
-					content="Clear Filters"
-					theme="translucent"
-					arrow={true}
-					singleton={target}
-				>
+				<Tippy content="Clear Filters" theme="translucent" arrow={true} singleton={target}>
 					<div
 						className="d-inline-block ml-2 icon-dark"
 						style={{cursor: "pointer", height: "16px"}}
 						onClick={clearFilters}
 					>
-						<img
-							src={x}
-							alt="x"
-							height="20px"
-							width="20px"
-							className="d-block mb-1"
-						/>
+						<img src={x} alt="x" height="20px" width="20px" className="d-block mb-1" />
 					</div>
 				</Tippy>
 			</div>

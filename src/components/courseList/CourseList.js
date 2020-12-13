@@ -1,11 +1,6 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {
-	getFilters,
-	getSavedCourses,
-	getSearchQuery,
-	getSort
-} from "../../redux/courseListSlice";
+import {getFilters, getSavedCourses, getSearchQuery, getSort} from "../../redux/courseListSlice";
 import {FixedSizeList as List} from "react-window";
 import {useWindowWidth} from "@react-hook/window-size";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -125,24 +120,18 @@ function CourseList({id}) {
 				return false;
 			}
 			if (filters.credits && filters.credits.length > 0) {
-				const creditFiltersSet = new Set(
-					filters.credits.map(option => parseInt(option.value))
-				);
+				const creditFiltersSet = new Set(filters.credits.map(option => parseInt(option.value)));
 				// Object.values(courseData[1])[0][2] is the number of course credits listed for the first section
 				let credits = Object.values(courseData[1])[0][2];
 				if (!creditFiltersSet.has(credits)) return false;
 			}
 			if (filters.subject && filters.subject.length > 0) {
-				const subjectFiltersSet = new Set(
-					filters.subject.map(option => option.value)
-				);
+				const subjectFiltersSet = new Set(filters.subject.map(option => option.value));
 				let subject = subjectNames[courseID.split(" ")[0]];
 				if (!subjectFiltersSet.has(subject)) return false;
 			}
 			if (filters.level && filters.level.length > 0) {
-				const levelFiltersSet = new Set(
-					filters.level.map(option => parseInt(option.value))
-				);
+				const levelFiltersSet = new Set(filters.level.map(option => parseInt(option.value)));
 				let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
 				if (!levelFiltersSet.has(level)) return false;
 			}
@@ -161,9 +150,7 @@ function CourseList({id}) {
 				}
 			}
 			if (filters.instructors && filters.instructors.length > 0) {
-				const instructorFiltersSet = new Set(
-					filters.instructors.map(option => option.value)
-				);
+				const instructorFiltersSet = new Set(filters.instructors.map(option => option.value));
 				const sections = Object.values(courseData[1]);
 				var hasInstructor = false;
 				for (let i = 0; i < sections.length && !hasInstructor; i++) {
@@ -206,6 +193,13 @@ function CourseList({id}) {
 				case "Name":
 					// a/b[1][0] is the course name
 					return a[1][0].localeCompare(b[1][0]);
+				case "Grade":
+					const aGrade = a[1][4];
+					const bGrade = b[1][4];
+					if (!aGrade && !bGrade) return 0;
+					if (!aGrade) return 1;
+					if (!bGrade) return -1;
+					return bGrade - aGrade;
 				default:
 					return 0;
 			}
@@ -214,11 +208,10 @@ function CourseList({id}) {
 	const Row = ({index, style}) => {
 		const [courseID, courseData] = filteredCourses[index];
 		const courseEnrollment = {current: 200, max: 250};
-		const courseGrade = "A";
 		const course = {
 			name: courseData[0],
 			enrollment: courseEnrollment,
-			grade: courseGrade,
+			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
 			sections: courseData[1]
 		};
@@ -226,9 +219,7 @@ function CourseList({id}) {
 			<CourseListItem
 				courseID={courseID}
 				name={course.name}
-				enrollmentPercent={
-					(courseEnrollment.current / courseEnrollment.max) * 100
-				}
+				enrollmentPercent={(courseEnrollment.current / courseEnrollment.max) * 100}
 				credits={course.credits}
 				numSections={Object.keys(course.sections).length}
 				grade={course.grade}
@@ -271,10 +262,7 @@ function CourseList({id}) {
 				)}
 			</div>
 
-			<div
-				className="gt-gold font-weight-bold pl-2 mt-2"
-				style={{fontSize: "1.25rem"}}
-			>
+			<div className="gt-gold font-weight-bold pl-2 mt-2" style={{fontSize: "1.25rem"}}>
 				Saved Courses
 			</div>
 			<div id="savedCourses">

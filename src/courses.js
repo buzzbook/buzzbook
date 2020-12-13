@@ -1,4 +1,4 @@
-import data from "./sp21_testdata.json";
+import data from "./courseDataWithGrades.json";
 console.log(data);
 
 /*
