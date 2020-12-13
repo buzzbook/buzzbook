@@ -93,7 +93,7 @@ function Filters() {
 					className="dropdownFilter"
 				></DropdownButton>
 				<span
-					className="text-muted"
+					className="text-muted clear"
 					style={{cursor: "pointer"}}
 					onClick={clearFilters}
 				>

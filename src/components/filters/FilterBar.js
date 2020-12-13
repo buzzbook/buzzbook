@@ -10,11 +10,11 @@ import "../../css/Filters.css";
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
-		<div className="row mx-0" id="filterBar">
+		<div className="row mx-0 my-2" id="filterBar">
 			<div className="col-3 h-100 p-3">
 				<input
 					type="text"
-					className="form-control mb-2"
+					className="form-control"
 					placeholder="Search Courses"
 					onChange={e => dispatch(updateSearchQuery(e.target.value))}
 				/>

@@ -48,12 +48,18 @@ function Nav() {
 	});
 
 	return (
-		<nav className="nav flex-column pl-4">
-			<ul className="pl-0">
+		<nav className="nav flex-column">
+			<ul className="pl-5">
 				<li>
 					<Link className="navbar-brand" to="/">
-						<img src={itLogo} alt="Buzz" className="mr-2" />
-						{/* <br />
+						<img src={itLogo} alt="Buzz" />
+						{/*
+						<Icon
+							name="itlogo"
+							alt="Buzz"
+							iconclass="mr-2 icon-dark"
+						/>
+						<br />
 					<b>
 						G<span className="theme">T</span>
 					</b>{" "}
@@ -63,10 +69,13 @@ function Nav() {
 				{navPages.map(page => (
 					<li
 						key={page.path}
-						className={"nav-item" + (page.path === activePath ? " active" : "")}
+						className={"nav-item"}
 					>
-						<Link className="primarytextcolor px-0 pt-1 pb-2" to={page.path}>
-							<b style={{fontSize: "1.2rem"}}>{page.title}</b>
+						<Link
+							className={"px-0 " + (activePath.includes(page.path) ? "navselectedfont" : "navfont")}
+							to={page.path}
+						>
+							{page.title}
 						</Link>
 					</li>
 				))}

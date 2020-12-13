@@ -1,4 +1,4 @@
-#filter-container {
+#filter-container, #filterBar {
   display: flex;
   align-items: center;
 }
@@ -73,5 +73,9 @@
 #filterBar input {
 	background-color: var(--bgcolor);
 	color: var(--primarytextcolor);
-	border-radius: 5rem;
+	border-radius: 0.5rem;
+}
+
+#filterBar #filters .clear {
+	margin-left: 10px;
 }

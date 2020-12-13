@@ -19,11 +19,13 @@ function CourseListItem(course) {
 
 	let isSelected = selectedCourse === course.courseID;
 	let bgColor = isSelected ? "var(--labelcolor)" : "initial";
+	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
 
 	let enrollmentColor = "var(--green)";
-	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
+	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
+	else if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
 	let gradeColor = "green";
@@ -33,11 +35,11 @@ function CourseListItem(course) {
 
 	const listItem = (
 		<div
-			className="p-2 mb-2 rounded"
+			className="p-2 rounded"
 			style={
 				course.page === "catalog"
-					? {backgroundColor: bgColor}
-					: {backgroundColor: "initial"}
+					? {backgroundColor: bgColor, boxShadow: bshadow}
+					: {backgroundColor: "initial", boxShadow: "initial"}
 			}
 			onClick={() =>
 				course.page === "catalog" &&
@@ -56,7 +58,7 @@ function CourseListItem(course) {
 
 					<div style={{fontSize: "0.9rem"}}>
 						<span style={{color: enrollmentColor}}>
-							{Math.round(course.enrollmentPercent)}% enrollment
+							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
 						<span>

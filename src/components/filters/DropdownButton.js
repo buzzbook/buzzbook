@@ -15,7 +15,7 @@ export default function DropdownButton({ children, label, className }) {
       onShow={show}
       onHide={hide}
     >
-      <button className={`dropdownButton ${className} ${visible ? 'shownFilter' : ''}`}>{label}</button>
+      <button className={`dropdownButton sectionlabelfont ${className} ${visible ? 'shownFilter' : ''}`}>{label}</button>
     </Tippy>
   );
 }

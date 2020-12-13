@@ -8,4 +8,6 @@ raw icon files into `./raw_icons` and run `grunt`, svg-store will aggregate into
 	onClick={() => dispatch(saveCourse(course.courseID))}
 />
 ```
+TODO:
 flickering issue, preloader in `icon.js`
+itlogo svg is not rendering properly, using png before can get a raw svg w/o masks

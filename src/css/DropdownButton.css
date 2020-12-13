@@ -1,10 +1,12 @@
 .dropdownFilter {
   margin: 0px 5px;
-  padding: 0px 10px;
-  border: 2px solid var(--inputcolor);
+  padding: 0px 15px;
+  border: 1px solid var(--inputcolor);
   border-radius: 15px;
   background-color: var(--bgcolor);
   color: var(--inputcolor);
+  font-size: 1rem !important;
+  outline: none !important;
 }
 
 .dropdownContainer {

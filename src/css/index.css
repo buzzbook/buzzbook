@@ -27,21 +27,22 @@ body.light-theme {
 	--icon-dark: invert(0);
 }
 
-:focus {
+* {
 	outline: none;
 }
 
 /*Color Definitions*/
 :root {
 	--white: #FFFFFF;
+	--lightwhite: #FCFCFC;
 	--offwhite: #F7F7F7;
 	--black: #3B3B3B;
 	--grey: #7C7C7C;
 	--accentgrey: #EDEDED;
 	--darkgrey: #E7E7E7; /*for ratings bar*/
 	--lightgrey: #C6C6C6;
-	--red: #FF5C5C;
-	--pink: #FFA7A7;
+	--red: #F75959;
+	--crimson: #99001A;
 	--orange: #F5A334;
 	--yellow: #FFCE00;
 	--green: #69C961;
@@ -54,6 +55,7 @@ body.light-theme {
 	--bgcolor: var(--white);
 	--themecolor: var(--theme);
 	--navcolor: var(--offwhite);
+	--shadingcolor: var(--lightwhite);
 	--primarytextcolor: var(--black);
 	--secondarytextcolor: var(--grey);
 	--labelcolor: var(--accentgrey);
@@ -64,6 +66,7 @@ body.light-theme {
 	--bgcolor: var(--black);
 	--themecolor: var(--theme);
 	--navcolor: var(--white); /*placeholders for offwhite variations*/
+	--shadingcolor: var(--white);
 	--primarytextcolor: var(--white);
 	--secondarytextcolor: var(--white);
 	--labelcolor: var(--white);
@@ -80,8 +83,8 @@ body.light-theme {
 .red {
 	color: var(--red);
 }
-.pink {
-	color: var(--pink);
+.crimson {
+	color: var(--crimson);
 }
 .orange {
 	color: var(--orange);
@@ -132,7 +135,7 @@ body.light-theme {
 	font-family: var(--secondaryfont);
 	font-weight: 400;
 	font-size: 1.0625rem;
-	/*color: var(--textcolor);*/
+	/*color: var(--primarytextcolor);*/
 }
 
 .contentfont { /*descriptions and information*/
@@ -145,14 +148,14 @@ body.light-theme {
 .navfont { /*nav bar unselected*/
 	font-family: var(--secondaryfont);
 	font-weight: 400;
-	font-size: 1.3125rem;
+	font-size: 1.2rem;
 	color: var(--textcolor);
 }
 
 .navselectedfont{ /*nav bar selected*/
 	font-family: var(--secondaryfont);
-	font-weight: 600;
-	font-size: 1.3125rem;
+	font-weight: 500;
+	font-size: 1.2rem;
 	color: var(--theme);
 }
 
@@ -204,11 +207,11 @@ body {
 
 .icon-light {
 	filter: var(--icon-light);
-	height: 20px;
-	width: 20px;
+	height: 15px;
+	width: 15px;
 }
 .icon-dark {
 	filter: var(--icon-dark);
-	height: 20px;
-	width: 20px;
+	height: 15px;
+	width: 15px;
 }

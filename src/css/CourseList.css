@@ -1,8 +1,8 @@
 #courseList {
 	height: 60%;
 	box-shadow:
-        inset 0px 11px 8px -10px #CCC,
-        inset 0px -11px 8px -10px #CCC;
+        inset 0px 6px 8px -10px var(--primarytextcolor),
+        inset 0px -6px 8px -10px var(--primarytextcolor);
 }
 #savedCourses {
 	height: 40%;
@@ -13,8 +13,12 @@
 	cursor: pointer;
 	transition: all 0.2s;
 }
-#courseList > a > div:hover {
+#courseList * a > div:hover {
 	background-color: var(--labelcolor) !important;
+	/*box-shadow: inset -1.5px 1.5px 6px var(--labelcolor),
+							inset 1.5px -1.5px 6px var(--bgcolor);*/
+	box-shadow: inset -1px 1px 4.5px var(--inputcolor),
+       				inset 1px -1px 4.5px var(--bgcolor);
 }
 
 #courseList a {
@@ -41,7 +45,7 @@
 	transform: translate(0, -50%);
 	top: 50%;
 	right: 0;
-	width: 20px;
+	width: 15px;
 	transition: 0.2s;
 }
 
@@ -50,4 +54,16 @@
 }
 .unsaveIcon:hover {
 	filter: invert(50%) sepia(100%) hue-rotate(-20deg) saturate(30);
+}
+
+.inline {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.inline > svg {
+	position: relative;
+	transform: none;
+	margin-left: 1rem;
 }

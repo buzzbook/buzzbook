@@ -232,7 +232,7 @@ function CourseList({id}) {
 							<List
 								height={height}
 								itemCount={filteredCourses.length}
-								itemSize={80}
+								itemSize={70}
 								width={width}
 							>
 								{Row}
@@ -243,8 +243,7 @@ function CourseList({id}) {
 			</div>
 
 			<div
-				className="theme font-weight-bold pl-2 mt-2"
-				style={{fontSize: "1.25rem"}}
+				className="sectionlabelfont pl-2 mt-2"
 			>
 				Saved Courses
 			</div>

@@ -121,22 +121,24 @@ function CourseInfo() {
 			<div className="" id="courseInfo">
 				<div className="row w-100 mx-0">
 					<div className="col-4 pl-0">
-						<h1>{course.courseID}</h1>
-						{isSaved ? (
-							<Icon
-								name="unsave"
-								alt="unsave course"
-								iconclass="unsaveIcon icon-dark"
-								onClick={() => dispatch(removeCourse(course.courseID))}
-							/>
-						) : (
-							<Icon
-								name="save"
-								alt="save course"
-								iconclass="saveIcon icon-dark"
-								onClick={() => dispatch(saveCourse(course.courseID))}
-							/>
-						)}
+						<div class="inline">
+							<h1>{course.courseID}</h1>
+							{isSaved ? (
+								<Icon
+									name="unsave"
+									alt="unsave course"
+									iconclass="unsaveIcon icon-dark"
+									onClick={() => dispatch(removeCourse(course.courseID))}
+								/>
+							) : (
+								<Icon
+									name="save"
+									alt="save course"
+									iconclass="saveIcon icon-dark"
+									onClick={() => dispatch(saveCourse(course.courseID))}
+								/>
+							)}
+						</div>
 						<h4 className="theme">{course.name}</h4>
 					</div>
 					<div className="col-2">
