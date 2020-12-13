@@ -1,4 +1,4 @@
-import data from "./courseDataWithGrades.json";
+import data from "../courseDataWithGrades.json";
 console.log(data);
 
 /*

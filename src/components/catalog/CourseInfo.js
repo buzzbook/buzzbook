@@ -5,13 +5,14 @@ import {
 	updateSelectedCourse,
 	getSavedCourses,
 	removeCourse,
-	saveCourse
+	saveCourse,
+	getFilters
 } from "../../redux/courseListSlice";
 import {useHistory, useLocation, Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import BeatLoader from "react-spinners/BeatLoader";
 import RatingBar from "./RatingBar";
-import courses, {caches} from "../../courses";
+import courses, {caches} from "../../scripts/courses";
 
 import enrollmentIcon from "../../img/enrollmentIcon.png";
 import gradeIcon from "../../img/gradeIcon.png";
@@ -28,6 +29,7 @@ function CourseInfo() {
 	const location = useLocation();
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
+	const filters = useSelector(getFilters);
 
 	let path = location.pathname.split("/");
 	if (path.length === 3) {
@@ -272,6 +274,7 @@ function CourseInfo() {
 							<th scope="col">Location</th>
 							<th scope="col">Instructors</th>
 							<th scope="col">Attributes</th>
+							{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
 						</tr>
 					</thead>
 					<tbody>
@@ -331,7 +334,8 @@ function CourseInfo() {
 								id: id,
 								time: meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
 								days: meetings.length > 0 && meetings[0][1] !== "&nbsp;" ? meetings[0][1] : "N/A",
-								location: meetings.length > 0 ? meetings[0][2] : "N/A"
+								location: meetings.length > 0 ? meetings[0][2] : "N/A",
+								campus: caches.campuses[sectionRaw[4]]
 							};
 
 							return (
@@ -368,6 +372,7 @@ function CourseInfo() {
 									<td>{section.location}</td>
 									<td>{instructors}</td>
 									<td>{attributes}</td>
+									{filters.campus.value !== "Any" && <td>{section.campus}</td>}
 								</tr>
 							);
 						})}

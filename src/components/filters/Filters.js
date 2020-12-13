@@ -2,10 +2,9 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Tippy, {useSingleton} from "@tippyjs/react";
 import {resetFilters, updateFilter, getFilters, updateSort, getSort} from "../../redux/courseListSlice";
-import {subjectNames} from "../courseList/CourseList";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
-import {instructors, caches} from "../../courses";
+import {sortBy, subjects, levels, credits, types, instructorList} from "./filterOptions";
 import "../../css/Filters.css";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/translucent.css";
@@ -56,7 +55,7 @@ function Filters() {
 						ariaDescribedBy="sort-by-label"
 						value={sort}
 						onChange={value => dispatch(updateSort(value))}
-						optionList={["Course ID", "Name", "Grade"]}
+						optionList={sortBy}
 					/>
 				</DropdownButton>
 				<DropdownButton
@@ -71,9 +70,7 @@ function Filters() {
 						placeholder="Search..."
 						value={filters.subject}
 						onChange={value => updateFil(value, "subject")}
-						optionList={Object.keys(subjectNames).map(key => {
-							return subjectNames[key];
-						})}
+						optionList={subjects}
 						isMulti
 						isSearchable
 						windowed
@@ -90,7 +87,7 @@ function Filters() {
 						ariaDescribedBy="level-label"
 						value={filters.level}
 						onChange={value => updateFil(value, "level")}
-						optionList={[1000, 2000, 3000, 4000, 6000, 7000, 8000, 9000]}
+						optionList={levels}
 						isMulti
 					/>
 				</DropdownButton>
@@ -105,7 +102,7 @@ function Filters() {
 						ariaDescribedBy="credits-label"
 						value={filters.credits}
 						onChange={value => updateFil(value, "credits")}
-						optionList={[0, 1, 2, 3, 4, 5, 6, 9]}
+						optionList={credits}
 						isMulti
 					/>
 				</DropdownButton>
@@ -121,7 +118,7 @@ function Filters() {
 						placeholder="Search..."
 						value={filters.type}
 						onChange={value => updateFil(value, "type")}
-						optionList={caches["scheduleTypes"]}
+						optionList={types}
 						isMulti
 						isSearchable
 					/>
@@ -138,7 +135,7 @@ function Filters() {
 						placeholder="Search..."
 						value={filters.instructors}
 						onChange={value => updateFil(value, "instructors")}
-						optionList={instructors}
+						optionList={instructorList}
 						isMulti
 						isSearchable
 						windowed

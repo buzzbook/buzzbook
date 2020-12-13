@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import courses from "../courses";
+import courses from "../scripts/courses";
 
 var startID = Object.keys(courses)[0];
 let path = window.location.href.split("/");
@@ -15,6 +15,8 @@ if (path.length === 5) {
 	}
 }
 
+const defaultFilters = {campus: {value: "Any", label: "Any"}};
+
 export const courseListSlice = createSlice({
 	name: "courseList",
 	initialState: {
@@ -22,7 +24,7 @@ export const courseListSlice = createSlice({
 		// Saved courses is an object full of courseID: true entries
 		// This is because searching an object is O(1) vs O(n) for an array
 		savedCourses: {},
-		filters: {},
+		filters: defaultFilters,
 		sort: {value: "Course ID", label: "Course ID"},
 		searchQuery: ""
 	},
@@ -42,7 +44,7 @@ export const courseListSlice = createSlice({
 			state.filters[action.payload.name] = action.payload.value;
 		},
 		resetFilters: state => {
-			state.filters = {};
+			state.filters = defaultFilters;
 		},
 		updateSort: (state, action) => {
 			state.sort = action.payload;

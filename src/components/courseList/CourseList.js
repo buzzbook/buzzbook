@@ -4,10 +4,10 @@ import {getFilters, getSavedCourses, getSearchQuery, getSort} from "../../redux/
 import {FixedSizeList as List} from "react-window";
 import {useWindowWidth} from "@react-hook/window-size";
 import AutoSizer from "react-virtualized-auto-sizer";
-import courses from "../../courses";
+import courses from "../../scripts/courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
-import {caches} from "../../courses";
+import {caches} from "../../scripts/courses";
 import "../../css/CourseList.css";
 
 /** Keys are the courseID values. Values are the long names */
@@ -136,7 +136,6 @@ function CourseList({id}) {
 				if (!levelFiltersSet.has(level)) return false;
 			}
 			if (filters.type && filters.type.length > 0) {
-				// Filter out by type here
 				const typeFilters = filters.type.map(option => option.value);
 				var courseTypes = new Set();
 				Object.values(courseData[1]).forEach(section => {
@@ -147,6 +146,22 @@ function CourseList({id}) {
 					if (!courseTypes.has(typeFilters[i])) {
 						return false;
 					}
+				}
+			}
+			if (filters.campus.value !== "Any") {
+				const campusFilter = filters.campus.value;
+				const sections = Object.values(courseData[1]);
+				let match = false;
+				for (let i = 0; i < sections.length; i++) {
+					const section = sections[i];
+					const campus = caches["campuses"][section[4]];
+					if (campus === campusFilter) {
+						match = true;
+						break;
+					}
+				}
+				if (!match) {
+					return false;
 				}
 			}
 			if (filters.instructors && filters.instructors.length > 0) {
