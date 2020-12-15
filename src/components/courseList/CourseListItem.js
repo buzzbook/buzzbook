@@ -18,7 +18,7 @@ function CourseListItem(course) {
 	const savedCourses = useSelector(getSavedCourses);
 
 	let isSelected = selectedCourse === course.courseID;
-	let bgColor = isSelected ? "var(--labelcolor)" : "initial";
+	let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
@@ -28,7 +28,7 @@ function CourseListItem(course) {
 	else if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
-	let gradeColor = "green";
+	let gradeColor = "var(--green)";
 	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
 	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
 	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
@@ -49,27 +49,27 @@ function CourseListItem(course) {
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
 					<div className="text-cutoff">
-						<h5 className="d-inline">
-							<b>{course.courseID}</b>
+						<h5 className="d-inline headingfont">
+							{course.courseID}
 						</h5>
-						&nbsp;&nbsp;&nbsp;
-						<span>{course.name}</span>
+						&nbsp;&nbsp;
+						<span className="subheadingfont">{course.name}</span>
 					</div>
 
-					<div style={{fontSize: "0.9rem"}}>
+					<div className="contentfont">
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
 						<span>
 							{course.credits} credit{course.credits !== 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
 						<span>
 							{course.numSections} section{course.numSections > 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&bull;&nbsp;</span>
-						<span style={{color: gradeColor}}>{course.grade}</span>
+						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+						<span style={{color: gradeColor, fontWeight: "700"}}>{course.grade}</span>
 					</div>
 				</div>
 

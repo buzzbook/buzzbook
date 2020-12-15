@@ -20,11 +20,11 @@ function FilterBar() {
 				/>
 			</div>
 			<div className="col-9 h-100 p-3">
-				<div className="d-flex">
+				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"
 						className="mr-3 icon-dark"
-						style={{width: 30, height: 30, cursor: "pointer"}}
+						style={{width: 20, height: 20, cursor: "pointer"}}
 						data-toggle="modal"
 						data-target="#filterModal"
 					>

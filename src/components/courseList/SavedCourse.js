@@ -11,11 +11,11 @@ function SavedCourse(course) {
 				className="savedCourse text-cutoff"
 				style={{maxWidth: "calc(100% - 25px)"}}
 			>
-				<span style={{fontSize: "1.25rem"}}>
-					<b>{course.courseID}</b>
+				<span className="headingfont">
+					{course.courseID}
 				</span>
-				&nbsp;&nbsp;&nbsp;
-				<span>{course.name}</span>
+				&nbsp;&nbsp;
+				<span className="subheadingfont">{course.name}</span>
 			</div>
 
 			<Icon

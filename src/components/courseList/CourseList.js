@@ -12,6 +12,9 @@ import courses from "../../courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
 import "../../css/CourseList.css";
+import $ from "jquery";
+
+import Icon from "../../img/icon";
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -119,6 +122,12 @@ function CourseList({id}) {
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
 
+	const initCollapsed = JSON.parse(localStorage.getItem('collapsed'));
+	const toggleCollapse = () => {
+		$("#clistwrapper").toggleClass("savecollapsed");
+		localStorage.setItem('collapsed', $("#clistwrapper").hasClass("savecollapsed"));
+	};
+
 	let refilter = false;
 	if (
 		currFilters !== filters ||
@@ -193,7 +202,7 @@ function CourseList({id}) {
 
 	const Row = ({index, style}) => {
 		const [courseID, courseData] = filteredCourses[index];
-		const courseEnrollment = {current: 200, max: 250};
+		const courseEnrollment = {current: parseInt(courseID.split(" ")[1]) , max: 9999}; //just testing colors
 		const courseGrade = "A";
 		const course = {
 			name: courseData[0],
@@ -220,7 +229,7 @@ function CourseList({id}) {
 	};
 
 	return (
-		<div>
+		<div id="clistwrapper" className={(initCollapsed ? "savecollapsed" : "")}>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
 					<span className="display-block text-center mt-2">
@@ -243,9 +252,16 @@ function CourseList({id}) {
 			</div>
 
 			<div
-				className="sectionlabelfont pl-2 mt-2"
+				className="sectionlabelfont inline justify-content-between px-2 mt-2 mb-1 savedCoursesheader"
 			>
 				Saved Courses
+
+				<Icon
+					name="collapse"
+					alt="collapse"
+					iconclass="icon-dark"
+					onClick={toggleCollapse}
+				/>
 			</div>
 			<div id="savedCourses">
 				<SavedCourses />

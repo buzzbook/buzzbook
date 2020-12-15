@@ -28,7 +28,7 @@ body.light-theme {
 }
 
 * {
-	outline: none;
+	outline: none !important;
 }
 
 /*Color Definitions*/
@@ -119,14 +119,14 @@ body.light-theme {
 
 .headingfont { /*search bar course number*/
 	font-family: var(--primaryfont);
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 1.25rem;
 	color: var(--primarytextcolor);
 }
 
 .subheadingfont { /*search bar course name*/
 	font-family: var(--primaryfont);
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1rem;
 	color: var(--primarytextcolor);
 }
@@ -192,6 +192,12 @@ body {
 .icon-large {
 	width: 2.2rem;
 	height: 2.2rem;
+}
+
+.inline {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 /*Mobile Styles*/

@@ -122,7 +122,7 @@ function CourseInfo() {
 				<div className="row w-100 mx-0">
 					<div className="col-4 pl-0">
 						<div class="inline">
-							<h1>{course.courseID}</h1>
+							<h1 class="titlefont mb-0">{course.courseID}</h1>
 							{isSaved ? (
 								<Icon
 									name="unsave"
@@ -139,7 +139,7 @@ function CourseInfo() {
 								/>
 							)}
 						</div>
-						<h4 className="theme">{course.name}</h4>
+						<h4 className="subtitlefont">{course.name}</h4>
 					</div>
 					<div className="col-2">
 						<div className="text-muted">Statistics</div>

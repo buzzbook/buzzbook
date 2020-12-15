@@ -4,9 +4,9 @@ import FilterSelector from "../filters/FilterSelector";
 
 function SavedCourseItem(course) {
 	let enrollmentColor = "var(--green)";
-	if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
+	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
+	else if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
-
 	return (
 		<div className="p-2 mb-2 rounded">
 			<div className="position-relative">

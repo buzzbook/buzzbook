@@ -47,6 +47,14 @@
       <path id="buzz-b15aZpmJUr-2" data-name="b15aZpmJUr" d="M1985.29,921.54C1956.31,853,1724.22,613,1645.14,533.9s-522.13-356-603.9-350.75-29,108.13,229.27,184.6q258.21,76.5,643.61,569.41Q2014.28,990.13,1985.29,921.54Z" transform="translate(-252.92 -179.88)" fill="rgba(0,0,0,0)" stroke="#000" stroke-miterlimit="25.6" stroke-width="6.4" />
     </g>
   </symbol>
+  <symbol viewBox="0 0 14.283 14.283" id="icon-collapse">
+    <title>collapse</title>
+    <g id="collapse-Group_355" data-name="Group 355" transform="translate(-2 -2)">
+      <path id="collapse-Path_1113" data-name="Path 1113" d="M6.147,15.533h5.99a3.293,3.293,0,0,0,3.4-3.57V6.32a3.29,3.29,0,0,0-3.4-3.57H6.147a3.29,3.29,0,0,0-3.4,3.57v5.644A3.29,3.29,0,0,0,6.147,15.533Z" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="collapse-Path_1114" data-name="Path 1114" d="M12,13.561V7.914" transform="translate(-2.858 -1.596)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="collapse-Path_1115" data-name="Path 1115" d="M13.432,12.322l-2.59,2.6-2.59-2.6" transform="translate(-1.7 -2.958)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    </g>
+  </symbol>
   <symbol viewBox="0 0 11.63 13.462" id="icon-credits">
     <title>credits</title>
     <g id="credits-Group_450" data-name="Group 450" transform="translate(-3.5 -2)">

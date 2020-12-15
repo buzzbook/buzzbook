@@ -26,6 +26,7 @@ const Icon = props => {
 			xmlnsXlink="http://www.w3.org/1999/xlink"
 			className={`${props.iconclass} icon-${props.size}`}
 			alt={`${props.alt}`}
+      style={props.style}
 			onClick={props.onClick}
 		>
 			<use xlinkHref={`${iconset}#${"icon-" + props.name}`} />
