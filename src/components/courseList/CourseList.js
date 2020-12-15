@@ -243,6 +243,7 @@ function CourseList({id}) {
 								itemCount={filteredCourses.length}
 								itemSize={70}
 								width={width}
+								className="hoverscroll"
 							>
 								{Row}
 							</List>
@@ -263,7 +264,7 @@ function CourseList({id}) {
 					onClick={toggleCollapse}
 				/>
 			</div>
-			<div id="savedCourses">
+			<div id="savedCourses" className="hoverscroll">
 				<SavedCourses />
 			</div>
 		</div>

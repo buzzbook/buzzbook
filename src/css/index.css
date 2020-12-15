@@ -200,6 +200,14 @@ body {
 	align-items: center;
 }
 
+.text-link {
+	text-decoration: none !important;
+	transition: color 2s;
+}
+.text-link:hover > span.subheadingfont {
+	color: var(--secondarytextcolor) !important;
+}
+
 /*Mobile Styles*/
 @media (max-width: 950px) {
 

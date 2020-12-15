@@ -121,8 +121,8 @@ function CourseInfo() {
 			<div className="" id="courseInfo">
 				<div className="row w-100 mx-0">
 					<div className="col-4 pl-0">
-						<div class="inline">
-							<h1 class="titlefont mb-0">{course.courseID}</h1>
+						<div className="inline">
+							<h1 className="titlefont mb-0">{course.courseID}</h1>
 							{isSaved ? (
 								<Icon
 									name="unsave"
