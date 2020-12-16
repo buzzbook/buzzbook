@@ -51,7 +51,7 @@ function Nav() {
 		<nav className="nav flex-column">
 			<ul className="pl-5">
 				<li>
-					<Link className="navbar-brand pt-0" to="/">
+					<Link className="navbar-brand p-0" to="/">
 						<img src={itLogo} alt="Buzz" />
 						{/*
 						<Icon

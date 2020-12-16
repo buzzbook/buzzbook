@@ -2,6 +2,10 @@
   display: flex;
   align-items: center;
 }
+#filterBar {
+	margin-top: 1.25rem;
+	margin-bottom: 0.5rem;
+}
 
 .form-control,
 .input-group-text,
@@ -34,6 +38,18 @@
 .input-group-prepend span {
 	color: var(--primarytextcolor);
 	background-color: var(--labelcolor);
+}
+#filterBar .searchwrapper svg {
+	position: absolute;
+	left: .75rem;
+	top: 50%;
+	transform: translate(0, -50%);
+	width: 15px;
+	height: 15px;
+	/*background: url("../img/iconset.svg#icon-search") center / contain no-repeat;*/
+}
+.searchwrapper {
+	position: relative;
 }
 
 .button-group {
@@ -73,7 +89,8 @@
 #filterBar input {
 	background-color: var(--bgcolor);
 	color: var(--primarytextcolor);
-	border-radius: 0.5rem;
+	border-radius: 0.625rem;
+	padding-left: 2.25rem;
 }
 
 #filterBar #filters .clear {

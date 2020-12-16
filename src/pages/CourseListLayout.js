@@ -5,6 +5,7 @@ import FilterBar from "../components/filters/FilterBar";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
 import {usePreload} from "../img/icon";
+//import stylechanges from "../unused";
 
 function Layout({id, content, savedCoursesDetails}) {
 	useLayoutEffect(() => {
@@ -22,12 +23,13 @@ function Layout({id, content, savedCoursesDetails}) {
 	let numSaved = Object.keys(savedCourses).length;
 
 	const col = savedCoursesDetails && numSaved > 0 ? "col-6" : "col-9";
-	const contentStyle = `${col} h-100`;
+	const contentStyle = `${col} h-100 pl-0`;
+	//stylechanges();
 	return (
 		<div>
 			<FilterBar />
 			<div className="row mx-0" id={id}>
-				<div className="col-3 h-100">{<CourseList id={id} />}</div>
+				<div className="col-3 h-100 px-4">{<CourseList id={id} />}</div>
 				{savedCoursesDetails && numSaved > 0 && (
 					<div className="col-3 h-100 p-3">
 						{<SavedCoursesDetails id={id} />}

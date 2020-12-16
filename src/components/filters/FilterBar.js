@@ -6,20 +6,24 @@ import {updateSearchQuery} from "../../redux/courseListSlice";
 //import Icon from "../../img/icon";
 import iconset from "../../img/iconset.svg";
 import "../../css/Filters.css";
+import Icon from "../../img/icon";
 
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
-		<div className="row mx-0 my-2" id="filterBar">
-			<div className="col-3 h-100 p-3">
-				<input
-					type="text"
-					className="form-control"
-					placeholder="Search Courses"
-					onChange={e => dispatch(updateSearchQuery(e.target.value))}
-				/>
+		<div className="row mx-0" id="filterBar">
+			<div className="col-3 h-100 py-3 px-4">
+				<div className="searchwrapper">
+					<Icon name="search"/>
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Search Courses"
+						onChange={e => dispatch(updateSearchQuery(e.target.value))}
+					/>
+				</div>
 			</div>
-			<div className="col-9 h-100 p-3">
+			<div className="col-9 h-100 py-3 pl-0">
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"
