@@ -12,7 +12,7 @@ import "bootstrap";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "./css/index.css";
+import "./css/index.scss";
 
 ReactDOM.render(
 	<Provider store={store}>
