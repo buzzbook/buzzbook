@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../../redux/courseListSlice";
-import courses from "../../courses";
+import courses from "../../scripts/courses";
 import SavedCourseItem from "./SavedCourseItem";
 import "../../css/SavedCoursesDetails.css";
 
@@ -13,11 +13,9 @@ function SavedCoursesDetails({id}) {
 			<div style={{height: "100%"}}>
 				{Object.keys(savedCoursesIDs).map(courseID => {
 					const courseData = courses[courseID];
-					const courseEnrollment = {current: 200, max: 250};
 					const courseGrade = "A";
 					const course = {
 						name: courseData[0],
-						enrollment: courseEnrollment,
 						grade: courseGrade,
 						credits: Object.values(courseData[1])[0][2],
 						sections: courseData[1],
@@ -27,14 +25,9 @@ function SavedCoursesDetails({id}) {
 						<SavedCourseItem
 							courseID={courseID}
 							name={course.name}
-							enrollment={course.enrollment}
-							enrollmentPercent={
-								(course.enrollment.current /
-									course.enrollment.max) *
-								100
-							}
-							credits={course.credits}
 							grade={course.grade}
+							credits={course.credits}
+							sections={course.sections}
 							key={courseID}
 						/>
 					);

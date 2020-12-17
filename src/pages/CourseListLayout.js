@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from "react";
+import React from "react";
 import CourseList from "../components/courseList/CourseList";
 import SavedCoursesDetails from "../components/savedCoursesDetails/SavedCoursesDetails";
 import FilterBar from "../components/filters/FilterBar";
@@ -8,34 +8,57 @@ import {usePreload} from "../img/icon";
 //import stylechanges from "../unused";
 
 function Layout({id, content, savedCoursesDetails}) {
-	useLayoutEffect(() => {
-		let filterBarHeight =
-			document.getElementById("filterBar").getBoundingClientRect().height + 2;
-		document.getElementById(
-			"courseList"
-		).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
-	});
+	// useLayoutEffect(() => {
+	// 	let filterBarHeight =
+	// 		document.getElementById("filterBar").getBoundingClientRect().height + 2;
+	// 	document.getElementById(
+	// 		"courseList"
+	// 	).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
+	// });
 
 	const initload = usePreload("./iconset.svg");
 	console.log("initially loaded");
 
+	const filterHeight = "80px";
+
 	const savedCourses = useSelector(getSavedCourses);
 	let numSaved = Object.keys(savedCourses).length;
 
-	const col = savedCoursesDetails && numSaved > 0 ? "col-6" : "col-9";
-	const contentStyle = `${col} h-100 pl-0`;
+	const col = savedCoursesDetails && numSaved > 0 ? "1fr 1fr 2fr" : "1fr 3fr";
+	// const contentStyle = `${col} h-100 pl-0`;
 	//stylechanges();
 	return (
-		<div>
+		<div
+			style={{
+				display: "grid",
+				height: "100vh",
+				gridTemplateRows: `${filterHeight} auto`
+			}}
+		>
 			<FilterBar />
-			<div className="row mx-0" id={id}>
-				<div className="col-3 h-100 px-4">{<CourseList id={id} />}</div>
+			<div
+				id={id}
+				style={{
+					display: "grid",
+					gridTemplateColumns: col
+				}}
+				className = "mx-0"
+			>
+				<div
+					className="px-4"
+					style={{
+						minWidth: "300px",
+						height: `calc(100vh - ${filterHeight}`
+					}}
+				>
+					{<CourseList id={id} />}
+				</div>
 				{savedCoursesDetails && numSaved > 0 && (
-					<div className="col-3 h-100 p-3">
+					<div className="p-3" style={{minWidth: "250px"}}>
 						{<SavedCoursesDetails id={id} />}
 					</div>
 				)}
-				<div className={contentStyle}>{content}</div>
+				<div className="p-3">{content}</div>
 			</div>
 		</div>
 	);

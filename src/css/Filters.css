@@ -13,7 +13,7 @@
 	border-color: var(--inputcolor);
 }
 
-.form-control,
+/*.form-control,
 .custom-select {
 	background-color: var(--labelcolor);
 }
@@ -21,7 +21,7 @@
 .custom-select {
 	color: var(--primarytextcolor);
 	transition: 0s;
-}
+}*/
 
 .input-group > .input-group-prepend {
 	flex: 0 0 40%;
@@ -77,6 +77,11 @@
 	border-bottom-right-radius: 0.25rem;
 }
 
+.modal-dialog {
+  margin: 1rem auto;
+  max-width: 90%;
+}
+
 .modal-content {
 	background-color: var(--bgcolor);
 	color: var(--primarytextcolor);
@@ -84,6 +89,11 @@
 .close,
 .close:hover {
 	color: var(--primarytextcolor);
+}
+
+#filterBar {
+	display: grid;
+	grid-template-columns: 3fr 9fr;
 }
 
 #filterBar input {
@@ -95,4 +105,23 @@
 
 #filterBar #filters .clear {
 	margin-left: 10px;
+}
+
+.expanded-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: 10px 20px;
+}
+
+.timing-filter, .degree-requirements, .advanced-options {
+  grid-row: 2/5;
+}
+
+.degree-requirements {
+  grid-column: 2/4;
+}
+
+.advanced-options {
+  grid-column: 6/7;
 }

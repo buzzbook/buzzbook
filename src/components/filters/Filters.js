@@ -1,104 +1,160 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-	resetFilters,
-	updateFilter,
-	getFilters,
-	updateSort,
-	getSort
-} from "../../redux/courseListSlice";
-import {subjectNames} from "../courseList/CourseList";
+import Tippy, {useSingleton} from "@tippyjs/react";
+import {resetFilters, updateFilter, getFilters, updateSort, getSort} from "../../redux/courseListSlice";
 import DropdownButton from "./DropdownButton";
 import FilterSelector from "./FilterSelector";
+import {sortBy, subjects, levels, credits, types, instructorList} from "./filterOptions";
 import "../../css/Filters.css";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/translucent.css";
+import x from "../../img/x.png";
 
 function Filters() {
 	const clearFilters = () => {
 		dispatch(resetFilters());
+		dispatch(updateSort({label: "Course ID", value: "Course ID"}));
 	};
 
 	const dispatch = useDispatch();
 
-	//Term, Core, Time-from, Time-to, and Prof filter not implemented yet
 	const updateFil = (value, name) => {
-		dispatch(updateFilter({name: name, value: value}));
+		dispatch(updateFilter({value: value, name: name}));
 	};
 
 	const sort = useSelector(getSort);
 	const filters = useSelector(getFilters);
 
+	const [source, target] = useSingleton({
+		overrides: ["theme", "arrow"]
+	});
+
 	return (
 		<div id="filter-container">
 			<div id="filters">
-				<DropdownButton label="Sort By" className="dropdownFilter">
+				<Tippy
+					interactive
+					singleton={source}
+					moveTransition="transform 0.5s"
+					placement="bottom"
+					trigger="mouseenter"
+					theme="transparent"
+					arrow={false}
+					interactiveBorder={50}
+				/>
+
+				<DropdownButton
+					label="Sort By"
+					className="dropdownFilter"
+					highlight={sort.value !== "Course ID"}
+					singleton={target}
+				>
 					<FilterSelector
 						id="sort-by-filter"
 						ariaLabel="Sort By"
 						ariaDescribedBy="sort-by-label"
 						value={sort}
 						onChange={value => dispatch(updateSort(value))}
-						optionList={["Course ID", "Name"]}
+						optionList={sortBy}
 					/>
 				</DropdownButton>
-				<DropdownButton label="Departments" className="dropdownFilter">
+				<DropdownButton
+					label="Departments"
+					className="dropdownFilter"
+					highlight={filters.subject && filters.subject.length > 0}
+					singleton={target}
+				>
 					<FilterSelector
 						ariaLabel="Subject"
 						ariaDescribedBy="subject-label"
-						placeholder="Select..."
+						placeholder="Search..."
 						value={filters.subject}
 						onChange={value => updateFil(value, "subject")}
-						optionList={Object.keys(subjectNames).map(key => {
-							return subjectNames[key];
-						})}
-						isMulti={true}
+						optionList={subjects}
+						isMulti
+						isSearchable
+						windowed
 					/>
 				</DropdownButton>
-				<DropdownButton label="Level" className="dropdownFilter">
+				<DropdownButton
+					label="Level"
+					className="dropdownFilter"
+					highlight={filters.level && filters.level.length > 0}
+					singleton={target}
+				>
 					<FilterSelector
 						ariaLabel="Level"
 						ariaDescribedBy="level-label"
-						placeholder="Select..."
 						value={filters.level}
 						onChange={value => updateFil(value, "level")}
-						optionList={[
-							1000,
-							2000,
-							3000,
-							4000,
-							6000,
-							7000,
-							8000,
-							9000
-						]}
-						isMulti={true}
+						optionList={levels}
+						isMulti
 					/>
 				</DropdownButton>
-				<DropdownButton label="Credits" className="dropdownFilter">
+				<DropdownButton
+					label="Credits"
+					className="dropdownFilter"
+					highlight={filters.credits && filters.credits.length > 0}
+					singleton={target}
+				>
 					<FilterSelector
 						ariaLabel="Credits"
 						ariaDescribedBy="credits-label"
-						placeholder="Select..."
 						value={filters.credits}
 						onChange={value => updateFil(value, "credits")}
-						optionList={[1, 2, 3, 4]}
-						isMulti={true}
+						optionList={credits}
+						isMulti
 					/>
 				</DropdownButton>
 				<DropdownButton
-					label="Time"
-					className="dropdownFilter"
-				></DropdownButton>
-				<DropdownButton
 					label="Type"
 					className="dropdownFilter"
-				></DropdownButton>
-				<span
-					className="text-muted clear"
-					style={{cursor: "pointer"}}
-					onClick={clearFilters}
+					highlight={filters.type && filters.type.length > 0}
+					singleton={target}
 				>
-					Clear Filters
-				</span>
+					<FilterSelector
+						ariaLabel="Type"
+						ariaDescribedBy="type-label"
+						placeholder="Search..."
+						value={filters.type}
+						onChange={value => updateFil(value, "type")}
+						optionList={types}
+						isMulti
+						isSearchable
+					/>
+				</DropdownButton>
+				<DropdownButton
+					label="Instructors"
+					className="dropdownFilter"
+					highlight={filters.instructors && filters.instructors.length > 0}
+					singleton={target}
+				>
+					<FilterSelector
+						ariaLabel="Instructors"
+						ariaDescribedBy="instructors-label"
+						placeholder="Search..."
+						value={filters.instructors}
+						onChange={value => updateFil(value, "instructors")}
+						optionList={instructorList}
+						isMulti
+						isSearchable
+						windowed
+					/>
+				</DropdownButton>
+				{/* <DropdownButton
+					label="Time"
+					className="dropdownFilter"
+					singleton={target}
+				></DropdownButton> */}
+				<Tippy content="Clear Filters" theme="translucent" arrow={true} singleton={target}>
+					<div
+						className="d-inline-block ml-2 icon-dark"
+						style={{cursor: "pointer", height: "16px"}}
+						onClick={clearFilters}
+					>
+						<img src={x} alt="x" height="20px" width="20px" className="d-block mb-1" />
+					</div>
+				</Tippy>
 			</div>
 		</div>
 	);

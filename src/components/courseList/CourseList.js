@@ -1,16 +1,13 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {
-	getFilters,
-	getSavedCourses,
-	getSearchQuery,
-	getSort
-} from "../../redux/courseListSlice";
+import {getFilters, getSavedCourses, getSearchQuery, getSort} from "../../redux/courseListSlice";
 import {FixedSizeList as List} from "react-window";
+import {useWindowWidth} from "@react-hook/window-size";
 import AutoSizer from "react-virtualized-auto-sizer";
-import courses from "../../courses";
+import courses from "../../scripts/courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
+import {caches} from "../../scripts/courses";
 import "../../css/CourseList.css";
 import $ from "jquery";
 
@@ -111,9 +108,6 @@ export const subjectNames = {
 	SWAH: "Swahili"
 };
 
-var currFilters = null;
-var currSort = null;
-var currSearch = null;
 var filteredCourses = null;
 
 function CourseList({id}) {
@@ -128,44 +122,76 @@ function CourseList({id}) {
 		localStorage.setItem('collapsed', $("#clistwrapper").hasClass("savecollapsed"));
 	};
 
-	let refilter = false;
-	if (
-		currFilters !== filters ||
-		currSearch !== searchQuery ||
-		filteredCourses === null
-	) {
-		refilter = true;
-		currFilters = filters;
-		currSearch = searchQuery;
-		filteredCourses = Object.entries(courses).filter(courseRaw => {
+	filteredCourses = Object.entries(courses)
+		.filter(courseRaw => {
 			const [courseID, courseData] = courseRaw;
 			if (id !== "catalog" && savedCourses[courseID]) {
 				return false;
 			}
-			// Object.values(courseData[1])[0][2] is the number of course credits
 			if (filters.credits && filters.credits.length > 0) {
-				if (filters.credits[0] !== "Any") {
-					const creditFilterBy = filters.credits.map(option =>
-						parseInt(option.value)
-					);
-					let credits = Object.values(courseData[1])[0][2];
-					if (!creditFilterBy.includes(credits)) return false;
-				}
+				const creditFiltersSet = new Set(filters.credits.map(option => parseInt(option.value)));
+				// Object.values(courseData[1])[0][2] is the number of course credits listed for the first section
+				let credits = Object.values(courseData[1])[0][2];
+				if (!creditFiltersSet.has(credits)) return false;
 			}
 			if (filters.subject && filters.subject.length > 0) {
-				const subjectFilterBy = filters.subject.map(option => option.value);
-				if (!subjectFilterBy.includes("Any")) {
-					let subject = subjectNames[courseID.split(" ")[0]];
-					if (!subjectFilterBy.includes(subject)) return false;
-				}
+				const subjectFiltersSet = new Set(filters.subject.map(option => option.value));
+				let subject = subjectNames[courseID.split(" ")[0]];
+				if (!subjectFiltersSet.has(subject)) return false;
 			}
 			if (filters.level && filters.level.length > 0) {
-				if (filters.level[0] !== "Any") {
-					const levelFilterBy = filters.level.map(option =>
-						parseInt(option.value)
-					);
-					let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
-					if (!levelFilterBy.includes(level)) return false;
+				const levelFiltersSet = new Set(filters.level.map(option => parseInt(option.value)));
+				let level = parseInt(courseID.split(" ")[1].charAt(0)) * 1000;
+				if (!levelFiltersSet.has(level)) return false;
+			}
+			if (filters.type && filters.type.length > 0) {
+				const typeFilters = filters.type.map(option => option.value);
+				var courseTypes = new Set();
+				Object.values(courseData[1]).forEach(section => {
+					// section[3] is the index representing the schedule type of the section
+					courseTypes.add(caches["scheduleTypes"][section[3]]);
+				});
+				for (let i = 0; i < typeFilters.length; i++) {
+					if (!courseTypes.has(typeFilters[i])) {
+						return false;
+					}
+				}
+			}
+			if (filters.campus.value !== "Any") {
+				const campusFilter = filters.campus.value;
+				const sections = Object.values(courseData[1]);
+				let match = false;
+				for (let i = 0; i < sections.length; i++) {
+					const section = sections[i];
+					const campus = caches["campuses"][section[4]];
+					if (campus === campusFilter) {
+						match = true;
+						break;
+					}
+				}
+				if (!match) {
+					return false;
+				}
+			}
+			if (filters.instructors && filters.instructors.length > 0) {
+				const instructorFiltersSet = new Set(filters.instructors.map(option => option.value));
+				const sections = Object.values(courseData[1]);
+				var hasInstructor = false;
+				for (let i = 0; i < sections.length && !hasInstructor; i++) {
+					const section = sections[i];
+					const meetings = section[1];
+					if (meetings.length > 0) {
+						const professors = meetings[0][4];
+						for (let p = 0; p < professors.length; p++) {
+							if (instructorFiltersSet.has(professors[p])) {
+								hasInstructor = true;
+								break;
+							}
+						}
+					}
+				}
+				if (!hasInstructor) {
+					return false;
 				}
 			}
 			if (searchQuery !== "") {
@@ -177,11 +203,8 @@ function CourseList({id}) {
 				}
 			}
 			return true;
-		});
-	}
-	if (currSort !== sort || refilter) {
-		currSort = sort;
-		filteredCourses = filteredCourses.sort((a, b) => {
+		})
+		.sort((a, b) => {
 			switch (sort) {
 				case "Course ID":
 					// a/b[0] is the courseID
@@ -194,20 +217,25 @@ function CourseList({id}) {
 				case "Name":
 					// a/b[1][0] is the course name
 					return a[1][0].localeCompare(b[1][0]);
+				case "Grade":
+					const aGrade = a[1][4];
+					const bGrade = b[1][4];
+					if (!aGrade && !bGrade) return 0;
+					if (!aGrade) return 1;
+					if (!bGrade) return -1;
+					return bGrade - aGrade;
 				default:
 					return 0;
 			}
 		});
-	}
 
 	const Row = ({index, style}) => {
 		const [courseID, courseData] = filteredCourses[index];
 		const courseEnrollment = {current: parseInt(courseID.split(" ")[1]) , max: 9999}; //just testing colors
-		const courseGrade = "A";
 		const course = {
 			name: courseData[0],
 			enrollment: courseEnrollment,
-			grade: courseGrade,
+			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
 			sections: courseData[1]
 		};
@@ -215,9 +243,7 @@ function CourseList({id}) {
 			<CourseListItem
 				courseID={courseID}
 				name={course.name}
-				enrollmentPercent={
-					(courseEnrollment.current / courseEnrollment.max) * 100
-				}
+				enrollmentPercent={(courseEnrollment.current / courseEnrollment.max) * 100}
 				credits={course.credits}
 				numSections={Object.keys(course.sections).length}
 				grade={course.grade}
@@ -228,8 +254,19 @@ function CourseList({id}) {
 		);
 	};
 
+	const windowWidth = useWindowWidth();
+	const itemHeight = windowWidth > 1630 ? 70 : 90;
+
 	return (
-		<div id="clistwrapper" className={(initCollapsed ? "savecollapsed" : "")}>
+		<div
+			id="clistwrapper"
+			className={(initCollapsed ? "savecollapsed" : "")}
+			style={{
+				display: "grid",
+				gridTemplateRows: "1fr auto 1fr",
+				height: "100%"
+			}}
+		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
 					<span className="display-block text-center mt-2">
@@ -241,7 +278,7 @@ function CourseList({id}) {
 							<List
 								height={height}
 								itemCount={filteredCourses.length}
-								itemSize={70}
+								itemSize={itemHeight}
 								width={width}
 								className="hoverscroll"
 							>

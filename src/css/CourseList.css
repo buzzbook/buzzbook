@@ -84,6 +84,10 @@
 	text-decoration: none;
 }
 
+#courseList .selected {
+	background-color: var(--low-alpha) !important;
+}
+
 .text-cutoff {
 	white-space: nowrap;
 	overflow: hidden;
@@ -99,6 +103,12 @@
 .unsaveIcon,
 .deleteIcon {
 	cursor: pointer;
+	transition: 0.2s;
+}
+
+#courseList .saveIcon,
+#courseList .unsaveIcon,
+#savedCourses .deleteIcon {
 	position: absolute;
 	transform: translate(0, -50%);
 	top: 50%;
@@ -106,6 +116,8 @@
 	width: 15px;
 	height: 15px;
 	transition: 0.2s;
+	grid-area: icon;
+	/*align-self: center;*/
 }
 
 .saveIcon:hover {

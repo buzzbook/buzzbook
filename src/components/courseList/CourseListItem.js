@@ -29,22 +29,22 @@ function CourseListItem(course) {
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
 	let gradeColor = "var(--green)";
-	if (course.grade.charAt(0) === "B") gradeColor = "var(--yellow)";
-	else if (course.grade.charAt(0) === "C") gradeColor = "var(--orange)";
-	else if (course.grade.charAt(0) === "D") gradeColor = "var(--red)";
+	if (course.grade) {
+		if (course.grade < 1) gradeColor = "var(--red)";
+		else if (course.grade < 2) gradeColor = "var(--orange)";
+		else if (course.grade < 3) gradeColor = "var(--yellow)";
+		else gradeColor = "var(--green)";
+	}
 
 	const listItem = (
 		<div
-			className="p-2 rounded"
+			className={`p-2 rounded`}
 			style={
 				course.page === "catalog"
 					? {backgroundColor: bgColor, boxShadow: bshadow}
 					: {backgroundColor: "initial", boxShadow: "initial"}
 			}
-			onClick={() =>
-				course.page === "catalog" &&
-				dispatch(updateSelectedCourse(course.courseID))
-			}
+			onClick={() => course.page === "catalog" && dispatch(updateSelectedCourse(course.courseID))}
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
@@ -66,10 +66,15 @@ function CourseListItem(course) {
 						</span>
 						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
 						<span>
-							{course.numSections} section{course.numSections > 1 && "s"}
+							{course.numSections} section
+							{course.numSections > 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-						<span style={{color: gradeColor, fontWeight: "700"}}>{course.grade}</span>
+						{course.grade && (
+							<>
+								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+								<span style={{color: gradeColor, fontWeight: "700"}}>{course.grade}</span>
+							</>
+						)}
 					</div>
 				</div>
 
@@ -90,11 +95,7 @@ function CourseListItem(course) {
 
 	if (course.page === "catalog") {
 		return (
-			<Link
-				to={`/catalog/${course.courseID.replaceAll(" ", "+")}`}
-				replace
-				style={course.style}
-			>
+			<Link to={`/catalog/${course.courseID.replaceAll(" ", "+")}`} replace style={course.style}>
 				{listItem}
 			</Link>
 		);

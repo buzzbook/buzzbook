@@ -1,25 +1,38 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Tippy from '@tippyjs/react';
-import '../../css/DropdownButton.css';
+import Tippy from "@tippyjs/react";
+import "../../css/DropdownButton.css";
 
-export default function DropdownButton({ children, label, className }) {
-  const [visible, setVisible] = useState(false);
-  const show = () => setVisible(true);
-  const hide = () => setVisible(false);
+export default function DropdownButton({
+	children,
+  label,
+  highlight,
+	className,
+	singleton
+}) {
   return (
     <Tippy content={<div className='dropdownContainer'>{children}</div>}
-      trigger='click'
+      {/*trigger='click'
       interactive
       placement='bottom-start'
       onShow={show}
-      onHide={hide}
+      onHide={hide}*/}
+			theme="transparent"
+			arrow={false}
+			singleton={singleton}
     >
-      <button className={`dropdownButton sectionlabelfont ${className} ${visible ? 'shownFilter' : ''}`}>{label}</button>
+      <button id={(highlight) ? 'highlight' : ''} className={`dropdownButton sectionlabelfont ${className}`}>{label}</button>
     </Tippy>
   );
 }
 
 DropdownButton.propTypes = {
   label: PropTypes.string.isRequired,
+  highlight: PropTypes.bool,
+	singleton: PropTypes.object.isRequired,
+	className: PropTypes.string
+};
+
+DropdownButton.defaultProps = {
+	highlight: false,
 };

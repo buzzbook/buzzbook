@@ -11,8 +11,8 @@ import Icon from "../../img/icon";
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
-		<div className="row mx-0" id="filterBar">
-			<div className="col-3 h-100 py-3 px-4">
+		<div className="mx-0" id="filterBar">
+			<div className="h-100 py-3 px-4">
 				<div className="searchwrapper">
 					<Icon name="search"/>
 					<input
@@ -23,7 +23,7 @@ function FilterBar() {
 					/>
 				</div>
 			</div>
-			<div className="col-9 h-100 py-3 pl-0">
+			<div className="h-100 py-3 pl-0">
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"
@@ -43,7 +43,7 @@ function FilterBar() {
 						aria-labelledby="filterModalLabel"
 						aria-hidden="true"
 					>
-						<div className="modal-dialog modal-lg" role="document">
+						<div className="modal-dialog" role="document">
 							<div className="modal-content">
 								<div className="modal-header">
 									<h5

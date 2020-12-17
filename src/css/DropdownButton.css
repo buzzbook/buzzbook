@@ -23,3 +23,27 @@
   color: var(--primarytextcolor);
   background-color: var(--labelcolor);
 }
+
+/*.dropdownContainer,
+.shadow {
+	-webkit-box-shadow: 2px 2px 20px 0px var(--shadow);
+	-moz-box-shadow: 2px 2px 20px 0px var(--shadow);
+	box-shadow: 2px 2px 20px 0px var(--shadow);
+}*/
+
+.dropdownButton {
+	transition: 0.1s;
+}
+
+/*.dropdownButton:focus {
+	outline: none;
+}*/
+
+.tippy-box[data-theme~="transparent"] {
+	background-color: transparent;
+}
+
+#highlight {
+  color: var(--primarytextcolor);
+  background-color: var(--theme);
+}
