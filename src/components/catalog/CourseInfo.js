@@ -15,7 +15,6 @@ import RatingBar from "./RatingBar";
 import courses, {caches} from "../../scripts/courses";
 
 import Icon from "../../img/icon";
-import {Helmet} from "react-helmet";
 
 var prevSelectedCourse;
 var profGrades;
@@ -81,7 +80,7 @@ function CourseInfo() {
 	else if ((courseEnrollment.current / courseEnrollment.max) * 100 > 33) enrollmentColor = "var(--orange)";
 
 	const courseGrade = courseRaw[4] || -1;
-	let gradeColor = "var(--main-text)";
+	let gradeColor = "var(--secondarytextcolor)";
 	if (courseGrade !== -1) {
 		if (courseGrade < 3) gradeColor = "var(--red)";
 		else if (courseGrade < 3.25) gradeColor = "var(--orange)";
@@ -99,15 +98,15 @@ function CourseInfo() {
 	function prereqsHelper(val, firstRun) {
 		if (!Array.isArray(val)) {
 			return (
-				<div className="prereq" key={val.id}>
+				<>
 					{courses[val.id] ? (
 						<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"}>
-							{val.id}
+							<div className="prereq" key={val.id}>{val.id}</div>
 						</Link>
 					) : (
-						val.id
+						<div className="prereq" key={val.id}>{val.id}</div>
 					)}
-				</div>
+				</>
 			);
 		}
 
@@ -142,7 +141,7 @@ function CourseInfo() {
 			<Helmet>
 				<title>BuzzBook | {course.courseID}</title>
 			</Helmet>
-			<div className="" id="courseInfo">
+			<div className="mr-4" id="courseInfo">
 				<div
 					className="w-100 mx-0"
 					style={{
@@ -200,7 +199,7 @@ function CourseInfo() {
 									iconclass="d-inline-block mr-1 icon-light"
 								/>
 								<div style={{color: gradeColor}} className="d-inline-block">
-									{course.grade === -1 ? <>Not found</> : course.grade}
+									{course.grade === -1 ? <>N/A</> : course.grade}
 								</div>
 							</div>
 							<div style={{whiteSpace: "nowrap"}}>
@@ -220,8 +219,9 @@ function CourseInfo() {
 					<div
 						style={{
 							display: "grid",
-							gridTemplateColumns: "auto 3fr 50px",
-							gap: "0 10px"
+							gridTemplateColumns: "max-content 10rem max-content",
+							gap: "0 8px",
+							gridTemplateRows: "1fr 1fr 1fr 1fr"
 						}}
 					>
 						<div className="text-muted" style={{gridArea: "1 / 1 / 1 / 1"}}>
@@ -258,7 +258,7 @@ function CourseInfo() {
 				<div className="text-muted">Class Sections</div>
 				<table className="table-responsive">
 					<thead>
-						<tr>
+						<tr className="sectionlabelfont primarytextcolor">
 							<th scope="col">Section ID</th>
 							<th scope="col">CRN</th>
 							<th scope="col">Type</th>
@@ -309,12 +309,12 @@ function CourseInfo() {
 								grades = [];
 								instructorArr.forEach(instructor => {
 									let profName = instructor.split(" (P)")[0];
-									grades.push(profGrades[profName] || "Not found");
+									grades.push(profGrades[profName] || "N/A");
 								});
 							}
 							var sectionGradeColors = [];
 							grades.forEach(grade => {
-								let sectionGradeColor = "var(--main-text)";
+								let sectionGradeColor = "var(--secondarytextcolor)";
 								if (typeof grade === "number") {
 									if (grade < 3) sectionGradeColor = "var(--red)";
 									else if (grade < 3.25) sectionGradeColor = "var(--orange)";
@@ -334,7 +334,7 @@ function CourseInfo() {
 							};
 
 							return (
-								<tr key={section.id}>
+								<tr key={section.id} className="contentfont secondarytextcolor">
 									<td>{section.id}</td>
 									<td>{section.courseNumber}</td>
 									<td>{section.type}</td>
@@ -358,7 +358,7 @@ function CourseInfo() {
 												);
 											})
 										) : (
-											<BeatLoader size={8} margin={0} color="var(--main-text)" />
+											<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
 											// <>Loading...</>
 										)}
 									</td>

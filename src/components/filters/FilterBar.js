@@ -23,7 +23,7 @@ function FilterBar() {
 					/>
 				</div>
 			</div>
-			<div className="h-100 py-3 pl-0">
+			<div className="py-3 pl-0">
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"

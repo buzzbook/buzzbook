@@ -19,7 +19,7 @@
   box-shadow: 2px 2px 20px 0px rgba(50, 50, 50, 0.3);
 }
 
-.shownFilter, .dropdownButton:hover {
+.shownFilter, .dropdownButton:hover, #highlight {
   color: var(--primarytextcolor);
   background-color: var(--labelcolor);
 }
@@ -41,9 +41,4 @@
 
 .tippy-box[data-theme~="transparent"] {
 	background-color: transparent;
-}
-
-#highlight {
-  color: var(--primarytextcolor);
-  background-color: var(--theme);
 }

@@ -1,7 +1,7 @@
 /* Course Info */
 #courseInfo {
 	height: calc(96vh - 88px);
-	overflow-y: scroll;
+	overflow-y: auto !important;
 }
 #courseInfo table {
 	color: var(--primarytextcolor);
@@ -11,11 +11,18 @@
 	border: none;
 }
 #courseInfo table thead th {
-	color: #6c757d;
+	border-right: 3px solid var(--shadingcolor);
 	background-color: var(--labelcolor);
-	border: 1px solid var(--bgcolor);
-	padding: 0.5rem 1rem;
-	font-weight: normal;
+	padding: 0.25rem 1rem;
+	color: inherit;
+	font-weight: inherit;
+}
+#courseInfo table thead th:first-child {
+	border-radius: .2rem 0 0 .2rem;
+}
+#courseInfo table thead th:last-child {
+	border-right: none;
+	border-radius: 0 .2rem .2rem 0;
 }
 #courseInfo table td {
 	padding: 2.5px 7.5px;

@@ -30,9 +30,9 @@ function CourseListItem(course) {
 
 	let gradeColor = "var(--green)";
 	if (course.grade) {
-		if (course.grade < 1) gradeColor = "var(--red)";
-		else if (course.grade < 2) gradeColor = "var(--orange)";
-		else if (course.grade < 3) gradeColor = "var(--yellow)";
+		if (course.grade < 1.7) gradeColor = "var(--red)";
+		else if (course.grade < 2.7) gradeColor = "var(--orange)";
+		else if (course.grade < 3.7) gradeColor = "var(--yellow)";
 		else gradeColor = "var(--green)";
 	}
 

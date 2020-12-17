@@ -262,16 +262,12 @@ function CourseList({id}) {
 			id="clistwrapper"
 			className={(initCollapsed ? "savecollapsed" : "")}
 			style={{
-				display: "grid",
-				gridTemplateRows: "1fr auto 1fr",
 				height: "100%"
 			}}
 		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
-					<span className="display-block text-center mt-2">
-						<h2>No classes match your filters :(</h2>
-					</span>
+					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters 😔</h2>
 				) : (
 					<AutoSizer>
 						{({height, width}) => (
@@ -301,7 +297,7 @@ function CourseList({id}) {
 					onClick={toggleCollapse}
 				/>
 			</div>
-			<div id="savedCourses" className="hoverscroll">
+			<div id="savedCourses">
 				<SavedCourses />
 			</div>
 		</div>

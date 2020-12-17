@@ -12,15 +12,15 @@ export default function DropdownButton({
 }) {
   return (
     <Tippy content={<div className='dropdownContainer'>{children}</div>}
-      {/*trigger='click'
-      interactive
-      placement='bottom-start'
-      onShow={show}
-      onHide={hide}*/}
 			theme="transparent"
 			arrow={false}
 			singleton={singleton}
     >
+		{/*trigger='click'
+		interactive
+		placement='bottom-start'
+		onShow={show}
+		onHide={hide}*/}
       <button id={(highlight) ? 'highlight' : ''} className={`dropdownButton sectionlabelfont ${className}`}>{label}</button>
     </Tippy>
   );

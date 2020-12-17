@@ -15,11 +15,12 @@ function RatingBar({value, max = 5, highIsBetter}) {
 
 	return (
 		<div
-			className="w-100 p-1"
+			className="w-100"
 			style={{
-				backgroundColor: "var(--labelcolor)",
+				backgroundColor: "var(--darkgrey)",
 				height: 20,
-				borderRadius: 20
+				borderRadius: ".3rem",
+				padding: ".28rem .3rem"
 			}}
 		>
 			<div
@@ -28,7 +29,7 @@ function RatingBar({value, max = 5, highIsBetter}) {
 					backgroundColor: color,
 					width: `${rating}%`,
 					height: "100%",
-					borderRadius: 20
+					borderRadius: ".25rem"
 				}}
 			></div>
 		</div>

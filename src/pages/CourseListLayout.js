@@ -32,7 +32,7 @@ function Layout({id, content, savedCoursesDetails}) {
 			style={{
 				display: "grid",
 				height: "100vh",
-				gridTemplateRows: `${filterHeight} auto`
+				gridTemplateRows: `max-content auto`
 			}}
 		>
 			<FilterBar />
@@ -47,8 +47,7 @@ function Layout({id, content, savedCoursesDetails}) {
 				<div
 					className="px-4"
 					style={{
-						minWidth: "300px",
-						height: `calc(100vh - ${filterHeight}`
+						minWidth: "300px"
 					}}
 				>
 					{<CourseList id={id} />}
@@ -58,7 +57,7 @@ function Layout({id, content, savedCoursesDetails}) {
 						{<SavedCoursesDetails id={id} />}
 					</div>
 				)}
-				<div className="p-3">{content}</div>
+				<div>{content}</div>
 			</div>
 		</div>
 	);

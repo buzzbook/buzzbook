@@ -56,6 +56,7 @@ body.light-theme {
 	--themecolor: var(--theme);
 	--navcolor: var(--offwhite);
 	--shadingcolor: var(--lightwhite);
+	--contrastcolor: var(--darkgrey);
 	--primarytextcolor: var(--black);
 	--secondarytextcolor: var(--grey);
 	--labelcolor: var(--accentgrey);
@@ -171,7 +172,7 @@ body.light-theme {
 
 .contentfont { /*descriptions and information*/
 	font-family: var(--secondaryfont);
-	font-weight: 400;
+	font-weight: 300;
 	font-size: 1rem;
 	/*color: var(--secondarytextcolor);*/
 }
