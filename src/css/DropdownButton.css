@@ -20,7 +20,7 @@
 }
 
 .shownFilter, .dropdownButton:hover, #highlight {
-  color: var(--primarytextcolor);
+  color: var(--primarytextcolor) !important;
   background-color: var(--labelcolor);
 }
 

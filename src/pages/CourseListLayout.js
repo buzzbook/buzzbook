@@ -19,7 +19,7 @@ function Layout({id, content, savedCoursesDetails}) {
 	const initload = usePreload("./iconset.svg");
 	console.log("initially loaded");
 
-	const filterHeight = "80px";
+	// const filterHeight = "80px";
 
 	const savedCourses = useSelector(getSavedCourses);
 	let numSaved = Object.keys(savedCourses).length;

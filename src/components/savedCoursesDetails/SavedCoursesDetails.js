@@ -9,7 +9,7 @@ function SavedCoursesDetails({id}) {
 	const savedCoursesIDs = useSelector(getSavedCourses);
 
 	return (
-		<div style={{height: "calc(95vh - 88px)", overflowY: "scroll"}}>
+		<div style={{height: "calc(95vh - 88px)"}} className="customhoverscroll">
 			<div style={{height: "100%"}}>
 				{Object.keys(savedCoursesIDs).map(courseID => {
 					const courseData = courses[courseID];

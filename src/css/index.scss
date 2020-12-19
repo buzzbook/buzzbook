@@ -76,10 +76,10 @@ body.light-theme {
 
 /*Color Styles*/
 .primarytextcolor {
-	color: var(--primarytextcolor);
+	color: var(--primarytextcolor) !important;
 }
 .secondarytextcolor {
-	color: var(--secondarytextcolor);
+	color: var(--secondarytextcolor) !important;
 }
 .red {
 	color: var(--red);
@@ -167,14 +167,14 @@ body.light-theme {
 	font-family: var(--secondaryfont);
 	font-weight: 400;
 	font-size: 1.0625rem;
-	/*color: var(--primarytextcolor);*/
+	color: var(--primarytextcolor);
 }
 
 .contentfont { /*descriptions and information*/
 	font-family: var(--secondaryfont);
-	font-weight: 300;
+	font-weight: 400;
 	font-size: 1rem;
-	/*color: var(--secondarytextcolor);*/
+	color: var(--secondarytextcolor);
 }
 
 .navfont { /*nav bar unselected*/
@@ -226,15 +226,44 @@ body {
 	height: 2.2rem;
 }
 
+/*Utility Styles*/
 .inline {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
+/*Scrollbar Styles*/
+.hidescroll{
+  scrollbar-width: none; /*Firefox*/
+	-ms-overflow-style: none; /*IE*/
+}
+.hidescroll::-webkit-scrollbar {
+  display:none; /*Chrome, Safari*/
+}
+
+.hoverscroll{
+  overflow-y: hidden !important;
+}
+
+.customhoverscroll::-webkit-scrollbar {
+  width: 6px;
+	background-color: transparent;
+}
+.customhoverscroll::-webkit-scrollbar-thumb {
+	border-radius: .5rem;
+	background-color: transparent;
+}
+.customhoverscroll:hover::-webkit-scrollbar-thumb {
+	background-color: var(--secondarytextcolor);
+}
+.customhoverscroll, .hoverscroll:hover{
+	overflow-y: overlay !important;
+}
+
 .text-link {
 	text-decoration: none !important;
-	transition: color 2s;
+	transition: color 1s;
 }
 .text-link:hover > span.subheadingfont {
 	color: var(--secondarytextcolor) !important;

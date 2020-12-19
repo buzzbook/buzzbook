@@ -18,7 +18,8 @@ function CourseListItem(course) {
 	const savedCourses = useSelector(getSavedCourses);
 
 	let isSelected = selectedCourse === course.courseID;
-	let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
+	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
+	let bgColor = "initial";
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
@@ -56,7 +57,7 @@ function CourseListItem(course) {
 						<span className="subheadingfont">{course.name}</span>
 					</div>
 
-					<div className="contentfont">
+					<div className="contentfont primarytextcolor">
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>

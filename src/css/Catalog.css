@@ -36,10 +36,14 @@
 	display: inline-block;
 }
 .prereq {
-	padding: 7.5px 12.5px;
+	padding: .25rem .75rem;
 }
 .prereq-container {
 	padding: 5px;
+	background-color: var(--contrastcolor);
+}
+.prereq-wrapper .prereq:first-child {
+	/*margin-left: 0;*/
 }
 
 /* Scroll Bars */

@@ -21,7 +21,7 @@ export default function DropdownButton({
 		placement='bottom-start'
 		onShow={show}
 		onHide={hide}*/}
-      <button id={(highlight) ? 'highlight' : ''} className={`dropdownButton sectionlabelfont ${className}`}>{label}</button>
+      <button id={(highlight) ? 'highlight' : ''} className={`dropdownButton sectionlabelfont secondarytextcolor ${className}`}>{label}</button>
     </Tippy>
   );
 }

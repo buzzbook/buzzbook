@@ -276,7 +276,7 @@ function CourseList({id}) {
 								itemCount={filteredCourses.length}
 								itemSize={itemHeight}
 								width={width}
-								className="hoverscroll"
+								className="customhoverscroll"
 							>
 								{Row}
 							</List>

@@ -36,42 +36,6 @@
 	transform: rotate(180deg);
 }
 
-/*Scrollbar Behavior*/
-.hidescroll{
-  scrollbar-width: none; /*Firefox*/
-	-ms-overflow-style: none; /*IE*/
-}
-.hidescroll::-webkit-scrollbar {
-  display:none;
-}
-
-.hoverscroll{
-  overflow-y: hidden !important;
-}
-.hoverscroll:hover {
-	overflow-y: scroll !important;
-}
-
-.c-hoverscroll::-webkit-scrollbar {
-  width: 5px;
-	display: overlay;
-}
-.c-hoverscroll::-webkit-scrollbar-thumb {
-	background: var(--secondarytextcolor);
-	border-radius:1rem;
-}
-
-.c2-hoverscroll::-webkit-scrollbar{
-  background-color: transparent;
-	width: 5px
-}
-.c2-hoverscroll::-webkit-scrollbar-thumb{
-	background-color: transparent;
-}
-.c2-hoverscroll:hover::-webkit-scrollbar-thumb {
-	background-color: black;
-}
-
 /*Selected Course Box-Shadow*/
 #courseList > a > div {
 	cursor: pointer;
