@@ -16,6 +16,7 @@
 	padding: 0.25rem 1rem;
 	color: inherit;
 	font-weight: inherit;
+	white-space: nowrap;
 }
 #courseInfo table thead th:first-child {
 	border-radius: .2rem 0 0 .2rem;
@@ -38,10 +39,10 @@
 .prereq {
 	padding: .25rem .75rem;
 }
-.prereq-container {
+/*.prereq-container {
 	padding: 5px;
 	background-color: var(--contrastcolor);
-}
+}*/
 .prereq-wrapper .prereq:first-child {
 	/*margin-left: 0;*/
 }
@@ -65,4 +66,8 @@
 #courseInfo table::-webkit-scrollbar-thumb:hover {
 	background-color: var(--labelcolor);
 	border-radius: 15px;
+}
+
+.infowrapper .contentfont, .infowrapper.contentfont {
+	font-size: 0.9rem;
 }

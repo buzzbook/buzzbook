@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
+import {useWindowWidth} from "@react-hook/window-size";
 import {
 	updateSelectedCourse,
 	getSelectedCourse,
@@ -16,6 +17,8 @@ function CourseListItem(course) {
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
+	const windowWidth = useWindowWidth();
+	const sectionvisible = windowWidth > 1750 ? true : false;
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
@@ -49,7 +52,7 @@ function CourseListItem(course) {
 		>
 			<div className="position-relative">
 				<div style={{maxWidth: "calc(100% - 25px)"}}>
-					<div className="text-cutoff">
+					<div className="text-cutoff" style={{lineHeight: "1.25rem"}}>
 						<h5 className="d-inline headingfont">
 							{course.courseID}
 						</h5>
@@ -57,7 +60,7 @@ function CourseListItem(course) {
 						<span className="subheadingfont">{course.name}</span>
 					</div>
 
-					<div className="contentfont primarytextcolor">
+					<div className="contentfont primarytextcolor" style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>
@@ -65,11 +68,15 @@ function CourseListItem(course) {
 						<span>
 							{course.credits} credit{course.credits !== 1 && "s"}
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-						<span>
-							{course.numSections} section
-							{course.numSections > 1 && "s"}
-						</span>
+						{sectionvisible && (
+							<>
+								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+								<span>
+									{course.numSections} section
+									{course.numSections > 1 && "s"}
+								</span>
+							</>
+						)}
 						{course.grade && (
 							<>
 								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>

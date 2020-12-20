@@ -26,8 +26,8 @@ const navPages = [
 function App({location}) {
 	return (
 		<>
-			<div style={{display: "grid", gridTemplateColumns: "200px 1fr"}}>
-				<div className="pr-0" style={{maxWidth: 200}}>
+			<div style={{display: "grid", gridTemplateColumns: "180px 1fr"}}>
+				<div className="pr-0" style={{maxWidth: 180}}>
 					<Nav />
 				</div>
 				<div className="px-0">

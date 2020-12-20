@@ -255,7 +255,7 @@ function CourseList({id}) {
 	};
 
 	const windowWidth = useWindowWidth();
-	const itemHeight = windowWidth > 1630 ? 70 : 90;
+	const itemHeight = windowWidth > 1630 ? 60 : 80;
 
 	return (
 		<div
@@ -267,7 +267,7 @@ function CourseList({id}) {
 		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
-					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters 😔</h2>
+					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters <span role="img" aria-label="unhappyface">😔</span></h2>
 				) : (
 					<AutoSizer>
 						{({height, width}) => (

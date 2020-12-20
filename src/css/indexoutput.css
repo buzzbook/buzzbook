@@ -1,28 +1,9 @@
 body {
-  --main-bg: #141414;
-  --gt-gold: #eaaa00;
-  --main-text: #dadada;
-  --nav-link: #dadada;
-  --border: #555;
-  --input-border: #555;
-  --input: #1d1d1d;
-  --low-alpha: red;
-  --med-alpha: pink;
-  --high-alpha: yellow;
   --icon-light: invert(0);
   --icon-dark: invert(100%);
 }
 
 body.light-theme {
-  --main-bg: white;
-  --main-text: #353535;
-  --nav-link: #444444;
-  --border: #333;
-  --input-border: #aaa;
-  --input: #eee;
-  --low-alpha: red;
-  --med-alpha: pink;
-  --high-alpha: yellow;
   --icon-light: invert(100%);
   --icon-dark: invert(0);
 }
@@ -56,6 +37,7 @@ body.light-theme {
   --themecolor: var(--theme);
   --navcolor: var(--offwhite);
   --shadingcolor: var(--lightwhite);
+  --contrastcolor: var(--darkgrey);
   --primarytextcolor: var(--black);
   --secondarytextcolor: var(--grey);
   --labelcolor: var(--accentgrey);
@@ -76,11 +58,11 @@ body.light-theme {
 
 /*Color Styles*/
 .primarytextcolor {
-  color: var(--primarytextcolor);
+  color: var(--primarytextcolor) !important;
 }
 
 .secondarytextcolor {
-  color: var(--secondarytextcolor);
+  color: var(--secondarytextcolor) !important;
 }
 
 .red {
@@ -119,13 +101,14 @@ body.light-theme {
   font-size: 2.5rem;
   color: var(--primarytextcolor);
   font-size: 40px;
-  line-height: 32px;
-  transform: translateY(0.01em);
+  line-height: 48px;
+  transform: translateY(0.21em);
   padding-top: 1;
+  font-family: Raleway;
 }
 .titlefont::before {
   content: "";
-  margin-top: -1px;
+  margin-top: -17px;
   display: block;
   height: 0;
 }
@@ -148,8 +131,8 @@ body.light-theme {
 
 .subheadingfont {
   /*search bar course name*/
-  font-family: var(--primaryfont);
-  font-weight: 500;
+  font-family: var(--secondaryfont);
+  font-weight: 400;
   font-size: 1rem;
   color: var(--primarytextcolor);
 }
@@ -159,15 +142,15 @@ body.light-theme {
   font-family: var(--secondaryfont);
   font-weight: 400;
   font-size: 1.0625rem;
-  /*color: var(--primarytextcolor);*/
+  color: var(--primarytextcolor);
 }
 
 .contentfont {
   /*descriptions and information*/
   font-family: var(--secondaryfont);
-  font-weight: 400;
+  font-weight: 300;
   font-size: 1rem;
-  /*color: var(--secondarytextcolor);*/
+  color: var(--secondarytextcolor);
 }
 
 .navfont {
@@ -176,6 +159,17 @@ body.light-theme {
   font-weight: 400;
   font-size: 1.2rem;
   color: var(--textcolor);
+  font-size: 19.2px;
+  line-height: 24px;
+  transform: translateY(0.185em);
+  padding-top: 1;
+  font-family: Karla;
+}
+.navfont::before {
+  content: "";
+  margin-top: -9px;
+  display: block;
+  height: 0;
 }
 
 .navselectedfont {
@@ -184,6 +178,17 @@ body.light-theme {
   font-weight: 500;
   font-size: 1.2rem;
   color: var(--theme);
+  font-size: 19.2px;
+  line-height: 24px;
+  transform: translateY(0.185em);
+  padding-top: 1;
+  font-family: Karla;
+}
+.navselectedfont::before {
+  content: "";
+  margin-top: -9px;
+  display: block;
+  height: 0;
 }
 
 html {
@@ -221,15 +226,51 @@ body {
   height: 2.2rem;
 }
 
+/*Utility Styles*/
 .inline {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
+/*Scrollbar Styles*/
+.hidescroll {
+  scrollbar-width: none;
+  /*Firefox*/
+  -ms-overflow-style: none;
+  /*IE*/
+}
+
+.hidescroll::-webkit-scrollbar {
+  display: none;
+  /*Chrome, Safari*/
+}
+
+.hoverscroll {
+  overflow-y: hidden !important;
+}
+
+.customhoverscroll::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.customhoverscroll::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: transparent;
+}
+
+.customhoverscroll:hover::-webkit-scrollbar-thumb {
+  background-color: var(--secondarytextcolor);
+}
+
+.customhoverscroll, .hoverscroll:hover {
+  overflow-y: overlay !important;
+}
+
 .text-link {
   text-decoration: none !important;
-  transition: color 2s;
+  transition: color 1s;
 }
 
 .text-link:hover > span.subheadingfont {

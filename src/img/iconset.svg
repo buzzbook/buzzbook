@@ -47,6 +47,15 @@
       <path id="buzz-b15aZpmJUr-2" data-name="b15aZpmJUr" d="M1985.29,921.54C1956.31,853,1724.22,613,1645.14,533.9s-522.13-356-603.9-350.75-29,108.13,229.27,184.6q258.21,76.5,643.61,569.41Q2014.28,990.13,1985.29,921.54Z" transform="translate(-252.92 -179.88)" fill="rgba(0,0,0,0)" stroke="#000" stroke-miterlimit="25.6" stroke-width="6.4" />
     </g>
   </symbol>
+  <symbol viewBox="0 0 11.08 11.082" id="icon-close">
+    <title>close</title>
+    <g id="close-Group_453" data-name="Group 453" transform="translate(-770.939 -372.939)">
+      <g id="close-Group_452" data-name="Group 452" transform="translate(772 374)">
+        <path id="close-Path_1329" data-name="Path 1329" d="M10.555,1.595,1.6,10.546" transform="translate(-1.599 -1.591)" fill="none" stroke="#7c7c7c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+        <path id="close-Path_1330" data-name="Path 1330" d="M10.56,10.553,1.6,1.593" transform="translate(-1.601 -1.593)" fill="none" stroke="#7c7c7c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      </g>
+    </g>
+  </symbol>
   <symbol viewBox="0 0 14.283 14.283" id="icon-collapse">
     <title>collapse</title>
     <g id="collapse-Group_355" data-name="Group 355" transform="translate(-2 -2)">
@@ -96,6 +105,14 @@
       <path id="grades-Path_1110" data-name="Path 1110" d="M8.67,2.789H6.138A3.285,3.285,0,0,0,2.75,6.35v5.63a3.281,3.281,0,0,0,3.388,3.561h5.975A3.282,3.282,0,0,0,15.5,11.98V9.252" transform="translate(-2.75 -2.763)" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
       <path id="grades-Path_1111" data-name="Path 1111" d="M8.592,8.283l5.06-5.06a1.615,1.615,0,0,1,2.283,0l.824.824a1.614,1.614,0,0,1,0,2.283l-5.085,5.085a1.47,1.47,0,0,1-1.039.431H8.1l.064-2.56A1.47,1.47,0,0,1,8.592,8.283Z" transform="translate(-4.477 -2.75)" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
       <path id="grades-Path_1112" data-name="Path 1112" d="M15.165,4.6l3.092,3.092" transform="translate(-6.759 -3.348)" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 15.363 15.363" id="icon-info">
+    <title>info</title>
+    <g id="info-Group_455" data-name="Group 455" transform="translate(3176.363 -56.637) rotate(180)">
+      <path id="info-Path_1335" data-name="Path 1335" d="M489.682,50.75a6.932,6.932,0,1,1-6.932,6.932A6.932,6.932,0,0,1,489.682,50.75Z" transform="translate(2679 -122)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="info-Path_1336" data-name="Path 1336" d="M491.995,56.2v3.311" transform="translate(2676.683 -123.367)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="info-Path_1337" data-name="Path 1337" d="M491.995,63.8H492" transform="translate(2676.683 -125.27)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
     </g>
   </symbol>
   <symbol viewBox="0 0 2302.703 2278.365" id="icon-itlogo">
@@ -150,6 +167,15 @@
       <path id="search-Path_1124" data-name="Path 1124" d="M18.018,18.485,21.542,22" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
     </g>
   </symbol>
+  <symbol viewBox="0 0 13.5 13.5" id="icon-section">
+    <title>section</title>
+    <g id="section-Group_454" data-name="Group 454" transform="translate(-2680.25 120.75)">
+      <path id="section-Path_1331" data-name="Path 1331" d="M15.306,2h1.96a1.476,1.476,0,0,1,1.469,1.482V5.458a1.476,1.476,0,0,1-1.469,1.482h-1.96a1.476,1.476,0,0,1-1.469-1.482V3.482A1.476,1.476,0,0,1,15.306,2Z" transform="translate(2674.265 -122)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="section-Path_1332" data-name="Path 1332" d="M3.469,2H5.429A1.476,1.476,0,0,1,6.9,3.482V5.458A1.476,1.476,0,0,1,5.429,6.941H3.469A1.476,1.476,0,0,1,2,5.458V3.482A1.476,1.476,0,0,1,3.469,2Z" transform="translate(2679 -122)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="section-Path_1333" data-name="Path 1333" d="M3.469,13.766H5.429A1.476,1.476,0,0,1,6.9,15.248v1.976a1.476,1.476,0,0,1-1.469,1.482H3.469A1.476,1.476,0,0,1,2,17.224V15.248A1.476,1.476,0,0,1,3.469,13.766Z" transform="translate(2679 -126.706)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+      <path id="section-Path_1334" data-name="Path 1334" d="M15.306,13.766h1.96a1.476,1.476,0,0,1,1.469,1.483v1.976a1.476,1.476,0,0,1-1.469,1.482h-1.96a1.476,1.476,0,0,1-1.469-1.482V15.248A1.476,1.476,0,0,1,15.306,13.766Z" transform="translate(2674.265 -126.706)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
+    </g>
+  </symbol>
   <symbol viewBox="0 0 19.534 20.722" id="icon-settings">
     <title>settings</title>
     <g id="settings-Group_357" data-name="Group 357" transform="translate(-2.4 -1.528)">
@@ -159,13 +185,21 @@
   </symbol>
   <symbol viewBox="0 0 50 50" id="icon-sun">
     <title>sun</title>
-    <path fill="none" stroke="#b3a369" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M25 16c4.963 0 9 4.038 9 9 0 4.963-4.037 9-9 9-4.962 0-9-4.037-9-9C16 20.038 20.038 16 25 16M25 45L25 39M25 11L25 5M5 25L11 25M39 25L45 25M10.858 39.143L15.101 34.9M34.899 15.102L39.143 10.858M10.858 10.858L15.101 15.102M34.899 34.9L39.143 39.143" />
+    <path fill="none" stroke="#eaaa00" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M25 16c4.963 0 9 4.038 9 9 0 4.963-4.037 9-9 9-4.962 0-9-4.037-9-9C16 20.038 20.038 16 25 16M25 45L25 39M25 11L25 5M5 25L11 25M39 25L45 25M10.858 39.143L15.101 34.9M34.899 15.102L39.143 10.858M10.858 10.858L15.101 15.102M34.899 34.9L39.143 39.143" />
   </symbol>
   <symbol viewBox="0 0 12.16 14.773" id="icon-unsave">
     <title>unsave</title>
     <g id="unsave-Group_451" data-name="Group 451" transform="translate(-3.546 -2.028)">
       <path id="unsave-Path_1104" data-name="Path 1104" d="M9.365,13.683l-4.08,2.235a.68.68,0,0,1-.907-.271h0a.718.718,0,0,1-.082-.321v-9.9c0-1.889,1.291-2.644,3.148-2.644h4.363c1.8,0,3.148.705,3.148,2.519v10.03a.674.674,0,0,1-.674.674.742.742,0,0,1-.327-.082L9.85,13.683A.51.51,0,0,0,9.365,13.683Z" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill-rule="evenodd" />
       <path id="unsave-Path_1105" data-name="Path 1105" d="M8.37,9.323h5.018" transform="translate(-1.271 -2.043)" fill="none" stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 16.049 14.578" id="icon-warning">
+    <title>warning</title>
+    <g id="warning-Group_456" data-name="Group 456" transform="translate(-3256.918 67.369)">
+      <path id="warning-Path_1339" data-name="Path 1339" d="M580.35,64.781h11.322a1.624,1.624,0,0,0,1.422-2.235L587.4,52.589a1.626,1.626,0,0,0-2.845,0l-5.689,9.957a1.626,1.626,0,0,0,.894,2.118,1.662,1.662,0,0,0,.529.117" transform="translate(2679 -118.363)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="warning-Path_1340" data-name="Path 1340" d="M587.99,60.72V58.3" transform="translate(2676.984 -119.791)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+      <path id="warning-Path_1342" data-name="Path 1342" d="M587.99,58.31V58.3" transform="translate(2676.984 -114.796)" fill="none" stroke="#3b3b3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
     </g>
   </symbol>
 </svg>

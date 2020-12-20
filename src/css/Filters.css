@@ -10,7 +10,7 @@
 .form-control,
 .input-group-text,
 .custom-select {
-	border-color: var(--inputcolor);
+	border-color: var(--boundarycolor);
 }
 
 /*.form-control,

@@ -1,28 +1,9 @@
 body {
-	--main-bg: #141414;
-	--gt-gold: #eaaa00;
-	--main-text: #dadada;
-	--nav-link: #dadada;
-	--border: #555;
-	--input-border: #555;
-	--input: #1d1d1d;
-	--low-alpha: red;
-	--med-alpha: pink;
-	--high-alpha: yellow;
 	--icon-light: invert(0);
 	--icon-dark: invert(100%);
 }
 
 body.light-theme {
-	--main-bg: white;
-	--main-text: #353535;
-	--nav-link: #444444;
-	--border: #333;
-	--input-border: #aaa;
-	--input: #eee;
-	--low-alpha: red;
-	--med-alpha: pink;
-	--high-alpha: yellow;
 	--icon-light: invert(100%);
 	--icon-dark: invert(0);
 }
@@ -30,6 +11,9 @@ body.light-theme {
 * {
 	outline: none !important;
 }
+
+$baseFontSize: 16;
+$gridRowHeight: 4;
 
 /*Color Definitions*/
 :root {
@@ -40,6 +24,7 @@ body.light-theme {
 	--grey: #7C7C7C;
 	--accentgrey: #EDEDED;
 	--darkgrey: #E7E7E7; /*for ratings bar*/
+	--midgrey: #E0E0E0;
 	--lightgrey: #C6C6C6;
 	--red: #F75959;
 	--crimson: #99001A;
@@ -57,6 +42,7 @@ body.light-theme {
 	--navcolor: var(--offwhite);
 	--shadingcolor: var(--lightwhite);
 	--contrastcolor: var(--darkgrey);
+	--boundarycolor: var(--midgrey);
 	--primarytextcolor: var(--black);
 	--secondarytextcolor: var(--grey);
 	--labelcolor: var(--accentgrey);
@@ -108,7 +94,7 @@ body.light-theme {
   @return ($lineHeightScale - 1) / 2 + $descenderHeightScale;
 }
 
-@mixin basekick($typeSizeModifier, $baseFontSize, $descenderHeightScale, $typeRowSpan, $gridRowHeight, $capHeight) {
+@mixin basekick($typeSizeModifier, $typeRowSpan, $descenderHeightScale, $capHeight) {
   $fontSize: $typeSizeModifier * $baseFontSize;
   $lineHeight: $typeRowSpan * $gridRowHeight;
   $typeOffset: calculateTypeOffset($lineHeight, $fontSize, $descenderHeightScale);
@@ -133,13 +119,29 @@ body.light-theme {
   }
 }
 
+@mixin Raleway($typeSizeModifier, $typeRowSpan) {
+  $ralewayDescenderHeightScale: 0.11;
+  $ralewayCapHeight: 0.75;
+
+  @include basekick($typeSizeModifier, $typeRowSpan, $ralewayDescenderHeightScale, $ralewayCapHeight);
+  font-family: Raleway;
+}
+
+@mixin Karla($typeSizeModifier, $typeRowSpan) {
+  $karlaDescenderHeightScale: 0.06;
+  $karlaCapHeight: 0.75;
+
+  @include basekick($typeSizeModifier, $typeRowSpan, $karlaDescenderHeightScale, $karlaCapHeight);
+  font-family: Karla;
+}
+
 /*Font Styles*/
 .titlefont { /*course number*/
 	font-family: var(--primaryfont);
 	font-weight: 600;
 	font-size: 2.5rem;
 	color: var(--primarytextcolor);
-	@include basekick(2.5, 16, .11, 8, 4, 0.75);
+	@include Raleway(2.5, 12)
 }
 
 .subtitlefont { /*course name*/
@@ -147,6 +149,7 @@ body.light-theme {
 	font-weight: 400;
 	font-size: 1.6875rem;
 	color: var(--themecolor);
+	@include Raleway(1.6875, 5.25)
 }
 
 .headingfont { /*search bar course number*/
@@ -157,8 +160,8 @@ body.light-theme {
 }
 
 .subheadingfont { /*search bar course name*/
-	font-family: var(--primaryfont);
-	font-weight: 500;
+	font-family: var(--secondaryfont);
+	font-weight: 400;
 	font-size: 1rem;
 	color: var(--primarytextcolor);
 }
@@ -168,13 +171,15 @@ body.light-theme {
 	font-weight: 400;
 	font-size: 1.0625rem;
 	color: var(--primarytextcolor);
+	// @include Karla(1.0625, 5);
 }
 
 .contentfont { /*descriptions and information*/
 	font-family: var(--secondaryfont);
-	font-weight: 400;
+	font-weight: 300;
 	font-size: 1rem;
 	color: var(--secondarytextcolor);
+	// @include basekick(1, 16, .11, 8, 4, 0.75);
 }
 
 .navfont { /*nav bar unselected*/
@@ -182,6 +187,7 @@ body.light-theme {
 	font-weight: 400;
 	font-size: 1.2rem;
 	color: var(--textcolor);
+	@include Karla(1.2, 6)
 }
 
 .navselectedfont{ /*nav bar selected*/
@@ -189,6 +195,7 @@ body.light-theme {
 	font-weight: 500;
 	font-size: 1.2rem;
 	color: var(--theme);
+	@include Karla(1.2, 6)
 }
 
 html {

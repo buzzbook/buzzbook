@@ -114,7 +114,7 @@ function CourseInfo() {
 		var output = [];
 		for (let i = 1; i < val.length; i++) {
 			if ((!firstRun || val.length > 2) && Array.isArray(val[i])) {
-				output.push(<div className="prereq-container">{prereqsHelper(val[i], false)}</div>);
+				output.push(<>&#65339;{prereqsHelper(val[i], false)}&#65341;</>);
 			} else output.push(prereqsHelper(val[i], false));
 			if (i !== val.length - 1) {
 				output.push(<>{separator}</>);
@@ -147,11 +147,12 @@ function CourseInfo() {
 					style={{
 						display: "grid",
 						gridTemplateColumns: "3fr 1fr max-content 2fr",
+						gridTemplateRows: "4rem",
 						gap: "0 4rem"
 					}}
 				>
 					<div>
-						<div className="inline">
+						<div className="inline coursetitle">
 							<h1 className="titlefont mb-0">{course.courseID}</h1>
 							{isSaved ? (
 								<Icon
@@ -169,44 +170,62 @@ function CourseInfo() {
 								/>
 							)}
 						</div>
-						<h4 className="subtitlefont" style = {{marginTop: ".5rem"}}>{course.name}</h4>
+						<h4 className="subtitlefont mb-0" style = {{marginTop: ".75rem"}}>{course.name}</h4>
 					</div>
-					<div>
-						<div className="sectionlabelfont">Statistics</div>
-						<div className="contentfont">
-							<div style={{whiteSpace: "nowrap"}}>
-								<Icon
-									name="enrollment"
-									alt="enrollment icon"
-									width="11px"
-									iconclass="d-inline-block mr-1 icon-light"
-								/>
-								<div style={{color: enrollmentColor, fontWeight: "500"}} className="d-inline-block">
-									{course.enrollment.current}/{course.enrollment.max}
-								</div>
+					<div
+						className="infowrapper"
+						style = {{
+							display: "grid",
+							gridTemplateColumns: "max-content max-content",
+							gap: "0 12px",
+							gridTemplateRows: "1fr 1fr 1fr"
+						}}
+					>
+						<div className="sectionlabelfont" style={{gridArea: "1 / 1 / 1 / 2"}}>Statistics</div>
+						<div style={{whiteSpace: "nowrap", gridArea: "2 / 1 / 2 / 1"}} className="inline contentfont">
+							<Icon
+								name="enrollment"
+								alt="enrollment icon"
+								width="11px"
+								iconclass="d-inline-block mr-1 icon-dark"
+							/>
+							<div style={{color: enrollmentColor, fontWeight: "500"}} className="d-inline-block">
+								{course.enrollment.current}/{course.enrollment.max}
 							</div>
-							<div style={{whiteSpace: "nowrap"}}>
-								<Icon
-									name="grades"
-									alt="grade icon"
-									width="11px"
-									iconclass="d-inline-block mr-1 icon-light"
-								/>
-								<div style={{color: gradeColor, fontWeight: "500"}} className="d-inline-block">
-									{course.grade === -1 ? <>N/A</> : course.grade}
-								</div>
+						</div>
+						<div style={{whiteSpace: "nowrap", gridArea: "3 / 1 / 3 / 1"}} className="inline contentfont">
+							<Icon
+								name="grades"
+								alt="grade icon"
+								width="11px"
+								iconclass="d-inline-block mr-1 icon-dark"
+							/>
+							<div style={{color: gradeColor, fontWeight: "500"}} className="d-inline-block">
+								{course.grade === -1 ? <span style={{fontWeight: "300"}}>N/A</span> : course.grade}
 							</div>
-							<div style={{whiteSpace: "nowrap"}}>
-								<Icon
-									name="credits"
-									alt="credits icon"
-									width="11px"
-									iconclass="d-inline-block mr-1 icon-light"
-								/>
-								<div className="d-inline-block secondarytextcolor">
-									{course.credits} credit
-									{course.credits !== 1 && "s"}
-								</div>
+						</div>
+						<div style={{whiteSpace: "nowrap", gridArea: "2 / 2 / 2 / 2"}} className="inline contentfont">
+							<Icon
+								name="credits"
+								alt="credits icon"
+								width="11px"
+								iconclass="d-inline-block mr-1 icon-dark"
+							/>
+							<div className="d-inline-block secondarytextcolor">
+								{course.credits} credit
+								{course.credits !== 1 && "s"}
+							</div>
+						</div>
+						<div style={{whiteSpace: "nowrap", gridArea: "3 / 2 / 3 / 2"}} className="inline contentfont">
+							<Icon
+								name="section"
+								alt="sections icon"
+								width="11px"
+								iconclass="d-inline-block mr-1 icon-dark"
+							/>
+							<div className="d-inline-block secondarytextcolor">
+								{Object.keys(course.sections).length} section
+								{Object.keys(course.sections).length > 1 && "s"}
 							</div>
 						</div>
 					</div>
@@ -215,9 +234,9 @@ function CourseInfo() {
 							display: "grid",
 							gridTemplateColumns: "max-content 10rem max-content",
 							gap: "0 8px",
-							gridTemplateRows: "1fr 1fr 1fr 1fr",
+							gridTemplateRows: "1fr 1fr 1fr",
 						}}
-						className="contentfont"
+						className="contentfont infowrapper"
 					>
 						<div className="sectionlabelfont" style={{gridArea: "1 / 1 / 1 / 1"}}>
 							Ratings
@@ -254,7 +273,7 @@ function CourseInfo() {
 				<table className="table-responsive">
 					<thead>
 						<tr className="sectionlabelfont primarytextcolor">
-							<th scope="col">Section ID</th>
+							<th scope="col">ID</th>
 							<th scope="col">CRN</th>
 							<th scope="col">Type</th>
 							<th scope="col">Enrollment</th>

@@ -17,8 +17,8 @@ function RatingBar({value, max = 5, highIsBetter}) {
 		<div
 			className="w-100"
 			style={{
-				backgroundColor: "var(--darkgrey)",
-				height: 20,
+				backgroundColor: "var(--contrastcolor)",
+				height: 17,
 				borderRadius: ".3rem",
 				padding: ".28rem .3rem"
 			}}

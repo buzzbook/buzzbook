@@ -5,7 +5,7 @@ import FilterBar from "../components/filters/FilterBar";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
 import {usePreload} from "../img/icon";
-//import stylechanges from "../unused";
+import stylechanges from "../unused";
 
 function Layout({id, content, savedCoursesDetails}) {
 	// useLayoutEffect(() => {

@@ -54,10 +54,6 @@
 	text-decoration: none;
 }
 
-#courseList .selected {
-	background-color: var(--low-alpha) !important;
-}
-
 .text-cutoff {
 	white-space: nowrap;
 	overflow: hidden;
@@ -97,7 +93,7 @@
 	filter: invert(50%) sepia(100%) hue-rotate(-20deg) saturate(30);
 }
 
-.inline > svg {
+.coursetitle.inline > svg {
 	position: relative;
 	transform: none;
 	margin-left: 1rem;
