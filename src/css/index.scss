@@ -186,7 +186,7 @@ $gridRowHeight: 4;
 	font-family: var(--secondaryfont);
 	font-weight: 400;
 	font-size: 1.2rem;
-	color: var(--textcolor);
+	color: var(--primarytextcolor);
 	@include Karla(1.2, 6)
 }
 
@@ -201,7 +201,7 @@ $gridRowHeight: 4;
 html {
 	font-size: 16px;
 	background-color: var(--bgcolor);
-	color: var(--textcolor);
+	color: var(--primarytextcolor);
 	scroll-behavior: smooth;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;

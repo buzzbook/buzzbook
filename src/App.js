@@ -13,6 +13,7 @@ import Enrollment from "./pages/Enrollment";
 import Scheduler from "./pages/Scheduler";
 import Ratings from "./pages/Ratings";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 const navPages = [
 	{component: Catalog, path: "/catalog/"},
@@ -42,6 +43,7 @@ function App({location}) {
 								key={index}
 							/>
 						))}
+						<Route path="" component={NotFound} />
 					</Switch>
 				</div>
 			</div>

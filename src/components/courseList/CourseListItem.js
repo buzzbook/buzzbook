@@ -34,10 +34,20 @@ function CourseListItem(course) {
 
 	let gradeColor = "var(--green)";
 	if (course.grade) {
-		if (course.grade < 1.7) gradeColor = "var(--red)";
-		else if (course.grade < 2.7) gradeColor = "var(--orange)";
-		else if (course.grade < 3.7) gradeColor = "var(--yellow)";
+		if (course.grade <= 1.5) gradeColor = "var(--red)";
+		else if (course.grade <= 2.5) gradeColor = "var(--orange)";
+		else if (course.grade <= 3.5) gradeColor = "var(--yellow)";
 		else gradeColor = "var(--green)";
+	}
+
+	let grademap = {"A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3, "B-": 2.7, "C+": 2.3, "C": 2, "C-": 1.7, "D+": 1.3, "D": 1.0, "F": 0}
+	let delta = 4.01;
+	var lettergrade;
+	for (let letter in grademap) {
+		if (Math.abs(grademap[letter] - course.grade) <= delta) {
+			delta = Math.abs(grademap[letter] - course.grade);
+			lettergrade = letter;
+		}
 	}
 
 	const listItem = (
@@ -80,7 +90,7 @@ function CourseListItem(course) {
 						{course.grade && (
 							<>
 								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-								<span style={{color: gradeColor, fontWeight: "700"}}>{course.grade}</span>
+								<span style={{color: gradeColor, fontWeight: "700"}}>{lettergrade}</span>
 							</>
 						)}
 					</div>
