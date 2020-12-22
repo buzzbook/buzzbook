@@ -168,14 +168,14 @@ function CourseInfo() {
 								<Icon
 									name="unsave"
 									alt="unsave course"
-									iconclass="unsaveIcon icon-dark"
+									iconclass="unsaveIcon iconfilter"
 									onClick={() => dispatch(removeCourse(course.courseID))}
 								/>
 							) : (
 								<Icon
 									name="save"
 									alt="save course"
-									iconclass="saveIcon icon-dark"
+									iconclass="saveIcon iconfilter"
 									onClick={() => dispatch(saveCourse(course.courseID))}
 								/>
 							)}
@@ -197,7 +197,7 @@ function CourseInfo() {
 								name="enrollment"
 								alt="enrollment icon"
 								width="11px"
-								iconclass="d-inline-block mr-1 icon-dark"
+								iconclass="d-inline-block mr-1 iconfilter"
 							/>
 							<div style={{color: enrollmentColor, fontWeight: "500"}} className="d-inline-block">
 								{course.enrollment.current}/{course.enrollment.max}
@@ -208,7 +208,7 @@ function CourseInfo() {
 								name="grades"
 								alt="grade icon"
 								width="11px"
-								iconclass="d-inline-block mr-1 icon-dark"
+								iconclass="d-inline-block mr-1 iconfilter"
 							/>
 							<div style={{color: gradeColor, fontWeight: "500"}} className="d-inline-block">
 								{course.grade === -1 ? <span style={{fontWeight: "300"}}>N/A</span> : <>{lettergrade} ({course.grade})</>}
@@ -219,7 +219,7 @@ function CourseInfo() {
 								name="credits"
 								alt="credits icon"
 								width="11px"
-								iconclass="d-inline-block mr-1 icon-dark"
+								iconclass="d-inline-block mr-1 iconfilter"
 							/>
 							<div className="d-inline-block secondarytextcolor">
 								{course.credits} credit
@@ -231,7 +231,7 @@ function CourseInfo() {
 								name="section"
 								alt="sections icon"
 								width="11px"
-								iconclass="d-inline-block mr-1 icon-dark"
+								iconclass="d-inline-block mr-1 iconfilter"
 							/>
 							<div className="d-inline-block secondarytextcolor">
 								{Object.keys(course.sections).length} section

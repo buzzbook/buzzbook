@@ -293,7 +293,7 @@ function CourseList({id}) {
 				<Icon
 					name="collapse"
 					alt="collapse"
-					iconclass="icon-dark"
+					iconclass="iconfilter"
 					onClick={toggleCollapse}
 				/>
 			</div>

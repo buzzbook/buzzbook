@@ -152,7 +152,7 @@ function Filters() {
 				<Icon
 					name="close"
 					alt="clear filters"
-					iconclass="ml-2 icon-dark"
+					iconclass="ml-2 iconfilter"
 					style={{cursor: "pointer"}}
 					onClick={clearFilters}
 				/>

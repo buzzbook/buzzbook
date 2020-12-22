@@ -3,17 +3,15 @@ import iconset from "../../img/iconset.svg";
 
 const localStorage = window.localStorage;
 const initialTheme = localStorage.getItem("theme");
-if (!initialTheme) {
-	localStorage.setItem("theme", "dark");
-} else if (initialTheme === "light") {
-	document.body.classList.add("light-theme");
+if (initialTheme === "dark") {
+	document.documentElement.classList.add("dark-theme");
 }
 
 function ThemeChanger() {
-	const [theme, updateTheme] = useState(initialTheme || "dark");
+	const [theme, updateTheme] = useState(initialTheme || "light");
 
 	const toggleTheme = () => {
-		document.body.classList.toggle("light-theme");
+		document.documentElement.classList.toggle("dark-theme");
 		let newTheme = theme === "dark" ? "light" : "dark";
 		localStorage.setItem("theme", newTheme);
 		updateTheme(newTheme);

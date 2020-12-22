@@ -27,7 +27,7 @@ function FilterBar() {
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"
-						className="mr-3 icon-dark"
+						className="mr-3 iconfilter"
 						style={{width: 20, height: 20, cursor: "pointer"}}
 						data-toggle="modal"
 						data-target="#filterModal"

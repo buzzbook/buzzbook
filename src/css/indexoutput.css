@@ -1,11 +1,11 @@
 body {
   --icon-light: invert(0);
-  --icon-dark: invert(100%);
+  --iconfilter: invert(100%);
 }
 
 body.light-theme {
   --icon-light: invert(100%);
-  --icon-dark: invert(0);
+  --iconfilter: invert(0);
 }
 
 * {
@@ -289,8 +289,8 @@ body {
   width: 15px;
 }
 
-.icon-dark {
-  filter: var(--icon-dark);
+.iconfilter {
+  filter: var(--iconfilter);
   height: 15px;
   width: 15px;
 }

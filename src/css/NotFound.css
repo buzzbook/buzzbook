@@ -3,7 +3,7 @@
   padding: 0;
   width: 1.5em;
   height: 1.5em;
-  border: 1px solid #ddd;
+  border: 1px solid var(--boundarycolor);
 }
 .piece-view {
   margin-bottom: 12px;
@@ -34,5 +34,5 @@
   background-color: var(--theme);
 }
 .piece-preview {
-  background-color: #eee;
+  background-color: var(--labelcolor);
 }

@@ -4,7 +4,7 @@ raw icon files into `./raw_icons` and run `grunt`, svg-store will aggregate into
 <Icon
 	name="save"
 	alt="save course"
-	iconclass="saveIcon icon-dark"
+	iconclass="saveIcon iconfilter"
 	onClick={() => dispatch(saveCourse(course.courseID))}
 />
 ```

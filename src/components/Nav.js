@@ -41,7 +41,7 @@ function Nav() {
 						<Icon
 							name="itlogo"
 							alt="Buzz"
-							iconclass="mr-2 icon-dark"
+							iconclass="mr-2 iconfilter"
 						/>
 						<br />
 					<b>

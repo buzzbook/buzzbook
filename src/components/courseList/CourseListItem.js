@@ -19,6 +19,7 @@ function CourseListItem(course) {
 	const savedCourses = useSelector(getSavedCourses);
 	const windowWidth = useWindowWidth();
 	const sectionvisible = windowWidth > 1750 ? true : false;
+	//const isdark = document.documentElement.classList.contains("dark-theme");
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
@@ -67,10 +68,10 @@ function CourseListItem(course) {
 							{course.courseID}
 						</h5>
 						&nbsp;&nbsp;
-						<span className="subheadingfont">{course.name}</span>
+						<span className={"subheadingfont altheadingcolor"}>{course.name}</span>
 					</div>
 
-					<div className="contentfont primarytextcolor" style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
+					<div className={"contentfont altheadingcolor"} style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>
@@ -99,7 +100,7 @@ function CourseListItem(course) {
 				<Icon
 					name={isSaved? "unsave": "save"}
 					alt={isSaved? "unsave course": "save course"}
-					iconclass={isSaved? "unsaveIcon icon-dark": "saveIcon icon-dark"}
+					iconclass={isSaved? "unsaveIcon iconfilter": "saveIcon iconfilter"}
 					onClick={isSaved? (
 						() => dispatch(removeCourse(course.courseID))
 					) : (

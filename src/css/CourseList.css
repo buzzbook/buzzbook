@@ -10,13 +10,24 @@
 	box-shadow:
 				inset 0px 5px 8px -10px var(--primarytextcolor),
     		inset 0px -5px 8px -10px var(--primarytextcolor);
-	transition: height 1.5s;
+	transition: height 1.5s, box-shadow 0.4s !important;
 }
+
+.dark-theme #courseList {
+	box-shadow:
+				inset 0px 12px 10px -10px black,
+				inset 0px -12px 10px -10px black;
+	box-shadow:
+				inset 0px 11px 10px -13px black,
+				inset 0px -11px 10px -13px black;
+	/*specifically for dark mode*/
+}
+
 #savedCourses {
 	height: 34%;
 	/*overflow-y: scroll;*/
 	overflow-x: hidden;
-	transition: height 1.5s;
+	transition: height 1.5s !important;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
@@ -81,7 +92,7 @@
 	right: 0;
 	width: 15px;
 	height: 15px;
-	transition: 0.2s;
+	transition: 0.2s !important;
 	grid-area: icon;
 	/*align-self: center;*/
 }
