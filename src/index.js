@@ -12,6 +12,7 @@ import "bootstrap";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+//import "./css/reset.css"; will need to rework some default modifiers
 import "./css/index.scss";
 
 ReactDOM.render(

@@ -5,7 +5,7 @@
   border-radius: 15px;
   background-color: var(--bgcolor);
   color: var(--inputcolor);
-  font-size: 1rem !important;
+  font-size: .925rem !important;
   outline: none !important;
   font-weight: 300 !important;
 }
@@ -29,13 +29,13 @@
 	-webkit-box-shadow: 2px 2px 20px 0px var(--shadow);
 	-moz-box-shadow: 2px 2px 20px 0px var(--shadow);
 	box-shadow: 2px 2px 20px 0px var(--shadow);
-}*/
+}
 
 .dropdownButton {
 	transition: 0.1s;
 }
 
-/*.dropdownButton:focus {
+.dropdownButton:focus {
 	outline: none;
 }*/
 

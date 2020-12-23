@@ -1,6 +1,13 @@
 * {
 	outline: none !important;
-	transition: background-color 0.3s ease, color 0.3s ease, invert 0.3s ease, border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+	transition: none !important;
 }
 
 $baseFontSize: 16;
@@ -67,7 +74,7 @@ $gridRowHeight: 4;
 .secondarytextcolor {
 	color: var(--secondarytextcolor) !important;
 }
-.altheadingcolor {
+.altheadingcolor, .altheadingcolor *{
 	color: var(--altheadingcolor) !important;
 }
 .red {
@@ -210,6 +217,10 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
+html * { /*laggy*/
+	transition: background-color 0.3s ease, color 0.3s ease, invert 0.3s ease, border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
 body {
 	font-family: var(--primaryfont);
 	background-color: var(--bgcolor);
@@ -246,6 +257,14 @@ body {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.noselect {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none;
+	-o-user-select: none;
+	user-select: none;
 }
 
 /*Scrollbar Styles*/

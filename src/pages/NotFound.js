@@ -59,7 +59,7 @@ function NotFound() {
           )}
         </div>
         {/*<img alt="nvm its really not working "src="https://loremflickr.com/320/240/bee" />*/}
-        <div className="inline mt-3" style={{justifyContent:"center"}}>
+        <div className="inline mt-3 gamewrapper" style={{justifyContent:"center"}}>
           <Tetris>
             {({ HeldPiece, Gameboard, PieceQueue, points, linesCleared }) => (
               <div>

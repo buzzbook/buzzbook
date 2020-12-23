@@ -1,7 +1,7 @@
 /* Course Info */
 #courseInfo {
 	height: calc(96vh - 88px);
-	overflow-y: auto !important;
+	overflow-y: hidden !important;
 }
 #courseInfo table {
 	color: var(--primarytextcolor);

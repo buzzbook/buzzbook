@@ -1,9 +1,10 @@
 import React from "react";
 import {Switch, Route} from "react-router-dom";
+import $ from 'jquery';
 
 import "./css/App.css";
 import Nav from "./components/Nav";
-import ThemeChanger from "./components/settings/ThemeChanger";
+import Controls from "./components/settings/Controls";
 
 // Nav Pages
 import Home from "./pages/Home";
@@ -23,6 +24,10 @@ const navPages = [
 	{component: Ratings, path: "/ratings/"},
 	{component: About, path: "/about/"}
 ];
+
+$(window).on('load', function() {
+  $("html").removeClass("preload");
+});
 
 function App({location}) {
 	return (
@@ -47,7 +52,7 @@ function App({location}) {
 					</Switch>
 				</div>
 			</div>
-			<ThemeChanger />
+			<Controls />
 		</>
 	);
 }

@@ -101,7 +101,7 @@ function CourseInfo() {
 				<>
 					{courses[val.id] ? (
 						<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"}>
-							<div className="prereq" key={val.id}>{val.id}</div>
+							<div className="prereq contentfont" key={val.id}>{val.id}</div>
 						</Link>
 					) : (
 						<div className="prereq" key={val.id}>{val.id}</div>
@@ -151,7 +151,7 @@ function CourseInfo() {
 			<Helmet>
 				<title>BuzzBook | {course.courseID}</title>
 			</Helmet>
-			<div className="mr-4 hidescroll" id="courseInfo">
+			<div className="mr-4" id="courseInfo">
 				<div
 					className="w-100 mx-0"
 					style={{
@@ -268,135 +268,136 @@ function CourseInfo() {
 					</div>
 				</div>
 
-				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} />
+				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className="mt-3 mb-0"/>
+				<div className="hidescroll" style={{height: "100%", overflowY: "scroll"}}>
+					<div className="sectionlabelfont mt-2">Description</div>
+					<div className="mb-3 contentfont">{course.description}</div>
 
-				<div className="sectionlabelfont">Description</div>
-				<div className="mb-3 contentfont">{course.description}</div>
+					<div className="sectionlabelfont">Prerequisites</div>
+					<div className="mb-3 prereq-wrapper contentfont">{course.prerequisites}</div>
 
-				<div className="sectionlabelfont">Prerequisites</div>
-				<div className="mb-3 prereq-wrapper contentfont">{course.prerequisites}</div>
+					<div className="sectionlabelfont">Enrollment Restrictions</div>
+					<div className="mb-3">{course.enrollRestrictions}</div>
 
-				<div className="sectionlabelfont">Enrollment Restrictions</div>
-				<div className="mb-3">{course.enrollRestrictions}</div>
+					<div className="sectionlabelfont">Class Sections</div>
+					<table className="table-responsive">
+						<thead>
+							<tr className="sectionlabelfont primarytextcolor">
+								<th scope="col">ID</th>
+								<th scope="col">CRN</th>
+								<th scope="col">Type</th>
+								<th scope="col">Enrollment</th>
+								<th scope="col">Instructor Grades</th>
+								<th scope="col">Time</th>
+								<th scope="col">Days</th>
+								<th scope="col">Location</th>
+								<th scope="col">Instructors</th>
+								<th scope="col">Attributes</th>
+								{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
+							</tr>
+						</thead>
+						<tbody>
+							{Object.entries(course.sections).map(entry => {
+								const [id, sectionRaw] = entry;
 
-				<div className="sectionlabelfont">Class Sections</div>
-				<table className="table-responsive">
-					<thead>
-						<tr className="sectionlabelfont primarytextcolor">
-							<th scope="col">ID</th>
-							<th scope="col">CRN</th>
-							<th scope="col">Type</th>
-							<th scope="col">Enrollment</th>
-							<th scope="col">Instructor Grades</th>
-							<th scope="col">Time</th>
-							<th scope="col">Days</th>
-							<th scope="col">Location</th>
-							<th scope="col">Instructors</th>
-							<th scope="col">Attributes</th>
-							{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
-						</tr>
-					</thead>
-					<tbody>
-						{Object.entries(course.sections).map(entry => {
-							const [id, sectionRaw] = entry;
+								const sectionEnrollment = {current: 20, max: 25};
+								let sectionEnrollmentColor = "var(--green)";
+								if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
+									sectionEnrollmentColor = "var(--red)";
+								else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
+									sectionEnrollmentColor = "var(--orange)";
 
-							const sectionEnrollment = {current: 20, max: 25};
-							let sectionEnrollmentColor = "var(--green)";
-							if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
-								sectionEnrollmentColor = "var(--red)";
-							else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
-								sectionEnrollmentColor = "var(--orange)";
-
-							const meetings = sectionRaw[1];
-							var instructors = meetings.length > 0 ? "" : "N/A";
-							var instructorArr;
-							if (instructors !== "N/A") {
-								instructorArr = [];
-								meetings[0][4].forEach((instructor, i) => {
-									if (instructor.charAt(instructor.length - 1) === " ") {
-										instructor = instructor.substr(0, instructor.length - 1);
+								const meetings = sectionRaw[1];
+								var instructors = meetings.length > 0 ? "" : "N/A";
+								var instructorArr;
+								if (instructors !== "N/A") {
+									instructorArr = [];
+									meetings[0][4].forEach((instructor, i) => {
+										if (instructor.charAt(instructor.length - 1) === " ") {
+											instructor = instructor.substr(0, instructor.length - 1);
+										}
+										instructors += instructor;
+										instructorArr.push(instructor);
+										if (i !== meetings[0][4].length - 1) instructors += ", ";
+									});
+								}
+								var attributes = "";
+								sectionRaw[5].forEach((attribute, index) => {
+									attributes += caches.attributes[attribute];
+									if (index < sectionRaw[5].length - 1) {
+										attributes += ", ";
 									}
-									instructors += instructor;
-									instructorArr.push(instructor);
-									if (i !== meetings[0][4].length - 1) instructors += ", ";
 								});
-							}
-							var attributes = "";
-							sectionRaw[5].forEach((attribute, index) => {
-								attributes += caches.attributes[attribute];
-								if (index < sectionRaw[5].length - 1) {
-									attributes += ", ";
+								var grades = ["N/A"];
+								if (gradesLoaded && instructorArr && instructorArr[0] !== "TBA") {
+									grades = [];
+									instructorArr.forEach(instructor => {
+										let profName = instructor.split(" (P)")[0];
+										grades.push(profGrades[profName] || "N/A");
+									});
 								}
-							});
-							var grades = ["N/A"];
-							if (gradesLoaded && instructorArr && instructorArr[0] !== "TBA") {
-								grades = [];
-								instructorArr.forEach(instructor => {
-									let profName = instructor.split(" (P)")[0];
-									grades.push(profGrades[profName] || "N/A");
+								var sectionGradeColors = [];
+								grades.forEach(grade => {
+									let sectionGradeColor = "var(--secondarytextcolor)";
+									if (typeof grade === "number") {
+										if (grade < 1.5) sectionGradeColor = "var(--red)";
+										else if (grade < 2.5) sectionGradeColor = "var(--orange)";
+										else if (grade < 3.5) sectionGradeColor = "var(--yellow)";
+										else sectionGradeColor = "var(--green)";
+									}
+									sectionGradeColors.push(sectionGradeColor);
 								});
-							}
-							var sectionGradeColors = [];
-							grades.forEach(grade => {
-								let sectionGradeColor = "var(--secondarytextcolor)";
-								if (typeof grade === "number") {
-									if (grade < 1.5) sectionGradeColor = "var(--red)";
-									else if (grade < 2.5) sectionGradeColor = "var(--orange)";
-									else if (grade < 3.5) sectionGradeColor = "var(--yellow)";
-									else sectionGradeColor = "var(--green)";
-								}
-								sectionGradeColors.push(sectionGradeColor);
-							});
-							const section = {
-								type: caches.scheduleTypes[sectionRaw[3]],
-								courseNumber: sectionRaw[0],
-								id: id,
-								time: meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
-								days: meetings.length > 0 && meetings[0][1] !== "&nbsp;" ? meetings[0][1] : "N/A",
-								location: meetings.length > 0 ? meetings[0][2] : "N/A",
-								campus: caches.campuses[sectionRaw[4]]
-							};
+								const section = {
+									type: caches.scheduleTypes[sectionRaw[3]],
+									courseNumber: sectionRaw[0],
+									id: id,
+									time: meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
+									days: meetings.length > 0 && meetings[0][1] !== "&nbsp;" ? meetings[0][1] : "N/A",
+									location: meetings.length > 0 ? meetings[0][2] : "N/A",
+									campus: caches.campuses[sectionRaw[4]]
+								};
 
-							return (
-								<tr key={section.id} className="contentfont secondarytextcolor">
-									<td>{section.id}</td>
-									<td>{section.courseNumber}</td>
-									<td>{section.type}</td>
-									<td style={{color: sectionEnrollmentColor}}>
-										{sectionEnrollment.current}/{sectionEnrollment.max}
-									</td>
-									<td>
-										{gradesLoaded ? (
-											grades.map((grade, i) => {
-												return (
-													<>
-														<span
-															style={{
-																color: sectionGradeColors[i]
-															}}
-														>
-															{grade}
-														</span>
-														{i < grades.length - 1 && <>, </>}
-													</>
-												);
-											})
-										) : (
-											<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
-											// <>Loading...</>
-										)}
-									</td>
-									<td>{section.time}</td>
-									<td>{section.days}</td>
-									<td>{section.location}</td>
-									<td>{instructors}</td>
-									<td>{attributes}</td>
-									{filters.campus.value !== "Any" && <td>{section.campus}</td>}
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+								return (
+									<tr key={section.id} className="contentfont secondarytextcolor">
+										<td>{section.id}</td>
+										<td>{section.courseNumber}</td>
+										<td>{section.type}</td>
+										<td style={{color: sectionEnrollmentColor}}>
+											{sectionEnrollment.current}/{sectionEnrollment.max}
+										</td>
+										<td>
+											{gradesLoaded ? (
+												grades.map((grade, i) => {
+													return (
+														<>
+															<span
+																style={{
+																	color: sectionGradeColors[i]
+																}}
+															>
+																{grade}
+															</span>
+															{i < grades.length - 1 && <>, </>}
+														</>
+													);
+												})
+											) : (
+												<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
+												// <>Loading...</>
+											)}
+										</td>
+										<td>{section.time}</td>
+										<td>{section.days}</td>
+										<td>{section.location}</td>
+										<td>{instructors}</td>
+										<td>{attributes}</td>
+										{filters.campus.value !== "Any" && <td>{section.campus}</td>}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</>
 	);

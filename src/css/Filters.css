@@ -101,6 +101,7 @@
 	color: var(--primarytextcolor);
 	border-radius: 0.625rem;
 	padding-left: 2.25rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 #filterBar #filters .clear {

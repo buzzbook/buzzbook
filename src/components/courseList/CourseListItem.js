@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {useWindowWidth} from "@react-hook/window-size";
@@ -27,6 +27,7 @@ function CourseListItem(course) {
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
+	let Prefs = JSON.parse(localStorage.getItem("settings"));
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
@@ -51,6 +52,13 @@ function CourseListItem(course) {
 		}
 	}
 
+	let displaygrade = lettergrade;
+	if(Prefs[1] === 2){
+		displaygrade = course.grade;
+	}else if(Prefs[1] === 3){
+		displaygrade = <>{lettergrade}, {course.grade}</>;
+	}
+
 	const listItem = (
 		<div
 			className={`p-2 rounded`}
@@ -71,27 +79,29 @@ function CourseListItem(course) {
 						<span className={"subheadingfont altheadingcolor"}>{course.name}</span>
 					</div>
 
-					<div className={"contentfont altheadingcolor"} style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
+					<div className={"contentfont"} style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
 						<span style={{color: enrollmentColor}}>
 							{Math.round(course.enrollmentPercent)}% enrolled
 						</span>
-						<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-						<span>
-							{course.credits} credit{course.credits !== 1 && "s"}
+						<span className="altheadingcolor">
+							<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+							<span>
+								{course.credits} credit{course.credits !== 1 && "s"}
+							</span>
+							{sectionvisible && (
+								<>
+									<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+									<span>
+										{course.numSections} section
+										{course.numSections > 1 && "s"}
+									</span>
+								</>
+							)}
 						</span>
-						{sectionvisible && (
-							<>
-								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-								<span>
-									{course.numSections} section
-									{course.numSections > 1 && "s"}
-								</span>
-							</>
-						)}
 						{course.grade && (
 							<>
-								<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
-								<span style={{color: gradeColor, fontWeight: "700"}}>{lettergrade}</span>
+								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{color: gradeColor, fontWeight: "700"}}>{displaygrade}</span>
 							</>
 						)}
 					</div>
