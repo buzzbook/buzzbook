@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, forceUpdate} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	getSelectedCourse,
@@ -13,6 +13,7 @@ import {Helmet} from "react-helmet";
 import BeatLoader from "react-spinners/BeatLoader";
 import RatingBar from "./RatingBar";
 import courses, {caches} from "../../scripts/courses";
+import Alert from "../settings/Alerts";
 
 import Icon from "../../img/icon";
 
@@ -88,6 +89,22 @@ function CourseInfo() {
 		else gradeColor = "var(--green)";
 	}
 
+	//let alertmsg;
+	let showAlert = false;
+	const [alertmsg, setalertmsg] = useState(<>THIS IS NOT WORKING</>);
+	function prereqMsg(msg) {
+		showAlert = true;
+		setalertmsg(<Alert show={true}>{msg}</Alert>);
+		// return(
+		// 	<Alert>{msg}</Alert>
+		// );
+		console.log("pressed " + " " + msg);
+		// var alertList = document.querySelectorAll('.alert')
+		// alertList.forEach(function (alert) {
+		//   new bootstrap.Alert(alert)
+		// })
+	}
+
 	const prereqsRaw = courseRaw[2];
 	var prereqs;
 	if (prereqsRaw.length <= 1) prereqs = <div>None</div>;
@@ -97,17 +114,17 @@ function CourseInfo() {
 
 	function prereqsHelper(val, firstRun) {
 		if (!Array.isArray(val)) {
-			return (
-				<>
-					{courses[val.id] ? (
-						<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"}>
-							<div className="prereq contentfont" key={val.id}>{val.id}</div>
-						</Link>
-					) : (
-						<div className="prereq" key={val.id}>{val.id}</div>
-					)}
-				</>
-			);
+			if (courses[val.id]){
+				return (
+					<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"} className="prereq contentfont">
+						<div key={val.id}>{val.id}</div>
+					</Link>
+				);
+			}else if(val.id.slice(val.id.length - 4).includes("X")){
+				return (<div className="prereq" onClick={() => prereqMsg(`${val.id} is not an offered course, it is used solely for credit purposes.`)} key={val.id}>{val.id}</div>);
+			}else{
+				return (<div className="prereq" onClick={() => prereqMsg(`Sorry, we do not have ${val.id} on record at the moment.`)} key={val.id}>{val.id} Test</div>);
+			}
 		}
 
 		const separator = val[0];
@@ -122,6 +139,7 @@ function CourseInfo() {
 		}
 		return output;
 	}
+
 
 	const course = {
 		courseID: selectedCourse,
@@ -152,6 +170,8 @@ function CourseInfo() {
 				<title>BuzzBook | {course.courseID}</title>
 			</Helmet>
 			<div className="mr-4" id="courseInfo">
+				{console.log("rerendering course info")}
+				{console.log(alertmsg)}
 				<div
 					className="w-100 mx-0"
 					style={{
@@ -269,7 +289,7 @@ function CourseInfo() {
 				</div>
 
 				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className="mt-3 mb-0"/>
-				<div className="hidescroll" style={{height: "100%", overflowY: "scroll"}}>
+				<div className="hidescroll" style={{height: "88%", overflowY: "scroll"}}>
 					<div className="sectionlabelfont mt-2">Description</div>
 					<div className="mb-3 contentfont">{course.description}</div>
 
@@ -398,6 +418,7 @@ function CourseInfo() {
 						</tbody>
 					</table>
 				</div>
+				{alertmsg}
 			</div>
 		</>
 	);

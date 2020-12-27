@@ -1,15 +1,13 @@
-body {
-  --icon-light: invert(0);
-  --iconfilter: invert(100%);
-}
-
-body.light-theme {
-  --icon-light: invert(100%);
-  --iconfilter: invert(0);
-}
-
 * {
   outline: none !important;
+}
+
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
 
 /*Color Definitions*/
@@ -17,11 +15,16 @@ body.light-theme {
   --white: #FFFFFF;
   --lightwhite: #FCFCFC;
   --offwhite: #F7F7F7;
-  --black: #3B3B3B;
+  --darkblack: #100F0E;
+  /**/
+  --black: #171717;
+  /**/
+  --offblack: #3B3B3B;
   --grey: #7C7C7C;
   --accentgrey: #EDEDED;
   --darkgrey: #E7E7E7;
   /*for ratings bar*/
+  --midgrey: #E0E0E0;
   --lightgrey: #C6C6C6;
   --red: #F75959;
   --crimson: #99001A;
@@ -38,22 +41,35 @@ body.light-theme {
   --navcolor: var(--offwhite);
   --shadingcolor: var(--lightwhite);
   --contrastcolor: var(--darkgrey);
-  --primarytextcolor: var(--black);
+  --boundarycolor: var(--midgrey);
+  --primarytextcolor: var(--offblack);
   --secondarytextcolor: var(--grey);
   --labelcolor: var(--accentgrey);
   --inputcolor: var(--lightgrey);
+  --altheadingcolor: var(--primarytextcolor);
 }
 
 .dark-theme {
-  --bgcolor: var(--black);
+  --bgcolor: #1B1B1D;
+  /*black*/
   --themecolor: var(--theme);
-  --navcolor: var(--white);
-  /*placeholders for offwhite variations*/
-  --shadingcolor: var(--white);
-  --primarytextcolor: var(--white);
-  --secondarytextcolor: var(--white);
-  --labelcolor: var(--white);
-  --inputcolor: var(--white);
+  --navcolor: #16161a;
+  /*#100F0E*/
+  --shadingcolor: #212121;
+  --contrastcolor: var(--offblack);
+  --boundarycolor: #383838;
+  /*2B2B2B*/
+  --primarytextcolor: #F8F8F8;
+  /* f0f6fc accentgrey fafafa d8d8d8*/
+  --secondarytextcolor: #B1B1B1;
+  /*grey*/
+  --labelcolor: #282828;
+  --inputcolor: #000000;
+  /*212121 or 222222*/
+  --altheadingcolor: #E4E7EB;
+  /*d9e2ec e0e0e0*/
+  --iconfilter: invert(35%);
+  /*temp before sorting out svg fill*/
 }
 
 /*Color Styles*/
@@ -63,6 +79,10 @@ body.light-theme {
 
 .secondarytextcolor {
   color: var(--secondarytextcolor) !important;
+}
+
+.altheadingcolor, .altheadingcolor * {
+  color: var(--altheadingcolor) !important;
 }
 
 .red {
@@ -119,6 +139,17 @@ body.light-theme {
   font-weight: 400;
   font-size: 1.6875rem;
   color: var(--themecolor);
+  font-size: 27px;
+  line-height: 21px;
+  transform: translateY(-0.0011111111em);
+  padding-top: 1;
+  font-family: Raleway;
+}
+.subtitlefont::before {
+  content: "";
+  margin-top: -1px;
+  display: block;
+  height: 0;
 }
 
 .headingfont {
@@ -158,7 +189,7 @@ body.light-theme {
   font-family: var(--secondaryfont);
   font-weight: 400;
   font-size: 1.2rem;
-  color: var(--textcolor);
+  color: var(--primarytextcolor);
   font-size: 19.2px;
   line-height: 24px;
   transform: translateY(0.185em);
@@ -193,15 +224,22 @@ body.light-theme {
 
 html {
   font-size: 16px;
-  background-color: var(--bgcolor);
-  color: var(--textcolor);
+  /*background-color: var(--bgcolor);
+  color: var(--primarytextcolor);*/
   scroll-behavior: smooth;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
+html * {
+  /*laggy*/
+  transition: background-color 0.3s ease, color 0.3s ease, invert 0.3s ease, border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
 body {
   font-family: var(--primaryfont);
+  background-color: var(--bgcolor);
+  color: var(--primarytextcolor);
   font-size: 1rem;
   /*line-height: 1.6rem;*/
   box-sizing: border-box;
@@ -211,6 +249,12 @@ body {
 }
 
 /*Icon Styles*/
+.iconfilter {
+  filter: var(--iconfilter);
+  height: 15px;
+  width: 15px;
+}
+
 .icon-small {
   width: 1rem;
   height: 1rem;
@@ -231,6 +275,14 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 /*Scrollbar Styles*/
@@ -278,21 +330,5 @@ body {
 }
 
 /*Mobile Styles*/
-body {
-  background-color: var(--bgcolor);
-  color: var(--primarytextcolor);
-}
-
-.icon-light {
-  filter: var(--icon-light);
-  height: 15px;
-  width: 15px;
-}
-
-.iconfilter {
-  filter: var(--iconfilter);
-  height: 15px;
-  width: 15px;
-}
 
 /*# sourceMappingURL=indexoutput.css.map */

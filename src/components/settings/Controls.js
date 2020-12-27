@@ -83,10 +83,10 @@ function Controls() {
 					<div className="contentfont">Result Display</div>
 					<div className="btn-group btn-group-toggle" data-toggle="buttons">
 					  <label className="btn btn-secondary contentfont">
-					    <input type="radio" name="options" id="option1" autoComplete="off" checked={Prefs[0] === 1} onClick={() => toggleSetting(0,1)}/>Compact
+					    <input type="radio" name="options" id="option1" autoComplete="off" defaultChecked={Prefs[0] === 1} onClick={() => toggleSetting(0,1)}/>Compact
 					  </label>
 					  <label className="btn btn-secondary contentfont">
-					    <input type="radio" name="options" id="option2" autoComplete="off" checked={Prefs[0] === 2} onClick={() => toggleSetting(0,2)}/>Expanded
+					    <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={Prefs[0] === 2} onClick={() => toggleSetting(0,2)}/>Expanded
 					  </label>
 					</div>
 				</div>
@@ -94,13 +94,13 @@ function Controls() {
 					<div className="contentfont">Grade Display</div>
 					<div className="btn-group btn-group-toggle" data-toggle="buttons">
 					  <label className="btn btn-secondary contentfont">
-					    <input type="radio" name="options" id="option1" autoComplete="off" checked={Prefs[1] === 1} onClick={() => toggleSetting(1,1)}/>Letter
+					    <input type="radio" name="options" id="option1" autoComplete="off" defaultChecked={Prefs[1] === 1} onClick={() => toggleSetting(1,1)}/>Letter
 					  </label>
 					  <label className="btn btn-secondary contentfont">
-					    <input type="radio" name="options" id="option2" autoComplete="off" checked={Prefs[1] === 2} onClick={() => toggleSetting(1,2)}/>GPA
+					    <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={Prefs[1] === 2} onClick={() => toggleSetting(1,2)}/>GPA
 					  </label>
 						<label className="btn btn-secondary contentfont">
-					    <input type="radio" name="options" id="option2" autoComplete="off" checked={Prefs[1] === 3} onClick={() => toggleSetting(1,3)}/>Both
+					    <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={Prefs[1] === 3} onClick={() => toggleSetting(1,3)}/>Both
 					  </label>
 					</div>
 				</div>
