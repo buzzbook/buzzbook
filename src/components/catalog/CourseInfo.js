@@ -1,4 +1,4 @@
-import React, {useState, forceUpdate} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	getSelectedCourse,
@@ -89,21 +89,16 @@ function CourseInfo() {
 		else gradeColor = "var(--green)";
 	}
 
-	//let alertmsg;
-	let showAlert = false;
-	const [alertmsg, setalertmsg] = useState(<>THIS IS NOT WORKING</>);
-	function prereqMsg(msg) {
-		showAlert = true;
-		setalertmsg(<Alert show={true}>{msg}</Alert>);
-		// return(
-		// 	<Alert>{msg}</Alert>
-		// );
-		console.log("pressed " + " " + msg);
-		// var alertList = document.querySelectorAll('.alert')
-		// alertList.forEach(function (alert) {
-		//   new bootstrap.Alert(alert)
-		// })
-	}
+	const [alertmsg, setalertmsg] = useState(<></>);
+	// function prereqMsg(msg) {
+	// 	showAlert = true;
+	// 	setalertmsg(<Alert show={true}>{msg}</Alert>);
+	// 	//console.log("pressed " + " " + msg);
+	// 	// var alertList = document.querySelectorAll('.alert')
+	// 	// alertList.forEach(function (alert) {
+	// 	//   new bootstrap.Alert(alert)
+	// 	// })
+	// }
 
 	const prereqsRaw = courseRaw[2];
 	var prereqs;
@@ -121,9 +116,9 @@ function CourseInfo() {
 					</Link>
 				);
 			}else if(val.id.slice(val.id.length - 4).includes("X")){
-				return (<div className="prereq" onClick={() => prereqMsg(`${val.id} is not an offered course, it is used solely for credit purposes.`)} key={val.id}>{val.id}</div>);
+				return (<div className="prereq" onClick={() => setalertmsg(<Alert>{val.id} is not an offered course, it is used solely for credit purposes.</Alert>)} key={val.id}>{val.id}</div>);
 			}else{
-				return (<div className="prereq" onClick={() => prereqMsg(`Sorry, we do not have ${val.id} on record at the moment.`)} key={val.id}>{val.id} Test</div>);
+				return (<div className="prereq" onClick={() => setalertmsg(<Alert>Sorry, we do not have {val.id} on record at the moment.</Alert>)} key={val.id}>{val.id}</div>);
 			}
 		}
 
@@ -170,8 +165,6 @@ function CourseInfo() {
 				<title>BuzzBook | {course.courseID}</title>
 			</Helmet>
 			<div className="mr-4" id="courseInfo">
-				{console.log("rerendering course info")}
-				{console.log(alertmsg)}
 				<div
 					className="w-100 mx-0"
 					style={{
