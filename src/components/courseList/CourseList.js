@@ -258,7 +258,7 @@ function CourseList({id}) {
 	};
 
 	const windowWidth = useWindowWidth();
-	const Prefs = JSON.parse(localStorage.getItem("settings"));
+	const Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
 	let itemHeight = windowWidth > 1630 ? 60 : 80;
 	if (Prefs[0] === 2){
 		itemHeight = windowWidth > 1630 ? 70 : 90;

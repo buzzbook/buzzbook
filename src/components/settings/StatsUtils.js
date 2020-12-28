@@ -4,7 +4,7 @@ let grademap = {"A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3, "B-": 2.7, "C+": 2.3, "C
 
 export function determineGradeColor(grade) {
   if ((grade !== -1) && (typeof(grade) === `number`)) {
-    var Prefs = JSON.parse(localStorage.getItem("settings"));
+    var Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
     var n = Prefs[2] - 1;
     var delta = gradethreshold[n][0] - gradethreshold[n][1];
     for (var i = 0; i < gradethreshold[n].length; ++i){

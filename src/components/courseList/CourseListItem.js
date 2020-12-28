@@ -28,7 +28,7 @@ function CourseListItem(course) {
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
-	let Prefs = JSON.parse(localStorage.getItem("settings"));
+	let Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
