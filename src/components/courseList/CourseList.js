@@ -116,11 +116,14 @@ function CourseList({id}) {
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
 
-	const initCollapsed = JSON.parse(localStorage.getItem('collapsed'));
+	let initCollapsed = JSON.parse(localStorage.getItem('collapsed'));
 	const toggleCollapse = () => {
 		$("#clistwrapper").toggleClass("savecollapsed");
 		localStorage.setItem('collapsed', $("#clistwrapper").hasClass("savecollapsed"));
 	};
+	if (!(`collapsed` in localStorage)){
+		initCollapsed = true;
+	}
 
 	filteredCourses = Object.entries(courses)
 		.filter(courseRaw => {
@@ -266,7 +269,7 @@ function CourseList({id}) {
 			id="clistwrapper"
 			className={(initCollapsed ? "savecollapsed" : "")}
 			style={{
-				height: "100%"
+				height: "calc(100vh - 90px)"
 			}}
 		>
 			<div id="courseList">
@@ -290,7 +293,8 @@ function CourseList({id}) {
 			</div>
 
 			<div
-				className="sectionlabelfont inline justify-content-between px-2 mt-2 mb-1 savedCoursesheader"
+				id = "savedCoursesheader"
+				className="sectionlabelfont inline justify-content-between px-2 mt-2 mb-1 "
 			>
 				Saved Courses
 

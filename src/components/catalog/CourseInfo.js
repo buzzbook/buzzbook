@@ -282,7 +282,7 @@ function CourseInfo() {
 				</div>
 
 				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className="mt-3 mb-0"/>
-				<div className="hidescroll" style={{height: "88%", overflowY: "scroll"}}>
+				<div className="hidescroll" style={{height: "calc(100vh - 83px - 90px)", overflowY: "scroll"}}>
 					<div className="sectionlabelfont mt-2">Description</div>
 					<div className="mb-3 contentfont">{course.description}</div>
 

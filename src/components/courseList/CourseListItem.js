@@ -75,7 +75,7 @@ function CourseListItem(course) {
 						<h5 className="d-inline headingfont">
 							{course.courseID}
 						</h5>
-						&nbsp;&nbsp;
+						{windowWidth > 1630 ? <>&nbsp;&nbsp;</> : (<br/>)}
 						<span className={"subheadingfont altheadingcolor"}>{course.name}</span>
 					</div>
 

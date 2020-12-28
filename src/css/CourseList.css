@@ -24,7 +24,7 @@
 }
 
 #savedCourses {
-	height: 34%;
+	height: calc(40% - 37px - 1rem);
 	/*overflow-y: scroll;*/
 	overflow-x: hidden;
 	transition: height 1.5s !important;
@@ -37,13 +37,13 @@
 
 /*Collapsible Saved Courses*/
 .savecollapsed #courseList {
-	height: 95%;
+	height: calc(100% - 25px - 1rem);
 }
 .savecollapsed #savedCourses {
 	height: 0%;
 	overflow: hidden;
 }
-.savecollapsed .savedCoursesheader svg {
+.savecollapsed #savedCoursesheader svg {
 	transform: rotate(180deg);
 }
 

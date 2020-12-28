@@ -17,7 +17,7 @@ function FilterBar() {
 					<Icon name="search"/>
 					<input
 						type="text"
-						className="form-control"
+						className="form-control sectionlabelfont"
 						placeholder="Search Courses"
 						onChange={e => dispatch(updateSearchQuery(e.target.value))}
 					/>
