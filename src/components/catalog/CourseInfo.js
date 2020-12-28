@@ -14,6 +14,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import RatingBar from "./RatingBar";
 import courses, {caches} from "../../scripts/courses";
 import Alert from "../settings/Alerts";
+import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
 
 import Icon from "../../img/icon";
 
@@ -81,13 +82,7 @@ function CourseInfo() {
 	else if ((courseEnrollment.current / courseEnrollment.max) * 100 > 33) enrollmentColor = "var(--orange)";
 
 	const courseGrade = courseRaw[4] || -1;
-	let gradeColor = "var(--secondarytextcolor)";
-	if (courseGrade !== -1) {
-		if (courseGrade < 1.5) gradeColor = "var(--red)";
-		else if (courseGrade < 2.5) gradeColor = "var(--orange)";
-		else if (courseGrade < 3.5) gradeColor = "var(--yellow)";
-		else gradeColor = "var(--green)";
-	}
+	const gradeColor = determineGradeColor(courseGrade);
 
 	const [alertmsg, setalertmsg] = useState(<></>);
 	// function prereqMsg(msg) {
@@ -149,15 +144,7 @@ function CourseInfo() {
 
 	let isSaved = savedCourses[course.courseID];
 
-	let grademap = {"A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3, "B-": 2.7, "C+": 2.3, "C": 2, "C-": 1.7, "D+": 1.3, "D": 1.0, "F": 0}
-	let delta = 4.01;
-	var lettergrade;
-	for (let letter in grademap) {
-		if (Math.abs(grademap[letter] - course.grade) <= delta) {
-			delta = Math.abs(grademap[letter] - course.grade);
-			lettergrade = letter;
-		}
-	}
+	const lettergrade = determineGradeLetter(course.grade)
 
 	return (
 		<>
@@ -350,15 +337,10 @@ function CourseInfo() {
 									});
 								}
 								var sectionGradeColors = [];
+								var sectionGradeLetters = [];
 								grades.forEach(grade => {
-									let sectionGradeColor = "var(--secondarytextcolor)";
-									if (typeof grade === "number") {
-										if (grade < 1.5) sectionGradeColor = "var(--red)";
-										else if (grade < 2.5) sectionGradeColor = "var(--orange)";
-										else if (grade < 3.5) sectionGradeColor = "var(--yellow)";
-										else sectionGradeColor = "var(--green)";
-									}
-									sectionGradeColors.push(sectionGradeColor);
+									sectionGradeColors.push(determineGradeColor(grade));
+									sectionGradeLetters.push(determineGradeLetter(grade));
 								});
 								const section = {
 									type: caches.scheduleTypes[sectionRaw[3]],
@@ -388,7 +370,11 @@ function CourseInfo() {
 																	color: sectionGradeColors[i]
 																}}
 															>
-																{grade}
+																{typeof(grade) === "number" ? (
+																	<>{sectionGradeLetters[i]} ({grade})</>
+																):(
+																	grade
+																)}
 															</span>
 															{i < grades.length - 1 && <>, </>}
 														</>

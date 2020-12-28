@@ -19,8 +19,8 @@ if (initialTheme === "dark") {
 
 let Prefs = JSON.parse(localStorage.getItem("settings"));
 if (!Prefs) {
-	localStorage.setItem("settings", JSON.stringify([1,1]));
-	Prefs = [1,1];
+	localStorage.setItem("settings", JSON.stringify([1,3,2]));
+	Prefs = [1,3,2];
 }
 
 function Controls() {
@@ -101,6 +101,17 @@ function Controls() {
 					  </label>
 						<label className="btn btn-secondary contentfont">
 					    <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={Prefs[1] === 3} onClick={() => toggleSetting(1,3)}/>Both
+					  </label>
+					</div>
+				</div>
+				<div className="settingsitem">
+					<div className="contentfont">Grade Coloring</div>
+					<div className="btn-group btn-group-toggle" data-toggle="buttons">
+					  <label className="btn btn-secondary contentfont">
+					    <input type="radio" name="options" id="option1" autoComplete="off" defaultChecked={Prefs[2] === 1} onClick={() => toggleSetting(2,1)}/>By Letter
+					  </label>
+					  <label className="btn btn-secondary contentfont">
+					    <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={Prefs[2] === 2} onClick={() => toggleSetting(2,2)}/>By Bin
 					  </label>
 					</div>
 				</div>

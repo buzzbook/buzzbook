@@ -11,6 +11,7 @@ import {
 } from "../../redux/courseListSlice";
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
+import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
 
 function CourseListItem(course) {
 
@@ -34,23 +35,8 @@ function CourseListItem(course) {
 	else if (course.enrollmentPercent > 67) enrollmentColor = "var(--red)";
 	else if (course.enrollmentPercent > 33) enrollmentColor = "var(--orange)";
 
-	let gradeColor = "var(--green)";
-	if (course.grade) {
-		if (course.grade <= 1.5) gradeColor = "var(--red)";
-		else if (course.grade <= 2.5) gradeColor = "var(--orange)";
-		else if (course.grade <= 3.5) gradeColor = "var(--yellow)";
-		else gradeColor = "var(--green)";
-	}
-
-	let grademap = {"A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3, "B-": 2.7, "C+": 2.3, "C": 2, "C-": 1.7, "D+": 1.3, "D": 1.0, "F": 0}
-	let delta = 4.01;
-	var lettergrade;
-	for (let letter in grademap) {
-		if (Math.abs(grademap[letter] - course.grade) <= delta) {
-			delta = Math.abs(grademap[letter] - course.grade);
-			lettergrade = letter;
-		}
-	}
+	const gradeColor = determineGradeColor(course.grade);
+	const lettergrade = determineGradeLetter(course.grade);
 
 	let displaygrade = lettergrade;
 	if(Prefs[1] === 2){
