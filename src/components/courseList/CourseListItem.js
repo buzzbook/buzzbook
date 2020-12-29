@@ -19,7 +19,6 @@ function CourseListItem(course) {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 	const windowWidth = useWindowWidth();
-	const sectionvisible = windowWidth > 1750 ? true : false;
 	//const isdark = document.documentElement.classList.contains("dark-theme");
 
 	let isSelected = selectedCourse === course.courseID;
@@ -67,14 +66,14 @@ function CourseListItem(course) {
 
 					<div className={"contentfont"} style={{letterSpacing: "-.01rem", lineHeight: "1rem"}}>
 						<span style={{color: enrollmentColor}}>
-							{Math.round(course.enrollmentPercent)}% enrolled
+							{Math.round(course.enrollmentPercent)}% {windowWidth > 1820 && `enrolled`}
 						</span>
 						<span className="altheadingcolor">
 							<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
 							<span>
 								{course.credits} credit{course.credits !== 1 && "s"}
 							</span>
-							{sectionvisible && (
+							{windowWidth > 1530 && (
 								<>
 									<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
 									<span>
