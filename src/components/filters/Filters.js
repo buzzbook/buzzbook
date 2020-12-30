@@ -8,7 +8,7 @@ import {sortBy, subjects, levels, credits, types, instructorList} from "./filter
 import "../../css/Filters.css";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/translucent.css";
-import x from "../../img/x.png";
+import Icon from "../../img/icon";
 
 function Filters() {
 	const clearFilters = () => {
@@ -146,16 +146,17 @@ function Filters() {
 					className="dropdownFilter"
 					singleton={target}
 				></DropdownButton> */}
-				<Tippy content="Clear Filters" theme="translucent" arrow={true} singleton={target}>
-					<div
-						className="d-inline-block ml-2 icon-dark"
-						style={{cursor: "pointer", height: "16px"}}
-						onClick={clearFilters}
-					>
-						<img src={x} alt="x" height="20px" width="20px" className="d-block mb-1" />
-					</div>
-				</Tippy>
+
 			</div>
+			<Tippy content="Clear Filters" theme="translucent" arrow={true} singleton={target}>
+				<Icon
+					name="close"
+					alt="clear filters"
+					iconclass="ml-2 iconfilter"
+					style={{cursor: "pointer"}}
+					onClick={clearFilters}
+				/>
+			</Tippy>
 		</div>
 	);
 }

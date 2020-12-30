@@ -1,34 +1,32 @@
 .nav {
 	height: 100vh;
-	color: var(--main-text);
-	background-color: var(--low-alpha);
-}
-
-.nav .navbar-brand {
-	color: var(--main-text);
-	font-size: xx-large;
+	background-color: var(--navcolor);
 }
 
 .nav .navbar-brand img {
 	max-width: 40px;
+	padding-top: 1.5rem;
 }
 
-.nav .nav-item:active {
+.nav .nav-item {
+	margin-top: 1rem;
+}
+
+.nav .nav-item:nth-child(2) {
+	margin-top: 1.6rem;
+}
+
+.nav .nav-item a {
+	/*transition: color 0.1s !important;*/
+	transition: none;
 	outline: none;
 	box-shadow: none;
 }
 
-.nav .nav-item a.nav-link {
-	color: var(--nav-link);
-	transition: color 0.25s;
-}
-
-.nav .nav-item a.nav-link:hover {
-	color: #ffe084;
-}
-
-.nav .nav-item.active a.nav-link {
-	color: var(--gt-gold);
+.nav .nav-item a:hover {
+	color: var(--theme);
+	font-weight: 500; /*take this out if it looks bad*/
+	text-decoration: none;
 }
 
 .nav ul {

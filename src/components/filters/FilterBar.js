@@ -3,31 +3,37 @@ import Filters from "./Filters";
 import ExpandedFilters from "./ExpandedFilters";
 import {useDispatch} from "react-redux";
 import {updateSearchQuery} from "../../redux/courseListSlice";
-import filterIcon from "../../img/filterIcon.png";
+//import Icon from "../../img/icon";
+import iconset from "../../img/iconset.svg";
 import "../../css/Filters.css";
+import Icon from "../../img/icon";
 
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
 		<div className="mx-0" id="filterBar">
-			<div className="h-100 p-3">
-				<input
-					type="text"
-					className="form-control mb-2"
-					placeholder="Search Courses"
-					onChange={e => dispatch(updateSearchQuery(e.target.value))}
-				/>
+			<div className="h-100 py-3 px-4">
+				<div className="searchwrapper">
+					<Icon name="search"/>
+					<input
+						type="text"
+						className="form-control sectionlabelfont"
+						placeholder="Search Courses"
+						onChange={e => dispatch(updateSearchQuery(e.target.value))}
+					/>
+				</div>
 			</div>
-			<div className="h-100 p-3">
-				<div className="d-flex">
-					<img
-						src={filterIcon}
+			<div className="py-3 pl-0">
+				<div className="d-flex align-items-center">
+					<svg
 						alt="filter"
-						className="mr-3 icon-dark"
-						style={{width: 40, height: 40, cursor: "pointer"}}
+						className="mr-3 iconfilter"
+						style={{width: 20, height: 20, cursor: "pointer"}}
 						data-toggle="modal"
 						data-target="#filterModal"
-					/>
+					>
+						<use href={iconset+"#icon-filter"}/>
+					</svg>
 
 					<div
 						className="modal fade"

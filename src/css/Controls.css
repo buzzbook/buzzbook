@@ -1,0 +1,51 @@
+#settingsbox {
+  right: 1.9%;
+  background-color: var(--bgcolor);
+  padding: 0.5rem 1rem 1rem 1rem;
+  border-radius: .4rem;
+  box-shadow: 1.5px 1.5px 2px var(--labelcolor),
+              -1.5px -1.5px 2px  var(--labelcolor);
+  margin-top: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(0, 5%);
+  transition: 0.4s !important;
+}
+
+.openmenu {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+#settingsbox .btn-secondary {
+  background-color: var(--bgcolor);
+  border: 1px solid var(--boundarycolor) !important;
+  padding: 0 1rem;
+}
+
+#settingsbox .btn-secondary{
+  font-size: 0.9rem;
+}
+
+#settingsbox .btn-secondary.active, #settingsbox .btn-secondary:hover {
+  background-color: var(--labelcolor) !important;
+  color: var(--primarytextcolor) !important;
+}
+
+#settingsbox > .settingsitem {
+  margin-top: .3rem;
+}
+#settingsbox *:first-child{
+  margin-top: 0;
+}
+
+#settingsbox .btn-group {
+  width: 100%;
+}
+#settingsbox .btn-group .btn-secondary:first-child{
+  border-radius: 1rem 0 0 1rem;
+}
+#settingsbox .btn-group .btn-secondary:last-child{
+  border-radius: 0 1rem 1rem 0;
+}

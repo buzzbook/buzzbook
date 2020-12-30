@@ -1,0 +1,42 @@
+.game-block {
+  margin: 0;
+  padding: 0;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid var(--boundarycolor);
+}
+.piece-view {
+  margin-bottom: 12px;
+}
+.piece-view .game-block {
+  width: 18px;
+  height: 18px;
+}
+.piece-i {
+  background-color: var(--red);
+}
+.piece-j {
+  background-color: var(--orange);
+}
+.piece-l {
+  background-color: var(--yellow);
+}
+.piece-o {
+  background-color: var(--crimson);
+}
+.piece-s {
+  background-color: var(--green);
+}
+.piece-t {
+  background-color: var(--blue);
+}
+.piece-z {
+  background-color: var(--theme);
+}
+.piece-preview {
+  background-color: var(--labelcolor);
+}
+
+.gamewrapper * {
+  transition: none !important;
+}

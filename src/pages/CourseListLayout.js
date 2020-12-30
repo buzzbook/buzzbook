@@ -4,20 +4,35 @@ import SavedCoursesDetails from "../components/savedCoursesDetails/SavedCoursesD
 import FilterBar from "../components/filters/FilterBar";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
+import {usePreload} from "../img/icon";
+import stylechanges from "../unused";
 
 function Layout({id, content, savedCoursesDetails}) {
+	// useLayoutEffect(() => {
+	// 	let filterBarHeight =
+	// 		document.getElementById("filterBar").getBoundingClientRect().height + 2;
+	// 	document.getElementById(
+	// 		"courseList"
+	// 	).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
+	// });
+
+	const initload = usePreload("./iconset.svg");
+	console.log("initially loaded");
+
+	// const filterHeight = "80px";
+
 	const savedCourses = useSelector(getSavedCourses);
 	let numSaved = Object.keys(savedCourses).length;
 
-	const filterHeight = "80px";
 	const col = savedCoursesDetails && numSaved > 0 ? "1fr 1fr 2fr" : "1fr 3fr";
-
+	// const contentStyle = `${col} h-100 pl-0`;
+	//stylechanges();
 	return (
 		<div
 			style={{
 				display: "grid",
 				height: "100vh",
-				gridTemplateRows: `${filterHeight} auto`
+				gridTemplateRows: `max-content auto`
 			}}
 		>
 			<FilterBar />
@@ -27,12 +42,12 @@ function Layout({id, content, savedCoursesDetails}) {
 					display: "grid",
 					gridTemplateColumns: col
 				}}
+				className = "mx-0"
 			>
 				<div
-					className="p-3"
+					className="px-4"
 					style={{
-						minWidth: "300px",
-						height: `calc(100vh - ${filterHeight}`
+						minWidth: "300px"
 					}}
 				>
 					{<CourseList id={id} />}
@@ -42,7 +57,7 @@ function Layout({id, content, savedCoursesDetails}) {
 						{<SavedCoursesDetails id={id} />}
 					</div>
 				)}
-				<div className="p-3">{content}</div>
+				<div>{content}</div>
 			</div>
 		</div>
 	);

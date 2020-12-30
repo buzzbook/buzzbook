@@ -32,14 +32,20 @@ function Nav() {
 	});
 
 	return (
-		<nav className="nav flex-column pl-4">
-			<ul className="pl-0">
+		<nav className="nav flex-column">
+			<ul className="pl-5">
 				<li>
-					<Link className="navbar-brand" to="/">
-						<img src={itLogo} alt="Buzz" className="mr-2" />
-						{/* <br />
+					<Link className="navbar-brand p-0" to="/">
+						<img src={itLogo} alt="Buzz" />
+						{/*
+						<Icon
+							name="itlogo"
+							alt="Buzz"
+							iconclass="mr-2 iconfilter"
+						/>
+						<br />
 					<b>
-						G<span className="gt-gold">T</span>
+						G<span className="theme">T</span>
 					</b>{" "}
 					<i>BuzzBook</i> */}
 					</Link>
@@ -53,10 +59,10 @@ function Nav() {
 						}
 					>
 						<Link
-							className="nav-link px-0 pt-1 pb-2"
+							className={"px-0 " + (activePath.includes(page.path) ? "navselectedfont" : "navfont")}
 							to={page.path}
 						>
-							<b style={{fontSize: "1.2rem"}}>{page.title}</b>
+							{page.title}
 						</Link>
 					</li>
 				))}

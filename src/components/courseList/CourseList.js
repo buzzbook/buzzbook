@@ -9,6 +9,9 @@ import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
 import {caches} from "../../scripts/courses";
 import "../../css/CourseList.css";
+import $ from "jquery";
+
+import Icon from "../../img/icon";
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -112,6 +115,15 @@ function CourseList({id}) {
 	const sort = useSelector(getSort).value;
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
+
+	let initCollapsed = JSON.parse(localStorage.getItem('collapsed'));
+	const toggleCollapse = () => {
+		$("#clistwrapper").toggleClass("savecollapsed");
+		localStorage.setItem('collapsed', $("#clistwrapper").hasClass("savecollapsed"));
+	};
+	if (!(`collapsed` in localStorage)){
+		initCollapsed = true;
+	}
 
 	filteredCourses = Object.entries(courses)
 		.filter(courseRaw => {
@@ -222,7 +234,7 @@ function CourseList({id}) {
 
 	const Row = ({index, style}) => {
 		const [courseID, courseData] = filteredCourses[index];
-		const courseEnrollment = {current: 200, max: 250};
+		const courseEnrollment = {current: parseInt(courseID.split(" ")[1]) , max: 9999}; //just testing colors
 		const course = {
 			name: courseData[0],
 			enrollment: courseEnrollment,
@@ -246,21 +258,23 @@ function CourseList({id}) {
 	};
 
 	const windowWidth = useWindowWidth();
-	const itemHeight = windowWidth > 1630 ? 70 : 90;
+	const Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
+	let itemHeight = windowWidth > 1630 ? 60 : 80;
+	if (Prefs[0] === 2){
+		itemHeight = windowWidth > 1630 ? 70 : 90;
+	}
 
 	return (
 		<div
+			id="clistwrapper"
+			className={(initCollapsed ? "savecollapsed" : "")}
 			style={{
-				display: "grid",
-				gridTemplateRows: "1fr auto 1fr",
-				height: "100%"
+				height: "calc(100vh - 90px)"
 			}}
 		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
-					<span className="display-block text-center mt-2">
-						<h2>No classes match your filters :(</h2>
-					</span>
+					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters <span role="img" aria-label="unhappyface">😔</span></h2>
 				) : (
 					<AutoSizer>
 						{({height, width}) => (
@@ -269,6 +283,7 @@ function CourseList({id}) {
 								itemCount={filteredCourses.length}
 								itemSize={itemHeight}
 								width={width}
+								className="customhoverscroll"
 							>
 								{Row}
 							</List>
@@ -277,8 +292,18 @@ function CourseList({id}) {
 				)}
 			</div>
 
-			<div className="gt-gold font-weight-bold pl-2 mt-2" style={{fontSize: "1.25rem"}}>
+			<div
+				id = "savedCoursesheader"
+				className="sectionlabelfont inline justify-content-between px-2 mt-2 mb-1 "
+				onClick={toggleCollapse}
+			>
 				Saved Courses
+
+				<Icon
+					name="collapse"
+					alt="collapse"
+					iconclass="iconfilter"
+				/>
 			</div>
 			<div id="savedCourses">
 				<SavedCourses />

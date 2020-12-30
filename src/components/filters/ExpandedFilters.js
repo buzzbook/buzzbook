@@ -27,7 +27,7 @@ function ExpandedFilters() {
 		<div>
 			<div id="filters">
 				<div className="mb-1 font-weight-bold text-right">
-					<span className="text-muted" style={{cursor: "pointer"}} onClick={clearFilters}>
+					<span className="contentfont" style={{cursor: "pointer"}} onClick={clearFilters}>
 						Clear Filters
 					</span>
 				</div>

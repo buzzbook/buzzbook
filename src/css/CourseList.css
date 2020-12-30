@@ -1,22 +1,71 @@
-#savedCourses {
-	overflow-y: scroll;
+#courseList {
+	height: 60%;
+	box-shadow:
+        inset 0px 6px 6px -10px var(--primarytextcolor),
+        inset 0px -6px 6px -10px var(--primarytextcolor);
+	/*box-shadow:
+				inset 0px 3px 10px -10px var(--secondarytextcolor),
+				inset 0px -3px 10px -10px var(--secondarytextcolor);*/
+	/*second box shadow is the XD style, looks a bit off though*/
+	box-shadow:
+				inset 0px 5px 8px -10px var(--primarytextcolor),
+    		inset 0px -5px 8px -10px var(--primarytextcolor);
+	transition: height 1.5s, box-shadow 0.4s !important;
 }
 
-#courseList a > div {
+.dark-theme #courseList {
+	box-shadow:
+				inset 0px 12px 10px -10px black,
+				inset 0px -12px 10px -10px black;
+	box-shadow:
+				inset 0px 11px 10px -13px black,
+				inset 0px -11px 10px -13px black;
+	/*specifically for dark mode*/
+}
+
+#savedCourses {
+	height: calc(40% - 37px - 1rem);
+	/*overflow-y: scroll;*/
+	overflow-x: hidden;
+	transition: height 1.5s !important;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+#savedCourses::-webkit-scrollbar{
+	display: none;
+}
+#savedCoursesheader {
+	cursor: pointer;
+}
+
+/*Collapsible Saved Courses*/
+.savecollapsed #courseList {
+	height: calc(100% - 25px - 1rem);
+}
+.savecollapsed #savedCourses {
+	height: 0%;
+	overflow: hidden;
+}
+.savecollapsed #savedCoursesheader svg {
+	transform: rotate(180deg);
+}
+
+/*Selected Course Box-Shadow*/
+#courseList > a > div {
 	cursor: pointer;
 	transition: all 0.2s;
 }
-#courseList a > div:hover {
-	background-color: var(--med-alpha);
+#courseList * a > div:hover {
+	/*background-color: var(--labelcolor) !important;*/
+	/*box-shadow: inset -1.5px 1.5px 6px var(--labelcolor),
+							inset 1.5px -1.5px 6px var(--bgcolor);*/
+	box-shadow: inset -1px 1px 4.5px var(--inputcolor),
+       				inset 1px -1px 4.5px var(--bgcolor) !important;
 }
 
 #courseList a {
-	color: var(--main-text);
+	color: var(--primarytextcolor);
 	text-decoration: none;
-}
-
-#courseList .selected {
-	background-color: var(--low-alpha) !important;
 }
 
 .text-cutoff {
@@ -44,14 +93,12 @@
 	transform: translate(0, -50%);
 	top: 50%;
 	right: 0;
-	width: 20px;
-}
-
-#courseInfo .saveIcon,
-#courseInfo .unsaveIcon {
-	height: 35px;
+	width: 19px;
+	height: 19px;
+	padding: 2px;
+	transition: 0.2s !important;
 	grid-area: icon;
-	align-self: center;
+	/*align-self: center;*/
 }
 
 .saveIcon:hover {
@@ -59,4 +106,10 @@
 }
 .unsaveIcon:hover {
 	filter: invert(50%) sepia(100%) hue-rotate(-20deg) saturate(30);
+}
+
+.coursetitle.inline > svg {
+	position: relative;
+	transform: none;
+	margin-left: 1rem;
 }

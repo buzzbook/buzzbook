@@ -13,7 +13,7 @@ function Home() {
 				<div>
 					<div style={{fontSize: "4rem"}}>
 						<b>
-							<span className="gt-gold">Georgia Tech</span>
+							<span className="theme">Georgia Tech</span>
 						</b>{" "}
 						<i>BuzzBook</i>
 					</div>
