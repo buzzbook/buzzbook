@@ -73,7 +73,7 @@ function Controls() {
 			<Icon
 				name="settings"
 				alt="settings"
-				style={{height:20, width:20}}
+				style={{height:20, width:20, cursor: "pointer"}}
 				iconclass="iconfilter ml-3 settingsicon"
 				onClick={openSettings}
 			/>

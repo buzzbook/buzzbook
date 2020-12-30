@@ -295,6 +295,7 @@ function CourseList({id}) {
 			<div
 				id = "savedCoursesheader"
 				className="sectionlabelfont inline justify-content-between px-2 mt-2 mb-1 "
+				onClick={toggleCollapse}
 			>
 				Saved Courses
 
@@ -302,7 +303,6 @@ function CourseList({id}) {
 					name="collapse"
 					alt="collapse"
 					iconclass="iconfilter"
-					onClick={toggleCollapse}
 				/>
 			</div>
 			<div id="savedCourses">
