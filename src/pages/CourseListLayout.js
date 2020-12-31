@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import CourseList from "../components/courseList/CourseList";
 import SavedCoursesDetails from "../components/savedCoursesDetails/SavedCoursesDetails";
 import FilterBar from "../components/filters/FilterBar";
@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
 import {usePreload} from "../img/icon";
 import stylechanges from "../unused";
+import {SettingsContext, Settings} from "../components/settings/SettingsContext";
 
 function Layout({id, content, savedCoursesDetails}) {
 	// useLayoutEffect(() => {
@@ -15,7 +16,8 @@ function Layout({id, content, savedCoursesDetails}) {
 	// 		"courseList"
 	// 	).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
 	// });
-
+	const [courselistSettings, toggleSettings] = useState([1,3,2]);
+	const passedSettings = {courselistSettings, toggleSettings};
 	const initload = usePreload("./iconset.svg");
 	console.log("initially loaded");
 
@@ -28,38 +30,40 @@ function Layout({id, content, savedCoursesDetails}) {
 	// const contentStyle = `${col} h-100 pl-0`;
 	//stylechanges();
 	return (
-		<div
-			style={{
-				display: "grid",
-				height: "100vh",
-				gridTemplateRows: `max-content auto`
-			}}
-		>
-			<FilterBar />
+		<SettingsContext.Provider value={passedSettings}>
 			<div
-				id={id}
 				style={{
 					display: "grid",
-					gridTemplateColumns: col
+					height: "100vh",
+					gridTemplateRows: `max-content auto`
 				}}
-				className = "mx-0"
 			>
+				<FilterBar />
 				<div
-					className="px-4"
+					id={id}
 					style={{
-						minWidth: "300px"
+						display: "grid",
+						gridTemplateColumns: col
 					}}
+					className = "mx-0"
 				>
-					{<CourseList id={id} />}
-				</div>
-				{savedCoursesDetails && numSaved > 0 && (
-					<div className="p-3" style={{minWidth: "250px"}}>
-						{<SavedCoursesDetails id={id} />}
+					<div
+						className="px-4"
+						style={{
+							minWidth: "300px"
+						}}
+					>
+						{<CourseList id={id} />}
 					</div>
-				)}
-				<div>{content}</div>
+					{savedCoursesDetails && numSaved > 0 && (
+						<div className="p-3" style={{minWidth: "250px"}}>
+							{<SavedCoursesDetails id={id} />}
+						</div>
+					)}
+					<div>{content}</div>
+				</div>
 			</div>
-		</div>
+		</SettingsContext.Provider>
 	);
 }
 

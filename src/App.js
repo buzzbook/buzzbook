@@ -29,6 +29,12 @@ $(window).on('load', function() {
   $("html").removeClass("preload");
 });
 
+// var originalSetItem = localStorage.setItem;
+// localStorage.setItem = function(){
+//     document.createEvent('Event').initEvent('itemInserted', true, true);
+//     originalSetItem.apply(this, arguments);
+// }
+
 function App({location}) {
 	return (
 		<>

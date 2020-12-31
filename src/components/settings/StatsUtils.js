@@ -2,7 +2,7 @@ let gradethreshold = [[3.5, 2.5, 1.5], [3.75, 3.5, 3.25, 3, 2.75]];
 let gradecolorlist = ["var(--green)", "var(--yellow)", "var(--orange)", "var(--red)", "var(--crimson)", "var(--crimson)"];
 let grademap = {"A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3, "B-": 2.7, "C+": 2.3, "C": 2, "C-": 1.7, "D+": 1.3, "D": 1.0, "F": 0}
 
-export function determineGradeColor(grade) {
+export function determineGradeColor(grade, format) {
   if ((grade !== -1) && (typeof(grade) === `number`)) {
     var Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
     var n = Prefs[2] - 1;

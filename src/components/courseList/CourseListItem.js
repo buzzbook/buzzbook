@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, setState, useContext} from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {useWindowWidth} from "@react-hook/window-size";
@@ -12,14 +12,17 @@ import {
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
 import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
+import {SettingsContext} from "../settings/SettingsContext";
 
-function CourseListItem(course) {
+function CourseListItem(course, props) {
 
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 	const windowWidth = useWindowWidth();
-	//const isdark = document.documentElement.classList.contains("dark-theme");
+	const Settings = useContext(SettingsContext);
+	// console.log(Settings);
+	// console.log(Settings.courselistSettings[0]);
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
@@ -28,6 +31,48 @@ function CourseListItem(course) {
 
 	let isSaved = savedCourses[course.courseID];
 	let Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
+	// const [gradeformat, setgradeformat] = useState(JSON.parse(localStorage.getItem("settings"))[1] || 1);
+	//
+	// // var originalSetItem = localStorage.setItem;
+	// // localStorage.setItem = function(){
+	// //     document.createEvent('Event').initEvent('itemInserted', true, true);
+	// // 		console.log("hi");
+	// // }
+	//
+	// var originalSetItem = localStorage.setItem;
+	//
+	// localStorage.setItem = function(key, value) {
+	//   var event = new Event('itemInserted');
+	//
+	//   event.value = value; // Optional..
+	//   event.key = key; // Optional..
+	//
+	//   document.dispatchEvent(event);
+	//   originalSetItem.apply(this, arguments);
+	// };
+	//
+	// var localStorageSetHandler = function(e) {
+	//   alert('localStorage.set("' + e.key + '", "' + e.value + '") was called');
+	// };
+	// //
+	// // document.addEventListener("itemInserted", localStorageSetHandler, false);
+	//
+	// useEffect(() => {
+	//   function checkgradeformat() {
+	//     const item = JSON.parse(localStorage.getItem('settings'));
+	// 		console.log(item);
+	//     if (item) {
+	// 			console.log("activity detected");
+	//       setgradeformat(item[1]);
+	// 			// this.setState({ state: this.state });
+	//     }
+	//   }
+	// 	console.log("INIT");
+	//   document.addEventListener('itemInserted', checkgradeformat, false);
+	// 	return () => {
+	// 		document.removeEventListener('itemInserted', checkgradeformat, false);
+	//   }
+	// }, []);
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
@@ -38,9 +83,9 @@ function CourseListItem(course) {
 	const lettergrade = determineGradeLetter(course.grade);
 
 	let displaygrade = lettergrade;
-	if(Prefs[1] === 2){
+	if(Settings.courselistSettings[1] === 2){
 		displaygrade = course.grade;
-	}else if(Prefs[1] === 3){
+	}else if(Settings.courselistSettings[1] === 3){
 		displaygrade = <>{lettergrade}, {course.grade}</>;
 	}
 
