@@ -1,7 +1,7 @@
 import React, {useState, useContext} from "react";
 import Icon from "../../img/icon";
 import DarkModeToggle from "react-dark-mode-toggle";
-import {SettingsContext, Settings} from "../settings/SettingsContext";
+import {SettingsContext} from "../settings/SettingsContext";
 import "../../css/Controls.css";
 import $ from 'jquery';
 
@@ -37,14 +37,12 @@ function Controls() {
 	};
 
 	const {courselistSettings, toggleSettings} = useContext(SettingsContext);
-	console.log(courselistSettings + "asdf2");
-	toggleSettings([1,1,1]);
-	console.log(courselistSettings + "asdf2");
 
 	const toggleSetting = (index, state) => {
 		if (Prefs[index] !== state){
 			Prefs[index] = state;
 			toggleSettings(Prefs);
+			console.log(courselistSettings);
 			localStorage.setItem("settings", JSON.stringify(Prefs));
 		}
 	};

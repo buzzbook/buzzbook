@@ -5,6 +5,7 @@ import $ from 'jquery';
 import "./css/App.css";
 import Nav from "./components/Nav";
 import Controls from "./components/settings/Controls";
+import {SettingsContextProvider} from "./components/settings/SettingsContext";
 
 // Nav Pages
 import Home from "./pages/Home";
@@ -29,36 +30,36 @@ $(window).on('load', function() {
   $("html").removeClass("preload");
 });
 
-// var originalSetItem = localStorage.setItem;
-// localStorage.setItem = function(){
-//     document.createEvent('Event').initEvent('itemInserted', true, true);
-//     originalSetItem.apply(this, arguments);
-// }
-
 function App({location}) {
+	// const [courselistSettings, toggleSettings] = useState(JSON.parse(localStorage.getItem('settings')) || [2,3,2]);
+	// const settingsUpdate = (value) => {
+  //    toggleSettings(value);
+  // }
 	return (
 		<>
-			<div style={{display: "grid", gridTemplateColumns: "180px 1fr"}}>
-				<div className="pr-0" style={{maxWidth: 180}}>
-					<Nav />
-				</div>
-				<div className="px-0">
-					<Switch location={location}>
-						<Route exact path="/" component={Home} />
+			<SettingsContextProvider>
+				<div style={{display: "grid", gridTemplateColumns: "180px 1fr"}}>
+					<div className="pr-0" style={{maxWidth: 180}}>
+						<Nav />
+					</div>
+					<div className="px-0">
+						<Switch location={location}>
+							<Route exact path="/" component={Home} />
 
-						{navPages.map((page, index) => (
-							<Route
-								// exact
-								path={page.path}
-								component={page.component}
-								key={index}
-							/>
-						))}
-						<Route path="" component={NotFound} />
-					</Switch>
+							{navPages.map((page, index) => (
+								<Route
+									// exact
+									path={page.path}
+									component={page.component}
+									key={index}
+								/>
+							))}
+							<Route path="" component={NotFound} />
+						</Switch>
+					</div>
 				</div>
-			</div>
-			<Controls />
+				<Controls />
+			</SettingsContextProvider>
 		</>
 	);
 }

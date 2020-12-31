@@ -1,8 +1,35 @@
-import React from "react";
+// import React from "react";
+//
+// export const Settings = {
+//   courselistSettings: [], //[courselistitem height, grade display format, grade color format]
+//   toggleSettings: () => {},
+// };
+//
+// export const SettingsContext = React.createContext(Settings);
 
-export const Settings = {
-  courselistSettings: [1,3,2], //[courselistitem height, grade display format, grade color format]
-  toggleSettings: () => {console.log("hi")},
-};
+import React, { useState } from 'react'
 
-export const SettingsContext = React.createContext(Settings);
+export const SettingsContext = React.createContext({
+  courselistSettings: [], //[courselistitem height, grade display format, grade color format]
+  toggleSettings: () => {},
+})
+
+export const SettingsContextProvider = (props) => {
+  const initSetting = JSON.parse(localStorage.getItem('settings')) || [2,3,2];
+  const toggleSettings = (setting) => {
+    setState({...state, courselistSettings: setting})
+  }
+
+  const initState = {
+    courselistSettings: initSetting,
+    toggleSettings: toggleSettings
+  }
+
+  const [state, setState] = useState(initState)
+
+  return (
+    <SettingsContext.Provider value={state}>
+      {props.children}
+    </SettingsContext.Provider>
+  )
+}
