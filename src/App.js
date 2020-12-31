@@ -31,10 +31,6 @@ $(window).on('load', function() {
 });
 
 function App({location}) {
-	// const [courselistSettings, toggleSettings] = useState(JSON.parse(localStorage.getItem('settings')) || [2,3,2]);
-	// const settingsUpdate = (value) => {
-  //    toggleSettings(value);
-  // }
 	return (
 		<>
 			<SettingsContextProvider>

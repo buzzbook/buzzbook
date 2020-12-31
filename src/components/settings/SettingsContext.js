@@ -1,12 +1,3 @@
-// import React from "react";
-//
-// export const Settings = {
-//   courselistSettings: [], //[courselistitem height, grade display format, grade color format]
-//   toggleSettings: () => {},
-// };
-//
-// export const SettingsContext = React.createContext(Settings);
-
 import React, { useState } from 'react'
 
 export const SettingsContext = React.createContext({
@@ -15,7 +6,7 @@ export const SettingsContext = React.createContext({
 })
 
 export const SettingsContextProvider = (props) => {
-  const initSetting = JSON.parse(localStorage.getItem('settings')) || [2,3,2];
+  const initSetting = JSON.parse(localStorage.getItem('settings')) || [1, 3, 2];
   const toggleSettings = (setting) => {
     setState({...state, courselistSettings: setting})
   }

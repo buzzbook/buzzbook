@@ -4,8 +4,8 @@ import SavedCoursesDetails from "../components/savedCoursesDetails/SavedCoursesD
 import FilterBar from "../components/filters/FilterBar";
 import {useSelector} from "react-redux";
 import {getSavedCourses} from "../redux/courseListSlice";
-import {usePreload} from "../img/icon";
-import stylechanges from "../unused";
+// import {usePreload} from "../img/icon";
+// import stylechanges from "../unused";
 
 function Layout({id, content, savedCoursesDetails}) {
 	// useLayoutEffect(() => {
@@ -15,8 +15,10 @@ function Layout({id, content, savedCoursesDetails}) {
 	// 		"courseList"
 	// 	).parentElement.style.height = `calc(93vh - ${filterBarHeight}px)`;
 	// });
-	const initload = usePreload("./iconset.svg");
-	console.log("initially loaded");
+
+	// Icon Preloader Issue
+	// const initload = usePreload("./iconset.svg");
+	// console.log("initially loaded");
 
 	// const filterHeight = "80px";
 

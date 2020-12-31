@@ -260,9 +260,7 @@ function CourseList({id}) {
 
 	const windowWidth = useWindowWidth();
 	let itemHeight = windowWidth > 1630 ? 60 : 80;
-	if (courselistSettings[0] === 1){
-		itemHeight = windowWidth > 1630 ? 60 : 80;
-	}else if (courselistSettings[0] === 2){
+	if (courselistSettings[0] === 2){
 		itemHeight = windowWidth > 1630 ? 70 : 90;
 	}
 

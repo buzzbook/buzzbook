@@ -26,6 +26,7 @@ if (!Prefs) {
 
 function Controls() {
 	const [theme, updateTheme] = useState(localStorage.getItem("theme") || "light");
+	const {courselistSettings, toggleSettings} = useContext(SettingsContext);
 
 	const toggleTheme = () => {
 		document.documentElement.classList.add("themetransition");
@@ -35,8 +36,6 @@ function Controls() {
 		localStorage.setItem("theme", newTheme);
 		updateTheme(newTheme);
 	};
-
-	const {courselistSettings, toggleSettings} = useContext(SettingsContext);
 
 	const toggleSetting = (index, state) => {
 		if (Prefs[index] !== state){

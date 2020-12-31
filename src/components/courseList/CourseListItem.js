@@ -28,7 +28,6 @@ function CourseListItem(course, props) {
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
-	//let Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
@@ -39,9 +38,7 @@ function CourseListItem(course, props) {
 	const lettergrade = determineGradeLetter(course.grade);
 
 	let displaygrade = lettergrade;
-	if(courselistSettings[1] === 1){
-		displaygrade = lettergrade;
-	}else if(courselistSettings[1] === 2){
+	if(courselistSettings[1] === 2){
 		displaygrade = course.grade;
 	}else if(courselistSettings[1] === 3){
 		displaygrade = <>{lettergrade}, {course.grade}</>;
