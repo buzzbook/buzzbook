@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Icon from "../../img/icon";
 import DarkModeToggle from "react-dark-mode-toggle";
+import {SettingsContext} from "../settings/SettingsContext";
 import "../../css/Controls.css";
 import $ from 'jquery';
 
@@ -25,6 +26,7 @@ if (!Prefs) {
 
 function Controls() {
 	const [theme, updateTheme] = useState(localStorage.getItem("theme") || "light");
+	const {courselistSettings, toggleSettings} = useContext(SettingsContext);
 
 	const toggleTheme = () => {
 		document.documentElement.classList.add("themetransition");
@@ -38,6 +40,8 @@ function Controls() {
 	const toggleSetting = (index, state) => {
 		if (Prefs[index] !== state){
 			Prefs[index] = state;
+			toggleSettings(Prefs);
+			console.log(courselistSettings);
 			localStorage.setItem("settings", JSON.stringify(Prefs));
 		}
 	};

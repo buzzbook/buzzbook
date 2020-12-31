@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useSelector} from "react-redux";
 import {getFilters, getSavedCourses, getSearchQuery, getSort} from "../../redux/courseListSlice";
 import {FixedSizeList as List} from "react-window";
@@ -10,7 +10,7 @@ import SavedCourses from "./SavedCourses";
 import {caches} from "../../scripts/courses";
 import "../../css/CourseList.css";
 import $ from "jquery";
-
+import {SettingsContext} from "../settings/SettingsContext";
 import Icon from "../../img/icon";
 
 /** Keys are the courseID values. Values are the long names */
@@ -256,11 +256,11 @@ function CourseList({id}) {
 			/>
 		);
 	};
+	const {courselistSettings} = useContext(SettingsContext);
 
 	const windowWidth = useWindowWidth();
-	const Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
 	let itemHeight = windowWidth > 1630 ? 60 : 80;
-	if (Prefs[0] === 2){
+	if (courselistSettings[0] === 2){
 		itemHeight = windowWidth > 1630 ? 70 : 90;
 	}
 

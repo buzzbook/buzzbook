@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext} from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {useWindowWidth} from "@react-hook/window-size";
@@ -12,14 +12,15 @@ import {
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
 import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
+import {SettingsContext} from "../settings/SettingsContext";
 
-function CourseListItem(course) {
+function CourseListItem(course, props) {
 
 	const dispatch = useDispatch();
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 	const windowWidth = useWindowWidth();
-	//const isdark = document.documentElement.classList.contains("dark-theme");
+	const {courselistSettings} = useContext(SettingsContext);
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
@@ -27,7 +28,6 @@ function CourseListItem(course) {
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
-	let Prefs = JSON.parse(localStorage.getItem("settings")) || [1,3,2];
 
 	let enrollmentColor = "var(--green)";
 	if (course.enrollmentPercent >= 100) enrollmentColor = "var(--crimson)";
@@ -38,9 +38,9 @@ function CourseListItem(course) {
 	const lettergrade = determineGradeLetter(course.grade);
 
 	let displaygrade = lettergrade;
-	if(Prefs[1] === 2){
+	if(courselistSettings[1] === 2){
 		displaygrade = course.grade;
-	}else if(Prefs[1] === 3){
+	}else if(courselistSettings[1] === 3){
 		displaygrade = <>{lettergrade}, {course.grade}</>;
 	}
 
