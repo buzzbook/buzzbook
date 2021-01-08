@@ -135,8 +135,10 @@ function EnrollmentGraph() {
         label: course.name,
         data: course.data,
         borderColor: colors[i % colors.length],
-        borderWidth: 1,
+        borderWidth: 2,
         fill: false,
+        pointBackgroundColor: colors[i % colors.length],
+        pointRadius: 2.4,
       });
     });
     enrollmentGraph.update();
