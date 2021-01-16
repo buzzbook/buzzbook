@@ -32,7 +32,7 @@ function Enrollment() {
               </div>
             )
             :
-            (<EnrollmentGraph />)
+            (<EnrollmentGraph savedCourses={savedCourses}/>)
         }
       />
     </>
