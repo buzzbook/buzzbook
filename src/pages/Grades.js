@@ -7,11 +7,11 @@ import { getSavedCourses } from "../redux/courseListSlice";
 
 function Grades() {
   const savedCourses = useSelector(getSavedCourses);
-	return (
-		<>
-			<Helmet>
-				<title>BuzzBook | Grades</title>
-			</Helmet>
+  return (
+    <>
+      <Helmet>
+        <title>BuzzBook | Grades</title>
+      </Helmet>
       <Layout
         id="grades"
         savedCoursesDetails
@@ -30,11 +30,11 @@ function Grades() {
               </div>
             )
             :
-            (<GradesGraph />)
+            (<GradesGraph savedCourses={savedCourses} />)
         }
       />
-		</>
-	);
+    </>
+  );
 }
 
 export default Grades;
