@@ -37,6 +37,11 @@
 #savedCoursesheader {
 	cursor: pointer;
 }
+#savedCoursesheader svg {
+	height: 19px;
+	width: 19px;
+	padding: 2px;
+}
 
 /*Collapsible Saved Courses*/
 .savecollapsed #courseList {

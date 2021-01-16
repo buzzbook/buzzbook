@@ -123,7 +123,7 @@ CourseListItem.propTypes = {
 	enrollmentPercent: PropTypes.number.isRequired,
 	credits: PropTypes.number.isRequired,
 	numSections: PropTypes.number.isRequired,
-	grade: PropTypes.string.isRequired
+	grade: PropTypes.number
 };
 
 export default CourseListItem;

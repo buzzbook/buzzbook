@@ -209,6 +209,16 @@ $gridRowHeight: 4;
 	@include Karla(1.2, 6)
 }
 
+::-moz-selection {
+  color: var(--bgcolor);
+  background: var(--primarytextcolor);
+}
+
+::selection {
+	color: var(--bgcolor);
+  background: var(--primarytextcolor);
+}
+
 html {
 	font-size: 16px;
 	/*background-color: var(--bgcolor);
