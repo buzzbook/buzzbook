@@ -105,25 +105,24 @@ function EnrollmentGraph() {
         },
         tooltips: {
           callbacks: {
-            title: function () {
-              return ``;
+            title: function (tooltipItem) {
+              const day = tooltipItem[0].xLabel;
+              return `Day ${day}`;
             },
             label: function (tooltipItem, data) {
               const line = data.datasets[tooltipItem.datasetIndex];
               const className = line.label;
               return `${className}`;
             },
-            afterBody: function (tooltipPoints, data) {
-              const tooltipItem = tooltipPoints[0];
+            afterLabel: function (tooltipItem, data) {
               const rawLine = data.datasets[tooltipItem.datasetIndex];
 
               // index of the item corresponds with the x value of the data
               // i.e. Day 15 = the 15th index in data array
               const rawItem = rawLine.data[parseInt(tooltipItem.label)];
-              const day = rawItem.x;
               const enrollment = rawItem.y;
               const waitlist = rawItem.waitlist;
-              let testMultiline = [`Day ${day}`, `${enrollment}% enrolled`, `${waitlist} waitlist`];
+              let testMultiline = [`${enrollment}% enrolled`, `${waitlist} waitlist`];
               return testMultiline;
             },
           }
