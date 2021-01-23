@@ -224,7 +224,7 @@ const testData = [
 const colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 193, 69, 1)', 'rgba(178, 247, 239, 1)'];
 
 const config = {
-  type: 'line',
+  type: 'LineWithLine',
   data: {
     datasets: [],
   },
@@ -259,6 +259,9 @@ const config = {
       }]
     },
     tooltips: {
+      mode: 'index',
+      intersect: false,
+      xAlign: 'left',
       callbacks: {
         title: function (tooltipItem) {
           const day = tooltipItem[0].xLabel;
@@ -288,6 +291,33 @@ const config = {
 function EnrollmentGraph({ savedCourses }) {
   useEffect(() => {
     const ctx = document.getElementById('enrollment-graph');
+
+    // extends line chart to have the vertical line - LineWithLine
+    Chart.defaults.LineWithLine = Chart.defaults.line;
+    Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+      draw: function (ease) {
+        Chart.controllers.line.prototype.draw.call(this, ease);
+
+        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+          var activePoint = this.chart.tooltip._active[0],
+            ctx = this.chart.ctx,
+            x = activePoint.tooltipPosition().x,
+            topY = this.chart.scales['y-axis-0'].top,
+            bottomY = this.chart.scales['y-axis-0'].bottom;
+
+          // draw line
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(x, topY);
+          ctx.lineTo(x, bottomY);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = '#07C';
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    });
+
     new Chart(ctx, config);
   }, []);
 
@@ -311,7 +341,7 @@ function EnrollmentGraph({ savedCourses }) {
     config.data.datasets = datasets;
     Chart.helpers.each(Chart.instances, function (instance) {
       instance.chart.update(config);
-    })
+    });
   });
   return <canvas id="enrollment-graph" width="400" height="400"></canvas>;
 }
