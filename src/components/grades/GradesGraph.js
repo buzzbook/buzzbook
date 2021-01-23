@@ -7,6 +7,15 @@ const testData = [
   [12, 14, 17, 22, 14, 7, 6, 3, 2, 2, 1],
 ];
 
+const calcPercentile = (index, dataList) => {
+  let sum = 0;
+  for (let i = 0; i < dataList.length; i++) {
+    if (i > index) break;
+    sum += dataList[i];
+  }
+  return `${100 - sum}`;
+}
+
 const config = {
   type: 'bar',
   data: {
@@ -48,6 +57,12 @@ const config = {
           const percentage = tooltipItem.value;
           return `${className} - ${percentage}%`;
         },
+        afterLabel: function (tooltipItem, data) {
+          const dataset = data.datasets[tooltipItem.datasetIndex];
+          const className = dataset.label;
+          const percetile = calcPercentile(tooltipItem.index, dataset.data);
+          return `upper ${percetile} percentile of ${className}`;
+        }
       }
     },
   },
