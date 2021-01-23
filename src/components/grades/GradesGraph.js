@@ -36,9 +36,11 @@ const config = {
       }]
     },
     tooltips: {
+      mode: 'index',
+      intersect: false,
       callbacks: {
-        title: function () {
-          return ``;
+        title: function (toolTipItemList, data) {
+          return toolTipItemList[0].xLabel;
         },
         label: function (tooltipItem, data) {
           const dataset = data.datasets[tooltipItem.datasetIndex];
