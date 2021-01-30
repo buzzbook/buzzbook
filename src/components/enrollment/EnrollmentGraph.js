@@ -332,10 +332,10 @@ function EnrollmentGraph({ savedCourses }) {
         label: course.name,
         data: course.data,
         borderColor: colors[i % colors.length],
-        borderWidth: 2,
+        borderWidth: 3.5,
         fill: false,
         pointBackgroundColor: colors[i % colors.length],
-        pointRadius: 2.4,
+        pointRadius: 0,
       });
     });
     config.data.datasets = datasets;
