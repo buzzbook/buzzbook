@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 
 const testData = [
-  [27, 19, 16, 15, 7, 5, 3, 4, 1, 3, 0],
-  [9, 16, 19, 27, 14, 6, 5, 2, 1, 1, 0],
-  [12, 14, 17, 22, 14, 7, 6, 3, 2, 2, 1],
+  [30, 23, 17, 18, 7, 5],
+  [14, 19, 20, 27, 14, 6],
+  [12, 20, 22, 25, 14, 7],
 ];
 
 const calcPercentile = (index, dataList) => {
@@ -29,7 +29,11 @@ const config = {
     scales: {
       xAxes: [{
         type: 'category',
-        labels: ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F'],
+        labels: ['A', 'B', 'C', 'D', 'F', 'W'],
+        scaleLabel: {
+          display: true,
+          labelString: 'Grade',
+        },
       }],
       yAxes: [{
         type: 'linear',
