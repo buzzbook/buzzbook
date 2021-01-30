@@ -16,6 +16,20 @@ const calcPercentile = (index, dataList) => {
   return `${100 - sum}`;
 }
 
+const getSuffix = (num) => {
+  const lastTwoDigits = num % 100;
+  const lastDigit = num % 10;
+  if (lastDigit === 1 && lastTwoDigits !== 11) {
+    return 'st';
+  } else if (lastDigit === 2 && lastTwoDigits !== 12) {
+    return 'nd';
+  } else if (lastDigit === 3 && lastTwoDigits !== 13) {
+    return 'rd';
+  } else {
+    return 'th';
+  }
+}
+
 const config = {
   type: 'bar',
   data: {
@@ -64,8 +78,10 @@ const config = {
         afterLabel: function (tooltipItem, data) {
           const dataset = data.datasets[tooltipItem.datasetIndex];
           const className = dataset.label;
-          const percetile = calcPercentile(tooltipItem.index, dataset.data);
-          return `upper ${percetile} percentile of ${className}`;
+          const lowerPercetile = calcPercentile(tooltipItem.index, dataset.data);
+          const upperPercentile = (tooltipItem.xLabel === 'A') ? '99' : calcPercentile(tooltipItem.index - 1, dataset.data);
+          const suffix = getSuffix(upperPercentile);
+          return `${lowerPercetile}-${upperPercentile}${suffix} percentile of ${className}`;
         }
       }
     },
