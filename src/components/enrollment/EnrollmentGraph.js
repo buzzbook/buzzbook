@@ -5,6 +5,20 @@ import Chart from 'chart.js';
 
 // x is the date
 // y is enrollment percent
+
+const phaseOneEndDate = '12/11/2020';
+const phaseTwoStartDate = '1/8/2021';
+const phaseTwoEndDate = '1/22/2021';
+
+const getIndexOfDate = (date, data) => {
+  for (let i = 0; i < data.length; i++) {
+    if (date === data[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 const testData = [
   [
     { x: '11/5/2020', y: 0, waitlist: 0 },
@@ -23,18 +37,18 @@ const testData = [
     { x: '11/18/2020', y: 100, waitlist: 8 },
     { x: '11/19/2020', y: 100, waitlist: 8 },
     { x: '11/20/2020', y: 100, waitlist: 8 },
-    { x: '11/21/2020', y: 100, waitlist: 8 },
-    { x: '11/22/2020', y: 100, waitlist: 8 },
-    { x: '11/23/2020', y: 100, waitlist: 8 },
+    { x: '11/21/2020', y: 99, waitlist: 7 },
+    { x: '11/22/2020', y: 98, waitlist: 8 },
+    { x: '11/23/2020', y: 100, waitlist: 7 },
     { x: '11/24/2020', y: 100, waitlist: 8 },
-    { x: '11/25/2020', y: 100, waitlist: 8 },
+    { x: '11/25/2020', y: 98, waitlist: 8 },
     { x: '11/26/2020', y: 100, waitlist: 8 },
     { x: '11/27/2020', y: 100, waitlist: 8 },
     { x: '11/28/2020', y: 100, waitlist: 8 },
     { x: '11/29/2020', y: 100, waitlist: 8 },
     { x: '11/30/2020', y: 100, waitlist: 8 },
     { x: '12/1/2020', y: 100, waitlist: 8 },
-    { x: '12/5/2020', y: 100, waitlist: 8 },
+    { x: '12/5/2020', y: 98, waitlist: 8 },
     { x: '12/6/2020', y: 100, waitlist: 8 },
     { x: '12/7/2020', y: 100, waitlist: 8 },
     { x: '12/8/2020', y: 100, waitlist: 8 },
@@ -54,10 +68,35 @@ const testData = [
     { x: '12/22/2020', y: 100, waitlist: 8 },
     { x: '12/23/2020', y: 100, waitlist: 8 },
     { x: '12/24/2020', y: 100, waitlist: 8 },
-    { x: '12/25/2020', y: 98, waitlist: 6 },
-    { x: '12/26/2020', y: 96, waitlist: 10 },
-    { x: '12/27/2020', y: 98, waitlist: 9 },
+    { x: '12/25/2020', y: 100, waitlist: 8 },
+    { x: '12/26/2020', y: 100, waitlist: 8 },
+    { x: '12/27/2020', y: 100, waitlist: 8 },
     { x: '12/28/2020', y: 100, waitlist: 8 },
+    { x: '12/29/2020', y: 100, waitlist: 8 },
+    { x: '12/30/2020', y: 100, waitlist: 8 },
+    { x: '12/31/2020', y: 100, waitlist: 8 },
+    { x: '1/1/2021', y: 100, waitlist: 8 },
+    { x: '1/2/2021', y: 100, waitlist: 8 },
+    { x: '1/3/2021', y: 100, waitlist: 8 },
+    { x: '1/4/2021', y: 100, waitlist: 8 },
+    { x: '1/5/2021', y: 100, waitlist: 8 },
+    { x: '1/6/2021', y: 100, waitlist: 8 },
+    { x: '1/7/2021', y: 100, waitlist: 8 },
+    { x: '1/8/2021', y: 100, waitlist: 8 },
+    { x: '1/9/2021', y: 99, waitlist: 8 },
+    { x: '1/10/2021', y: 100, waitlist: 8 },
+    { x: '1/11/2021', y: 100, waitlist: 8 },
+    { x: '1/12/2021', y: null, waitlist: null },
+    { x: '1/13/2021', y: null, waitlist: null },
+    { x: '1/14/2021', y: null, waitlist: null },
+    { x: '1/15/2021', y: null, waitlist: null },
+    { x: '1/16/2021', y: null, waitlist: null },
+    { x: '1/17/2021', y: null, waitlist: null },
+    { x: '1/18/2021', y: null, waitlist: null },
+    { x: '1/19/2021', y: null, waitlist: null },
+    { x: '1/20/2021', y: null, waitlist: null },
+    { x: '1/21/2021', y: null, waitlist: null },
+    { x: '1/22/2021', y: null, waitlist: null },
   ],
   [
     { x: '11/5/2020', y: 0, waitlist: 0 },
@@ -93,24 +132,49 @@ const testData = [
     { x: '12/8/2020', y: 100, waitlist: 6 },
     { x: '12/9/2020', y: 100, waitlist: 6 },
     { x: '12/10/2020', y: 100, waitlist: 6 },
-    { x: '12/11/2020', y: 100, waitlist: 6 },
-    { x: '12/12/2020', y: 100, waitlist: 6 },
-    { x: '12/13/2020', y: 100, waitlist: 6 },
-    { x: '12/14/2020', y: 100, waitlist: 6 },
-    { x: '12/15/2020', y: 100, waitlist: 6 },
-    { x: '12/16/2020', y: 100, waitlist: 6 },
-    { x: '12/17/2020', y: 100, waitlist: 6 },
-    { x: '12/18/2020', y: 100, waitlist: 6 },
-    { x: '12/19/2020', y: 100, waitlist: 6 },
-    { x: '12/20/2020', y: 100, waitlist: 6 },
-    { x: '12/21/2020', y: 100, waitlist: 6 },
-    { x: '12/22/2020', y: 100, waitlist: 6 },
-    { x: '12/23/2020', y: 100, waitlist: 6 },
-    { x: '12/24/2020', y: 100, waitlist: 6 },
-    { x: '12/25/2020', y: 100, waitlist: 4 },
-    { x: '12/26/2020', y: 99, waitlist: 5 },
-    { x: '12/27/2020', y: 100, waitlist: 5 },
-    { x: '12/28/2020', y: 100, waitlist: 6 },
+    { x: '12/11/2020', y: 98, waitlist: 6 },
+    { x: '12/12/2020', y: 98, waitlist: 6 },
+    { x: '12/13/2020', y: 98, waitlist: 6 },
+    { x: '12/14/2020', y: 98, waitlist: 6 },
+    { x: '12/15/2020', y: 98, waitlist: 6 },
+    { x: '12/16/2020', y: 98, waitlist: 6 },
+    { x: '12/17/2020', y: 98, waitlist: 6 },
+    { x: '12/18/2020', y: 98, waitlist: 6 },
+    { x: '12/19/2020', y: 98, waitlist: 6 },
+    { x: '12/20/2020', y: 98, waitlist: 6 },
+    { x: '12/21/2020', y: 98, waitlist: 6 },
+    { x: '12/22/2020', y: 98, waitlist: 6 },
+    { x: '12/23/2020', y: 98, waitlist: 6 },
+    { x: '12/24/2020', y: 98, waitlist: 6 },
+    { x: '12/25/2020', y: 98, waitlist: 6 },
+    { x: '12/26/2020', y: 98, waitlist: 6 },
+    { x: '12/27/2020', y: 98, waitlist: 6 },
+    { x: '12/28/2020', y: 98, waitlist: 6 },
+    { x: '12/29/2020', y: 98, waitlist: 6 },
+    { x: '12/30/2020', y: 98, waitlist: 6 },
+    { x: '12/31/2020', y: 98, waitlist: 6 },
+    { x: '1/1/2021', y: 98, waitlist: 6 },
+    { x: '1/2/2021', y: 98, waitlist: 6 },
+    { x: '1/3/2021', y: 98, waitlist: 6 },
+    { x: '1/4/2021', y: 98, waitlist: 6 },
+    { x: '1/5/2021', y: 98, waitlist: 6 },
+    { x: '1/6/2021', y: 98, waitlist: 6 },
+    { x: '1/7/2021', y: 98, waitlist: 6 },
+    { x: '1/8/2021', y: 100, waitlist: 6 },
+    { x: '1/9/2021', y: 100, waitlist: 6 },
+    { x: '1/10/2021', y: 100, waitlist: 6 },
+    { x: '1/11/2021', y: 100, waitlist: 6 },
+    { x: '1/12/2021', y: null, waitlist: null },
+    { x: '1/13/2021', y: null, waitlist: null },
+    { x: '1/14/2021', y: null, waitlist: null },
+    { x: '1/15/2021', y: null, waitlist: null },
+    { x: '1/16/2021', y: null, waitlist: null },
+    { x: '1/17/2021', y: null, waitlist: null },
+    { x: '1/18/2021', y: null, waitlist: null },
+    { x: '1/19/2021', y: null, waitlist: null },
+    { x: '1/20/2021', y: null, waitlist: null },
+    { x: '1/21/2021', y: null, waitlist: null },
+    { x: '1/22/2021', y: null, waitlist: null },
   ],
   [
     { x: '11/5/2020', y: 0, waitlist: 0 },
@@ -125,23 +189,23 @@ const testData = [
     { x: '11/14/2020', y: 81, waitlist: 0 },
     { x: '11/15/2020', y: 83, waitlist: 0 },
     { x: '11/16/2020', y: 83, waitlist: 0 },
-    { x: '11/17/2020', y: 83, waitlist: 0 },
-    { x: '11/18/2020', y: 83, waitlist: 0 },
+    { x: '11/17/2020', y: 80, waitlist: 0 },
+    { x: '11/18/2020', y: 81, waitlist: 0 },
     { x: '11/19/2020', y: 83, waitlist: 0 },
-    { x: '11/20/2020', y: 83, waitlist: 0 },
-    { x: '11/21/2020', y: 83, waitlist: 0 },
-    { x: '11/22/2020', y: 83, waitlist: 0 },
-    { x: '11/23/2020', y: 83, waitlist: 0 },
-    { x: '11/24/2020', y: 83, waitlist: 0 },
-    { x: '11/25/2020', y: 83, waitlist: 0 },
-    { x: '11/26/2020', y: 83, waitlist: 0 },
-    { x: '11/27/2020', y: 83, waitlist: 0 },
-    { x: '11/28/2020', y: 83, waitlist: 0 },
+    { x: '11/20/2020', y: 84, waitlist: 0 },
+    { x: '11/21/2020', y: 85, waitlist: 0 },
+    { x: '11/22/2020', y: 84, waitlist: 0 },
+    { x: '11/23/2020', y: 86, waitlist: 0 },
+    { x: '11/24/2020', y: 85, waitlist: 0 },
+    { x: '11/25/2020', y: 85, waitlist: 0 },
+    { x: '11/26/2020', y: 85, waitlist: 0 },
+    { x: '11/27/2020', y: 85, waitlist: 0 },
+    { x: '11/28/2020', y: 86, waitlist: 0 },
     { x: '11/29/2020', y: 83, waitlist: 0 },
-    { x: '11/30/2020', y: 83, waitlist: 0 },
-    { x: '12/1/2020', y: 83, waitlist: 0 },
-    { x: '12/5/2020', y: 83, waitlist: 0 },
-    { x: '12/6/2020', y: 83, waitlist: 0 },
+    { x: '11/30/2020', y: 82, waitlist: 0 },
+    { x: '12/1/2020', y: 82, waitlist: 0 },
+    { x: '12/5/2020', y: 82, waitlist: 0 },
+    { x: '12/6/2020', y: 82, waitlist: 0 },
     { x: '12/7/2020', y: 83, waitlist: 0 },
     { x: '12/8/2020', y: 83, waitlist: 0 },
     { x: '12/9/2020', y: 83, waitlist: 0 },
@@ -161,9 +225,34 @@ const testData = [
     { x: '12/23/2020', y: 83, waitlist: 0 },
     { x: '12/24/2020', y: 83, waitlist: 0 },
     { x: '12/25/2020', y: 83, waitlist: 0 },
-    { x: '12/26/2020', y: 87, waitlist: 0 },
-    { x: '12/27/2020', y: 95, waitlist: 0 },
-    { x: '12/28/2020', y: 94, waitlist: 0 },
+    { x: '12/26/2020', y: 83, waitlist: 0 },
+    { x: '12/27/2020', y: 83, waitlist: 0 },
+    { x: '12/28/2020', y: 83, waitlist: 0 },
+    { x: '12/29/2020', y: 83, waitlist: 0 },
+    { x: '12/30/2020', y: 83, waitlist: 0 },
+    { x: '12/31/2020', y: 83, waitlist: 0 },
+    { x: '1/1/2021', y: 83, waitlist: 0 },
+    { x: '1/2/2021', y: 83, waitlist: 0 },
+    { x: '1/3/2021', y: 83, waitlist: 0 },
+    { x: '1/4/2021', y: 83, waitlist: 0 },
+    { x: '1/5/2021', y: 83, waitlist: 0 },
+    { x: '1/6/2021', y: 83, waitlist: 0 },
+    { x: '1/7/2021', y: 83, waitlist: 0 },
+    { x: '1/8/2021', y: 85, waitlist: 0 },
+    { x: '1/9/2021', y: 89, waitlist: 0 },
+    { x: '1/10/2021', y: 90, waitlist: 0 },
+    { x: '1/11/2021', y: 89, waitlist: 0 },
+    { x: '1/12/2021', y: null, waitlist: null },
+    { x: '1/13/2021', y: null, waitlist: null },
+    { x: '1/14/2021', y: null, waitlist: null },
+    { x: '1/15/2021', y: null, waitlist: null },
+    { x: '1/16/2021', y: null, waitlist: null },
+    { x: '1/17/2021', y: null, waitlist: null },
+    { x: '1/18/2021', y: null, waitlist: null },
+    { x: '1/19/2021', y: null, waitlist: null },
+    { x: '1/20/2021', y: null, waitlist: null },
+    { x: '1/21/2021', y: null, waitlist: null },
+    { x: '1/22/2021', y: null, waitlist: null },
   ],
 ];
 
@@ -188,7 +277,7 @@ const config = {
           labelString: 'Date',
         },
         ticks: {
-          max: '1/15/2021',
+          max: phaseTwoEndDate,
         }
       }],
       yAxes: [{
@@ -240,14 +329,51 @@ function EnrollmentGraph({ savedCourses }) {
       draw: function (ease) {
         Chart.controllers.line.prototype.draw.call(this, ease);
 
-        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-          var activePoint = this.chart.tooltip._active[0],
-            ctx = this.chart.ctx,
-            x = activePoint.tooltipPosition().x,
-            topY = this.chart.scales['y-axis-0'].top,
-            bottomY = this.chart.scales['y-axis-0'].bottom;
+        const ctx = this.chart.ctx,
+          topY = this.chart.scales['y-axis-0'].top,
+          bottomY = this.chart.scales['y-axis-0'].bottom;
 
-          // draw line
+        const data = this.chart.config.data.datasets[0].data;
+
+        // phase 1 end line
+        const phaseOneIndex = getIndexOfDate(phaseOneEndDate, data.map(point => point.x));
+        const phaseOneLineX = this.getMeta().data[phaseOneIndex]._model.x;
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([15, 10]);
+        ctx.moveTo(phaseOneLineX, topY);
+        ctx.lineTo(phaseOneLineX, bottomY);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#C6C6C6';
+        ctx.fillStyle = '#7C7C7C'
+        ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.rotate(Math.PI / 2);
+        ctx.fillText('PHASE 1 END', bottomY - (bottomY / 8), -phaseOneLineX - 10);
+        ctx.restore();
+
+        // phase 2 start line
+        const phaseTwoIndex = getIndexOfDate(phaseTwoStartDate, data.map(point => point.x));
+        const phaseTwoLineX = this.getMeta().data[phaseTwoIndex]._model.x;
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([15, 10]);
+        ctx.moveTo(phaseTwoLineX, topY);
+        ctx.lineTo(phaseTwoLineX, bottomY);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#C6C6C6';
+        ctx.fillStyle = '#7C7C7C'
+        ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.rotate(Math.PI / 2);
+        ctx.fillText('PHASE 2 START', bottomY - (bottomY / 8), -phaseTwoLineX - 10);
+        ctx.restore();
+
+        // hover line
+        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+          const activePoint = this.chart.tooltip._active[0],
+            x = activePoint.tooltipPosition().x;
+
           ctx.save();
           ctx.beginPath();
           ctx.moveTo(x, topY);
