@@ -54,10 +54,9 @@ function SavedCourse(course) {
 					iconclass="deleteIcon"
 				/>
 			</div>
-
-
-
-
+      <span>
+        {Object.keys(course.sections).join(', ')}
+      </span>
 		</div>
 	);
 }

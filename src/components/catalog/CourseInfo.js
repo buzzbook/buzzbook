@@ -5,7 +5,8 @@ import {
 	updateSelectedCourse,
 	getSavedCourses,
 	removeCourse,
-	saveCourse,
+  saveCourse,
+  toggleSection,
 	getFilters
 } from "../../redux/courseListSlice";
 import {useHistory, useLocation, Link} from "react-router-dom";
@@ -283,6 +284,7 @@ function CourseInfo() {
 					<table className="table-responsive">
 						<thead>
 							<tr className="sectionlabelfont primarytextcolor">
+                <th scope="col">Save</th>
 								<th scope="col">ID</th>
 								<th scope="col">CRN</th>
 								<th scope="col">Type</th>
@@ -354,6 +356,11 @@ function CourseInfo() {
 
 								return (
 									<tr key={section.id} className="contentfont secondarytextcolor">
+                    <td>
+                      <input type="checkbox" 
+                        onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
+                        checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse][section.id] !== undefined}/>
+                    </td>
 										<td>{section.id}</td>
 										<td>{section.courseNumber}</td>
 										<td>{section.type}</td>
