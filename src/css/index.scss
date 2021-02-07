@@ -315,6 +315,16 @@ body {
 	color: var(--secondarytextcolor) !important;
 }
 
+.tooltip-inner {
+	background-color: var(--labelcolor);
+	color: var(--primarytextcolor);
+	opacity: 1 !important;
+}
+.tooltip.show{opacity: 1 !important;}
+.tooltip.bs-tooltip-top .arrow:before {
+  border-top-color: var(--labelcolor) !important;
+}
+
 @media (max-width: 1630px) {
 	.titlefont {
 		@include Raleway(2, 7)
