@@ -56,16 +56,15 @@
 }
 
 /*Selected Course Box-Shadow*/
-#courseList > a > div {
+#courseList * a > div {
 	cursor: pointer;
-	transition: all 0.2s;
 }
 #courseList * a > div:hover {
-	/*background-color: var(--labelcolor) !important;*/
+	background-color: var(--navcolor) !important;
 	/*box-shadow: inset -1.5px 1.5px 6px var(--labelcolor),
 							inset 1.5px -1.5px 6px var(--bgcolor);*/
-	box-shadow: inset -1px 1px 4.5px var(--inputcolor),
-       				inset 1px -1px 4.5px var(--bgcolor) !important;
+	/*box-shadow: inset -1px 1px 4.5px var(--inputcolor),
+       				inset 1px -1px 4.5px var(--bgcolor) !important;*/
 }
 
 #courseList a {

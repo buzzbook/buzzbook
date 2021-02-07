@@ -24,7 +24,7 @@ function CourseListItem(course, props) {
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
-	let bgColor = "initial";
+	let bgColor = isSelected ? "var(--navcolor)" : "initial";
 	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
@@ -49,8 +49,8 @@ function CourseListItem(course, props) {
 			className={`p-2 rounded`}
 			style={
 				course.page === "catalog"
-					? {backgroundColor: bgColor, boxShadow: bshadow}
-					: {backgroundColor: "initial", boxShadow: "initial"}
+					? {backgroundColor: bgColor}
+					: {backgroundColor: "initial"}
 			}
 			onClick={() => course.page === "catalog" && dispatch(updateSelectedCourse(course.courseID))}
 		>
