@@ -35,7 +35,7 @@
 	border-radius: 5px;
 	margin: 5px;
 	display: inline-block;
-	transition: background-color 0.3s;
+	transition: background-color 0s;
 	cursor: pointer;
 }
 .prereq {
