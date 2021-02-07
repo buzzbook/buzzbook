@@ -15,6 +15,7 @@ import RatingBar from "./RatingBar";
 import courses, {caches} from "../../scripts/courses";
 import Alert from "../settings/Alerts";
 import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
+import $ from 'jquery';
 
 import Icon from "../../img/icon";
 
@@ -106,7 +107,7 @@ function CourseInfo() {
 		if (!Array.isArray(val)) {
 			if (courses[val.id]){
 				return (
-					<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"} className="prereq contentfont">
+					<Link to={`/catalog/${val.id.replaceAll(" ", "+")}`} key={val.id + "L"} className="prereq contentfont" data-toggle="tooltip" data-html="true" title={courses[val.id][0]}>
 						<div key={val.id}>{val.id}</div>
 					</Link>
 				);
@@ -130,6 +131,12 @@ function CourseInfo() {
 		return output;
 	}
 
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+	$('[data-toggle="tooltip"]').on('click', function () {
+  	$(this).tooltip('hide')
+	})
 
 	const course = {
 		courseID: selectedCourse,
