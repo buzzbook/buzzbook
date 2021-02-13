@@ -284,7 +284,7 @@ function CourseInfo() {
 					<table className="table-responsive">
 						<thead>
 							<tr className="sectionlabelfont primarytextcolor">
-                <th scope="col">Save</th>
+                <th scope="col"></th>
 								<th scope="col">ID</th>
 								<th scope="col">CRN</th>
 								<th scope="col">Type</th>
