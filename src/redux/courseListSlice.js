@@ -34,12 +34,27 @@ export const courseListSlice = createSlice({
 		},
 		/** Adds a course by its course ID */
 		saveCourse: (state, action) => {
-			state.savedCourses[action.payload] = true;
+			state.savedCourses[action.payload] = {};
 		},
 		/** Removes a course by its course ID */
 		removeCourse: (state, action) => {
 			delete state.savedCourses[action.payload];
-		},
+    },
+    toggleSection: (state, action) => {
+      const course = Object.keys(action.payload)[0];
+      const section = Object.values(action.payload)[0];
+      if (state.savedCourses[course] === undefined) {
+        // add course if not saved
+        state.savedCourses[course] = {};
+      }
+      if (state.savedCourses[course][section] === undefined) {
+        // saving the section
+        state.savedCourses[course][section] = true;
+      } else {
+        // removing the seciton
+        delete state.savedCourses[course][section];
+      }
+    },
 		updateFilter: (state, action) => {
 			state.filters[action.payload.name] = action.payload.value;
 		},
@@ -58,7 +73,8 @@ export const courseListSlice = createSlice({
 export const {
 	updateSelectedCourse,
 	saveCourse,
-	removeCourse,
+  removeCourse,
+  toggleSection,
 	updateFilter,
 	resetFilters,
 	updateSort,
