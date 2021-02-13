@@ -81,3 +81,8 @@
 .infowrapper .contentfont, .infowrapper.contentfont {
 	font-size: 0.9rem;
 }
+
+/*Collapsible Course Info Description*/
+.savecollapsed #section-header svg {
+	transform: rotate(180deg);
+}
