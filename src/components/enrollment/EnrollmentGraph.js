@@ -3,22 +3,13 @@ import Chart from 'chart.js';
 // Webpack import not working for some reason
 // import {graphic} from "../../img/gradesPageGraphic.png";
 
-// x is the date
-// y is enrollment percent
-
+// Replace dates to change the phase start/end marker
 const phaseOneEndDate = '12/11/2020';
 const phaseTwoStartDate = '1/8/2021';
 const phaseTwoEndDate = '1/22/2021';
 
-const getIndexOfDate = (date, data) => {
-  for (let i = 0; i < data.length; i++) {
-    if (date === data[i]) {
-      return i;
-    }
-  }
-  return -1;
-}
-
+// x is the date
+// y is enrollment percent
 const testData = [
   [
     { x: '11/5/2020', y: 0, waitlist: 0 },
@@ -256,9 +247,6 @@ const testData = [
   ],
 ];
 
-// more colors needed
-const colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 193, 69, 1)', 'rgba(178, 247, 239, 1)'];
-
 const config = {
   type: 'LineWithLine',
   data: {
@@ -268,7 +256,7 @@ const config = {
     title: {
       display: true,
       text: 'Enrollment Percentage Over Time',
-    },
+    }, 
     scales: {
       xAxes: [{
         type: 'time',
@@ -278,7 +266,8 @@ const config = {
         },
         ticks: {
           max: phaseTwoEndDate,
-        }
+        },
+        gridLines: {},
       }],
       yAxes: [{
         scaleLabel: {
@@ -289,7 +278,9 @@ const config = {
           beginAtZero: true,
           max: 100,
           callback: (label) => label + '%',
-        }
+        },
+        gridLines: {},
+
       }]
     },
     tooltips: {
@@ -316,10 +307,50 @@ const config = {
         },
       }
     },
+    legend: {
+      labels: {},
+    },
   },
 };
 
+// more colors needed
+const colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 193, 69, 1)', 'rgba(178, 247, 239, 1)'];
+
+const getIndexOfDate = (date, data) => {
+  for (let i = 0; i < data.length; i++) {
+    if (date === data[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+const setColors = () => {
+  const style = window.getComputedStyle(document.documentElement);
+
+  const textColor = style.getPropertyValue('--primarytextcolor');
+  const secTextColor = style.getPropertyValue('--secondarytextcolor');
+  const grey = style.getPropertyValue('--boundarycolor');
+
+  config.options.title.fontColor = textColor;
+
+  config.options.scales.xAxes[0].scaleLabel.fontColor = textColor;
+  config.options.scales.xAxes[0].ticks.fontColor = textColor;
+  config.options.scales.xAxes[0].gridLines.color = grey;
+  config.options.scales.xAxes[0].gridLines.zeroLineColor = secTextColor;
+
+   config.options.scales.yAxes[0].scaleLabel.fontColor = textColor;
+  config.options.scales.yAxes[0].ticks.fontColor = textColor;
+  config.options.scales.yAxes[0].gridLines.color = grey;
+  config.options.scales.yAxes[0].gridLines.zeroLineColor = secTextColor;
+
+  config.options.legend.labels.fontColor = textColor;
+}
+
 function EnrollmentGraph({ savedCourses }) {
+
+  setColors();
+
   useEffect(() => {
     const ctx = document.getElementById('enrollment-graph');
 

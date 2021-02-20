@@ -48,6 +48,8 @@ const config = {
           display: true,
           labelString: 'Grade',
         },
+        ticks: {},
+        gridLines: {},
       }],
       yAxes: [{
         type: 'linear',
@@ -59,7 +61,8 @@ const config = {
           beginAtZero: true,
           suggestedMax: 50,
           callback: (label) => label + '%',
-        }
+        },
+        gridLines: {},
       }]
     },
     tooltips: {
@@ -85,12 +88,41 @@ const config = {
         }
       }
     },
+    legend: {
+      labels: {},
+    },
   },
 };
 
 const colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 193, 69, 1)', 'rgba(178, 247, 239, 1)'];
 
+const setColors = () => {
+  const style = window.getComputedStyle(document.documentElement);
+
+  const textColor = style.getPropertyValue('--primarytextcolor');
+  const secTextColor = style.getPropertyValue('--secondarytextcolor');
+  const grey = style.getPropertyValue('--boundarycolor');
+
+  config.options.title.fontColor = textColor;
+
+  config.options.scales.xAxes[0].scaleLabel.fontColor = textColor;
+  config.options.scales.xAxes[0].ticks.fontColor = textColor;
+  config.options.scales.xAxes[0].gridLines.color = grey;
+  config.options.scales.xAxes[0].gridLines.zeroLineColor = secTextColor;
+
+   config.options.scales.yAxes[0].scaleLabel.fontColor = textColor;
+  config.options.scales.yAxes[0].ticks.fontColor = textColor;
+  config.options.scales.yAxes[0].gridLines.color = grey;
+  config.options.scales.yAxes[0].gridLines.zeroLineColor = secTextColor;
+
+  config.options.legend.labels.fontColor = textColor;
+}
+
+
 function GradesGraph({ savedCourses }) {
+
+  setColors();
+
   useEffect(() => {
     const ctx = document.getElementById('grade-graph');
     new Chart(ctx, config);
