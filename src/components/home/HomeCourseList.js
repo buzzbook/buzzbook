@@ -6,28 +6,33 @@ import courses, { caches } from "../../scripts/courses";
 
 function HomeCourseList() {
   const savedCourses = useSelector(getSavedCourses);
-  console.log(savedCourses);
+  if (Object.keys(savedCourses).length === 0) {
+    return (
+      <>
+        Go to "Catalog" and save some courses!
+      </>
+    )
+  }
   return (
     <div>
       {Object.keys(savedCourses).map((id, index) => {
         const coursesRaw = courses[id];
         const name = coursesRaw[0];
         const credits = Object.values(coursesRaw[1])[0][2];
-        console.log(coursesRaw);
         const hasSavedSections = Object.keys(savedCourses[id]).length > 0;
         return <div class="home-saved-course">
-          {id} - {name} - {credits} credit{credits !== 1 && "s"}
+          <h6>{id} - {name} - {credits} credit{credits !== 1 && "s"}</h6>
           {hasSavedSections && (
             <table className="section-table">
               <tr>
-                <th></th>
-                <th>Section</th>
-                <th>CRN</th>
-                <th>Time</th>
-                <th>Days</th>
-                <th>Location</th>
-                <th>Instructor</th>
-                <th>Enrollment</th>
+                <th style={{}}></th>
+                <th style={{width: "10%"}}>Section</th>
+                <th style={{width: "10%"}}>CRN</th>
+                <th style={{width: "10%"}}>Enrollment</th>
+                <th style={{width: "15%"}}>Time</th>
+                <th style={{width: "5%"}}>Days</th>
+                <th style={{width: "25%"}}>Location</th>
+                <th style={{width: "25%"}}>Instructor</th>
               </tr>
               {Object.keys(savedCourses[id]).map((section, index) => {
                 const sectionRaw = coursesRaw[1][section];
@@ -46,11 +51,11 @@ function HomeCourseList() {
                   <td><input type="checkbox" /></td>
                   <td>{section}</td>
                   <td>{sectionID}</td>
+                  <td>0/10</td>
                   <td>{time}</td>
                   <td>{day}</td>
                   <td>{location}</td>
                   <td>{instructors}</td>
-                  <td>0/10</td>
                 </tr>
               })}
             </table>

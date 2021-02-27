@@ -22,7 +22,7 @@ function Home() {
 						A reenvisioned course catalog. Made by students, for students.
 					</h5>
           <div className="home-course-list-container">
-            <h6>My Saved Courses:</h6>
+            <h5>My Saved Courses:</h5>
             <div className="home-course-list">
               <HomeCourseList/>
             </div>
