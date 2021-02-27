@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { getSavedCourses } from "../../redux/courseListSlice";
+import { Link } from "react-router-dom";
 import courses, { caches } from "../../scripts/courses";
 
 
@@ -9,7 +10,7 @@ function HomeCourseList() {
   if (Object.keys(savedCourses).length === 0) {
     return (
       <>
-        Go to "Catalog" and save some courses!
+        Get started by heading over to <Link to="/catalog">Catalog</Link> and saving some courses!
       </>
     )
   }
@@ -26,13 +27,13 @@ function HomeCourseList() {
             <table className="section-table">
               <tr>
                 <th style={{}}></th>
-                <th style={{width: "10%"}}>Section</th>
-                <th style={{width: "10%"}}>CRN</th>
-                <th style={{width: "10%"}}>Enrollment</th>
-                <th style={{width: "15%"}}>Time</th>
-                <th style={{width: "5%"}}>Days</th>
-                <th style={{width: "25%"}}>Location</th>
-                <th style={{width: "25%"}}>Instructor</th>
+                <th style={{ width: "10%" }}>Section</th>
+                <th style={{ width: "10%" }}>CRN</th>
+                <th style={{ width: "10%" }}>Enrollment</th>
+                <th style={{ width: "15%" }}>Time</th>
+                <th style={{ width: "5%" }}>Days</th>
+                <th style={{ width: "25%" }}>Location</th>
+                <th style={{ width: "25%" }}>Instructor</th>
               </tr>
               {Object.keys(savedCourses[id]).map((section, index) => {
                 const sectionRaw = coursesRaw[1][section];

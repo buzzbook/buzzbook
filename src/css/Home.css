@@ -8,12 +8,15 @@
 .home-content > div {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 16vh);
-  width: calc(100% - 10vw);
+  height: calc(100% - 2 * var(--home-content-top-margin));
+  width: calc(100% - 2 * var(--home-content-left-margin));
 	position: absolute;
-	top: 8vh;
-	left: 5vw;
+	top: var(--home-content-top-margin);
+	left: var(--home-content-left-margin);
 	z-index: 1;
+
+  --home-content-top-margin: 8vh;
+  --home-content-left-margin: 5vw;
 }
 
 .home-content > img {
@@ -32,11 +35,13 @@
 }
 
 .home-course-list {
-  padding: 2vh 1vw;
-  height: calc(100% - 10vh);
-  max-height: calc(100%);
-  background-color: rgba(225, 225, 225, 0.8);
+  padding: var(--course-list-padding) 1vw;
+  height: calc(100% - 2 * var(--course-list-padding));
+  background-color: rgba(225, 225, 225, 0.9);
+  border-radius: 10px;
   overflow-y: scroll;
+
+  --course-list-padding: 2vh;
 }
 .section-table {
   margin: 0px 2vw;
