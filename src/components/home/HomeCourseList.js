@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSavedCourses, removeCourse, updateSelectedCourse } from "../../redux/courseListSlice";
+import { checkHomeCourse, checkHomeSection, getSavedCourses, updateSelectedCourse } from "../../redux/courseListSlice";
 import { Link } from "react-router-dom";
 import courses, { caches } from "../../scripts/courses";
 
 function HomeCourseList() {
   const dispatch = useDispatch();
   const savedCourses = useSelector(getSavedCourses);
-
   if (Object.keys(savedCourses).length === 0) {
     return (
       <>
@@ -15,10 +14,10 @@ function HomeCourseList() {
       </>
     )
   }
-  const HomeCourse = ({ id, name, credits, hasSavedSections, sectionList }) => (
-    <div class="home-saved-course">
+  const HomeCourse = ({ id, name, credits, hasSavedSections, sectionList }) => {
+    return (<div class="home-saved-course">
       <span>
-        <input type="checkbox" />
+        <input type="checkbox" onChange={() => dispatch(checkHomeCourse(id))} checked={savedCourses[id]["checked"]} />
         <Link
           onClick={() => dispatch(updateSelectedCourse(id))}
           to={`/catalog/${id.replaceAll(" ", "+")}`}
@@ -39,7 +38,7 @@ function HomeCourseList() {
             <th style={{ width: "25%" }}>Location</th>
             <th style={{ width: "25%" }}>Instructor</th>
           </tr>
-          {Object.keys(savedCourses[id]).map((section, index) => {
+          {Object.keys(savedCourses[id]["sections"]).map((section, index) => {
             const sectionRaw = sectionList[section];
 
             let sectionID, meetings;
@@ -53,7 +52,7 @@ function HomeCourseList() {
             const time = meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A";
 
             return <tr>
-              <td><input type="checkbox" /></td>
+              <td><input type="checkbox" onChange={() => dispatch(checkHomeSection({ [id]: section }))} checked={savedCourses[id]["sections"][section]} /></td>
               <td>{section}</td>
               <td>{sectionID}</td>
               <td>0/10</td>
@@ -66,14 +65,17 @@ function HomeCourseList() {
         </table>
       )}
     </div>
-  );
+    )
+  };
   return (
     <div>
       {Object.keys(savedCourses).map((id, index) => {
         const coursesRaw = courses[id];
         const name = coursesRaw[0];
         const credits = Object.values(coursesRaw[1])[0][2];
-        const hasSavedSections = Object.keys(savedCourses[id]).length > 0;
+        const savedSections = Object.keys(savedCourses[id]);
+        savedSections.splice(0, 1); // remove checked
+        const hasSavedSections = savedSections.length > 0;
         const sectionList = coursesRaw[1];
         return <HomeCourse
           id={id}

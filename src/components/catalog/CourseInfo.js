@@ -366,7 +366,7 @@ function CourseInfo() {
                     <td>
                       <input type="checkbox" 
                         onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
-                        checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse][section.id] !== undefined}/>
+                        checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse]["sections"][section.id] !== undefined}/>
                     </td>
 										<td>{section.id}</td>
 										<td>{section.courseNumber}</td>

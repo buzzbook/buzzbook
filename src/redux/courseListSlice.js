@@ -29,12 +29,36 @@ export const courseListSlice = createSlice({
 		searchQuery: ""
 	},
 	reducers: {
+    /** handles course check in home page */
+    checkHomeCourse: (state, action) => {
+      const course = action.payload;
+      const checkedCourse = state.savedCourses[course];
+      const checked = !checkedCourse["checked"];
+      checkedCourse["checked"] = checked;
+
+      // set all sections to checked/unchecked
+      Object.keys(checkedCourse.sections).forEach(key => {
+        checkedCourse["sections"][key] = checked;
+      });
+    },
+    checkHomeSection: (state, action) => {
+      const course = Object.keys(action.payload)[0];
+      const section = Object.values(action.payload)[0];
+
+      if (state.savedCourses[course]["sections"][section] === false) {
+        // check the section
+        state.savedCourses[course]["sections"][section] = true;
+      } else {
+        // uncheck the section
+        state.savedCourses[course]["sections"][section] = false;
+      }
+    },
 		updateSelectedCourse: (state, action) => {
 			state.selectedCourse = action.payload;
 		},
 		/** Adds a course by its course ID */
 		saveCourse: (state, action) => {
-			state.savedCourses[action.payload] = {};
+			state.savedCourses[action.payload] = {checked: false, sections: {}};
 		},
 		/** Removes a course by its course ID */
 		removeCourse: (state, action) => {
@@ -45,14 +69,14 @@ export const courseListSlice = createSlice({
       const section = Object.values(action.payload)[0];
       if (state.savedCourses[course] === undefined) {
         // add course if not saved
-        state.savedCourses[course] = {};
+        state.savedCourses[course] = {checked: false, sections: {}};
       }
-      if (state.savedCourses[course][section] === undefined) {
+      if (state.savedCourses[course]["sections"][section] === undefined) {
         // saving the section
-        state.savedCourses[course][section] = true;
+        state.savedCourses[course]["sections"][section] = false;
       } else {
-        // removing the seciton
-        delete state.savedCourses[course][section];
+        // removing the section
+        delete state.savedCourses[course]["sections"][section];
       }
     },
 		updateFilter: (state, action) => {
@@ -71,6 +95,8 @@ export const courseListSlice = createSlice({
 });
 
 export const {
+  checkHomeCourse,
+  checkHomeSection,
 	updateSelectedCourse,
 	saveCourse,
   removeCourse,
