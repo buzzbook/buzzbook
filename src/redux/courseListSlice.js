@@ -24,11 +24,22 @@ export const courseListSlice = createSlice({
 		// Saved courses is an object full of courseID: true entries
 		// This is because searching an object is O(1) vs O(n) for an array
 		savedCourses: {},
+    selectAll: false,
 		filters: defaultFilters,
 		sort: {value: "Course ID", label: "Course ID"},
 		searchQuery: ""
 	},
 	reducers: {
+    /** handles all select in home page */
+    allSelect: (state, action) => {
+      state.selectAll = !state.selectAll;
+      Object.keys(state.savedCourses).forEach(course => {
+        state.savedCourses[course].checked = state.selectAll;
+        Object.keys(state.savedCourses[course]["sections"]).forEach(section => {
+          state.savedCourses[course]["sections"][section] = state.selectAll;
+        });
+      });
+    },
     /** handles course check in home page */
     checkHomeCourse: (state, action) => {
       const course = action.payload;
@@ -40,17 +51,33 @@ export const courseListSlice = createSlice({
       Object.keys(checkedCourse.sections).forEach(key => {
         checkedCourse["sections"][key] = checked;
       });
+      if (!checked) {
+        // remove select all since one course is not selected
+        state.selectAll = false;
+      }
     },
+    /** handles section check in home page */
     checkHomeSection: (state, action) => {
       const course = Object.keys(action.payload)[0];
       const section = Object.values(action.payload)[0];
+      const checkedCourse = state.savedCourses[course];
 
-      if (state.savedCourses[course]["sections"][section] === false) {
+      if (checkedCourse["sections"][section] === false) {
         // check the section
-        state.savedCourses[course]["sections"][section] = true;
+        checkedCourse["sections"][section] = true;
+
+        let sectionCheckedList = Object.keys(checkedCourse["sections"]).map(key => checkedCourse["sections"][key]);
+        // if every section in a course is checked, check the course
+        if (sectionCheckedList.every(bool => bool)) {
+          checkedCourse["checked"] = true;
+        }
       } else {
         // uncheck the section
-        state.savedCourses[course]["sections"][section] = false;
+        checkedCourse["sections"][section] = false;
+        // uncheck course since a section is unchecked 
+        checkedCourse["checked"] = false;
+        // uncheck select all
+        state.selectAll = false;
       }
     },
 		updateSelectedCourse: (state, action) => {
@@ -95,6 +122,7 @@ export const courseListSlice = createSlice({
 });
 
 export const {
+  allSelect,
   checkHomeCourse,
   checkHomeSection,
 	updateSelectedCourse,
@@ -107,6 +135,7 @@ export const {
 	updateSearchQuery
 } = courseListSlice.actions;
 
+export const getSelectAll = state => state.courseList.selectAll;
 export const getSelectedCourse = state => state.courseList.selectedCourse;
 export const getSavedCourses = state => state.courseList.savedCourses;
 export const getFilters = state => state.courseList.filters;

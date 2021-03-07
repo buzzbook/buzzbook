@@ -37,7 +37,7 @@
 .home-course-list {
   padding: var(--course-list-padding) 1vw;
   height: calc(100% - 2 * var(--course-list-padding));
-  background-color: rgba(225, 225, 225, 0.9);
+  background-color: var(--navcoloralpha);
   border-radius: 10px;
   overflow-y: scroll;
 
