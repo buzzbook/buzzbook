@@ -7,9 +7,24 @@ import {updateSearchQuery} from "../../redux/courseListSlice";
 import iconset from "../../img/iconset.svg";
 import "../../css/Filters.css";
 import Icon from "../../img/icon";
+import $ from 'jquery';
 
 function FilterBar() {
 	const dispatch = useDispatch();
+
+	const openFilters = () => {
+		if ($('#filtersBox').css("visibility") === "hidden"){
+			$('#filtersBox').addClass('openmenu');
+			$('html').click(function(event) {
+		    if ($(event.target).closest('#filtersBox, .filtersIcon').length === 0) {
+	        $('#filtersBox').removeClass('openmenu');
+		    }
+			});
+		}else{
+			$('#filtersBox').removeClass('openmenu');
+		}
+	}
+
 	return (
 		<div className="mx-0" id="filterBar">
 			<div className="h-100 py-3 px-4">
@@ -27,46 +42,22 @@ function FilterBar() {
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"
-						className="mr-3 iconfilter"
+						className="mr-3 iconfilter filtersIcon"
 						style={{width: 20, height: 20, cursor: "pointer"}}
-						data-toggle="modal"
-						data-target="#filterModal"
+						onClick={openFilters}
 					>
 						<use href={iconset+"#icon-filter"}/>
 					</svg>
 
 					<div
-						className="modal fade"
-						id="filterModal"
-						tabIndex="-1"
-						role="dialog"
-						aria-labelledby="filterModalLabel"
-						aria-hidden="true"
+						id="filtersBox"
+						className="position-absolute"
 					>
-						<div className="modal-dialog" role="document">
-							<div className="modal-content">
-								<div className="modal-header">
-									<h5
-										className="modal-title"
-										id="filterModalLabel"
-									>
-										Filters
-									</h5>
-									<button
-										type="button"
-										className="close"
-										data-dismiss="modal"
-										aria-label="Close"
-									>
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div className="modal-body">
-									<ExpandedFilters />
-								</div>
-							</div>
+						<div className="modal-body">
+							<ExpandedFilters />
 						</div>
 					</div>
+
 					<Filters />
 				</div>
 			</div>

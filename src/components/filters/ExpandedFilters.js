@@ -26,14 +26,9 @@ function ExpandedFilters() {
 	return (
 		<div>
 			<div id="filters">
-				<div className="mb-1 font-weight-bold text-right">
-					<span className="contentfont" style={{cursor: "pointer"}} onClick={clearFilters}>
-						Clear Filters
-					</span>
-				</div>
 				<div className="expanded-filters-grid">
 					<div>
-						<h6 className="mt-2">Sort By</h6>
+						<h6 className="subheadingfont">Sort By</h6>
 						<FilterSelector
 							id="sort-by-filter"
 							ariaLabel="Sort By"
@@ -44,7 +39,7 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Department</h6>
+						<h6 className="subheadingfont">Department</h6>
 						<FilterSelector
 							ariaLabel="Subject"
 							ariaDescribedBy="subject-label"
@@ -58,7 +53,7 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Level</h6>
+						<h6 className="subheadingfont">Level</h6>
 						<FilterSelector
 							ariaLabel="Level"
 							ariaDescribedBy="level-label"
@@ -69,7 +64,7 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Credits</h6>
+						<h6 className="subheadingfont">Credits</h6>
 						<FilterSelector
 							ariaLabel="Credits"
 							ariaDescribedBy="credits-label"
@@ -80,7 +75,7 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Type</h6>
+						<h6 className="subheadingfont">Type</h6>
 						<FilterSelector
 							ariaLabel="Type"
 							ariaDescribedBy="type-label"
@@ -93,28 +88,30 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Status</h6>
-						<label>
-							<input type="checkbox" />
-							Open
-						</label>
-						<label>
-							<input type="checkbox" />
-							Waitlist
-						</label>
+						<h6 className="subheadingfont">Status</h6>
+						<div className="inline">
+							<label className="contentfont form-check">
+								<input type="checkbox" className="form-check-input"/>
+								Open
+							</label>
+							<label className="contentfont form-check ml-2">
+								<input type="checkbox" className="form-check-input"/>
+								Waitlist
+							</label>
+						</div>
 					</div>
 					<div className="timing-filter">
-						<h6 className="mt-2">Timing Filter</h6>
+						<h6 className="subheadingfont">Timing Filter</h6>
 					</div>
 					<div className="degree-requirements">
-						<h6 className="mt-2">Degree Requirements</h6>
+						<h6 className="subheadingfont">Degree Requirements</h6>
 					</div>
 					<div>
-						<h6 className="mt-2">Course Quality</h6>
+						<h6 className="subheadingfont">Course Quality</h6>
 						<Range min={0} max={5} defaultValue={[0, 5]} />
 					</div>
 					<div>
-						<h6 className="mt-2">Instructors</h6>
+						<h6 className="subheadingfont">Instructors</h6>
 						<FilterSelector
 							ariaLabel="Instructors"
 							ariaDescribedBy="instructors-label"
@@ -128,11 +125,11 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Professor Quality</h6>
+						<h6 className="subheadingfont">Professor Quality</h6>
 						<Range min={0} max={5} defaultValue={[0, 5]} />
 					</div>
 					<div>
-						<h6 className="mt-2">Terms</h6>
+						<h6 className="subheadingfont">Terms</h6>
 						<FilterSelector
 							ariaLabel="Terms"
 							ariaDescribedBy="Terms-label"
@@ -141,7 +138,7 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div>
-						<h6 className="mt-2">Weekly Workload</h6>
+						<h6 className="subheadingfont">Weekly Workload</h6>
 						<Range min={0} max={5} defaultValue={[0, 5]} />
 					</div>
 					<div>
@@ -156,13 +153,13 @@ function ExpandedFilters() {
 						/>
 					</div>
 					<div className="advanced-options">
-						<h6 className="mt-2">Advanced Options</h6>
-						<label>
-							<input type="checkbox" />
+						<h6 className=" subheadingfont">Advanced Options</h6>
+						<label className="contentfont form-check">
+							<input type="checkbox" className="form-check-input"/>
 							Only Show Eligible
 						</label>
-						<label>
-							<input type="checkbox" />
+						<label className="contentfont form-check">
+							<input type="checkbox" className="form-check-input"/>
 							Only Show Related
 						</label>
 					</div>
