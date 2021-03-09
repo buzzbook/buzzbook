@@ -1,17 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {determineGradeColor} from '../settings/StatsUtils';
 
 function RatingBar({value, max = 5, highIsBetter}) {
 	const rating = (value / max) * 100;
 
-	let color = "var(--green)";
-	if (highIsBetter) {
-		if (rating < 33) color = "var(--red)";
-		else if (rating < 67) color = "var(--orange)";
-	} else {
-		if (rating >= 80) color = "var(--red)";
-		else if (rating >= 60) color = "var(--orange)";
-	}
+	const color = determineGradeColor((value/5)*4)
+	//console.log(value, color)
 
 	return (
 		<div

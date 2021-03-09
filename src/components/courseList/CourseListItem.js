@@ -11,7 +11,7 @@ import {
 } from "../../redux/courseListSlice";
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
-import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
+import {determineGradeLetter, determineGradeColor, determineRatingColor} from "../settings/StatsUtils";
 import {SettingsContext} from "../settings/SettingsContext";
 
 
@@ -39,7 +39,7 @@ function CourseListItem(course, props) {
 				//console.log(cRating[course.courseID], typeof cRating[course.courseID])
 				updateRatings(true);
 			})
-		console.log("Loaded Ratings for ", dept, num)
+		//console.log("Loaded Ratings for ", dept, num)
 	}
 
 

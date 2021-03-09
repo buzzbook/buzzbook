@@ -33,3 +33,17 @@ export function determineGradeLetter(grade){
   }
   return lettergrade;
 }
+
+export function determineRatingColor(value, max = 5, highIsBetter) {
+  const rating = (value / max) * 100;
+
+	let color = "var(--green)";
+	if (highIsBetter) {
+		if (rating < 33) color = "var(--red)";
+		else if (rating < 67) color = "var(--orange)";
+	} else {
+		if (rating >= 80) color = "var(--red)";
+		else if (rating >= 60) color = "var(--orange)";
+	}
+	return color;
+}

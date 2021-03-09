@@ -21,6 +21,7 @@ import Icon from "../../img/icon";
 
 var prevSelectedCourse;
 var profGrades;
+var courseRatings;
 
 function CourseInfo() {
 	const dispatch = useDispatch();
@@ -51,10 +52,11 @@ function CourseInfo() {
 	}
 
 	const [gradesLoaded, updateGradesLoaded] = useState(false);
-
+	const [ratingsLoaded, updateRatingsLoaded] = useState(false);
 	if (prevSelectedCourse !== selectedCourse) {
 		prevSelectedCourse = selectedCourse;
 		updateGradesLoaded(false);
+		updateRatingsLoaded(false);
 		profGrades = {};
 		let courseQuery = selectedCourse.replaceAll(" ", "%20");
 		// For CHEM 1211K/1212K
@@ -73,7 +75,17 @@ function CourseInfo() {
 				}
 				updateGradesLoaded(true);
 			});
+
+		const [dept, num] = selectedCourse.split(" ")
+		fetch(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
+			.then(resp => resp.json())
+			.then(data => {
+				courseRatings = {courseEff: (data.courseEff ? +data.courseEff.toFixed(2) : 0), profEff: (data.courseEff ? +data.profEff.toFixed(2): 0), hours: (data.courseEff ? data.hoursPer : 0)}
+				updateRatingsLoaded(true);
+			})
 	}
+
+	courseRatings = courseRatings || {courseEff: 0, profEff: 0, hours: 0};
 
 	const courseRaw = courses[selectedCourse];
 
@@ -260,18 +272,18 @@ function CourseInfo() {
 						</div>
 
 						{/* Quality */}
-						<div style={{gridArea: "2 / 1 / 2 / 1"}} >Quality</div>
+						<div style={{gridArea: "2 / 1 / 2 / 1"}} >Course</div>
 						<div style={{gridArea: "2 / 2 / 2 / 2"}}>
-							<RatingBar value={4} highIsBetter={true} />
+							<RatingBar value={courseRatings.courseEff} highIsBetter={true} />
 						</div>
-						<div style={{gridArea: "2 / 3 / 2 / 3"}} className="font-italic">{4}/5</div>
+						<div style={{gridArea: "2 / 3 / 2 / 3"}} className="font-italic">{courseRatings.courseEff}/5</div>
 
 						{/* Difficulty */}
-						<div style={{gridArea: "3 / 1 / 3 / 1"}} >Difficulty</div>
+						<div style={{gridArea: "3 / 1 / 3 / 1"}} >Instructor</div>
 						<div style={{gridArea: "3 / 2 / 3 / 2"}}>
-							<RatingBar value={3.5} highIsBetter={false} />
+							<RatingBar value={courseRatings.profEff} highIsBetter={true} />
 						</div>
-						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{3.5}/5</div>
+						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{courseRatings.profEff}/5</div>
 					</div>
 				</div>
 
