@@ -15,9 +15,9 @@ Router.get("/test", (req, res) => {
 
 Router.get("/byCourse", (req, res) => {
   //console.log(req.query.num || "Num")
-  const query = 'SELECT AVG(`Course: Overall Effectiveness`) AS courseEff FROM byCourse WHERE Dept = ? AND Num LIKE ? AND Year >= 2017'
+  const query = 'SELECT (SELECT AVG(`Course: Overall Effectiveness`) AS courseEff FROM byCourse WHERE Dept = ? AND Num LIKE ? AND Year >= 2017) AS courseEff, (SELECT AVG(`Instructor: Overall Effectiveness`) AS profEff FROM byProf WHERE Dept = ? AND Num LIKE ? AND Year >= 2017) AS profEff'
   //console.log(query, [req.query.dept, `num`])
-  mysqlc.query(query, [req.query.dept, req.query.num || `%`], (error, results, fields) => {
+  mysqlc.query(query, [req.query.dept, req.query.num || `%`, req.query.dept, req.query.num || `%`], (error, results, fields) => {
     if (error) {
       throw error
     } else {
@@ -28,3 +28,8 @@ Router.get("/byCourse", (req, res) => {
 });
 
 module.exports = Router;
+
+// SELECT (SELECT AVG(`Course: Overall Effectiveness`) AS courseEff FROM byCourse WHERE Dept = "CSE" AND Num LIKE 6220 AND Year >= 2017) AS courseEff, (SELECT AVG(`Instructor: Overall Effectiveness`) AS profEff FROM byProf WHERE Dept = "CSE" AND Num LIKE 6220 AND Year >= 2017) AS profEff
+//
+//
+// SELECT AVG(byCourse.`Course: Overall Effectiveness`) AS courseEff, AVG(byProf.`Instructor: Overall Effectiveness`) AS instrEff FROM byCourse, byProf WHERE (byCourse.Dept = byProf.Dept) = "CSE" AND (byCourse.Num = byProf.Num) LIKE 6220 AND (byCourse.Year = byProf.Year) >= 2017

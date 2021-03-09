@@ -14,8 +14,8 @@ import Icon from "../../img/icon";
 import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
 import {SettingsContext} from "../settings/SettingsContext";
 
-var rating = {};
-
+var cRating = {};
+var pRating = {};
 function CourseListItem(course, props) {
 
 	const dispatch = useDispatch();
@@ -33,8 +33,9 @@ function CourseListItem(course, props) {
 		.then(resp => resp.json())
 		.then(data => {
 			//console.log(data)
-			rating[course.courseID] = data.courseEff
-			console.log(rating[course.courseID], typeof rating[course.courseID])
+			cRating[course.courseID] = data.courseEff
+			pRating[course.courseID] = data.profEff
+			//console.log(cRating[course.courseID], typeof cRating[course.courseID])
 			updateRatingsLoaded(true);
 		})
 
@@ -52,7 +53,9 @@ function CourseListItem(course, props) {
 
 	const gradeColor = determineGradeColor(course.grade);
 	const lettergrade = determineGradeLetter(course.grade);
-	const ratingColor = determineGradeColor((rating[course.courseID]/5)*4)
+	const cRatingColor = determineGradeColor((cRating[course.courseID]/5)*4)
+	const pRatingColor = determineGradeColor((pRating[course.courseID]/5)*4)
+
 
 	let displaygrade = lettergrade;
 	if(courselistSettings[1] === 2){
@@ -61,7 +64,7 @@ function CourseListItem(course, props) {
 		displaygrade = <>{lettergrade}, {course.grade}</>;
 	}
 
-	console.log(rating, ratingColor)
+	//console.log(rating, ratingColor)
 
 	const listItem = (
 		<div
@@ -101,17 +104,24 @@ function CourseListItem(course, props) {
 									</span>
 								</>
 							)}
+							<br/>
 						</span>
 						{course.grade && (
 							<>
-								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+
 								<span style={{color: gradeColor, fontWeight: "700"}}>{displaygrade}</span>
 							</>
 						)}
-						{rating[course.courseID] && (
+						{cRating[course.courseID] && (
 							<>
 								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
-								<span style={{color: ratingColor, fontWeight: "700"}}>{rating[course.courseID] && rating[course.courseID].toFixed(2)}</span>
+								<span style={{color: cRatingColor, fontWeight: "700"}}>C: {cRating[course.courseID] && cRating[course.courseID].toFixed(2)}</span>
+							</>
+						)}
+						{pRating[course.courseID] && (
+							<>
+								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{color: pRatingColor, fontWeight: "700"}}>I: {pRating[course.courseID] && pRating[course.courseID].toFixed(2)}</span>
 							</>
 						)}
 					</div>
