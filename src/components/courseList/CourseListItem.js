@@ -14,8 +14,9 @@ import Icon from "../../img/icon";
 import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
 import {SettingsContext} from "../settings/SettingsContext";
 
-var cRating = {};
-var pRating = {};
+
+var ratingstore = {};
+
 function CourseListItem(course, props) {
 
 	const dispatch = useDispatch();
@@ -23,21 +24,36 @@ function CourseListItem(course, props) {
 	const savedCourses = useSelector(getSavedCourses);
 	const windowWidth = useWindowWidth();
 	const {courselistSettings} = useContext(SettingsContext);
-	const [ratingLoaded, updateRatingsLoaded] = useState(false);
+	const [ratingsState, updateRatings] = useState(false);
+
+	if (!ratingstore[course.courseID] && !ratingsState) {
+	// 	updateRatings(false);
+	//componentDidMount(){
+		//course.courseID.split(" ").length !== 2 && console.log("nope")
+		const [dept, num] = course.courseID.split(" ")
+			//console.log(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
+		fetch(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
+			.then(resp => resp.json())
+			.then(data => {
+				ratingstore[course.courseID] = {courseEff: data.courseEff, profEff: data.profEff, hours: data.hoursPer}
+				//console.log(cRating[course.courseID], typeof cRating[course.courseID])
+				updateRatings(true);
+			})
+		console.log("Loaded Ratings for ", dept, num)
+	}
 
 
-	//course.courseID.split(" ").length !== 2 && console.log("nope")
-	const [dept, num] = course.courseID.split(" ")
-	//console.log(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
-	fetch(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
-		.then(resp => resp.json())
-		.then(data => {
-			//console.log(data)
-			cRating[course.courseID] = data.courseEff
-			pRating[course.courseID] = data.profEff
-			//console.log(cRating[course.courseID], typeof cRating[course.courseID])
-			updateRatingsLoaded(true);
-		})
+	// function fetchRatings(dept, num) {
+	// 	fetch(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
+	// 		.then(resp => resp.json())
+	// 		.then(data => {ratingstore[course.courseID] = {thiscourseEff: data.courseEff, profEff: data.profEff, hours: data.hoursPer} })
+	// }
+	//
+	// useEffect(() => {
+	// 	const [dept, num] = course.courseID.split(" ")
+	// 	console.log("calling")
+	// 	fetchRatings(dept, num);
+	// })
 
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
@@ -53,8 +69,9 @@ function CourseListItem(course, props) {
 
 	const gradeColor = determineGradeColor(course.grade);
 	const lettergrade = determineGradeLetter(course.grade);
-	const cRatingColor = determineGradeColor((cRating[course.courseID]/5)*4)
-	const pRatingColor = determineGradeColor((pRating[course.courseID]/5)*4)
+	const currRatings = ratingstore[course.courseID] || {courseEff: 0, profEff: 0, hours: 0}
+	const cRatingColor = determineGradeColor((currRatings.courseEff/5)*4)
+	const pRatingColor = determineGradeColor((currRatings.profEff/5)*4)
 
 
 	let displaygrade = lettergrade;
@@ -112,16 +129,22 @@ function CourseListItem(course, props) {
 								<span style={{color: gradeColor, fontWeight: "700"}}>{displaygrade}</span>
 							</>
 						)}
-						{cRating[course.courseID] && (
+						{currRatings.courseEff && (
 							<>
 								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
-								<span style={{color: cRatingColor, fontWeight: "700"}}>C: {cRating[course.courseID] && cRating[course.courseID].toFixed(2)}</span>
+								<span style={{color: cRatingColor, fontWeight: "700"}}>C: {currRatings.courseEff && currRatings.courseEff.toFixed(2)}</span>
 							</>
 						)}
-						{pRating[course.courseID] && (
+						{currRatings.profEff && (
 							<>
 								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
-								<span style={{color: pRatingColor, fontWeight: "700"}}>I: {pRating[course.courseID] && pRating[course.courseID].toFixed(2)}</span>
+								<span style={{color: pRatingColor, fontWeight: "700"}}>I: {currRatings.profEff && currRatings.profEff.toFixed(2)}</span>
+							</>
+						)}
+						{currRatings.hours && (
+							<>
+								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{fontWeight: "700"}}>H: {currRatings.hours && currRatings.hours.toFixed(2)}</span>
 							</>
 						)}
 					</div>

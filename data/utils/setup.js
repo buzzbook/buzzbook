@@ -1,8 +1,17 @@
 const { exec } = require('child_process');
 const dbConfig = require('./config.js');
-const path = './data/ratingsdb_encoded.sql';
+const path = './data/ratingsdb.sql.gz';
 
-exec(`mysql -u${dbConfig.user} -p${dbConfig.password} -h${dbConfig.host} ${dbConfig.database} < ${path}`, (err, stdout, stderr) => {
+var cmd;
+if (path.slice(-3) === ".gz"){
+      cmd = `gunzip < ${path} | mysql -u${dbConfig.user} -p${dbConfig.password} -h${dbConfig.host} ${dbConfig.database}`
+      console.log("Importing zipped file...")
+} else {
+      cmd = `mysql -u${dbConfig.user} -p${dbConfig.password} -h${dbConfig.host} ${dbConfig.database} < ${path}`
+      console.log("Importing sql file...")
+}
+
+exec(cmd, (err, stdout, stderr) => {
       if (err) { console.error(`exec error: ${err}`); return; }
       console.log(`The import has finished.`);
 });
