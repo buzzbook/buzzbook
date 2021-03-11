@@ -27,9 +27,25 @@ Router.get("/byCourse", (req, res) => {
   })
 });
 
+Router.get("/sql", (req, res) => {
+  mysqlc.query(req.query.query, (error, results, fields) => {
+    if (error) {
+      throw error
+    } else {
+      console.log("SQL query sent:", req.query)
+      res.send(results)
+    }
+  })
+});
+
+Router.get("/courses", (req, res) => {
+
+});
+
+module.exports = Router;
+
 // SELECT (SELECT AVG(`Course: Overall Effectiveness`) AS courseEff, AVG(`Hours per Week`) as hoursPer FROM byCourse WHERE Dept = "CX" AND Num LIKE "4220" AND Year >= 2017) inner join (SELECT AVG(`Instructor: Overall Effectiveness`) as profEff FROM byProf WHERE Dept = "CX" AND Num LIKE 4220 AND Year >= 2017) on a.courseEff = b.profEff;
 //
-module.exports = Router;
 // SELECT (SELECT AVG(`Course: Overall Effectiveness`) AS courseEff FROM byCourse WHERE Dept = "CSE" AND Num LIKE 6220 AND Year >= 2017) AS courseEff, (SELECT AVG(`Instructor: Overall Effectiveness`) AS profEff FROM byProf WHERE Dept = "CSE" AND Num LIKE 6220 AND Year >= 2017) AS profEff
 //
 //

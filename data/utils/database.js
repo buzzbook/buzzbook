@@ -12,7 +12,7 @@ connection.connect(err => {
   }
 })
 
-const testquer1 = 'SELECT * FROM bySection LIMIT 10'
+const testquery1 = 'SELECT * FROM bySection LIMIT 10'
 const testquery2 = 'SELECT 1 + 1 AS solution'
 
 connection.query('SELECT (SELECT COUNT(*) FROM byProf) as profcount, (SELECT COUNT(*) FROM bySection) as seccount, (SELECT COUNT(*) FROM byCourse) as coursecount', (error, results, fields) => {
