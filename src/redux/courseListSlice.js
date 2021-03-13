@@ -80,6 +80,24 @@ export const courseListSlice = createSlice({
         state.selectAll = false;
       }
     },
+    /** handles deletion of checked courses/sections in home page */
+    deleteHomeSelected: (state, action) => {
+      const courseList = state.savedCourses;
+      console.log(courseList);
+      Object.keys(courseList).forEach(key => {
+        if (courseList[key].checked) {
+          // remove course
+          delete courseList[[key]];
+        } else {
+          // remove any section checked
+          Object.keys(courseList[key].sections).forEach(sectionKey => {
+            if (courseList[key].sections[sectionKey]) {
+              delete courseList[key].sections[sectionKey];
+            }
+          });
+        }
+      });
+    },
 		updateSelectedCourse: (state, action) => {
 			state.selectedCourse = action.payload;
 		},
@@ -125,6 +143,7 @@ export const {
   allSelect,
   checkHomeCourse,
   checkHomeSection,
+  deleteHomeSelected,
 	updateSelectedCourse,
 	saveCourse,
   removeCourse,
