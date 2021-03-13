@@ -73,8 +73,7 @@ function HomeCourseList() {
         const coursesRaw = courses[id];
         const name = coursesRaw[0];
         const credits = Object.values(coursesRaw[1])[0][2];
-        const savedSections = Object.keys(savedCourses[id]);
-        savedSections.splice(0, 1); // remove checked
+        const savedSections = Object.keys(savedCourses[id].sections);
         const hasSavedSections = savedSections.length > 0;
         const sectionList = coursesRaw[1];
         return <HomeCourse

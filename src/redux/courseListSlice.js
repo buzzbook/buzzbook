@@ -83,7 +83,6 @@ export const courseListSlice = createSlice({
     /** handles deletion of checked courses/sections in home page */
     deleteHomeSelected: (state, action) => {
       const courseList = state.savedCourses;
-      console.log(courseList);
       Object.keys(courseList).forEach(key => {
         if (courseList[key].checked) {
           // remove course
@@ -97,6 +96,7 @@ export const courseListSlice = createSlice({
           });
         }
       });
+      state.selectAll = false;
     },
 		updateSelectedCourse: (state, action) => {
 			state.selectedCourse = action.payload;
@@ -104,6 +104,7 @@ export const courseListSlice = createSlice({
 		/** Adds a course by its course ID */
 		saveCourse: (state, action) => {
 			state.savedCourses[action.payload] = {checked: false, sections: {}};
+      state.selectAll = false;
 		},
 		/** Removes a course by its course ID */
 		removeCourse: (state, action) => {
@@ -119,6 +120,7 @@ export const courseListSlice = createSlice({
       if (state.savedCourses[course]["sections"][section] === undefined) {
         // saving the section
         state.savedCourses[course]["sections"][section] = false;
+        state.selectAll = false;
       } else {
         // removing the section
         delete state.savedCourses[course]["sections"][section];
