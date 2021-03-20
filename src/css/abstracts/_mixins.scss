@@ -1,4 +1,4 @@
-@use 'variables';
+@use 'variables' as *;
 
 @mixin basekick($typeSizeModifier, $typeRowSpan, $descenderHeightScale, $capHeight) {
     $fontSize: $typeSizeModifier * $baseFontSize;

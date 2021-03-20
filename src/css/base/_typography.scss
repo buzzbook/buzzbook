@@ -66,3 +66,18 @@
 	color: var(--theme);
 	@include a.Karla(1.2, 6)
 }
+
+
+@media (max-width: 1630px) {
+	.titlefont {
+		@include a.Raleway(2, 7)
+	}
+	.subtitlefont {
+		@include a.Raleway(1.25, 4.25)
+	}
+}
+
+/*Mobile Styles*/
+@media (max-width: 950px) {
+
+}

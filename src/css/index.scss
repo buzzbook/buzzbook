@@ -50,17 +50,3 @@ body {
 }
 
 
-
-@media (max-width: 1630px) {
-	.titlefont {
-		@include Raleway(2, 7)
-	}
-	.subtitlefont {
-		@include Raleway(1.25, 4.25)
-	}
-}
-
-/*Mobile Styles*/
-@media (max-width: 950px) {
-
-}
