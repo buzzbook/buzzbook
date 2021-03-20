@@ -1,0 +1,28 @@
+
+/*Scrollbar Styles*/
+.hidescroll{
+    scrollbar-width: none; /*Firefox*/
+      -ms-overflow-style: none; /*IE*/
+  }
+  .hidescroll::-webkit-scrollbar {
+    display:none; /*Chrome, Safari*/
+  }
+  
+  .hoverscroll{
+    overflow-y: hidden ;
+  }
+  
+  .customhoverscroll::-webkit-scrollbar {
+    width: 6px;
+      background-color: transparent;
+  }
+  .customhoverscroll::-webkit-scrollbar-thumb {
+      border-radius: .5rem;
+      background-color: transparent;
+  }
+  .customhoverscroll:hover::-webkit-scrollbar-thumb {
+      background-color: var(--secondarytextcolor);
+  }
+  .customhoverscroll, .hoverscroll:hover{
+      overflow-y: overlay ;
+  }

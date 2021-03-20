@@ -1,0 +1,42 @@
+@use 'variables';
+
+@mixin basekick($typeSizeModifier, $typeRowSpan, $descenderHeightScale, $capHeight) {
+    $fontSize: $typeSizeModifier * $baseFontSize;
+    $lineHeight: $typeRowSpan * $gridRowHeight;
+    $typeOffset: calculateTypeOffset($lineHeight, $fontSize, $descenderHeightScale);
+    $topSpace: $lineHeight - $capHeight * $fontSize;
+    $heightCorrection: 0;
+  
+    @if $topSpace > $gridRowHeight {
+      $heightCorrection: $topSpace - ($topSpace % $gridRowHeight);
+    }
+  
+    $preventCollapse: 1;
+  
+    font-size: #{$fontSize}px;
+    line-height: #{$lineHeight}px;
+    transform: translateY(#{$typeOffset}em);
+    padding-top: $preventCollapse;
+    &::before {
+      content: "";
+      margin-top: #{-($heightCorrection + $preventCollapse)}px;
+      display: block;
+      height: 0;
+    }
+  }
+  
+  @mixin Raleway($typeSizeModifier, $typeRowSpan) {
+    $ralewayDescenderHeightScale: 0.11;
+    $ralewayCapHeight: 0.75;
+  
+    @include basekick($typeSizeModifier, $typeRowSpan, $ralewayDescenderHeightScale, $ralewayCapHeight);
+    font-family: Raleway;
+  }
+  
+  @mixin Karla($typeSizeModifier, $typeRowSpan) {
+    $karlaDescenderHeightScale: 0.06;
+    $karlaCapHeight: 0.75;
+  
+    @include basekick($typeSizeModifier, $typeRowSpan, $karlaDescenderHeightScale, $karlaCapHeight);
+    font-family: Karla;
+  }

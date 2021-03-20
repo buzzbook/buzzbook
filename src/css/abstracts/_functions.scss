@@ -1,0 +1,4 @@
+@function calculateTypeOffset($lh, $fontSize, $descenderHeightScale) {
+    $lineHeightScale: $lh / $fontSize;
+    @return ($lineHeightScale - 1) / 2 + $descenderHeightScale;
+  }

@@ -1,0 +1,68 @@
+@use '../abstracts/' as a;
+
+
+
+
+
+/*Font Styles*/
+.titlefont { /*course number*/
+	font-family: var(--primaryfont);
+	font-weight: 600;
+	font-size: 2.5rem;
+	color: var(--primarytextcolor);
+	@include a.Raleway(2.5, 12)
+}
+
+.subtitlefont { /*course name*/
+	font-family: var(--primaryfont);
+	font-weight: 400;
+	font-size: 1.6875rem;
+	color: var(--themecolor);
+	@include a.Raleway(1.6875, 5.25)
+}
+
+.headingfont { /*search bar course number*/
+	font-family: var(--primaryfont);
+	font-weight: 600;
+	font-size: 1.25rem;
+	color: var(--primarytextcolor);
+}
+
+.subheadingfont { /*search bar course name*/
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1rem;
+	color: var(--primarytextcolor);
+}
+
+.sectionlabelfont { /*sections and labels*/
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1.0625rem;
+	color: var(--primarytextcolor);
+	// @include Karla(1.0625, 5);
+}
+
+.contentfont { /*descriptions and information*/
+	font-family: var(--secondaryfont);
+	font-weight: 300;
+	font-size: 1rem;
+	color: var(--secondarytextcolor);
+	// @include basekick(1, 16, .11, 8, 4, 0.75);
+}
+
+.navfont { /*nav bar unselected*/
+	font-family: var(--secondaryfont);
+	font-weight: 400;
+	font-size: 1.2rem;
+	color: var(--primarytextcolor);
+	@include a.Karla(1.2, 6)
+}
+
+.navselectedfont{ /*nav bar selected*/
+	font-family: var(--secondaryfont);
+	font-weight: 500;
+	font-size: 1.2rem;
+	color: var(--theme);
+	@include a.Karla(1.2, 6)
+}

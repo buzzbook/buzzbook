@@ -1,0 +1,70 @@
+/*Color Definitions*/
+:root {
+	--white: #FFFFFF;
+	--lightwhite: #FCFCFC;
+	--offwhite: #F7F7F7;
+	--darkblack: #100F0E; /**/
+	--black: #171717; /**/
+	--offblack: #3B3B3B;
+	--grey: #7C7C7C;
+	--accentgrey: #EDEDED;
+	--darkgrey: #E7E7E7; /*for ratings bar*/
+	--midgrey: #E0E0E0;
+	--lightgrey: #C6C6C6;
+
+	--red: #F75959;
+	--crimson: #99001A;
+	--orange: #F5A334;
+	--yellow: #FFCE00;
+	--green: #69C961;
+	--blue: #1063FF;
+	--theme: #EAAA00;
+	--primaryfont: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande, sans-serif;
+	--secondaryfont: Karla, Lato, Lucinda Grande, Tahoma, sans-serif;
+
+	/*light theme settings*/
+	--bgcolor: var(--white);
+	--themecolor: var(--theme);
+	--navcolor: var(--offwhite);
+	--shadingcolor: var(--lightwhite);
+	--contrastcolor: var(--darkgrey);
+	--boundarycolor: var(--midgrey);
+	--primarytextcolor: var(--offblack);
+	--secondarytextcolor: var(--grey);
+	--labelcolor: var(--accentgrey);
+	--inputcolor: var(--lightgrey);
+	--altheadingcolor: var(--primarytextcolor);
+	overflow: hidden
+}
+
+// type scale
+
+:root {
+	--fontbase: 14px;
+	--typescale: 1.25;
+
+	--f1: calc(var(--f2) / var(--typescale));
+	--f2: calc(var(--f3) / var(--typescale));
+	--f3: var(--fontbase); 
+	--f4: calc(var(--f3) * var(--typescale));
+	--f5: calc(var(--f4) * var(--typescale));
+	--f6: calc(var(--f5) * var(--typescale));
+	--f7: calc(var(--f6) * var(--typescale));
+
+}
+
+.dark-theme {
+	--bgcolor: #1B1B1D; /*black*/
+	--themecolor: var(--theme);
+	--navcolor: #16161a; /*#100F0E*/
+	--shadingcolor: #212121;
+	--contrastcolor: var(--offblack);
+	--boundarycolor: #383838; /*2B2B2B*/
+	--primarytextcolor: #F8F8F8; /* f0f6fc accentgrey fafafa d8d8d8*/
+	--secondarytextcolor: #B1B1B1; /*grey*/
+	--labelcolor: #282828;
+	--inputcolor: #000000; /*212121 or 222222*/
+	--altheadingcolor: #E4E7EB; /*d9e2ec e0e0e0*/
+
+	--iconfilter: invert(35%); /*temp before sorting out svg fill*/
+}

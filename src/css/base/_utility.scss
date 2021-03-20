@@ -1,0 +1,26 @@
+/*Utility Styles*/
+.inline {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+
+
+.text-link {
+	text-decoration: none ;
+	transition: color 1s;
+}
+.text-link:hover > span.subheadingfont {
+	color: var(--secondarytextcolor) ;
+}
+
+.tooltip-inner {
+	background-color: var(--labelcolor);
+	color: var(--primarytextcolor);
+	opacity: 1 ;
+}
+.tooltip.show{opacity: 1 ;}
+.tooltip.bs-tooltip-top .arrow:before {
+  border-top-color: var(--labelcolor) ;
+}
