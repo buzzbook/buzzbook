@@ -1,6 +1,6 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
-let data = JSON.parse(fs.readFileSync("./sp21_testdata.json"));
+let data = JSON.parse(fs.readFileSync("./f21.json"));
 
 const IDs = Object.keys(data.courses);
 var i = 0;
@@ -23,7 +23,7 @@ const interval = setInterval(() => {
 		})
 		.then(() => {
 			if (i === IDs.length - 1) {
-				fs.writeFile("courseDataWithGrades.json", JSON.stringify(data), err => {
+				fs.writeFile("f21grades.json", JSON.stringify(data), err => {
 					// In case of a error throw err.
 					if (err) throw err;
 				});

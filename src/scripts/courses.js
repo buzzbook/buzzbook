@@ -1,10 +1,10 @@
-import data from "../courseDataWithGrades.json";
+import data from "../f21grades.json";
 console.log(data);
 
 /*
 courses = [name, sections, prereqs, descriptions]
 sections = [CRN, meetings, credits, scheduleTypes index, campuses index, attributes indices, gradeBases index]
-meetings = [periods index, days, room, locations index, instructors, dateRange index] 
+meetings = [periods index, days, room, locations index, instructors, dateRange index]
 indeces refer to the caches
 */
 

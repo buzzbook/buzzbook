@@ -200,7 +200,8 @@ function CourseList({id}) {
 			if (searchQuery !== "") {
 				if (
 					!courseID.includes(searchQuery.toUpperCase()) &&
-					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase())
+					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase()) &&
+					!(courseData[3] != null &&  courseData[3].toUpperCase().includes(searchQuery.toUpperCase()))
 				) {
 					return false;
 				}
@@ -240,7 +241,8 @@ function CourseList({id}) {
 			enrollment: courseEnrollment,
 			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
-			sections: courseData[1]
+			sections: courseData[1],
+			description: courseData[3]
 		};
 		return (
 			<CourseListItem

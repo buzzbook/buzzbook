@@ -27,6 +27,10 @@ Router.get("/byCourse", (req, res) => {
   })
 });
 
+Router.get("/ratings", (req, res) => {
+  const query =  'SELECT AVG(``)'
+});
+
 Router.get("/sql", (req, res) => {
   mysqlc.query(req.query.query, (error, results, fields) => {
     if (error) {
