@@ -34,8 +34,8 @@ function App({location}) {
 	return (
 		<>
 			<SettingsContextProvider>
-				<div style={{display: "grid", gridTemplateColumns: "180px 1fr"}}>
-					<div className="pr-0" style={{maxWidth: 180}}>
+				<div style={{display: "grid", gridTemplateColumns: "200px 1fr"}}>
+					<div className="pr-0" style={{maxWidth: 200}}>
 						<Nav />
 					</div>
 					<div className="px-0">

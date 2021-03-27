@@ -1,6 +1,11 @@
 .nav {
 	height: 100vh;
-	background-color: var(--navcolor);
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-title > h4{
+  margin: 0;
 }
 
 .nav .navbar-brand img {
@@ -9,11 +14,7 @@
 }
 
 .nav .nav-item {
-	margin-top: 1rem;
-}
-
-.nav .nav-item:nth-child(2) {
-	margin-top: 1.6rem;
+	margin-top: 1.3rem;
 }
 
 .nav .nav-item a {
@@ -23,12 +24,26 @@
 	box-shadow: none;
 }
 
+.nav .nav-item a, .nav .nav-title {
+  padding: .5rem;
+}
+
 .nav .nav-item a:hover {
-	color: var(--theme);
 	font-weight: 500; /*take this out if it looks bad*/
 	text-decoration: none;
 }
 
 .nav ul {
 	list-style: none;
+}
+
+.bottom-nav {
+  margin-bottom: 1rem;
+}
+
+.feedback {
+  border-radius: 15px;
+  background-color: var(--accentgrey);
+  padding: 1rem;
+  margin: 1rem;
 }

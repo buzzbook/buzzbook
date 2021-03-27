@@ -33,7 +33,7 @@ $gridRowHeight: 4;
 	--yellow: #FFCE00;
 	--green: #69C961;
 	--blue: #1063FF;
-	--theme: #EAAA00;
+	--theme: #F6D26F;
 	--primaryfont: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande, sans-serif;
 	--secondaryfont: Karla, Lato, Lucinda Grande, Tahoma, sans-serif;
 
@@ -198,15 +198,16 @@ $gridRowHeight: 4;
 	font-weight: 400;
 	font-size: 1.2rem;
 	color: var(--primarytextcolor);
-	@include Karla(1.2, 6)
+	// @include Karla(1.6, 6)
 }
 
 .navselectedfont{ /*nav bar selected*/
 	font-family: var(--secondaryfont);
 	font-weight: 500;
 	font-size: 1.2rem;
-	color: var(--theme);
-	@include Karla(1.2, 6)
+  background-color: var(--theme);
+  border-radius: 15px;
+	// @include Karla(1.2, 6)
 }
 
 ::-moz-selection {
