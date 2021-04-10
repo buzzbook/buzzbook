@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import $ from "jquery";
 
-import "../css/Nav.css";
 import itLogo from "../img/itLogo.png";
 
 const navPages = [
@@ -32,26 +31,16 @@ function Nav() {
 	});
 
 	return (
-		<nav className="nav flex-column">
-			<ul className="pl-5">
-				<li>
+		<nav className="nav">
+			<div className="">
+				<div>
 					<Link className="navbar-brand p-0" to="/">
-						<img src={itLogo} alt="Buzz" />
-						{/*
-						<Icon
-							name="itlogo"
-							alt="Buzz"
-							iconclass="mr-2 iconfilter"
-						/>
-						<br />
-					<b>
-						G<span className="theme">T</span>
-					</b>{" "}
-					<i>BuzzBook</i> */}
+						<img src={itLogo} alt="Buzz" width="40" height="40" />
+	
 					</Link>
-				</li>
+				</div>
 				{navPages.map(page => (
-					<li
+					<div
 						key={page.path}
 						className={
 							"nav-item" +
@@ -64,9 +53,12 @@ function Nav() {
 						>
 							{page.title}
 						</Link>
-					</li>
+					</div>
 				))}
-			</ul>
+			</div>
+			<div>
+
+			</div>
 		</nav>
 	);
 }

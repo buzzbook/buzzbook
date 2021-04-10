@@ -1,0 +1,53 @@
+.button-base {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+
+
+.primary-button {
+
+    @extend .button-base;
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+    color: var(--linkcolor);
+    border:  1px solid transparent;
+
+    &:hover {
+        background: var(--outlinecolor);
+    }
+    &:active {
+        background: var(--hlcolor);
+    }
+
+}
+
+.secondary-button {
+    @extend .button-base;
+    grid-gap: 0.5rem;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--linkcolor);
+    border:  1px solid var(--outlinecolor);
+    &:hover {
+        background: var(--outlinecolor);
+    }
+    &:active {
+        background: var(--off-white);
+    }
+}
+
+.secondary-button-solid {
+    @extend .button-base;
+    grid-gap: 0.5rem;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--linkcolor);
+    &:hover {
+        background: var(--outlinecolor);
+    }
+    &:active {
+        background: var(--off-white);
+    }
+
+}

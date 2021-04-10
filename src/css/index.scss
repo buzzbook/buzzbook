@@ -3,10 +3,14 @@
 // read here: https://www.learnhowtoprogram.com/user-interfaces/building-layouts-preprocessors/7-1-sass-architecture
 // im using the new @use feature btw
 // this requires dart-sass ( npm i sass), not node-sass or libsass
+// using pure css framework
+// see docs: https://purecss.io/start/
+@use 'vendors/purecss.2.0.5.min.css';
 
 @use 'abstracts/cssvariables';
 @use 'base';
-
+@use 'layout';
+@use 'pages';
 
 * {
 	outline: none ;
@@ -23,10 +27,7 @@
 
 
 html {
-	font-size: var(--fontbase);
-	/*max adapting 13px*/
-	/*background-color: var(--bgcolor);
-	color: var(--primarytextcolor);*/
+
 	scroll-behavior: smooth;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -38,11 +39,7 @@ html {
 // }
 
 body {
-	font-family: var(--primaryfont);
-	background-color: var(--bgcolor);
-	color: var(--primarytextcolor);
-	font-size: 1rem;
-	/*line-height: 1.6rem;*/
+
 	box-sizing: border-box;
 	text-rendering: optimizeLegibility;
 	font-kerning: auto;

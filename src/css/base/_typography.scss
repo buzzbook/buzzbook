@@ -1,83 +1,112 @@
 @use '../abstracts/' as a;
 
 
+//type based on typescale
 
+h1 {
+	font-size: var(--f7);
 
-
-/*Font Styles*/
-.titlefont { /*course number*/
-	font-family: var(--primaryfont);
-	font-weight: 600;
-	font-size: 2.5rem;
-	color: var(--primarytextcolor);
-	@include a.Raleway(2.5, 12)
 }
 
-.subtitlefont { /*course name*/
-	font-family: var(--primaryfont);
-	font-weight: 400;
-	font-size: 1.6875rem;
-	color: var(--themecolor);
-	@include a.Raleway(1.6875, 5.25)
-}
+h2 {
+	font-size: var(--f6);
 
-.headingfont { /*search bar course number*/
-	font-family: var(--primaryfont);
-	font-weight: 600;
-	font-size: 1.25rem;
-	color: var(--primarytextcolor);
 }
+h3{
+	font-size: var(--f5);
 
-.subheadingfont { /*search bar course name*/
-	font-family: var(--secondaryfont);
-	font-weight: 400;
-	font-size: 1rem;
-	color: var(--primarytextcolor);
 }
+h4{
+	font-size: var(--f4);
 
-.sectionlabelfont { /*sections and labels*/
-	font-family: var(--secondaryfont);
-	font-weight: 400;
-	font-size: 1.0625rem;
-	color: var(--primarytextcolor);
-	// @include Karla(1.0625, 5);
 }
+h5, label{
+	font-size: var(--f2);
 
-.contentfont { /*descriptions and information*/
-	font-family: var(--secondaryfont);
-	font-weight: 300;
-	font-size: 1rem;
-	color: var(--secondarytextcolor);
-	// @include basekick(1, 16, .11, 8, 4, 0.75);
 }
+h6{
+	font-size: var(--f1);
 
-.navfont { /*nav bar unselected*/
-	font-family: var(--secondaryfont);
-	font-weight: 400;
-	font-size: 1.2rem;
-	color: var(--primarytextcolor);
-	@include a.Karla(1.2, 6)
 }
-
-.navselectedfont{ /*nav bar selected*/
-	font-family: var(--secondaryfont);
-	font-weight: 500;
-	font-size: 1.2rem;
-	color: var(--theme);
-	@include a.Karla(1.2, 6)
+p {
+	font-size: var(--f3);
 }
 
 
-@media (max-width: 1630px) {
-	.titlefont {
-		@include a.Raleway(2, 7)
-	}
-	.subtitlefont {
-		@include a.Raleway(1.25, 4.25)
-	}
-}
+// /*Font Styles OLD*/
+// .titlefont { /*course number*/
+// 	font-family: var(--primaryfont);
+// 	font-weight: 600;
+// 	font-size: 2.5rem;
+// 	color: var(--primarytextcolor);
+// 	@include a.Raleway(2.5, 12)
+// }
 
-/*Mobile Styles*/
-@media (max-width: 950px) {
+// .subtitlefont { /*course name*/
+// 	font-family: var(--primaryfont);
+// 	font-weight: 400;
+// 	font-size: 1.6875rem;
+// 	color: var(--themecolor);
+// 	@include a.Raleway(1.6875, 5.25)
+// }
 
-}
+// .headingfont { /*search bar course number*/
+// 	font-family: var(--primaryfont);
+// 	font-weight: 600;
+// 	font-size: 1.25rem;
+// 	color: var(--primarytextcolor);
+// }
+
+// .subheadingfont { /*search bar course name*/
+// 	font-family: var(--secondaryfont);
+// 	font-weight: 400;
+// 	font-size: 1rem;
+// 	color: var(--primarytextcolor);
+// }
+
+// .sectionlabelfont { /*sections and labels*/
+// 	font-family: var(--secondaryfont);
+// 	font-weight: 400;
+// 	font-size: 1.0625rem;
+// 	color: var(--primarytextcolor);
+// 	// @include Karla(1.0625, 5);
+// }
+
+// .contentfont { /*descriptions and information*/
+// 	font-family: var(--secondaryfont);
+// 	font-weight: 300;
+// 	font-size: 1rem;
+// 	color: var(--secondarytextcolor);
+// 	// @include basekick(1, 16, .11, 8, 4, 0.75);
+// }
+
+// .navfont { /*nav bar unselected*/
+// 	font-family: var(--secondaryfont);
+// 	font-weight: 400;
+// 	font-size: 1.2rem;
+// 	color: var(--primarytextcolor);
+// 	@include a.Karla(1.2, 6)
+// }
+
+// .navselectedfont{ /*nav bar selected*/
+// 	font-family: var(--secondaryfont);
+// 	font-weight: 500;
+// 	font-size: 1.2rem;
+// 	color: var(--theme);
+// 	@include a.Karla(1.2, 6)
+// }
+
+
+// @media (max-width: 1630px) {
+// 	.titlefont {
+// 		@include a.Raleway(2, 7)
+// 	}
+// 	.subtitlefont {
+// 		@include a.Raleway(1.25, 4.25)
+// 	}
+// }
+
+// /*Mobile Styles*/
+// @media (max-width: 950px) {
+
+// }
