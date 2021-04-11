@@ -19,8 +19,8 @@
 	--green: #69C961;
 	--blue: #1063FF;
 	--theme: #EAAA00;
-	--primaryfont: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande, sans-serif;
-	--secondaryfont: Karla, Lato, Lucinda Grande, Tahoma, sans-serif;
+	// --primaryfont: Raleway, Montserrat, SFNSText-Regular, Segoe UI, Luncida Grande, sans-serif;
+	// --secondaryfont: Karla, Lato, Lucinda Grande, Tahoma, sans-serif;
 
 	/*light theme settings*/
 	--bgcolor: var(--white);
@@ -34,7 +34,6 @@
 	--labelcolor: var(--accentgrey);
 	--inputcolor: var(--lightgrey);
 	--altheadingcolor: var(--primarytextcolor);
-	overflow: hidden
 }
 
 // type scale
@@ -45,7 +44,7 @@
 	--f0: calc(var(--f1) / var(--typescale));
 	--f1: calc(var(--f2) / var(--typescale));
 	--f2: calc(var(--f3) / var(--typescale));
-	--f3: var(--fontbase); 
+	--f3: var(--fontbase);
 	--f4: calc(var(--f3) * var(--typescale));
 	--f5: calc(var(--f4) * var(--typescale));
 	--f6: calc(var(--f5) * var(--typescale));

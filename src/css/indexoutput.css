@@ -74,15 +74,15 @@
 
 /*Color Styles*/
 .primarytextcolor {
-  color: var(--primarytextcolor) !important;
+  color: var(--primarytextcolor) ;
 }
 
 .secondarytextcolor {
-  color: var(--secondarytextcolor) !important;
+  color: var(--secondarytextcolor) ;
 }
 
 .altheadingcolor, .altheadingcolor * {
-  color: var(--altheadingcolor) !important;
+  color: var(--altheadingcolor) ;
 }
 
 .red {

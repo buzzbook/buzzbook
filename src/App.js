@@ -34,7 +34,7 @@ function App({location}) {
 	return (
 		<>
 			<SettingsContextProvider>
-				<div class="grid-main">
+				<div class="grid-main padh--8">
 					<div className="pr-0">
 						<Nav />
 					</div>

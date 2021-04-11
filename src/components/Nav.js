@@ -10,8 +10,10 @@ const navPages = [
 	{title: "Enrollment", path: "/enrollment/"},
 	{title: "Scheduler", path: "/scheduler/"},
 	{title: "Ratings", path: "/ratings/"},
-	{title: "About", path: "/about/"}
 ];
+const navPagesBot = [
+	{title: "About", path: "/about/"}
+]
 
 function Nav() {
 	const loc = useLocation();
@@ -31,7 +33,7 @@ function Nav() {
 	});
 
 	return (
-		<nav className="nav">
+		<nav className="padv--8 flex-v space-between h-100">
 			<div className="">
 				<div>
 					<Link className="navbar-brand p-0" to="/">
@@ -40,24 +42,45 @@ function Nav() {
 					</Link>
 				</div>
 				{navPages.map(page => (
+					<Link 
+					className="no-deco"
+					
+					to={page.path}
+				>
 					<div
 						key={page.path}
 						className={
-							"nav-item" +
-							(page.path === activePath ? " active" : "")
+							"primary-button pure-button" +
+							(activePath.includes(page.path) ? " active" : "")
 						}
 					>
-						<Link
-							className={"px-0 " + (activePath.includes(page.path) ? "navselectedfont" : "navfont")}
-							to={page.path}
-						>
-							{page.title}
-						</Link>
+						
+							<p class="bold">{page.title}</p>
+						
 					</div>
+					</Link>
 				))}
 			</div>
 			<div>
-
+			{navPagesBot.map(page => (
+					<Link 
+					className="no-deco"
+					
+					to={page.path}
+				>
+					<div
+						key={page.path}
+						className={
+							"primary-button pure-button" +
+							(activePath.includes(page.path) ? " active" : "")
+						}
+					>
+						
+							<p class="bold">{page.title}</p>
+						
+					</div>
+					</Link>
+				))}
 			</div>
 		</nav>
 	);
