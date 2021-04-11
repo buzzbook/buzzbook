@@ -11,7 +11,7 @@ function SavedCourses() {
 		<div className="px-2">
 			<div>
 				{Object.keys(savedCourses).map((id, index) => {
-					return <SavedCourse courseID={id} name={courses[id][0]} key={index} />;
+					return <SavedCourse courseID={id} name={courses[id][0]} sections={savedCourses[id]} key={index} />;
 				})}
 			</div>
 		</div>

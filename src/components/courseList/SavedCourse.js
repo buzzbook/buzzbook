@@ -19,6 +19,9 @@ function SavedCourse(course) {
 		</>
 	);
 
+  const sections = Object.keys(course.sections);
+  const hasSavedSections = sections.length > 0;
+
 	return (
 		<div className="position-relative">
 			<div
@@ -54,10 +57,11 @@ function SavedCourse(course) {
 					iconclass="deleteIcon"
 				/>
 			</div>
-
-
-
-
+      <span>
+        {
+          hasSavedSections ? `Sections: ${sections.join(', ')}` : ``
+        }
+      </span>
 		</div>
 	);
 }
