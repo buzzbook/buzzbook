@@ -475,6 +475,7 @@ function CourseInfo() {
           <div className="sectionlabelfont">Class Sections</div>
           <BootstrapTable
             bootstrap4
+            wrapperClasses="table-responsive" 
             keyField='id'
             data={courseSectionData}
             columns={columns}
