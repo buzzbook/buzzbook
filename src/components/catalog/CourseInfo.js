@@ -13,6 +13,7 @@ import { useHistory, useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import BeatLoader from "react-spinners/BeatLoader";
 import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import RatingBar from "./RatingBar";
 import courses, { caches } from "../../scripts/courses";
 import Alert from "../settings/Alerts";
@@ -473,6 +474,7 @@ function CourseInfo() {
 
           <div className="sectionlabelfont">Class Sections</div>
           <BootstrapTable
+            bootstrap4
             keyField='id'
             data={courseSectionData}
             columns={columns}
