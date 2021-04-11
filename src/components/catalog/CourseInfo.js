@@ -169,13 +169,14 @@ function CourseInfo() {
     };
     return (
       <div id={headerName} className={(initCollapsed ? "savecollapsed test-collapse" : "test-collapse")}>
-        <div id="section-header" className="inline" onClick={toggleCollapse}>
+        <div id="section-header" className="inline mt-2" onClick={toggleCollapse}>
+          <div className="sectionlabelfont">{title}</div>
           <Icon
             name="collapse"
             alt="collapse"
             iconclass="iconfilter"
+            style={{marginLeft: ".5rem"}}
           />
-          <div className="sectionlabelfont mt-2">{title}</div>
         </div>
         {!collapsed && (
           <div className={`mb-3 contentfont ${className}`}>{children}</div>
@@ -387,9 +388,12 @@ function CourseInfo() {
 									return (
 										<tr key={section.id} className="contentfont secondarytextcolor">
 	                    <td>
-	                      <input type="checkbox"
-	                        onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
-	                        checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse]["sections"][section.id] !== undefined}/>
+                        <div className = "form-check">
+                          <input type="checkbox" className = "form-check-input" id = "checktest"
+                            onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
+                            checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse]["sections"][section.id] !== undefined}/>
+                          <label className = "form-check-label" for = "checktest"></label>
+                        </div>
 	                    </td>
 											<td>{section.id}</td>
 											<td>{section.courseNumber}</td>
