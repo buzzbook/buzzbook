@@ -273,15 +273,16 @@ function CourseList({id}) {
 			style={{
 				height: "calc(100vh - 90px)"
 			}}
-		>
+		>			
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
 					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters <span role="img" aria-label="unhappyface">😔</span></h2>
 				) : (
+					<><div className = "subheadingfont text-center">{filteredCourses.length} Results Found</div>
 					<AutoSizer>
-						{({height, width}) => (
+						{({height, width}) => {return (
 							<List
-								height={height}
+								height={height - 24}
 								itemCount={filteredCourses.length}
 								itemSize={itemHeight}
 								width={width}
@@ -289,8 +290,8 @@ function CourseList({id}) {
 							>
 								{Row}
 							</List>
-						)}
-					</AutoSizer>
+						)}}
+					</AutoSizer></>
 				)}
 			</div>
 

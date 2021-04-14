@@ -163,8 +163,10 @@ function CourseInfo() {
 	};
 
 	let isSaved = savedCourses[course.courseID];
-
 	const lettergrade = determineGradeLetter(course.grade)
+	let sharedAttr = Object.values(course.sections).map(i => i[5]).reduce((a,b) => a.filter(c => b.includes(c)))
+	let sharedAttrEle = sharedAttr.map(attr => <div className="prereq">{caches.attributes[attr]}</div>)
+	console.log(sharedAttr)
 
 	return (
 		<>
@@ -287,8 +289,8 @@ function CourseInfo() {
 						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{courseRatings.profEff}/5</div>
 					</div>
 				</div>
-
-				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className="mt-3 mb-0"/>
+				<div className="sharedAttr contentfont mt-1">{sharedAttrEle}</div>
+				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className={" mb-0 " + (sharedAttr.length < 1 ? "mt-3" : "mt-1")}/>
 				<div className="hidescroll" style={{height: "calc(100vh - 83px - 90px)", overflowY: "scroll"}}>
 					<div className="sectionlabelfont mt-2">Description</div>
 					<div className="mb-3 contentfont">{course.description}</div>
@@ -308,11 +310,11 @@ function CourseInfo() {
 								<th scope="col">CRN</th>
 								<th scope="col">Type</th>
 								<th scope="col">Enrollment</th>
-								<th scope="col">Instructor Grades</th>
 								<th scope="col">Time</th>
 								<th scope="col">Days</th>
 								<th scope="col">Location</th>
 								<th scope="col">Instructors</th>
+								<th scope="col">Grades</th>
 								<th scope="col">Attributes</th>
 								{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
 							</tr>
@@ -337,16 +339,18 @@ function CourseInfo() {
 										if (instructor.charAt(instructor.length - 1) === " ") {
 											instructor = instructor.substr(0, instructor.length - 1);
 										}
-										instructors += instructor;
+										instructors += instructor.replace("(P)", "");
 										instructorArr.push(instructor);
 										if (i !== meetings[0][4].length - 1) instructors += ", ";
 									});
 								}
 								var attributes = "";
 								sectionRaw[5].forEach((attribute, index) => {
-									attributes += caches.attributes[attribute];
-									if (index < sectionRaw[5].length - 1) {
-										attributes += ", ";
+									if (!sharedAttr.includes(attribute)){
+										attributes += caches.attributes[attribute];
+										if (index < sectionRaw[5].length - 1) {
+											attributes += ", ";
+										}
 									}
 								});
 								var grades = ["N/A"];
@@ -375,17 +379,21 @@ function CourseInfo() {
 
 								return (
 									<tr key={section.id} className="contentfont secondarytextcolor">
-                    <td>
-                      <input type="checkbox" 
-                        onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
-                        checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse][section.id] !== undefined}/>
-                    </td>
+										<td>
+										<input type="checkbox" 
+											onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
+											checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse][section.id] !== undefined}/>
+										</td>
 										<td>{section.id}</td>
 										<td>{section.courseNumber}</td>
 										<td>{section.type}</td>
 										<td style={{color: sectionEnrollmentColor}}>
 											{sectionEnrollment.current}/{sectionEnrollment.max}
 										</td>
+										<td>{section.time}</td>
+										<td>{section.days}</td>
+										<td>{section.location}</td>
+										<td>{instructors}</td>
 										<td>
 											{gradesLoaded ? (
 												grades.map((grade, i) => {
@@ -411,10 +419,6 @@ function CourseInfo() {
 												// <>Loading...</>
 											)}
 										</td>
-										<td>{section.time}</td>
-										<td>{section.days}</td>
-										<td>{section.location}</td>
-										<td>{instructors}</td>
 										<td>{attributes}</td>
 										{filters.campus.value !== "Any" && <td>{section.campus}</td>}
 									</tr>
