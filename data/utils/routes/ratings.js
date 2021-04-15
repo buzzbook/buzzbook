@@ -27,6 +27,22 @@ Router.get("/byCourse", (req, res) => {
   })
 });
 
+Router.get("/byProfandCourse", (req, res) => {
+  const query = "SELECT ROUND(AVG(`Course: Overall Effectiveness`),2) AS courseEff, ROUND(AVG(`Instructor: Overall Effectiveness`),2) AS profEff, ROUND(AVG(`Hours per Week`),2) as hoursPer"+
+                " FROM byProf"+
+                " WHERE Dept LIKE ? and Num LIKE ? AND Instructor LIKE ?"
+  test = mysqlc.query(query, [req.query.dept, req.query.num, req.query.prof], (error, results, fields) => {
+    if (error) {
+      throw error
+    } else {
+      console.log("byProfandCourse query sent:", req.query)
+      res.send(results[0])
+    }
+  })
+  //console.log(test.sql)
+})
+//sample query: http://localhost:4000/byProfandCourse/?dept=ACCT&num=2101&prof=%Rupar%Katarzyna%
+
 Router.get("/ratings", (req, res) => {
   const query =  'SELECT AVG(``)'
 });
@@ -42,9 +58,9 @@ Router.get("/sql", (req, res) => {
   })
 });
 
-Router.get("/courses", (req, res) => {
+// Router.get("/courses", (req, res) => {
 
-});
+// });
 
 module.exports = Router;
 

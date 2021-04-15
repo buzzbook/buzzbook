@@ -15,7 +15,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import RatingBar from "./RatingBar";
 import courses, {caches} from "../../scripts/courses";
 import Alert from "../settings/Alerts";
-import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils";
+import {determineGradeLetter, determineGradeColor, determineRatingColor} from "../settings/StatsUtils";
 import $ from 'jquery';
 
 import Icon from "../../img/icon";
@@ -23,6 +23,7 @@ import Icon from "../../img/icon";
 var prevSelectedCourse;
 var profGrades;
 var courseRatings;
+var secRatings;
 
 function CourseInfo() {
 	const dispatch = useDispatch();
@@ -31,6 +32,19 @@ function CourseInfo() {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 	const filters = useSelector(getFilters);
+
+	const courseRaw = courses[selectedCourse];
+	const courseEnrollment = {current: 200, max: 250};
+	const course = {
+		courseID: selectedCourse,
+		name: courseRaw[0],
+		enrollment: courseEnrollment,
+		//grade: courseGrade,
+		credits: Object.values(courseRaw[1])[0][2],
+		sections: courseRaw[1],
+		description: courseRaw[3],
+		//prerequisites: prereqs
+	};
 
 	let path = location.pathname.split("/");
 	if (path.length === 3) {
@@ -54,11 +68,14 @@ function CourseInfo() {
 
 	const [gradesLoaded, updateGradesLoaded] = useState(false);
 	const [ratingsLoaded, updateRatingsLoaded] = useState(false);
+	const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 	if (prevSelectedCourse !== selectedCourse) {
 		prevSelectedCourse = selectedCourse;
 		updateGradesLoaded(false);
 		updateRatingsLoaded(false);
+		updateSecRatingsLoaded(false);
 		profGrades = {};
+		secRatings = {};
 		let courseQuery = selectedCourse.replaceAll(" ", "%20");
 		// For CHEM 1211K/1212K
 		if (courseQuery.charAt(courseQuery.length - 1) === "K") {
@@ -84,18 +101,39 @@ function CourseInfo() {
 				courseRatings = {courseEff: (data.courseEff ? +data.courseEff.toFixed(2) : 0), profEff: (data.courseEff ? +data.profEff.toFixed(2): 0), hours: (data.courseEff ? data.hoursPer : 0)}
 				updateRatingsLoaded(true);
 			})
+					
+		var instrList = Object.values(course.sections).map(i => i[1].some(a => a.length > 1) ? i[1][0][4][0] : "N/A")
+		instrList = [...new Set(instrList)]
+		const profCount = instrList.filter(a => a !== "N/A").length 
+		if (profCount !== 0) {
+			instrList.map((instr, i) => {
+				// console.log(instr)
+				let instrQuery = instr.replace("(P)", " ").trim().split(" ")
+				let instrSQL = "%" + [instrQuery[instrQuery.length - 1], instrQuery[0]].join("%") + "%"			
+				fetch(`http://localhost:4000/byProfandCourse/?dept=%&num=%&prof=${instrSQL}`) //temporarily not piping dept for test
+					.then(resp => resp.json())
+					.then(data => {
+						// console.log(data)
+						if (!(data.courseEff === null && data.profEff === null && data.hoursPer === null)){
+							secRatings[instr] = data
+						}
+						if (i === instrList.length - 1){
+							updateSecRatingsLoaded(true);
+						}
+					})
+			})
+		}
+
 	}
 
 	courseRatings = courseRatings || {courseEff: 0, profEff: 0, hours: 0};
-
-	const courseRaw = courses[selectedCourse];
-
-	const courseEnrollment = {current: 200, max: 250};
+	
 	let enrollmentColor = "var(--green)";
 	if ((courseEnrollment.current / courseEnrollment.max) * 100 > 67) enrollmentColor = "var(--red)";
 	else if ((courseEnrollment.current / courseEnrollment.max) * 100 > 33) enrollmentColor = "var(--orange)";
 
 	const courseGrade = courseRaw[4] || -1;
+	course.grade = courseGrade
 	const gradeColor = determineGradeColor(courseGrade);
 
 	const [alertmsg, setalertmsg] = useState(<></>);
@@ -143,6 +181,7 @@ function CourseInfo() {
 		}
 		return output;
 	}
+	course.prerequisites = prereqs
 
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();
@@ -151,22 +190,10 @@ function CourseInfo() {
   	$(this).tooltip('hide')
 	})
 
-	const course = {
-		courseID: selectedCourse,
-		name: courseRaw[0],
-		enrollment: courseEnrollment,
-		grade: courseGrade,
-		credits: Object.values(courseRaw[1])[0][2],
-		sections: courseRaw[1],
-		description: courseRaw[3],
-		prerequisites: prereqs
-	};
-
 	let isSaved = savedCourses[course.courseID];
 	const lettergrade = determineGradeLetter(course.grade)
 	let sharedAttr = Object.values(course.sections).map(i => i[5]).reduce((a,b) => a.filter(c => b.includes(c)))
 	let sharedAttrEle = sharedAttr.map(attr => <div className="prereq">{caches.attributes[attr]}</div>)
-	console.log(sharedAttr)
 
 	return (
 		<>
@@ -178,7 +205,7 @@ function CourseInfo() {
 					className="w-100 mx-0"
 					style={{
 						display: "grid",
-						gridTemplateColumns: "3fr 1fr max-content 2fr",
+						gridTemplateColumns: "3fr 1fr 1fr 2fr",
 						gridTemplateRows: "4rem",
 						gap: "0 4rem"
 					}}
@@ -315,6 +342,7 @@ function CourseInfo() {
 								<th scope="col">Location</th>
 								<th scope="col">Instructors</th>
 								<th scope="col">Grades</th>
+								<th scope="col">Ratings</th>
 								<th scope="col">Attributes</th>
 								{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
 							</tr>
@@ -332,7 +360,7 @@ function CourseInfo() {
 
 								const meetings = sectionRaw[1];
 								var instructors = meetings.length > 0 ? "" : "N/A";
-								var instructorArr;
+								var instructorArr = [];
 								if (instructors !== "N/A") {
 									instructorArr = [];
 									meetings[0][4].forEach((instructor, i) => {
@@ -367,6 +395,16 @@ function CourseInfo() {
 									sectionGradeColors.push(determineGradeColor(grade));
 									sectionGradeLetters.push(determineGradeLetter(grade));
 								});
+								var secRating = [null, null, null]
+								if (secRatingsLoaded) {					
+									secRating = secRatings[instructorArr[0]]
+									if (typeof secRating !== "undefined") {
+										secRating = Object.values(secRating)
+									} else {
+										secRating = ["N/A", "N/A", "N/A"]
+									}
+								}
+
 								const section = {
 									type: caches.scheduleTypes[sectionRaw[3]],
 									courseNumber: sectionRaw[0],
@@ -418,6 +456,26 @@ function CourseInfo() {
 												<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
 												// <>Loading...</>
 											)}
+										</td>
+										<td style = {{whiteSpace: "nowrap"}}>
+											{secRatingsLoaded ? (
+												secRating.map((entry, i) => {
+													return (
+														<>
+															<span
+																style = {{color: i !== 2 && typeof entry !== "string" ? determineRatingColor(entry, 5, true):"var(--secondarytextcolor)"}}
+															>
+																{entry}
+															</span>
+															{i < secRating.length - 1 && <>, </>}
+														</>
+													)											
+													})
+												) : (
+													<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
+													// <>Loading...</>
+												)
+											}
 										</td>
 										<td>{attributes}</td>
 										{filters.campus.value !== "Any" && <td>{section.campus}</td>}
