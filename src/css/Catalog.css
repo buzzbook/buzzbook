@@ -17,6 +17,7 @@
 	color: inherit;
 	font-weight: inherit;
 	white-space: nowrap;
+	user-select: none;
 }
 #courseInfo table thead th:first-child {
 	border-radius: .2rem 0 0 .2rem;
@@ -27,7 +28,10 @@
 }
 #courseInfo table td {
 	padding: 2.5px 7.5px;
+	white-space: normal;
+	word-wrap: break-word;
 }
+.react-bootstrap-table table { table-layout: auto !important; overflow: auto !important;} /*Important for RBTv2*/
 
 .prereq,
 .prereq-container {
