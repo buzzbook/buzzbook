@@ -164,7 +164,12 @@ function CourseInfo() {
       dataField: 'attributes',
       text: 'Attributes',
       sort: true,
-    },
+    }, {
+		dataField: 'campus',
+		text: 'Campus',
+		sort: true,
+		hidden: filters.campus.value === "Any",
+	  },
   ];
 
   const selectRow = {
@@ -508,81 +513,6 @@ function CourseInfo() {
           <DescriptionSection title="Prerequisites" id="prerequisites" className={'prereq-wrapper'}>{course.prerequisites}</DescriptionSection>
           <DescriptionSection title="Enrollment Restrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> {/* merge from BS-table branch */}
           <DescriptionSection title="Class Sections" id="class-sections">
-{//             <table className="table-responsive"> Commented original table for merge checking
-//               <thead>
-//                 <tr className="sectionlabelfont primarytextcolor">
-//                   <th scope="col"></th>
-//                   <th scope="col">ID</th>
-//                   <th scope="col">CRN</th>
-//                   <th scope="col">Type</th>
-//                   <th scope="col">Enrollment</th>
-//                   <th scope="col">Instructor Grades</th>
-//                   <th scope="col">Time</th>
-//                   <th scope="col">Days</th>
-//                   <th scope="col">Location</th>
-//                   <th scope="col">Instructors</th>
-//                   <th scope="col">Attributes</th>
-// //                {filters.campus.value !== "Any" && <th scope="col">Campus</th>} TODO: carry over implementation
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {Object.entries(course.sections).map(entry => {
-//                     // merged above as exact same omitted for redundancy
-//                   };
-
-// 									return (
-// 										<tr key={section.id} className="contentfont secondarytextcolor">
-// 	                    <td>
-//                         <div className = "form-check">
-//                           <input type="checkbox" className = "form-check-input" id = "checktest"
-//                             onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
-//                             checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse]["sections"][section.id] !== undefined}/>
-//                           <label className = "form-check-label" for = "checktest"></label>
-//                         </div>
-// 	                    </td>
-// 											<td>{section.id}</td>
-// 											<td>{section.courseNumber}</td>
-// 											<td>{section.type}</td>
-// 											<td style={{color: sectionEnrollmentColor}}>
-// 												{sectionEnrollment.current}/{sectionEnrollment.max}
-// 											</td>
-// 											<td>
-// 												{gradesLoaded ? (
-// 													grades.map((grade, i) => {
-// 														return (
-// 															<>
-// 																<span
-// 																	style={{
-// 																		color: sectionGradeColors[i]
-// 																	}}
-// 																>
-// 																	{typeof(grade) === "number" ? (
-// 																		<>{sectionGradeLetters[i]} ({grade})</>
-// 																	):(
-// 																		grade
-// 																	)}
-// 																</span>
-// 																{i < grades.length - 1 && <>, </>}
-// 															</>
-// 														);
-// 													})
-// 												) : (
-// 													<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
-// 													// <>Loading...</>
-// 												)}
-// 											</td>
-// 											<td>{section.time}</td>
-// 											<td>{section.days}</td>
-// 											<td>{section.location}</td>
-// 											<td>{instructors}</td>
-// 											<td>{attributes}</td>
-// 											{filters.campus.value !== "Any" && <td>{section.campus}</td>}
-// 										</tr>
-// 									);
-// 								})}
-// 							</tbody>
-// 						</table>
-}
 					<BootstrapTable
 						bootstrap4
 						wrapperClasses="table-responsive" 
