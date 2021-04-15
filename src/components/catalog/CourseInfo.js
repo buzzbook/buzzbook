@@ -312,7 +312,7 @@ function CourseInfo() {
   Object.entries(course.sections).forEach(entry => {
     const [id, sectionRaw] = entry;
 
-    const sectionEnrollment = { current: 20, max: 25 };
+    // const sectionEnrollment = { current: 20, max: 25 };
 
     const sectionEnrollment = {current: 20, max: 25};
     let sectionEnrollmentColor = "var(--green)";
@@ -506,9 +506,9 @@ function CourseInfo() {
 				<div className="hidescroll" style={{height: "calc(100vh - 83px - 90px)", overflowY: "scroll"}}>
           <DescriptionSection title="Description" id="description">{course.description}</DescriptionSection>
           <DescriptionSection title="Prerequisites" id="prerequisites" className={'prereq-wrapper'}>{course.prerequisites}</DescriptionSection>
-          <DescriptionSection title="EnrollRestrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> // merge from BS-table branch
+          <DescriptionSection title="Enrollment Restrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> {/* merge from BS-table branch */}
           <DescriptionSection title="Class Sections" id="class-sections">
-//             <table className="table-responsive"> Commented original table for merge checking
+{//             <table className="table-responsive"> Commented original table for merge checking
 //               <thead>
 //                 <tr className="sectionlabelfont primarytextcolor">
 //                   <th scope="col"></th>
@@ -581,17 +581,18 @@ function CourseInfo() {
 // 									);
 // 								})}
 // 							</tbody>
-// 						</table>              
-              <BootstrapTable
-                bootstrap4
-                wrapperClasses="table-responsive" 
-                keyField='id'
-                data={courseSectionData}
-                columns={columns}
-                selectRow={selectRow}
-                headerClasses='sectionlabelfont primarytextcolor'
-                rowClasses='contentfont secondarytextcolor'
-              />
+// 						</table>
+}
+					<BootstrapTable
+						bootstrap4
+						wrapperClasses="table-responsive" 
+						keyField='id'
+						data={courseSectionData}
+						columns={columns}
+						selectRow={selectRow}
+						headerClasses='sectionlabelfont primarytextcolor'
+						rowClasses='contentfont secondarytextcolor'
+					/>
 					</DescriptionSection>
 				</div>
 				{alertmsg}
