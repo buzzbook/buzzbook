@@ -173,7 +173,7 @@ function CourseInfo() {
     onSelect: (row, isSelect, rowIndex, e) => {
       dispatch(toggleSection({ [selectedCourse]: row.id }));
     },
-    selected: (savedCourses[selectedCourse] !== undefined) && Object.keys(savedCourses[selectedCourse]),
+    selected: (savedCourses[selectedCourse] !== undefined) && Object.keys(savedCourses[selectedCourse]['sections']),
   } //marker 1: react-table
 
 	if (prevSelectedCourse !== selectedCourse) {
