@@ -34,7 +34,7 @@ function Nav() {
 
 	return (
 		<nav className="padv--8 flex-v space-between h-100">
-			<div className="">
+			<div className="gapv--5">
 				<div>
 					<Link className="navbar-brand p-0" to="/">
 						<img src={itLogo} alt="Buzz" width="40" height="40" />
@@ -61,7 +61,7 @@ function Nav() {
 					</Link>
 				))}
 			</div>
-			<div>
+			<div className="gapv--5">
 			{navPagesBot.map(page => (
 					<Link 
 					className="no-deco"
