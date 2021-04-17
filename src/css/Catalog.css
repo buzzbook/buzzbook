@@ -13,7 +13,7 @@
 #courseInfo table thead th {
 	border-right: 3px solid var(--shadingcolor);
 	background-color: var(--labelcolor);
-	padding: 0.25rem 1rem;
+	padding: 0.25rem 0.25rem;
 	color: inherit;
 	font-weight: inherit;
 	white-space: nowrap;
