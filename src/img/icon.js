@@ -19,6 +19,7 @@ export const usePreload = (url) => {
   return loaded;
 };
 
+
 const Icon = props => {
 	return (
 		<svg
