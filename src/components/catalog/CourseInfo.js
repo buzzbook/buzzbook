@@ -17,13 +17,15 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import RatingBar from "./RatingBar";
 import courses, { caches } from "../../scripts/courses";
 import Alert from "../settings/Alerts";
-import { determineGradeLetter, determineGradeColor } from "../settings/StatsUtils";
+import {determineGradeLetter, determineGradeColor, determineRatingColor} from "../settings/StatsUtils";
 import $ from 'jquery';
 
 import Icon from "../../img/icon";
 
 var prevSelectedCourse;
 var profGrades;
+var courseRatings;
+var secRatings;
 
 function CourseInfo() {
 	const dispatch = useDispatch();
@@ -32,6 +34,19 @@ function CourseInfo() {
 	const selectedCourse = useSelector(getSelectedCourse);
 	const savedCourses = useSelector(getSavedCourses);
 	const filters = useSelector(getFilters);
+
+	const courseRaw = courses[selectedCourse];
+	const courseEnrollment = {current: 200, max: 250};
+	const course = {
+		courseID: selectedCourse,
+		name: courseRaw[0],
+		enrollment: courseEnrollment,
+		//grade: courseGrade,
+		credits: Object.values(courseRaw[1])[0][2],
+		sections: courseRaw[1],
+		description: courseRaw[3],
+		//prerequisites: prereqs
+	};
 
 	let path = location.pathname.split("/");
 	if (path.length === 3) {
@@ -53,7 +68,9 @@ function CourseInfo() {
 		}
 	}
 
-	const [gradesLoaded, updateGradesLoaded] = useState(false);
+const [gradesLoaded, updateGradesLoaded] = useState(false);
+const [ratingsLoaded, updateRatingsLoaded] = useState(false);
+const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
   
   // React Table set up
   const enrollmentFormatter = (cell, row) => {
@@ -120,6 +137,28 @@ function CourseInfo() {
     }
   };
 
+  const ratingsFormatter = (cell, row) => {
+	  if (secRatingsLoaded) {
+		  var tempRating = row.secRating.map((entry, i) => {
+			return (
+				<>
+					<span
+						style = {{color: i !== 2 && typeof entry !== "string" ? determineRatingColor(entry, 5, true) : "var(--secondarytextcolor"}}
+					>
+						{entry}
+					</span>
+					{i < row.secRating.length - 1 && <>, </>}
+				</>
+			)
+		  })
+		  return (<span style = {{whiteSpace:"nowrap"}}>{tempRating}</span>)
+	  } else {
+		  return (
+			  <BeatLoader size={8} margin={0} color = "var(--secondarytextcolor)" />
+		  )
+	  }
+  }
+
   const columns = [
     {
       dataField: 'id',
@@ -139,12 +178,6 @@ function CourseInfo() {
       sort: true,
       formatter: enrollmentFormatter,
     }, {
-      dataField: 'gradeFormatted',
-      text: 'Instructor Grades',
-      sort: true,
-      sortFunc: sortGrades,
-      formatter: gradeFormatter,
-    }, {
       dataField: 'time',
       text: 'Time',
       sort: true,
@@ -161,6 +194,17 @@ function CourseInfo() {
       text: 'Instructors',
       sort: true,
     }, {
+		dataField: 'gradeFormatted',
+		text: 'Grades',
+		sort: true,
+		sortFunc: sortGrades,
+		formatter: gradeFormatter,
+	}, {
+		dataField: 'secRating',
+		text: 'Ratings',
+		sort: true,
+		formatter: ratingsFormatter,
+	}, {
       dataField: 'attributes',
       text: 'Attributes',
       sort: true,
@@ -184,7 +228,10 @@ function CourseInfo() {
 	if (prevSelectedCourse !== selectedCourse) {
 		prevSelectedCourse = selectedCourse;
 		updateGradesLoaded(false);
+		updateRatingsLoaded(false);
+		updateSecRatingsLoaded(false);
 		profGrades = {};
+		secRatings = {};
 		let courseQuery = selectedCourse.replaceAll(" ", "%20");
 		// For CHEM 1211K/1212K
 		if (courseQuery.charAt(courseQuery.length - 1) === "K") {
@@ -202,16 +249,47 @@ function CourseInfo() {
 				}
 				updateGradesLoaded(true);
 			});
+
+		const [dept, num] = selectedCourse.split(" ")
+		fetch(`http://localhost:4000/byCourse?dept=${dept}&num=${num}`)
+			.then(resp => resp.json())
+			.then(data => {
+				courseRatings = {courseEff: (data.courseEff ? +data.courseEff.toFixed(2) : 0), profEff: (data.courseEff ? +data.profEff.toFixed(2): 0), hours: (data.courseEff ? data.hoursPer : 0)}
+				updateRatingsLoaded(true);
+			})
+					
+		var instrList = Object.values(course.sections).map(i => i[1].some(a => a.length > 1) ? i[1][0][4][0] : "N/A")
+		instrList = [...new Set(instrList)]
+		const profCount = instrList.filter(a => a !== "N/A").length 
+		if (profCount !== 0) {
+			instrList.map((instr, i) => {
+				// console.log(instr)
+				let instrQuery = instr.replace("(P)", " ").trim().split(" ")
+				let instrSQL = "%" + [instrQuery[instrQuery.length - 1], instrQuery[0]].join("%") + "%"			
+				fetch(`http://localhost:4000/byProfandCourse/?dept=%&num=%&prof=${instrSQL}`) //temporarily not piping dept for test
+					.then(resp => resp.json())
+					.then(data => {
+						// console.log(data)
+						if (!(data.courseEff === null && data.profEff === null && data.hoursPer === null)){
+							secRatings[instr] = data
+						}
+						if (i === instrList.length - 1){
+							updateSecRatingsLoaded(true);
+						}
+					})
+			})
+		}
+
 	}
 
-	const courseRaw = courses[selectedCourse];
-
-	const courseEnrollment = {current: 200, max: 250};
+	courseRatings = courseRatings || {courseEff: 0, profEff: 0, hours: 0};
+	
 	let enrollmentColor = "var(--green)";
 	if ((courseEnrollment.current / courseEnrollment.max) * 100 > 67) enrollmentColor = "var(--red)";
 	else if ((courseEnrollment.current / courseEnrollment.max) * 100 > 33) enrollmentColor = "var(--orange)";
 
 	const courseGrade = courseRaw[4] || -1;
+	course.grade = courseGrade
 	const gradeColor = determineGradeColor(courseGrade);
 
 	const [alertmsg, setalertmsg] = useState(<></>);
@@ -259,6 +337,7 @@ function CourseInfo() {
 		}
 		return output;
 	}
+	course.prerequisites = prereqs
 
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();
@@ -267,20 +346,11 @@ function CourseInfo() {
   	$(this).tooltip('hide')
 	})
 
-	const course = {
-		courseID: selectedCourse,
-		name: courseRaw[0],
-		enrollment: courseEnrollment,
-		grade: courseGrade,
-		credits: Object.values(courseRaw[1])[0][2],
-		sections: courseRaw[1],
-		description: courseRaw[3],
-		prerequisites: prereqs
-	};
-
 	let isSaved = savedCourses[course.courseID];
 
 	const lettergrade = determineGradeLetter(course.grade);
+	let sharedAttr = Object.values(course.sections).map(i => i[5]).reduce((a,b) => a.filter(c => b.includes(c)))
+	let sharedAttrEle = sharedAttr.map(attr => <div className="prereq">{caches.attributes[attr]}</div>)
 
   const DescriptionSection = ({title, id, className, children}) => {
     const key = `${id}-collapsed`;
@@ -317,52 +387,59 @@ function CourseInfo() {
   Object.entries(course.sections).forEach(entry => {
     const [id, sectionRaw] = entry;
 
-    // const sectionEnrollment = { current: 20, max: 25 };
+	const sectionEnrollment = {current: 20, max: 25};
+	let sectionEnrollmentColor = "var(--green)";
+	if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
+		sectionEnrollmentColor = "var(--red)";
+	else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
+		sectionEnrollmentColor = "var(--orange)";
 
-    const sectionEnrollment = {current: 20, max: 25};
-    let sectionEnrollmentColor = "var(--green)";
-    if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
-      sectionEnrollmentColor = "var(--red)";
-    else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
-      sectionEnrollmentColor = "var(--orange)";
-
-    const meetings = sectionRaw[1];
-    var instructors = meetings.length > 0 ? "" : "N/A";
-    var instructorArr;
-    if (instructors !== "N/A") {
-      instructorArr = [];
-      meetings[0][4].forEach((instructor, i) => {
-        if (instructor.charAt(instructor.length - 1) === " ") {
-          instructor = instructor.substr(0, instructor.length - 1);
-        }
-        instructors += instructor;
-        instructorArr.push(instructor);
-        if (i !== meetings[0][4].length - 1) instructors += ", ";
-      });
-    }
-    var attributes = "";
-    sectionRaw[5].forEach((attribute, index) => {
-      attributes += caches.attributes[attribute];
-      if (index < sectionRaw[5].length - 1) {
-        attributes += ", ";
-      }
-    });
-    var grades = [];
-    if (gradesLoaded && instructorArr && instructorArr[0] !== "TBA") {
-      grades = [];
-      instructorArr.forEach(instructor => {
-        let profName = instructor.split(" (P)")[0];
-        grades.push(profGrades[profName] || "N/A");
-      });
-    } else if (gradesLoaded && instructorArr[0] === "TBA") {
-      grades.push("N/A");
-    }
-    var sectionGradeColors = [];
-    var sectionGradeLetters = [];
-    grades.forEach(grade => {
-      sectionGradeColors.push(determineGradeColor(grade));
-      sectionGradeLetters.push(determineGradeLetter(grade));
-    });
+	const meetings = sectionRaw[1];
+	var instructors = meetings.length > 0 ? "" : "N/A";
+	var instructorArr = [];
+	if (instructors !== "N/A") {
+		instructorArr = [];
+		meetings[0][4].forEach((instructor, i) => {
+			if (instructor.charAt(instructor.length - 1) === " ") {
+				instructor = instructor.substr(0, instructor.length - 1);
+			}
+			instructors += instructor.replace("(P)", "");
+			instructorArr.push(instructor);
+			if (i !== meetings[0][4].length - 1) instructors += ", ";
+		});
+	}
+	var attributes = "";
+	sectionRaw[5].forEach((attribute, index) => {
+		if (!sharedAttr.includes(attribute)){
+			attributes += caches.attributes[attribute];
+			if (index < sectionRaw[5].length - 1) {
+				attributes += ", ";
+			}
+		}
+	});
+	var grades = ["N/A"];
+	if (gradesLoaded && instructorArr && instructorArr[0] !== "TBA") {
+		grades = [];
+		instructorArr.forEach(instructor => {
+			let profName = instructor.split(" (P)")[0];
+			grades.push(profGrades[profName] || "N/A");
+		});
+	}
+	var sectionGradeColors = [];
+	var sectionGradeLetters = [];
+	grades.forEach(grade => {
+		sectionGradeColors.push(determineGradeColor(grade));
+		sectionGradeLetters.push(determineGradeLetter(grade));
+	});
+	var secRating = [null, null, null]
+	if (secRatingsLoaded) {					
+		secRating = secRatings[instructorArr[0]]
+		if (typeof secRating !== "undefined") {
+			secRating = Object.values(secRating)
+		} else {
+			secRating = ["N/A", "N/A", "N/A"]
+		}
+	}
 
     const section = {
       id: id,
@@ -378,7 +455,8 @@ function CourseInfo() {
       location: meetings.length > 0 ? meetings[0][2] : "N/A",
       instructors: instructors,
       attributes: attributes,
-      campus: caches.campuses[sectionRaw[4]]
+      campus: caches.campuses[sectionRaw[4]],
+	  secRating: secRating
     };
     courseSectionData.push(section);
   });
@@ -395,7 +473,7 @@ function CourseInfo() {
 					className="w-100 mx-0"
 					style={{
 						display: "grid",
-						gridTemplateColumns: "3fr 1fr max-content 2fr",
+						gridTemplateColumns: "3fr 1fr 1fr 2fr",
 						gridTemplateRows: "4rem",
 						gap: "0 4rem"
 					}}
@@ -491,24 +569,25 @@ function CourseInfo() {
               Ratings
 						</div>
 
-            {/* Quality */}
-            <div style={{ gridArea: "2 / 1 / 2 / 1" }} >Quality</div>
-            <div style={{ gridArea: "2 / 2 / 2 / 2" }}>
-              <RatingBar value={4} highIsBetter={true} />
-            </div>
-            <div style={{ gridArea: "2 / 3 / 2 / 3" }} className="font-italic">{4}/5</div>
+						{/* Quality */}
+						<div style={{gridArea: "2 / 1 / 2 / 1"}} >Course</div>
+						<div style={{gridArea: "2 / 2 / 2 / 2"}}>
+							<RatingBar value={courseRatings.courseEff} highIsBetter={true} />
+						</div>
+						<div style={{gridArea: "2 / 3 / 2 / 3"}} className="font-italic">{courseRatings.courseEff}/5</div>
 
 						{/* Difficulty */}
-						<div style={{gridArea: "3 / 1 / 3 / 1"}} >Difficulty</div>
+						<div style={{gridArea: "3 / 1 / 3 / 1"}} >Instructor</div>
 						<div style={{gridArea: "3 / 2 / 3 / 2"}}>
-							<RatingBar value={3.5} highIsBetter={false} />
+							<RatingBar value={courseRatings.profEff} highIsBetter={true} />
 						</div>
-						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{3.5}/5</div>
+						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{courseRatings.profEff}/5</div>
 					</div>
 				</div>
-
-				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className="mt-3 mb-0"/>
+				<div className="sharedAttr contentfont mt-1">{sharedAttrEle}</div>
+				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className={" mb-0 " + (sharedAttr.length < 1 ? "mt-3" : "mt-1")}/>
 				<div className="hidescroll" style={{height: "calc(100vh - 83px - 90px)", overflowY: "scroll"}}>
+{/* <<<<<<< HEAD */}
           <DescriptionSection title="Description" id="description">{course.description}</DescriptionSection>
           <DescriptionSection title="Prerequisites" id="prerequisites" className={'prereq-wrapper'}>{course.prerequisites}</DescriptionSection>
           <DescriptionSection title="Enrollment Restrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> {/* merge from BS-table branch */}
@@ -523,7 +602,174 @@ function CourseInfo() {
 						headerClasses='sectionlabelfont primarytextcolor'
 						rowClasses='contentfont secondarytextcolor'
 					/>
-					</DescriptionSection>
+		  </DescriptionSection>
+{/* ======= */}
+					{/* <div className="sectionlabelfont mt-2">Description</div>
+					<div className="mb-3 contentfont">{course.description}</div>
+
+					<div className="sectionlabelfont">Prerequisites</div>
+					<div className="mb-3 prereq-wrapper contentfont">{course.prerequisites}</div>
+
+					<div className="sectionlabelfont">Enrollment Restrictions</div>
+					<div className="mb-3">{course.enrollRestrictions}</div>
+
+					<div className="sectionlabelfont">Class Sections</div> */}
+					<table className="table-responsive">
+						<thead>
+							<tr className="sectionlabelfont primarytextcolor">
+                <th scope="col"></th>
+								<th scope="col">ID</th>
+								<th scope="col">CRN</th>
+								<th scope="col">Type</th>
+								<th scope="col">Enrollment</th>
+								<th scope="col">Time</th>
+								<th scope="col">Days</th>
+								<th scope="col">Location</th>
+								<th scope="col">Instructors</th>
+								<th scope="col">Grades</th>
+								<th scope="col">Ratings</th>
+								<th scope="col">Attributes</th>
+								{filters.campus.value !== "Any" && <th scope="col">Campus</th>}
+							</tr>
+						</thead>
+						<tbody>
+							{Object.entries(course.sections).map(entry => {
+								const [id, sectionRaw] = entry;
+
+								const sectionEnrollment = {current: 20, max: 25};
+								let sectionEnrollmentColor = "var(--green)";
+								if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
+									sectionEnrollmentColor = "var(--red)";
+								else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
+									sectionEnrollmentColor = "var(--orange)";
+
+								const meetings = sectionRaw[1];
+								var instructors = meetings.length > 0 ? "" : "N/A";
+								var instructorArr = [];
+								if (instructors !== "N/A") {
+									instructorArr = [];
+									meetings[0][4].forEach((instructor, i) => {
+										if (instructor.charAt(instructor.length - 1) === " ") {
+											instructor = instructor.substr(0, instructor.length - 1);
+										}
+										instructors += instructor.replace("(P)", "");
+										instructorArr.push(instructor);
+										if (i !== meetings[0][4].length - 1) instructors += ", ";
+									});
+								}
+								var attributes = "";
+								sectionRaw[5].forEach((attribute, index) => {
+									if (!sharedAttr.includes(attribute)){
+										attributes += caches.attributes[attribute];
+										if (index < sectionRaw[5].length - 1) {
+											attributes += ", ";
+										}
+									}
+								});
+								var grades = ["N/A"];
+								if (gradesLoaded && instructorArr && instructorArr[0] !== "TBA") {
+									grades = [];
+									instructorArr.forEach(instructor => {
+										let profName = instructor.split(" (P)")[0];
+										grades.push(profGrades[profName] || "N/A");
+									});
+								}
+								var sectionGradeColors = [];
+								var sectionGradeLetters = [];
+								grades.forEach(grade => {
+									sectionGradeColors.push(determineGradeColor(grade));
+									sectionGradeLetters.push(determineGradeLetter(grade));
+								});
+								var secRating = [null, null, null]
+								if (secRatingsLoaded) {					
+									secRating = secRatings[instructorArr[0]]
+									if (typeof secRating !== "undefined") {
+										secRating = Object.values(secRating)
+									} else {
+										secRating = ["N/A", "N/A", "N/A"]
+									}
+								}
+
+								const section = {
+									type: caches.scheduleTypes[sectionRaw[3]],
+									courseNumber: sectionRaw[0],
+									id: id,
+									time: meetings.length > 0 ? caches.periods[meetings[0][0]] : "N/A",
+									days: meetings.length > 0 && meetings[0][1] !== "&nbsp;" ? meetings[0][1] : "N/A",
+									location: meetings.length > 0 ? meetings[0][2] : "N/A",
+									campus: caches.campuses[sectionRaw[4]]
+								};
+
+								return (
+									<tr key={section.id} className="contentfont secondarytextcolor">
+										<td>
+										<input type="checkbox" 
+											onChange={() => dispatch(toggleSection({[selectedCourse]: section.id}))}
+											checked={savedCourses[selectedCourse] !== undefined && savedCourses[selectedCourse][section.id] !== undefined}/>
+										</td>
+										<td>{section.id}</td>
+										<td>{section.courseNumber}</td>
+										<td>{section.type}</td>
+										<td style={{color: sectionEnrollmentColor}}>
+											{sectionEnrollment.current}/{sectionEnrollment.max}
+										</td>
+										<td>{section.time}</td>
+										<td>{section.days}</td>
+										<td>{section.location}</td>
+										<td>{instructors}</td>
+										<td>
+											{gradesLoaded ? (
+												grades.map((grade, i) => {
+													return (
+														<>
+															<span
+																style={{
+																	color: sectionGradeColors[i]
+																}}
+															>
+																{typeof(grade) === "number" ? (
+																	<>{sectionGradeLetters[i]} ({grade})</>
+																):(
+																	grade
+																)}
+															</span>
+															{i < grades.length - 1 && <>, </>}
+														</>
+													);
+												})
+											) : (
+												<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
+												// <>Loading...</>
+											)}
+										</td>
+										<td style = {{whiteSpace: "nowrap"}}>
+											{secRatingsLoaded ? (
+												secRating.map((entry, i) => {
+													return (
+														<>
+															<span
+																style = {{color: i !== 2 && typeof entry !== "string" ? determineRatingColor(entry, 5, true):"var(--secondarytextcolor)"}}
+															>
+																{entry}
+															</span>
+															{i < secRating.length - 1 && <>, </>}
+														</>
+													)											
+													})
+												) : (
+													<BeatLoader size={8} margin={0} color="var(--secondarytextcolor)" />
+													// <>Loading...</>
+												)
+											}
+										</td>
+										<td>{attributes}</td>
+										{filters.campus.value !== "Any" && <td>{section.campus}</td>}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+{/* >>>>>>> ratings */}
 				</div>
 				{alertmsg}
 			</div>

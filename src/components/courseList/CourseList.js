@@ -200,7 +200,8 @@ function CourseList({id}) {
 			if (searchQuery !== "") {
 				if (
 					!courseID.includes(searchQuery.toUpperCase()) &&
-					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase())
+					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase()) &&
+					!(courseData[3] != null &&  courseData[3].toUpperCase().includes(searchQuery.toUpperCase()))
 				) {
 					return false;
 				}
@@ -240,7 +241,8 @@ function CourseList({id}) {
 			enrollment: courseEnrollment,
 			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
-			sections: courseData[1]
+			sections: courseData[1],
+			description: courseData[3]
 		};
 		return (
 			<CourseListItem
@@ -261,7 +263,7 @@ function CourseList({id}) {
 	const windowWidth = useWindowWidth();
 	let itemHeight = windowWidth > 1630 ? 60 : 80;
 	if (courselistSettings[0] === 2){
-		itemHeight = windowWidth > 1630 ? 70 : 90;
+		itemHeight = windowWidth > 1630 ? 70 : 95;
 	}
 
 	return (
@@ -271,15 +273,16 @@ function CourseList({id}) {
 			style={{
 				height: "calc(100vh - 90px)"
 			}}
-		>
+		>			
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (
 					<h2 className="subheadingfont text-center pt-3">Sorry, no classes match set filters <span role="img" aria-label="unhappyface">😔</span></h2>
 				) : (
+					<><div className = "subheadingfont text-center">{filteredCourses.length} Results Found</div>
 					<AutoSizer>
-						{({height, width}) => (
+						{({height, width}) => {return (
 							<List
-								height={height}
+								height={height - 24}
 								itemCount={filteredCourses.length}
 								itemSize={itemHeight}
 								width={width}
@@ -287,8 +290,8 @@ function CourseList({id}) {
 							>
 								{Row}
 							</List>
-						)}
-					</AutoSizer>
+						)}}
+					</AutoSizer></>
 				)}
 			</div>
 

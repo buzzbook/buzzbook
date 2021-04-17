@@ -37,7 +37,7 @@ function Filters() {
 					singleton={source}
 					moveTransition="transform 0.5s"
 					placement="bottom"
-					trigger="mouseenter"
+					trigger="click"
 					theme="transparent"
 					arrow={false}
 					interactiveBorder={50}

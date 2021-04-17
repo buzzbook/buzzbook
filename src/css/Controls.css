@@ -18,6 +18,12 @@
   transform: translate(0, 0) !important;
 }
 
+.controlBox{
+  padding: .3rem .9rem;
+  border-radius: 3rem;
+  background-color: var(--labelcolor);
+}
+
 #settingsbox .btn-secondary {
   background-color: var(--bgcolor);
   border: 1px solid var(--boundarycolor) !important;

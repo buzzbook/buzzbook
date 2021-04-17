@@ -60,6 +60,9 @@
 /*.dark-theme .prereq:hover {
 	background-color: var(--contrastcolor);
 }*/
+.sharedAttr > .prereq:first-child{
+	margin-left: 0;
+}
 
 /* Scroll Bars */
 .col-page > div::-webkit-scrollbar {
