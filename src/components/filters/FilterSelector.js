@@ -12,11 +12,24 @@ function FilterSelector(props) {
 	const customStyles = {
 		control: base => ({
 			...base,
-			background: "var(--labelcolor)",
-			borderColor: "var(--inputcolor)",
-			color: "var(--primarytextcolor)",
-			minWidth: "150px"
+			background: "var(--bgcolor)",
+			border: "1px solid var(--boundarycolor)",
+			color: "var(--secondarytextcolor)",
+			borderRadius: "2rem",
+			fontSize: "0.925rem",
+			fontFamily: "var(--secondaryfont)",
+			fontWeight: "300",
+			minWidth: "200px",
+			height: "2rem",
+			minHeight: "2rem"
 		}),
+		valueContainer: (provided, state) => ({
+      ...provided,
+    }),
+		indicatorsContainer: (provided, state) => ({
+      ...provided,
+      height: '2rem !important',
+    }),
 		singleValue: provided => ({
 			...provided,
 			color: "var(--primarytextcolor)"

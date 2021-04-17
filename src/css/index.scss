@@ -41,6 +41,7 @@ $gridRowHeight: 4;
 	--bgcolor: var(--white);
 	--themecolor: var(--theme);
 	--navcolor: var(--offwhite);
+  --navcoloralpha: rgba(247, 247, 247, 0.85);
 	--shadingcolor: var(--lightwhite);
 	--contrastcolor: var(--darkgrey);
 	--boundarycolor: var(--midgrey);
@@ -56,6 +57,7 @@ $gridRowHeight: 4;
 	--bgcolor: #1B1B1D; /*black*/
 	--themecolor: var(--theme);
 	--navcolor: #16161a; /*#100F0E*/
+  --navcoloralpha: rgba(22, 22, 26, 0.85);
 	--shadingcolor: #212121;
 	--contrastcolor: var(--offblack);
 	--boundarycolor: #383838; /*2B2B2B*/
@@ -209,8 +211,19 @@ $gridRowHeight: 4;
 	@include Karla(1.2, 6)
 }
 
+::-moz-selection {
+  color: var(--bgcolor);
+  background: var(--primarytextcolor);
+}
+
+::selection {
+	color: var(--bgcolor);
+  background: var(--primarytextcolor);
+}
+
 html {
 	font-size: 16px;
+	/*max adapting 13px*/
 	/*background-color: var(--bgcolor);
 	color: var(--primarytextcolor);*/
 	scroll-behavior: smooth;
@@ -302,6 +315,23 @@ body {
 }
 .text-link:hover > span.subheadingfont {
 	color: var(--secondarytextcolor) !important;
+}
+
+.tooltip-inner {
+	background-color: var(--labelcolor);
+	color: var(--primarytextcolor);
+	opacity: 1 !important;
+}
+.tooltip.show{opacity: 1 !important;}
+.tooltip.bs-tooltip-top .arrow:before {
+  border-top-color: var(--labelcolor) !important;
+}
+
+
+.openmenu {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
 }
 
 @media (max-width: 1630px) {

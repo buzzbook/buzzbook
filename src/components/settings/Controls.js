@@ -26,7 +26,7 @@ if (!Prefs) {
 
 function Controls() {
 	const [theme, updateTheme] = useState(localStorage.getItem("theme") || "light");
-	const {courselistSettings, toggleSettings} = useContext(SettingsContext);
+	const {toggleSettings} = useContext(SettingsContext);
 
 	const toggleTheme = () => {
 		document.documentElement.classList.add("themetransition");
@@ -41,7 +41,7 @@ function Controls() {
 		if (Prefs[index] !== state){
 			Prefs[index] = state;
 			toggleSettings(Prefs);
-			console.log(courselistSettings);
+			//console.log(courselistSettings);
 			localStorage.setItem("settings", JSON.stringify(Prefs));
 		}
 	};
@@ -60,7 +60,7 @@ function Controls() {
 	}
 
 	return (
-		<div className="position-fixed" style={{top: "2.1rem", right: "1.5rem"}}>
+		<div className="position-fixed controlBox" style={{top: "1.9rem", right: "1.5rem"}}>
 			{/*<svg
 				id="theme-toggle-icon"
 				alt={theme === "dark" ? "sun" : "moon"}
@@ -78,9 +78,10 @@ function Controls() {
 				name="settings"
 				alt="settings"
 				style={{height:20, width:20, cursor: "pointer"}}
-				iconclass="iconfilter ml-3 settingsicon"
+				iconclass="iconfilter ml-2 settingsicon"
 				onClick={openSettings}
 			/>
+			<div className="profile"></div>
 			<div id="settingsbox" className = "position-absolute noselect">
 				<div className="sectionlabelfont">Settings</div>
 				<div className="settingsitem">
