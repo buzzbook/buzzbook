@@ -1,5 +1,9 @@
 module.exports = function(grunt) {
 
+  let iconslist = []
+
+  
+
   grunt.initConfig({
     json_generator: {
       svgstore: {
