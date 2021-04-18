@@ -1,15 +1,22 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
+import {selectProfessor, getSavedCourses} from "../../redux/courseListSlice";
 import FilterSelector from "../filters/FilterSelector";
 
 function SavedCourseItem(course) {
 
-  const instructorList = Object.values(course.sections).map(section => {
+  const dispatch = useDispatch();
+  const savedCourses = useSelector(getSavedCourses);
+
+  const rawInstructorList = Object.values(course.sections).map(section => {
     return section[1][0][4][0];
   });
 
-  // removes duplicate professors
-  const instructorSet = new Set(instructorList);
+  // set removes duplicate professors
+  const instructorList = Array.from(new Set(rawInstructorList));
+  // unshift to add item to beginning
+  instructorList.unshift("All Professors");
 
 	return (
 		<div className="p-2 mb-2 rounded">
@@ -24,8 +31,13 @@ function SavedCourseItem(course) {
 					</div>
 					<FilterSelector
 						placeholder="All Professors"
-						optionList={Array.from(instructorSet)}
-						ariaLabel="Proffesors"
+						optionList={instructorList}
+            value={savedCourses[course.courseID]["professorFilter"]}
+            onChange={(value) => {
+              dispatch(selectProfessor({ [course.courseID]: value }))
+              
+            }}
+						ariaLabel="Professors"
 						ariaDescribedBy="profs-label"
 					/>
 					<FilterSelector

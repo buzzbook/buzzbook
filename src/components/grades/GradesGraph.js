@@ -2,9 +2,30 @@ import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 
 const testData = [
-  [30, 23, 17, 18, 7, 5],
-  [14, 19, 20, 27, 14, 6],
-  [12, 20, 22, 25, 14, 7],
+  {
+    course: "ACCT 2101", 
+    averageData: [30, 23, 17, 18, 7, 5],
+    professor: {
+      Bob: [1, 2, 3, 4, 5, 6],
+      John: [6, 5, 4, 3, 2, 1]
+    }
+  },
+  {
+    course: "ACCT 2102", 
+    averageData: [14, 19, 20, 27, 14, 6],
+    professor: {
+      Bob: [1, 2, 3, 4, 5, 6],
+      John: [6, 5, 4, 3, 2, 1]
+    }
+  },
+  {
+    course: "ACCT 2103", 
+    averageData: [12, 20, 22, 25, 14, 7],
+    professor: {
+      Bob: [1, 2, 3, 4, 5, 6],
+      John: [6, 5, 4, 3, 2, 1]
+    }
+  }
 ];
 
 const calcPercentile = (index, dataList) => {
@@ -131,7 +152,12 @@ function GradesGraph({ savedCourses }) {
   useEffect(() => {
     const formattedData = [];
     Object.keys(savedCourses).forEach((course, i) => {
-      formattedData.push({ name: course, data: testData[i % testData.length] })
+      // decide whether to display average data or specific professor's data
+      // TODO: once we have real data, we select the appropriate course data
+      const courseData = testData[i % testData.length];
+      // TODO: one we have real data, we select the appropriate professor data
+      const dataSource = (savedCourses[course].professorFilter.value === "All Professors") ? courseData.averageData : courseData.professor["Bob"];
+      formattedData.push({ name: course, data: dataSource })
     });
     const datasets = [];
     formattedData.forEach((course, i) => {

@@ -30,6 +30,13 @@ export const courseListSlice = createSlice({
 		searchQuery: ""
 	},
 	reducers: {
+    /** handles professor select for a course for data viz purposes */
+    selectProfessor: (state, action) => {
+      // on change, we change the current status to that given
+      const course = Object.keys(action.payload)[0];
+      const professor = Object.values(action.payload)[0];
+      state.savedCourses[course]["professorFilter"] = professor;
+    },
     /** handles all select in home page */
     allSelect: (state, action) => {
       state.selectAll = !state.selectAll;
@@ -103,7 +110,9 @@ export const courseListSlice = createSlice({
 		},
 		/** Adds a course by its course ID */
 		saveCourse: (state, action) => {
-			state.savedCourses[action.payload] = {checked: false, sections: {}};
+      // if changes made here, ensure it is also changed in other places where a course is saved
+      // Other places: toggleSelection
+			state.savedCourses[action.payload] = {checked: false, professorFilter: {value: "All Professors", label: "All Professors"}, sections: {}};
       state.selectAll = false;
 		},
 		/** Removes a course by its course ID */
@@ -115,7 +124,7 @@ export const courseListSlice = createSlice({
       const section = Object.values(action.payload)[0];
       if (state.savedCourses[course] === undefined) {
         // add course if not saved
-        state.savedCourses[course] = {checked: false, sections: {}};
+        state.savedCourses[course] = {checked: false, professorFilter: {value: "All Professors", label: "All Professors"}, sections: {}};
       }
       if (state.savedCourses[course]["sections"][section] === undefined) {
         // saving the section
@@ -142,6 +151,7 @@ export const courseListSlice = createSlice({
 });
 
 export const {
+  selectProfessor,
   allSelect,
   checkHomeCourse,
   checkHomeSection,

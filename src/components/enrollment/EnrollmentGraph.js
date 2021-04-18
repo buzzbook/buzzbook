@@ -10,7 +10,7 @@ const phaseTwoEndDate = '1/22/2021';
 
 // x is the date
 // y is enrollment percent
-const testData = [
+const testEnrollmentData = [
   [
     { x: '11/5/2020', y: 0, waitlist: 0 },
     { x: '11/6/2020', y: 11, waitlist: 0 },
@@ -247,6 +247,36 @@ const testData = [
   ],
 ];
 
+const testData = [
+  {
+    course: "ACCT 2101", 
+    overallData: testEnrollmentData[0],
+    professor: {
+      // Enrollment data for professor here in same format as testEnrollmentData
+      Bob: testEnrollmentData[1],
+      John: testEnrollmentData[2]
+    }
+  },
+  {
+    course: "ACCT 2102", 
+    overallData: testEnrollmentData[1],
+    professor: {
+      // Enrollment data for professor here in same format as testEnrollmentData
+      Bob: testEnrollmentData[0],
+      John: testEnrollmentData[2]
+    }
+  },
+  {
+    course: "ACCT 2103", 
+    overallData: testEnrollmentData[2],
+    professor: {
+      // Enrollment data for professor here in same format as testEnrollmentData
+      Bob: testEnrollmentData[1],
+      John: testEnrollmentData[0]
+    }
+  }
+]
+
 const config = {
   type: 'LineWithLine',
   data: {
@@ -423,7 +453,12 @@ function EnrollmentGraph({ savedCourses }) {
   useEffect(() => {
     const formattedData = [];
     Object.keys(savedCourses).forEach((course, i) => {
-      formattedData.push({ name: course, data: testData[i % testData.length] })
+      // decide whether to display overall data or specific professor's data
+      // TODO: once we have real data, we select the appropriate course data
+      const courseData = testData[i % testData.length];
+      // TODO: one we have real data, we select the appropriate professor data
+      const dataSource = (savedCourses[course].professorFilter.value === "All Professors") ? courseData.overallData : courseData.professor["Bob"];
+      formattedData.push({ name: course, data: dataSource })
     });
     const datasets = [];
     formattedData.forEach((course, i) => {
