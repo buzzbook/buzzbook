@@ -603,6 +603,7 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 						rowClasses='contentfont secondarytextcolor'
 					/>
 		  </DescriptionSection>
+		  {/* replace sort icons */}
 {/* ======= */}
 					{/* <div className="sectionlabelfont mt-2">Description</div>
 					<div className="mb-3 contentfont">{course.description}</div>

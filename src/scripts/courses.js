@@ -26,3 +26,15 @@ export const instructors = professors;
 
 export const caches = data.caches;
 export default data.courses;
+
+var mincourses = Object.keys(data.courses).map(function(course) {
+	return {
+		id: course,
+		name: data.courses[course][0],
+		description: data.courses[course][3]
+	}
+})
+console.log(mincourses)
+// console.log([...new Set(Object.keys(data.courses))]) affirm uniqueness
+
+export const searcher = mincourses;
