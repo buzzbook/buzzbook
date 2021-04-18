@@ -1,40 +1,14 @@
 import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 
-const testData = [
-  {
-    course: "ACCT 2101", 
-    averageData: [30, 23, 17, 18, 7, 5],
-    professor: {
-      Bob: [1, 2, 3, 4, 5, 6],
-      John: [6, 5, 4, 3, 2, 1]
-    }
-  },
-  {
-    course: "ACCT 2102", 
-    averageData: [14, 19, 20, 27, 14, 6],
-    professor: {
-      Bob: [1, 2, 3, 4, 5, 6],
-      John: [6, 5, 4, 3, 2, 1]
-    }
-  },
-  {
-    course: "ACCT 2103", 
-    averageData: [12, 20, 22, 25, 14, 7],
-    professor: {
-      Bob: [1, 2, 3, 4, 5, 6],
-      John: [6, 5, 4, 3, 2, 1]
-    }
-  }
-];
-
 const calcPercentile = (index, dataList) => {
   let sum = 0;
   for (let i = 0; i < dataList.length; i++) {
     if (i > index) break;
     sum += dataList[i];
   }
-  return `${100 - sum}`;
+  const percentile = 100 - sum;
+  return percentile.toFixed(0);
 }
 
 const getSuffix = (num) => {
@@ -80,7 +54,7 @@ const config = {
         },
         ticks: {
           beginAtZero: true,
-          suggestedMax: 50,
+          suggestedMax: 100,
           callback: (label) => label + '%',
         },
         gridLines: {},
@@ -163,37 +137,14 @@ function GradesGraph({ savedCourses }) {
           } else {
             // get grade data from a specific professor
 
-            /* notes:
-              LastName, FirstName MiddleName
-              local professor list vs course critique API
-              - inconsistent middle name usage
-                - EX: AE 2010 - Seitzman, Jerry M  vs Seitzman, Jerry
-                - EX: CS 1332 - Moss, Mark Bomi vs Moss, Mark
-              - sometimes middle name only the initial
-              - cases for when professor not found or TBA professor
-                - use course critique list as instructor list, so it matches
-            */
             let professor = savedCourses[course].professorFilter.value;
-            professor = professor.split(" ");
-            let middleNamePresent = professor.length > 3;
-            let formattedProfessorName =  (middleNamePresent) ? `${professor[2]}, ${professor[0]} ${professor[1]}` : `${professor[1]}, ${professor[0]}`;
-
-            try {
-              for (let i = 0; i < data.raw.length; i++) {
-                const currProf = data.raw[i];
-                if (currProf.instructor_name === formattedProfessorName) {
-                  let profData = [currProf.A, currProf.B, currProf.C, currProf.D, currProf.F, currProf.W];
-                  formattedData.push({ name: course, data: profData });
-                  break;
-                }
-                if (i === data.raw.length - 1) {
-                  throw 'Couldnt find professor';
-                }
+            for (let i = 0; i < data.raw.length; i++) {
+              const currProf = data.raw[i];
+              if (currProf.instructor_name === professor) {
+                let profData = [currProf.A, currProf.B, currProf.C, currProf.D, currProf.F, currProf.W];
+                formattedData.push({ name: course, data: profData });
+                break;
               }
-            } catch (e) {
-              console.log(e);
-              console.log(`profsesor name: ${formattedProfessorName}`);
-              console.log(data);
             }
           }
           const datasets = [];

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import {selectProfessor, selectSemester, getSavedCourses} from "../../redux/courseListSlice";
@@ -9,15 +9,17 @@ function SavedCourseItem(course) {
   const dispatch = useDispatch();
   const savedCourses = useSelector(getSavedCourses);
 
-  const rawInstructorList = Object.values(course.sections).map(section => {
-    return section[1][0][4][0];
-  });
-
-  // set removes duplicate professors
-  const instructorList = Array.from(new Set(rawInstructorList));
-  // unshift to add item to beginning
-  instructorList.unshift("All Professors");
-
+  const [instructorList, updateInstructorList] = useState([]);
+  
+  useEffect(() => {
+    fetch(`https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/test/data/course?courseID=${course.courseID}`)
+    .then(response => response.json())
+    .then(data => {
+      let newInstructorList = data.raw.map(prof => prof.instructor_name);
+      newInstructorList.unshift("All Professors");
+      updateInstructorList(newInstructorList);
+    });
+  }, []);
 	return (
 		<div className="p-2 mb-2 rounded">
 			<div className="position-relative">
