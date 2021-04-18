@@ -7,24 +7,12 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../scripts/courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
-import {caches, searcher} from "../../scripts/courses";
+import {caches} from "../../scripts/courses"; // can import searcher
 import "../../css/CourseList.css";
 import $ from "jquery";
 import {SettingsContext} from "../settings/SettingsContext";
 import Icon from "../../img/icon";
 import fuse from "./FuzzySearch";
-
-// const fuse = new Fuse(searcher, {
-//     keys: [
-//         {name: "id", weight: 0.5},
-//         {name: "name", weight: 0.25},
-//         {name: "description", weight: 0.25}
-//     ],
-// 	includeScore: true
-// })
-
-const util = fuse(searcher)
-console.log(util.search("Computational"))
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -125,6 +113,7 @@ var filteredCourses = null;
 
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
+	// eslint-disable-next-line
 	const sort = useSelector(getSort).value;
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
@@ -273,7 +262,8 @@ function CourseList({id}) {
 			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
 			sections: courseData[1],
-			description: courseData[3]
+			description: courseData[3],
+			score: courseScore
 		};
 		return (
 			<CourseListItem

@@ -11,7 +11,7 @@ import {
 } from "../../redux/courseListSlice";
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
-import {determineGradeLetter, determineGradeColor, determineRatingColor} from "../settings/StatsUtils";
+import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils"; // determineRatingColor
 import {SettingsContext} from "../settings/SettingsContext";
 
 
@@ -58,7 +58,7 @@ function CourseListItem(course, props) {
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
 	let bgColor = isSelected ? "var(--navcolor)" : "initial";
-	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
+	// let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
 
@@ -70,8 +70,8 @@ function CourseListItem(course, props) {
 	const gradeColor = determineGradeColor(course.grade);
 	const lettergrade = determineGradeLetter(course.grade);
 	const currRatings = ratingstore[course.courseID] || {courseEff: 0, profEff: 0, hours: 0}
-	const cRatingColor = determineGradeColor((currRatings.courseEff/5)*4)
-	const pRatingColor = determineGradeColor((currRatings.profEff/5)*4)
+	const cRatingColor = determineGradeColor(currRatings.courseEff*4/5)
+	const pRatingColor = determineGradeColor(currRatings.profEff*4/5)
 
 
 	let displaygrade = lettergrade;

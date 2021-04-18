@@ -74,13 +74,14 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
   
   // React Table set up
   const enrollmentFormatter = (cell, row) => {
-    if ((row.enrollmentCurrent / row.enrollmentMax) * 100 > 67)
+	const enrollPercent = row.enrollmentCurrent / row.enrollmentMax
+    if (enrollPercent * 100 > 67)
       return (
         <span style={{ color: 'var(--red' }}>
           {cell}
         </span>
       )
-    else if ((row.enrollmentCurrent / row.enrollmentMax) * 100 > 33) {
+    else if (enrollPercent * 100 > 33) {
       return (
         <span style={{ color: 'var(--orange' }}>
           {cell}
@@ -230,6 +231,7 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 		updateGradesLoaded(false);
 		updateRatingsLoaded(false);
 		updateSecRatingsLoaded(false);
+		$(".tooltip").tooltip("hide");
 		profGrades = {};
 		secRatings = {};
 		let courseQuery = selectedCourse.replaceAll(" ", "%20");
@@ -262,7 +264,7 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 		instrList = [...new Set(instrList)]
 		const profCount = instrList.filter(a => a !== "N/A").length 
 		if (profCount !== 0) {
-			instrList.map((instr, i) => {
+			instrList.forEach((instr, i) => {
 				// console.log(instr)
 				let instrQuery = instr.replace("(P)", " ").trim().split(" ")
 				let instrSQL = "%" + [instrQuery[instrQuery.length - 1], instrQuery[0]].join("%") + "%"			
@@ -339,12 +341,12 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 	}
 	course.prerequisites = prereqs
 
-	$(document).ready(function(){
+	$(document).ready(function(e){
 		$('[data-toggle="tooltip"]').tooltip();
 	});
-	$('[data-toggle="tooltip"]').on('click', function () {
-  	$(this).tooltip('hide')
-	})
+	// $('[data-toggle="tooltip"]').on('click', function () {
+  	// 	$(this).tooltip('hide')
+	// })
 
 	let isSaved = savedCourses[course.courseID];
 
@@ -388,11 +390,11 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
     const [id, sectionRaw] = entry;
 
 	const sectionEnrollment = {current: 20, max: 25};
-	let sectionEnrollmentColor = "var(--green)";
-	if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
-		sectionEnrollmentColor = "var(--red)";
-	else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
-		sectionEnrollmentColor = "var(--orange)";
+	// let sectionEnrollmentColor = "var(--green)"; determined in column
+	// if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 67)
+	// 	sectionEnrollmentColor = "var(--red)";
+	// else if ((sectionEnrollment.max / sectionEnrollment.current) * 100 > 33)
+	// 	sectionEnrollmentColor = "var(--orange)";
 
 	const meetings = sectionRaw[1];
 	var instructors = meetings.length > 0 ? "" : "N/A";
@@ -572,14 +574,14 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 						{/* Quality */}
 						<div style={{gridArea: "2 / 1 / 2 / 1"}} >Course</div>
 						<div style={{gridArea: "2 / 2 / 2 / 2"}}>
-							<RatingBar value={courseRatings.courseEff} highIsBetter={true} />
+							<RatingBar value={ratingsLoaded && courseRatings.courseEff} highIsBetter={true} />
 						</div>
 						<div style={{gridArea: "2 / 3 / 2 / 3"}} className="font-italic">{courseRatings.courseEff}/5</div>
 
 						{/* Difficulty */}
 						<div style={{gridArea: "3 / 1 / 3 / 1"}} >Instructor</div>
 						<div style={{gridArea: "3 / 2 / 3 / 2"}}>
-							<RatingBar value={courseRatings.profEff} highIsBetter={true} />
+							<RatingBar value={ratingsLoaded && courseRatings.profEff} highIsBetter={true} />
 						</div>
 						<div style={{gridArea: "3 / 3 / 3 / 3"}} className="font-italic">{courseRatings.profEff}/5</div>
 					</div>
@@ -587,24 +589,24 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 				<div className="sharedAttr contentfont mt-1">{sharedAttrEle}</div>
 				<hr style={{backgroundColor: "var(--labelcolor)", height: 3, borderTop: "none"}} className={" mb-0 " + (sharedAttr.length < 1 ? "mt-3" : "mt-1")}/>
 				<div className="hidescroll" style={{height: "calc(100vh - 83px - 90px)", overflowY: "scroll"}}>
-{/* <<<<<<< HEAD */}
-          <DescriptionSection title="Description" id="description">{course.description}</DescriptionSection>
-          <DescriptionSection title="Prerequisites" id="prerequisites" className={'prereq-wrapper'}>{course.prerequisites}</DescriptionSection>
-          <DescriptionSection title="Enrollment Restrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> {/* merge from BS-table branch */}
-          <DescriptionSection title="Class Sections" id="class-sections">
-					<BootstrapTable
-						bootstrap4
-						wrapperClasses="table-responsive" 
-						keyField='id'
-						data={courseSectionData}
-						columns={columns}
-						selectRow={selectRow}
-						headerClasses='sectionlabelfont primarytextcolor'
-						rowClasses='contentfont secondarytextcolor'
-					/>
-		  </DescriptionSection>
-		  {/* replace sort icons */}
-{/* ======= */}
+				{/* <<<<<<< HEAD */}
+					<DescriptionSection title="Description" id="description">{course.description}</DescriptionSection>
+					<DescriptionSection title="Prerequisites" id="prerequisites" className={'prereq-wrapper'}>{course.prerequisites}</DescriptionSection>
+					<DescriptionSection title="Enrollment Restrictions" id="enrollRestrictions">{course.enrollRestrictions}</DescriptionSection> {/* merge from BS-table branch */}
+					<DescriptionSection title="Class Sections" id="class-sections">
+								<BootstrapTable
+									bootstrap4
+									wrapperClasses="table-responsive" 
+									keyField='id'
+									data={courseSectionData}
+									columns={columns}
+									selectRow={selectRow}
+									headerClasses='sectionlabelfont primarytextcolor'
+									rowClasses='contentfont secondarytextcolor'
+								/>
+					</DescriptionSection>
+		  			{/* replace sort icons */}
+
 					{/* <div className="sectionlabelfont mt-2">Description</div>
 					<div className="mb-3 contentfont">{course.description}</div>
 
@@ -614,11 +616,11 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 					<div className="sectionlabelfont">Enrollment Restrictions</div>
 					<div className="mb-3">{course.enrollRestrictions}</div>
 
-					<div className="sectionlabelfont">Class Sections</div> */}
+					<div className="sectionlabelfont">Class Sections</div> 
 					<table className="table-responsive">
 						<thead>
 							<tr className="sectionlabelfont primarytextcolor">
-                <th scope="col"></th>
+                				<th scope="col"></th>
 								<th scope="col">ID</th>
 								<th scope="col">CRN</th>
 								<th scope="col">Type</th>
@@ -769,8 +771,8 @@ const [secRatingsLoaded, updateSecRatingsLoaded] = useState(false);
 								);
 							})}
 						</tbody>
-					</table>
-{/* >>>>>>> ratings */}
+					</table>*/}
+					{/* >>>>>>> ratings */}
 				</div>
 				{alertmsg}
 			</div>

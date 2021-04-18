@@ -34,7 +34,7 @@ export function determineGradeLetter(grade){
   return lettergrade;
 }
 
-export function determineRatingColor(value, max = 5, highIsBetter) {
+export function determineRatingColor(value, max = 5, highIsBetter = true) {
   const rating = (value / max) * 100;
 
 	let color = "var(--green)";
