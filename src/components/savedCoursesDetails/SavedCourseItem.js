@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
-import {selectProfessor, getSavedCourses} from "../../redux/courseListSlice";
+import {selectProfessor, selectSemester, getSavedCourses} from "../../redux/courseListSlice";
 import FilterSelector from "../filters/FilterSelector";
 
 function SavedCourseItem(course) {
@@ -33,16 +33,15 @@ function SavedCourseItem(course) {
 						placeholder="All Professors"
 						optionList={instructorList}
             value={savedCourses[course.courseID]["professorFilter"]}
-            onChange={(value) => {
-              dispatch(selectProfessor({ [course.courseID]: value }))
-              
-            }}
+            onChange={(value) => dispatch(selectProfessor({ [course.courseID]: value }))}
 						ariaLabel="Professors"
 						ariaDescribedBy="profs-label"
 					/>
 					<FilterSelector
 						placeholder="All Semesters"
-						optionList={["Spring 21", "Fall 20", "Spring 20"]}
+						optionList={["All Semesters", "Spring 21", "Fall 20", "Spring 20"]}
+            value={savedCourses[course.courseID]["semesterFilter"]}
+            onChange={(value) => dispatch(selectSemester({ [course.courseID]: value }))}
 						ariaLabel="Semesters"
 						ariaDescribedBy="semesters-label"
 					/>

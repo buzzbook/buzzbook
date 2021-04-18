@@ -37,6 +37,13 @@ export const courseListSlice = createSlice({
       const professor = Object.values(action.payload)[0];
       state.savedCourses[course]["professorFilter"] = professor;
     },
+     /** handles professor select for a course for data viz purposes */
+     selectSemester: (state, action) => {
+      // on change, we change the current status to that given
+      const course = Object.keys(action.payload)[0];
+      const semester = Object.values(action.payload)[0];
+      state.savedCourses[course]["semester"] = semester;
+    },
     /** handles all select in home page */
     allSelect: (state, action) => {
       state.selectAll = !state.selectAll;
@@ -112,7 +119,12 @@ export const courseListSlice = createSlice({
 		saveCourse: (state, action) => {
       // if changes made here, ensure it is also changed in other places where a course is saved
       // Other places: toggleSelection
-			state.savedCourses[action.payload] = {checked: false, professorFilter: {value: "All Professors", label: "All Professors"}, sections: {}};
+			state.savedCourses[action.payload] = {
+        checked: false, 
+        professorFilter: {value: "All Professors", label: "All Professors"}, 
+        sections: {},
+        semesterFilter: {value: "All Semesters", label: "All Semesters"}
+      };
       state.selectAll = false;
 		},
 		/** Removes a course by its course ID */
@@ -124,7 +136,12 @@ export const courseListSlice = createSlice({
       const section = Object.values(action.payload)[0];
       if (state.savedCourses[course] === undefined) {
         // add course if not saved
-        state.savedCourses[course] = {checked: false, professorFilter: {value: "All Professors", label: "All Professors"}, sections: {}};
+        state.savedCourses[course] = {
+          checked: false, 
+          professorFilter: {value: "All Professors", label: "All Professors"}, 
+          sections: {},
+          semesterFilter: {value: "All Semesters", label: "All Semesters"}
+        };
       }
       if (state.savedCourses[course]["sections"][section] === undefined) {
         // saving the section
@@ -152,6 +169,7 @@ export const courseListSlice = createSlice({
 
 export const {
   selectProfessor,
+  selectSemester,
   allSelect,
   checkHomeCourse,
   checkHomeSection,
