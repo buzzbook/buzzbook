@@ -1,6 +1,8 @@
 .button-base {
     display: grid;
     grid-gap: 1rem;
+    grid-auto-flow: column;
+    align-items: center;
     &:active {
         box-shadow: none;
         border-color: var(--link-blue);

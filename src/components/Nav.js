@@ -3,16 +3,17 @@ import {Link, useLocation} from "react-router-dom";
 import $ from "jquery";
 
 import itLogo from "../img/itLogo.png";
+import Icon from "../img/icon";
 
 const navPages = [
-	{title: "Catalog", path: "/catalog/"},
-	{title: "Grades", path: "/grades/"},
-	{title: "Enrollment", path: "/enrollment/"},
-	{title: "Scheduler", path: "/scheduler/"},
-	{title: "Ratings", path: "/ratings/"},
+	{title: "Catalog", path: "/catalog/", icon: "Category"},
+	{title: "Grades", path: "/grades/", icon: "Chart"},
+	{title: "Enrollment", path: "/enrollment/", icon: "Paper-Plus"},
+	{title: "Scheduler", path: "/scheduler/", icon: "Calendar"},
+	{title: "Ratings", path: "/ratings/", icon: "Graph"},
 ];
 const navPagesBot = [
-	{title: "About", path: "/about/"}
+	{title: "About", path: "/about/", icon: "Info-Square"}
 ]
 
 function Nav() {
@@ -35,11 +36,12 @@ function Nav() {
 	return (
 		<nav className="padv--8 flex-v space-between h-100">
 			<div className="gapv--5">
-				<div>
-					<Link className="navbar-brand p-0" to="/">
-						<img src={itLogo} alt="Buzz" width="40" height="40" />
-	
+				<div className="gapv--0"> 
+					<Link className="" to="/">
+						<Icon name="logo" />
 					</Link>
+					<h3>Buzzbook</h3>
+					<p>Beta 1.2</p>
 				</div>
 				{navPages.map(page => (
 					<Link 
@@ -54,7 +56,7 @@ function Nav() {
 							(activePath.includes(page.path) ? " active" : "")
 						}
 					>
-						
+							<Icon name={page.icon} />
 							<p class="bold">{page.title}</p>
 						
 					</div>
@@ -75,7 +77,7 @@ function Nav() {
 							(activePath.includes(page.path) ? " active" : "")
 						}
 					>
-						
+							<Icon name={page.icon} />
 							<p class="bold">{page.title}</p>
 						
 					</div>
