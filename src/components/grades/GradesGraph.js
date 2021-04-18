@@ -139,7 +139,6 @@ const setColors = () => {
   config.options.legend.labels.fontColor = textColor;
 }
 
-
 function GradesGraph({ savedCourses }) {
 
   setColors();
@@ -153,25 +152,65 @@ function GradesGraph({ savedCourses }) {
     const formattedData = [];
     Object.keys(savedCourses).forEach((course, i) => {
       // decide whether to display average data or specific professor's data
-      // TODO: once we have real data, we select the appropriate course data
-      const courseData = testData[i % testData.length];
-      // TODO: one we have real data, we select the appropriate professor data
-      const dataSource = (savedCourses[course].professorFilter.value === "All Professors") ? courseData.averageData : courseData.professor["Bob"];
-      formattedData.push({ name: course, data: dataSource })
+      fetch(`https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/test/data/course?courseID=${course}`)
+        .then(response => response.json())
+        .then(data => {
+          if (savedCourses[course].professorFilter.value === "All Professors") {
+            // get average grade data
+            const grades = data.header[0];
+            const averageData = [grades.avg_a, grades.avg_b, grades.avg_c, grades.avg_d, grades.avg_f, grades.avg_w];
+            formattedData.push({ name: course, data: averageData });
+          } else {
+            // get grade data from a specific professor
+
+            /* notes:
+              LastName, FirstName MiddleName
+              local professor list vs course critique API
+              - inconsistent middle name usage
+                - EX: AE 2010 - Seitzman, Jerry M  vs Seitzman, Jerry
+                - EX: CS 1332 - Moss, Mark Bomi vs Moss, Mark
+              - sometimes middle name only the initial
+              - cases for when professor not found or TBA professor
+                - use course critique list as instructor list, so it matches
+            */
+            let professor = savedCourses[course].professorFilter.value;
+            professor = professor.split(" ");
+            let middleNamePresent = professor.length > 3;
+            let formattedProfessorName =  (middleNamePresent) ? `${professor[2]}, ${professor[0]} ${professor[1]}` : `${professor[1]}, ${professor[0]}`;
+
+            try {
+              for (let i = 0; i < data.raw.length; i++) {
+                const currProf = data.raw[i];
+                if (currProf.instructor_name === formattedProfessorName) {
+                  let profData = [currProf.A, currProf.B, currProf.C, currProf.D, currProf.F, currProf.W];
+                  formattedData.push({ name: course, data: profData });
+                  break;
+                }
+                if (i === data.raw.length - 1) {
+                  throw 'Couldnt find professor';
+                }
+              }
+            } catch (e) {
+              console.log(e);
+              console.log(`profsesor name: ${formattedProfessorName}`);
+              console.log(data);
+            }
+          }
+          const datasets = [];
+          formattedData.forEach((course, i) => {
+            datasets.push({
+              label: course.name,
+              data: course.data,
+              backgroundColor: colors[i % colors.length],
+              fill: false,
+            });
+          });
+          config.data.datasets = datasets;
+          Chart.helpers.each(Chart.instances, function (instance) {
+            instance.chart.update(config);
+          });
+        });
     });
-    const datasets = [];
-    formattedData.forEach((course, i) => {
-      datasets.push({
-        label: course.name,
-        data: course.data,
-        backgroundColor: colors[i % colors.length],
-        fill: false,
-      });
-    });
-    config.data.datasets = datasets;
-    Chart.helpers.each(Chart.instances, function (instance) {
-      instance.chart.update(config);
-    })
   });
   return <canvas id="grade-graph" width="400" height="400"></canvas>;
 }

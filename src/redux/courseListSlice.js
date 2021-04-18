@@ -42,7 +42,7 @@ export const courseListSlice = createSlice({
       // on change, we change the current status to that given
       const course = Object.keys(action.payload)[0];
       const semester = Object.values(action.payload)[0];
-      state.savedCourses[course]["semester"] = semester;
+      state.savedCourses[course]["semesterFilter"] = semester;
     },
     /** handles all select in home page */
     allSelect: (state, action) => {
