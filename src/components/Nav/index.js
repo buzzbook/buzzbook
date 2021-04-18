@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import $ from "jquery";
+import './nav.scss';
 
-import itLogo from "../img/itLogo.png";
-import Icon from "../img/icon";
+import Icon from "../../img/icon";
 
 const navPages = [
 	{title: "Catalog", path: "/catalog/", icon: "Category"},
@@ -35,8 +35,8 @@ function Nav() {
 
 	return (
 		<nav className="padv--8 flex-v space-between h-100">
-			<div className="gapv--5">
-				<div className="gapv--0"> 
+			<div className="gapv--4">
+				<div className="gapv--0 main-logo"> 
 					<Link className="" to="/">
 						<Icon name="logo" />
 					</Link>
@@ -57,7 +57,7 @@ function Nav() {
 						}
 					>
 							<Icon name={page.icon} />
-							<p class="bold">{page.title}</p>
+							<h4 >{page.title}</h4>
 						
 					</div>
 					</Link>
@@ -78,7 +78,7 @@ function Nav() {
 						}
 					>
 							<Icon name={page.icon} />
-							<p class="bold">{page.title}</p>
+							<h4 class="bold">{page.title}</h4>
 						
 					</div>
 					</Link>

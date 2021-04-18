@@ -1,6 +1,6 @@
 .button-base {
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: var(--f2);
     grid-auto-flow: column;
     align-items: center;
     &:active {
