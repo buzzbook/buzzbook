@@ -7,11 +7,12 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import courses from "../../scripts/courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
-import {caches} from "../../scripts/courses";
+import {caches} from "../../scripts/courses"; // can import searcher
 import "../../css/CourseList.css";
 import $ from "jquery";
 import {SettingsContext} from "../settings/SettingsContext";
 import Icon from "../../img/icon";
+import fuse from "./FuzzySearch";
 
 /** Keys are the courseID values. Values are the long names */
 export const subjectNames = {
@@ -112,6 +113,7 @@ var filteredCourses = null;
 
 function CourseList({id}) {
 	const filters = useSelector(getFilters);
+	// eslint-disable-next-line
 	const sort = useSelector(getSort).value;
 	const savedCourses = useSelector(getSavedCourses);
 	const searchQuery = useSelector(getSearchQuery);
@@ -197,44 +199,62 @@ function CourseList({id}) {
 					return false;
 				}
 			}
-			if (searchQuery !== "") {
-				if (
-					!courseID.includes(searchQuery.toUpperCase()) &&
-					!courseData[0].toUpperCase().includes(searchQuery.toUpperCase()) &&
-					!(courseData[3] != null &&  courseData[3].toUpperCase().includes(searchQuery.toUpperCase()))
-				) {
-					return false;
-				}
-			}
+			// if (searchQuery !== "") {
+			// 	if (
+			// 		!courseID.includes(searchQuery.toUpperCase()) &&
+			// 		!courseData[0].toUpperCase().includes(searchQuery.toUpperCase()) &&
+			// 		!(courseData[3] != null &&  courseData[3].toUpperCase().includes(searchQuery.toUpperCase()))
+			// 	) {
+			// 		return false;
+			// 	}
+			// }
 			return true;
 		})
-		.sort((a, b) => {
-			switch (sort) {
-				case "Course ID":
-					// a/b[0] is the courseID
-					let aSplit = a[0].split(" ");
-					let bSplit = b[0].split(" ");
-					if (aSplit[0] === bSplit[0]) {
-						return parseInt(aSplit[1]) - parseInt(bSplit[1]);
-					}
-					return aSplit[0].localeCompare(bSplit[0]);
-				case "Name":
-					// a/b[1][0] is the course name
-					return a[1][0].localeCompare(b[1][0]);
-				case "Grade":
-					const aGrade = a[1][4];
-					const bGrade = b[1][4];
-					if (!aGrade && !bGrade) return 0;
-					if (!aGrade) return 1;
-					if (!bGrade) return -1;
-					return bGrade - aGrade;
-				default:
-					return 0;
+	
+	if (searchQuery !== ""){
+		const searchCourses = filteredCourses.map(course => {
+			return {
+				id: course[0],
+				dept: subjectNames[course[0].split(" ")[0]],
+				name: course[1][0],
+				description: course[1][3],
+				rest: course[1]
 			}
-		});
+		})
+
+		const util = fuse(searchCourses)
+		filteredCourses = util.search(searchQuery).map(course => {
+			return [course.item.id, course.item.rest, course.score]
+		})
+	}	
+
+	// filteredCourses.sort((a, b) => {
+	// 		switch (sort) {
+	// 			case "Course ID":
+	// 				// a/b[0] is the courseID
+	// 				let aSplit = a[0].split(" ");
+	// 				let bSplit = b[0].split(" ");
+	// 				if (aSplit[0] === bSplit[0]) {
+	// 					return parseInt(aSplit[1]) - parseInt(bSplit[1]);
+	// 				}
+	// 				return aSplit[0].localeCompare(bSplit[0]);
+	// 			case "Name":
+	// 				// a/b[1][0] is the course name
+	// 				return a[1][0].localeCompare(b[1][0]);
+	// 			case "Grade":
+	// 				const aGrade = a[1][4];
+	// 				const bGrade = b[1][4];
+	// 				if (!aGrade && !bGrade) return 0;
+	// 				if (!aGrade) return 1;
+	// 				if (!bGrade) return -1;
+	// 				return bGrade - aGrade;
+	// 			default:
+	// 				return 0;
+	// 		}
+	// 	});
 
 	const Row = ({index, style}) => {
-		const [courseID, courseData] = filteredCourses[index];
+		const [courseID, courseData, courseScore] = filteredCourses[index];
 		const courseEnrollment = {current: parseInt(courseID.split(" ")[1]) , max: 9999}; //just testing colors
 		const course = {
 			name: courseData[0],
@@ -242,7 +262,8 @@ function CourseList({id}) {
 			grade: courseData[4],
 			credits: Object.values(courseData[1])[0][2],
 			sections: courseData[1],
-			description: courseData[3]
+			description: courseData[3],
+			score: courseScore
 		};
 		return (
 			<CourseListItem

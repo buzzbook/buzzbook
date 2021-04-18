@@ -2,16 +2,16 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Range} from "rc-slider";
 import "rc-slider/assets/index.css";
-import {resetFilters, updateFilter, getFilters, updateSort, getSort} from "../../redux/courseListSlice";
+import {updateFilter, getFilters, updateSort, getSort} from "../../redux/courseListSlice"; // resetFilters
 import FilterSelector from "./FilterSelector";
 import {sortBy, subjects, levels, credits, types, instructorList, campuses} from "./filterOptions";
 import "../../css/Filters.css";
 
 function ExpandedFilters() {
-	const clearFilters = () => {
-		dispatch(resetFilters());
-		dispatch(updateSort({label: "Course ID", value: "Course ID"}));
-	};
+	// const clearFilters = () => {
+	// 	dispatch(resetFilters());
+	// 	dispatch(updateSort({label: "Course ID", value: "Course ID"}));
+	// };
 
 	const dispatch = useDispatch();
 

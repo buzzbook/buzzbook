@@ -11,7 +11,7 @@ import {
 } from "../../redux/courseListSlice";
 import {Link} from "react-router-dom";
 import Icon from "../../img/icon";
-import {determineGradeLetter, determineGradeColor, determineRatingColor} from "../settings/StatsUtils";
+import {determineGradeLetter, determineGradeColor} from "../settings/StatsUtils"; // determineRatingColor
 import {SettingsContext} from "../settings/SettingsContext";
 
 
@@ -58,7 +58,7 @@ function CourseListItem(course, props) {
 	let isSelected = selectedCourse === course.courseID;
 	// let bgColor = isSelected ? "var(--shadingcolor)" : "initial";
 	let bgColor = isSelected ? "var(--navcolor)" : "initial";
-	let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
+	// let bshadow = isSelected ? "inset -1px 1px 4.5px var(--inputcolor), inset 1px -1px 4.5px var(--bgcolor)" : "initial";
 
 	let isSaved = savedCourses[course.courseID];
 
@@ -70,8 +70,8 @@ function CourseListItem(course, props) {
 	const gradeColor = determineGradeColor(course.grade);
 	const lettergrade = determineGradeLetter(course.grade);
 	const currRatings = ratingstore[course.courseID] || {courseEff: 0, profEff: 0, hours: 0}
-	const cRatingColor = determineGradeColor((currRatings.courseEff/5)*4)
-	const pRatingColor = determineGradeColor((currRatings.profEff/5)*4)
+	const cRatingColor = determineGradeColor(currRatings.courseEff*4/5)
+	const pRatingColor = determineGradeColor(currRatings.profEff*4/5)
 
 
 	let displaygrade = lettergrade;
@@ -108,13 +108,13 @@ function CourseListItem(course, props) {
 							{Math.round(course.enrollmentPercent)}% {windowWidth > 1820 && `enrolled`}
 						</span>
 						<span className="altheadingcolor">
-							<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+							<span style={{fontWeight: "400"}}>&nbsp;|&nbsp;</span>
 							<span>
 								{course.credits} credit{course.credits !== 1 && "s"}
 							</span>
 							{windowWidth > 1530 && (
 								<>
-									<span style={{fontWeight: "900"}}>&nbsp;&#9632;&nbsp;</span>
+									<span style={{fontWeight: "400"}}>&nbsp;|&nbsp;</span>
 									<span>
 										{course.numSections} section
 										{course.numSections > 1 && "s"}
@@ -131,19 +131,19 @@ function CourseListItem(course, props) {
 						)}
 						{currRatings.courseEff && (
 							<>
-								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{fontWeight: "400"}} className="altheadingcolor">&nbsp;|&nbsp;</span>
 								<span style={{color: cRatingColor, fontWeight: "700"}}>C: {currRatings.courseEff && currRatings.courseEff.toFixed(2)}</span>
 							</>
 						)}
 						{currRatings.profEff && (
 							<>
-								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{fontWeight: "400"}} className="altheadingcolor">&nbsp;|&nbsp;</span>
 								<span style={{color: pRatingColor, fontWeight: "700"}}>I: {currRatings.profEff && currRatings.profEff.toFixed(2)}</span>
 							</>
 						)}
 						{currRatings.hours && (
 							<>
-								<span style={{fontWeight: "900"}} className="altheadingcolor">&nbsp;&#9632;&nbsp;</span>
+								<span style={{fontWeight: "400"}} className="altheadingcolor">&nbsp;|&nbsp;</span>
 								<span style={{fontWeight: "700"}}>H: {currRatings.hours && currRatings.hours.toFixed(2)}</span>
 							</>
 						)}
