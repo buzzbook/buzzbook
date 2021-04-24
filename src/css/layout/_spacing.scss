@@ -12,6 +12,9 @@
 @for $i from 0 through 8 {
     .gapv--#{$i} > *{
         margin-bottom: var(--f#{$i});
+        &:only-child, &:last-child {
+            margin-bottom: 0; 
+        }
     }
   }
 
@@ -19,5 +22,8 @@
 @for $i from 0 through 8 {
     .gaph--#{$i} > *{
         margin-right: var(--f#{$i});
+        &:only-child, &:last-child  {
+            margin-bottom: 0; 
+        }
     }
   }
