@@ -56,21 +56,28 @@
 :root {
 	--white: #fff;
 	--off-white: #F3F4FA;
+	--blue: #00244D;
 	--blue-80:  #275292;
 	--link-blue: #004DA1;
 	--buzz-gold:#F7B200;
 	--buzz-gold-60:#F6D26F;
 	--grey-light: #E5E5E5;
+	--grey-mid: #808080;
 
-	--red: #AF4126;
-	--darkred:#F95D10;
+	--darkred: #AF4126;
+	--red:#F95D10;
+	--green:#367117;
+
+
 	//light mode
 	--bgcolor: var(--white);
 	--bgcolorlight: var(--off-white);
 	--themecolor: var(--buzz-gold);
 	--hlcolor: var(--buzz-gold-60);
 	--linkcolor: var(--link-blue);
-	--textcolor: var(var(--blue-80));
+	--secondarytextcolor: var(--blue-80);
+	--primarytextcolor: var(--blue);
+	--tertiarytextcolor: var(--grey-mid);
 	--outlinecolor: var(--grey-light);
 
 }

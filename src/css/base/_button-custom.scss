@@ -29,7 +29,7 @@
     }
 
 }
-
+// outline button
 .secondary-button {
     @extend .button-base;
     grid-gap: var(--f0) ;
@@ -42,6 +42,9 @@
     }
     &:active, &.active {
         background: var(--off-white);
+    }
+    &.active {
+        font-weight: bold;
     }
 }
 
