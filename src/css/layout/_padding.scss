@@ -2,9 +2,9 @@
 // padding horizonatal, or padding left right
 // usage example: 
 // <div class="padh--0"></div>
-.padh {
+.pad-h {
     @for $i from 0 through 8 {
-        &--#{$i} {
+        &__#{$i} {
             padding-left: var(--f#{$i});
             padding-right: var(--f#{$i});
         }
@@ -12,9 +12,9 @@
 }
 
 //padding vertical
-.padv {
+.pad-v {
     @for $i from 0 through 8 {
-        &--#{$i} {
+        &__#{$i} {
             padding-top: var(--f#{$i});
             padding-bottom: var(--f#{$i});
         }

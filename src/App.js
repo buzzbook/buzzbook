@@ -34,11 +34,11 @@ function App({location}) {
 	return (
 		<>
 			<SettingsContextProvider>
-				<div class="grid-main padh--8">
-					<div className="pr-0">
+				<div class="grid-main pad-h__8">
+					<div className="">
 						<Nav />
 					</div>
-					<div className="px-0">
+					<div className="">
 						<Switch location={location}>
 							<Route exact path="/" component={Home} />
 

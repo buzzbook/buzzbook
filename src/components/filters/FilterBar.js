@@ -5,16 +5,16 @@ import {useDispatch} from "react-redux";
 import {updateSearchQuery} from "../../redux/courseListSlice";
 //import Icon from "../../img/icon";
 import iconset from "../../img/iconset.svg";
-import "../../css/Filters.css";
+//import "../../css/Filters.css";
 import Icon from "../../img/icon";
 
 function FilterBar() {
 	const dispatch = useDispatch();
 	return (
-		<div className="mx-0" id="filterBar">
+		<div className="mx-0" id="">
 			<div className="h-100 py-3 px-4">
-				<div className="searchwrapper">
-					<Icon name="search"/>
+				<div className="pad-h__2 pad-v__1 input">
+					<Icon name="Search"/>
 					<input
 						type="text"
 						className="form-control sectionlabelfont"

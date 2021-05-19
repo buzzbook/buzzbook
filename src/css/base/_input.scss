@@ -1,0 +1,13 @@
+.input {
+    border-radius: var(--f8);
+    border: 1px solid var(--grey-mid);
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-flow: column;
+    input {
+        outline: none;
+        border: none;
+
+    }
+
+}

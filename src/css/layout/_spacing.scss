@@ -10,7 +10,7 @@
 
 // vertical gap
 @for $i from 0 through 8 {
-    .gapv--#{$i} > *{
+    .gap-v__#{$i} > *{
         margin-bottom: var(--f#{$i});
         &:only-child, &:last-child {
             margin-bottom: 0; 
@@ -20,7 +20,7 @@
 
 // horizontal gap
 @for $i from 0 through 8 {
-    .gaph--#{$i} > *{
+    .gap-v__#{$i} > *{
         margin-right: var(--f#{$i});
         &:only-child, &:last-child  {
             margin-bottom: 0; 
