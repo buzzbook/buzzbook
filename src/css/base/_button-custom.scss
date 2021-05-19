@@ -51,14 +51,15 @@
 .secondary-button-solid {
     @extend .button-base;
     grid-gap: var(--f0);
-    border-radius: 50%;
+    border-radius: var(--f8);
     background: var(--white);
     color: var(--linkcolor);
     &:hover {
         background: var(--outlinecolor);
     }
     &:active, &.active {
-        background: var(--off-white);
+        background: var(--linkcolor);
+        color: var(--bgcolor);
     }
 
 }

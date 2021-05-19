@@ -1,13 +1,32 @@
+@use "../abstracts" as a;
+
 .input {
     border-radius: var(--f8);
     border: 1px solid var(--grey-mid);
     display: grid;
     grid-auto-columns: auto;
     grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
+    grid-gap: var(--f2);
+    color: var(--tertiarytextcolor);
+
+    
     input {
         outline: none;
         border: none;
+        font-weight: bold;
+        
+                
+        @include a.placeholder {
+            color: var(--tertiarytextcolor);
+            font-weight: normal;
+        }
 
+
+    }
+
+    &:focus {
+        color: var(--linkcolor);
     }
 
 }

@@ -14,7 +14,7 @@ function SavedCourseItem(course) {
 	return (
 		<div className="p-2 mb-2 rounded">
 			<div className="position-relative">
-				<div style={{maxWidth: "calc(100% - 25px)"}}>
+				<div /*style={{maxWidth: "calc(100% - 25px)"}} */>
 					<div className="text-cutoff">
 						<h5 className="d-inline">
 							<b>{course.courseID}</b>

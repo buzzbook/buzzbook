@@ -13,7 +13,7 @@ function FilterBar() {
 	return (
 		<div className="mx-0" id="">
 			<div className="h-100 py-3 px-4">
-				<div className="pad-h__2 pad-v__1 input">
+				<div className="input pad-h__2 pad-v__1 ">
 					<Icon name="Search"/>
 					<input
 						type="text"
@@ -23,7 +23,7 @@ function FilterBar() {
 					/>
 				</div>
 			</div>
-			<div className="py-3 pl-0">
+			<div className="py-3 pl-0" style={{display: 'none'}}>
 				<div className="d-flex align-items-center">
 					<svg
 						alt="filter"

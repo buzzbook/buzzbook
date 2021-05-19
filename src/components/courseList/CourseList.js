@@ -8,7 +8,7 @@ import courses from "../../scripts/courses";
 import CourseListItem from "./CourseListItem";
 import SavedCourses from "./SavedCourses";
 import {caches} from "../../scripts/courses";
-import "../../css/CourseList.css";
+//import "../../css/CourseList.css";
 import $ from "jquery";
 import {SettingsContext} from "../settings/SettingsContext";
 import Icon from "../../img/icon";
@@ -268,9 +268,9 @@ function CourseList({id}) {
 		<div
 			id="clistwrapper"
 			className={(initCollapsed ? "savecollapsed" : "")}
-			style={{
+			/*style={{
 				height: "calc(100vh - 90px)"
-			}}
+			}}*/
 		>
 			<div id="courseList">
 				{filteredCourses.length === 0 ? (

@@ -40,3 +40,25 @@
     @include basekick($typeSizeModifier, $typeRowSpan, $karlaDescenderHeightScale, $karlaCapHeight);
     font-family: Karla;
   }
+
+
+// placeholder shit 
+@mixin placeholder() {
+  
+  /* all */
+  &::-webkit-input-placeholder { /* Webkit */
+    @content;
+  }
+
+  &:-moz-placeholder { /* Firefox 18-4 */
+    @content;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+    @content;
+  }
+
+  &:-ms-input-placeholder {  /*  IE10+  */
+    @content;
+  }
+}
